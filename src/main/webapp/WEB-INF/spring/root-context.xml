@@ -5,5 +5,16 @@
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
-    <!--- TODO: mysql HikariCP 등록 방법 알아보기 -->
+    <!-- 1. hikariConfig를 bean으로 등록합니다 -->
+    <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/web_app_test?serverTimezone=Asia/Seoul"></property>
+        <property name="username" value="root"></property>
+        <property name="password" value="MomentFactory1!1!1!"></property>
+    </bean>
+
+    <!-- 2. data source를 등록합니다 -->
+    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+        <constructor-arg ref="hikariConfig"></constructor-arg>
+    </bean>
 </beans>

@@ -18,7 +18,8 @@
 	</properties>
 
 	<dependencies>
-		<!-- Spring -->
+
+		<!-- 1. Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
@@ -36,16 +37,23 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+        <dependency>
+            <artifactId>spring-test</artifactId>
+            <groupId>org.springframework</groupId>
+            <version>${org.springframework-version}</version>
+            <scope>test</scope>
+        </dependency>
 
-		<!-- AspectJ -->
+		<!-- 2. AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<version>${org.aspectj-version}</version>
 		</dependency>
 
-		<!-- Logging -->
-		<dependency>
+		<!-- 3. Logging -->
+		<!-- 3-1. slf4j -->
+        <dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>${org.slf4j-version}</version>
@@ -62,6 +70,7 @@
 			<version>${org.slf4j-version}</version>
 			<scope>runtime</scope>
 		</dependency>
+        <!-- 3-2. log4j -->
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -102,6 +111,12 @@
             <version>2.7.4</version>
         </dependency>
 
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.18</version>
+        </dependency>
+
 		<!-- @Inject -->
 		<dependency>
 			<groupId>javax.inject</groupId>
@@ -135,7 +150,7 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
+    </dependencies>
     <build>
         <plugins>
             <plugin>
