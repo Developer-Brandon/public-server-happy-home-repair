@@ -20,4 +20,9 @@ public class MybatisTests {
     public void testMapper() {
         log.info(testMapper.getClass().getName());
     }
+
+    @Test
+    public void testTimeMapper() {
+        log.info(testMapper.getTime());
+    }
 }
