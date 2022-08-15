@@ -13,8 +13,13 @@
         <property name="password" value="MomentFactory1!1!1!"></property>
     </bean>
 
-    <!-- 2. data source를 등록합니다 -->
+    <!-- 2. data source를 등록합니다(hikariCP configuration) -->
     <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
         <constructor-arg ref="hikariConfig"></constructor-arg>
+    </bean>
+
+    <!-- 3. sqlSessionFactory를 등록합니다 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
     </bean>
 </beans>
