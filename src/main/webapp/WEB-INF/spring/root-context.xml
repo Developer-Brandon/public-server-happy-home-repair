@@ -10,6 +10,7 @@
     <!-- 1. hikariConfig를 bean으로 등록합니다 -->
     <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+<!--        <property name="driverClassName" value="net.sf.log4jdbc.ql.jdbcapi.DriverSpy"></property>-->
         <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/web_app_test?serverTimezone=Asia/Seoul"></property>
         <property name="username" value="root"></property>
         <property name="password" value="MomentFactory1!1!1!"></property>
