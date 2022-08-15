@@ -2,7 +2,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
@@ -26,4 +27,7 @@
 
     <!-- 4. mybatis 관련 annotation 처리를 위해 scan 등록을 합니다 -->
     <mybatis-spring:scan base-package="com.dev.webApp.mapper"></mybatis-spring:scan>
+
+    <!-- 5. component를 scan할 base-package를 등록합니다 -->
+    <context:component-scan base-package="com.dev.webApp"></context:component-scan>
 </beans>
