@@ -3,32 +3,45 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+       xsi:schemaLocation="
+       http://mybatis.org/schema/mybatis-spring
+       http://mybatis.org/schema/mybatis-spring-1.2.xsd
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-	<!-- Root Context: defines shared resources visible to all other web components -->
+    <!-- Root Context: defines shared resources visible to all other web components -->
+
+
+    <!-- 2. data source를 등록합니다(hikariCP configuration) -->
+    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
+        <constructor-arg ref="hikariConfig" />
+    </bean>
 
     <!-- 1. hikariConfig를 bean으로 등록합니다 -->
     <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
-        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
-<!--        <property name="driverClassName" value="net.sf.log4jdbc.ql.jdbcapi.DriverSpy"></property>-->
-        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/web_app_test?serverTimezone=Asia/Seoul"></property>
-        <property name="username" value="root"></property>
-        <property name="password" value="MomentFactory1!1!1!"></property>
-    </bean>
-
-    <!-- 2. data source를 등록합니다(hikariCP configuration) -->
-    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
-        <constructor-arg ref="hikariConfig"></constructor-arg>
+        <property name="idleTimeout" value="30000" />
+        <property name="connectionTimeout" value="3000" />
+        <property name="maxLifetime" value="400000" />
+        <property name="maximumPoolSize" value="300" />
+        <property name="minimumIdle" value="20" />
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+        <property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/web_app_test?serverTimezone=Asia/Seoul" />
+        <property name="username" value="root" />
+        <property name="password" value="MomentFactory1!1!1!" />
     </bean>
 
     <!-- 3. sqlSessionFactory를 등록합니다 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"></property>
+        <property name="dataSource" ref="dataSource" />
     </bean>
 
     <!-- 4. mybatis 관련 annotation 처리를 위해 scan 등록을 합니다 -->
-    <mybatis-spring:scan base-package="com.dev.webApp.mapper"></mybatis-spring:scan>
+    <mybatis-spring:scan
+            base-package="com.dev.webApp.mapper"/>
 
-    <!-- 5. component를 scan할 base-package를 등록합니다 -->
-    <context:component-scan base-package="com.dev.webApp"></context:component-scan>
+    <!-- 5. component를 scan할(조사하도록 할) base-package를 등록합니다 -->
+    <context:component-scan
+            base-package="com.dev.webApp.service"/>
 </beans>
