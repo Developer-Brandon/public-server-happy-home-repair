@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dev.webApp.mapper.NoticeMapper">
+
+    <select id="selectNoticeList"
+            resultType="com.dev.webApp.domain.NoticeVO">
+        <![CDATA[
+            /* 전체 공지사항 리스트 조회 쿼리 */
+
+            SELECT *
+            FROM web_app_test.TB_NOTICE
+        ]]>
+    </select>
+
+    <select id="selectNotice"
+            parameterType="Long"
+            resultType="com.dev.webApp.domain.NoticeVO">
+       <![CDATA[
+        /* 단일 공지사항 리스트 조회 쿼리 */
+
+        SELECT NOTICE_NO AS noticeNo
+            , TITLE AS title
+            , content AS content
+            , REG_DT AS regDt
+            , MOD_DT AS modDt
+        FROM web_app_test.TB_NOTICE
+        where NOTICE_NO = #{noticeNo}
+        ]]>
+    </select>
+
+    <insert id="insertNotice"
+            parameterType="com.dev.webApp.domain.NoticeVO">
+        <![CDATA[
+        /* 특정 공지사항 삽입 쿼리 */
+        INSERT INTO web_app_test.TB_NOTICE(TITLE, CONTENT)
+        VALUE (#{title}, #{content})
+        ]]>
+        <selectKey
+            keyProperty="noticeNo"
+            order="AFTER"
+            resultType="long">
+                /* 특정 공지사항 삽입 쿼리 */
+                SELECT MAX(NOTICE_NO)
+                FROM web_app_test.TB_NOTICE
+        </selectKey>
+    </insert>
+
+    <update id="updateNotice"
+            parameterType="com.dev.webApp.domain.NoticeVO">
+        <![CDATA[
+        /* 단일 공지사항 리스트 수정 쿼리 */
+        ]]>
+        UPDATE web_app_test.TB_NOTICE
+        SET TITLE = #{title}
+        , CONTENT = #{content}
+        , MOD_DT = CURRENT_TIMESTAMP
+        WHERE NOTICE_NO = #{noticeNo}
+    </update>
+
+    <delete id="deleteNotice"
+            parameterType="Long">
+        <![CDATA[
+        /* 단일 공지사항 리스트 삭제 쿼리 */
+        DELETE FROM web_app_test.TB_NOTICE
+        WHERE NOTICE_NO = #{noticeNo}
+        ]]>
+    </delete>
+</mapper>
