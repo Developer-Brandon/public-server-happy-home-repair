@@ -1,10 +1,12 @@
 package com.dev.webApp.domain;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
+@Builder
 public class NoticeVO {
 
     private Long noticeNo;

@@ -1,4 +1,4 @@
-package com.dev.webApp.mybatis;
+package com.dev.webApp.persistence;
 
 import com.dev.webApp.mapper.TestMapper;
 

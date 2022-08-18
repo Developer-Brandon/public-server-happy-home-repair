@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface NoticeService {
 
-    public boolean registerNotice(NoticeVO noticeVO);
+    public boolean registerNotice(NoticeVO noticeVO) throws Exception;
 
-    public boolean registerNoticeList(List<NoticeVO> noticeVOList);
+    public boolean registerNoticeList(List<NoticeVO> noticeVOList) throws Exception;
 
-    public boolean modifyNotice(NoticeVO noticeVO);
+    public boolean modifyNotice(NoticeVO noticeVO) throws Exception;
 
-    public boolean removeNotice(Long noticeNo);
+    public boolean removeNotice(Long noticeNo) throws Exception;
 
     public NoticeVO getNotice(NoticeVO noticeVO);
 

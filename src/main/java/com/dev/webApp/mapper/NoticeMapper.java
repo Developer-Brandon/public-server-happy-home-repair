@@ -10,9 +10,13 @@ public interface NoticeMapper {
 
     public List<NoticeVO> selectNoticeList();
 
+    public List<NoticeVO> selectNoticeListBySize(Integer size);
+
     public NoticeVO selectNotice(Long noticeNo);
 
     public int insertNotice(NoticeVO noticeVO);
+
+    public int insertNoticeList(List<NoticeVO> noticeVOList);
 
     public int updateNotice(NoticeVO noticeNo);
 
