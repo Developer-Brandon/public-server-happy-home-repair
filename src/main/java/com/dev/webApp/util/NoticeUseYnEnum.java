@@ -1,6 +1,6 @@
 package com.dev.webApp.util;
 
-public enum NoticeUseYn {
+public enum NoticeUseYnEnum {
     Y
     , N
 }

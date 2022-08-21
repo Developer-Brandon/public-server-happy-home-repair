@@ -20,5 +20,7 @@ public interface NoticeMapper {
 
     public int updateNotice(NoticeVO noticeNo);
 
+    public int updateNoticeState(NoticeVO noticeVO);
+
     public int deleteNotice(Long noticeNo);
 }

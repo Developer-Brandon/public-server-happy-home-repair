@@ -12,6 +12,8 @@ public interface NoticeService {
 
     public boolean modifyNotice(NoticeVO noticeVO) throws Exception;
 
+    public boolean modifyNoticeState(NoticeVO noticeVO) throws Exception;
+
     public boolean removeNotice(Long noticeNo) throws Exception;
 
     public NoticeVO getNotice(NoticeVO noticeVO);

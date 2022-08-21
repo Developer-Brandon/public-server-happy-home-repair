@@ -1,6 +1,6 @@
 package com.dev.webApp.util;
 
-public enum FaqUseYn {
+public enum FaqUseYnEnum {
     Y
     , N
 }

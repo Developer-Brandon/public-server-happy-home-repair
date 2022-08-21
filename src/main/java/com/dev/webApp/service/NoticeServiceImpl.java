@@ -47,6 +47,16 @@ public class NoticeServiceImpl implements NoticeService{
     }
 
     @Override
+    public boolean modifyNoticeState(NoticeVO noticeVO) throws Exception {
+
+        if(noticeMapper.updateNoticeState(noticeVO) != 1) {
+            throw new Exception();
+        }
+
+        return true;
+    }
+
+    @Override
     public boolean removeNotice(Long noticeNo) throws Exception {
 
         if(noticeMapper.deleteNotice(noticeNo) != 1) {
