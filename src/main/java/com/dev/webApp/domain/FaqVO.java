@@ -1,7 +1,6 @@
 package com.dev.webApp.domain;
 
 import com.dev.webApp.util.FaqUseYnEnum;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
