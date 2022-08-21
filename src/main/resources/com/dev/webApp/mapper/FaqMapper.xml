@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dev.webApp.mapper.FaqMapper">
+
+    <select id="selectFaqList"
+            resultType="com.dev.webApp.domain.FaqVO">
+        <![CDATA[
+            /* 전체 자주하는 질문 리스트 조회 쿼리 */
+
+            SELECT FAQ_NO AS faqNo
+                 , TITLE AS title
+                 , CONTENT AS content
+                 , USE_YN AS useYnEnum
+                 , REG_DT AS regDt
+                 , MOD_DT AS modDt
+            FROM web_app_test.tb_faq
+        ]]>
+    </select>
+
+    <select id="selectFaq"
+            parameterType="Long"
+            resultType="com.dev.webApp.domain.FaqVO">
+       <![CDATA[
+        /* 단일 자주하는 질문 리스트 조회 쿼리 */
+
+        SELECT FAQ_NO AS faqNo
+            , TITLE AS title
+            , CONTENT AS content
+            , USE_YN AS useYnEnum
+            , REG_DT AS regDt
+            , MOD_DT AS modDt
+        FROM web_app_test.tb_faq
+        WHERE FAQ_NO = #{faqNo}
+        ]]>
+    </select>
+
+    <select id="selectFaqListBySize"
+            parameterType="Integer"
+            resultType="com.dev.webApp.domain.FaqVO">
+        <![CDATA[
+        /* 전체 자주하는 질문 리스트 조회를 개수로 가져오는 쿼리 */
+
+        SELECT FAQ_NO AS faqNo
+             , TITLE AS title
+             , CONTENT AS content
+             , USE_YN AS useYnEnum
+             , REG_DT AS regDt
+             , MOD_DT AS modDt
+        FROM web_app_test.tb_faq
+        LIMIT #{size}
+        ]]>
+    </select>
+
+    <insert id="insertFaq"
+            parameterType="com.dev.webApp.domain.FaqVO">
+        <![CDATA[
+        /* 특정 자주하는 질문 삽입 쿼리 */
+        INSERT INTO web_app_test.tb_faq(TITLE, CONTENT)
+        VALUE (#{title}, #{content})
+        ]]>
+        <selectKey
+            keyProperty="faqNo"
+            order="AFTER"
+            resultType="long">
+                /* 특정 자주하는 질문 삽입 쿼리 */
+                SELECT MAX(FAQ_NO)
+                FROM web_app_test.tb_faq
+        </selectKey>
+    </insert>
+
+    <update id="updateFaq"
+            parameterType="com.dev.webApp.domain.FaqVO">
+        <![CDATA[
+        /* 단일 자주하는 질문 리스트 수정 쿼리 */
+        UPDATE web_app_test.tb_faq
+        SET TITLE = #{title}
+            , CONTENT = #{content}
+            , USE_YN = #{useYnEnum}
+            , MOD_DT = CURRENT_TIMESTAMP
+        WHERE FAQ_NO = #{faqNo}
+        ]]>
+    </update>
+
+    <update id="updateFaqState"
+            parameterType="com.dev.webApp.domain.FaqVO">
+        <![CDATA[
+        /* 단일 자주하는 질문 (상태) 수정 쿼리 */
+        UPDATE web_app_test.tb_faq
+        SET USE_YN = #{useYnEnum}
+          , MOD_DT = CURRENT_TIMESTAMP
+        WHERE FAQ_NO = #{faqNo}
+        ]]>
+    </update>
+
+    <delete id="deleteFaq"
+            parameterType="Long">
+        <![CDATA[
+        /* 단일 자주하는 질문 리스트 삭제 쿼리 */
+        DELETE FROM web_app_test.tb_faq
+        WHERE FAQ_NO = #{faqNo}
+        ]]>
+    </delete>
+</mapper>

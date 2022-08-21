@@ -14,6 +14,8 @@ import static org.junit.Assert.assertNotNull;
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 public class NoticeServiceTests {
 
+    // TODO: notice 서비스쪽부터 로직 추가 예정
+
     @Autowired
     private NoticeService noticeService;
 

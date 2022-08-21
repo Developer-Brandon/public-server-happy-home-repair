@@ -1,14 +1,12 @@
 package com.dev.webApp.domain;
 
 import com.dev.webApp.util.NoticeUseYnEnum;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @Data
-@Builder
 @NoArgsConstructor
 public class NoticeVO {
 
