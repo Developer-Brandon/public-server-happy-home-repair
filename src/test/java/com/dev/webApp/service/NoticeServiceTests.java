@@ -1,7 +1,6 @@
 package com.dev.webApp.service;
 
 import com.dev.webApp.domain.NoticeVO;
-import com.dev.webApp.mapper.NoticeMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,7 @@ public class NoticeServiceTests {
     }
 
     @Test
-    public void serviceRegisterTest() {
+    public void serviceRegisterTest() throws Exception {
 
         NoticeVO noticeVO = new NoticeVO();
 

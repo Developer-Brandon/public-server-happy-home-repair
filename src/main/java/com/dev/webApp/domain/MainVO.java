@@ -10,7 +10,7 @@ import java.util.Date;
 @Data
 @Builder
 @NoArgsConstructor
-public class NoticeVO {
+public class MainVO {
 
     private Long noticeNo;
     private String title;

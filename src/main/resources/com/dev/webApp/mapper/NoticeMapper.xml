@@ -15,7 +15,7 @@
                  , USE_YN AS useYnEnum
                  , REG_DT AS regDt
                  , MOD_DT AS modDt
-            FROM web_app_test.TB_NOTICE
+            FROM web_app_test.tb_notice
         ]]>
     </select>
 
@@ -31,7 +31,7 @@
             , USE_YN AS useYnEnum
             , REG_DT AS regDt
             , MOD_DT AS modDt
-        FROM web_app_test.TB_NOTICE
+        FROM web_app_test.tb_notice
         WHERE NOTICE_NO = #{noticeNo}
         ]]>
     </select>
@@ -48,7 +48,7 @@
              , USE_YN AS useYnEnum
              , REG_DT AS regDt
              , MOD_DT AS modDt
-        FROM web_app_test.TB_NOTICE
+        FROM web_app_test.tb_notice
         LIMIT #{size}
         ]]>
     </select>
@@ -57,7 +57,7 @@
             parameterType="com.dev.webApp.domain.NoticeVO">
         <![CDATA[
         /* 특정 공지사항 삽입 쿼리 */
-        INSERT INTO web_app_test.TB_NOTICE(TITLE, CONTENT)
+        INSERT INTO web_app_test.tb_notice(TITLE, CONTENT)
         VALUE (#{title}, #{content})
         ]]>
         <selectKey
@@ -66,7 +66,7 @@
             resultType="long">
                 /* 특정 공지사항 삽입 쿼리 */
                 SELECT MAX(NOTICE_NO)
-                FROM web_app_test.TB_NOTICE
+                FROM web_app_test.tb_notice
         </selectKey>
     </insert>
 
@@ -74,7 +74,7 @@
             parameterType="com.dev.webApp.domain.NoticeVO">
         <![CDATA[
         /* 단일 공지사항 리스트 수정 쿼리 */
-        UPDATE web_app_test.TB_NOTICE
+        UPDATE web_app_test.tb_notice
         SET TITLE = #{title}
             , CONTENT = #{content}
             , USE_YN = #{useYnEnum}
@@ -87,7 +87,7 @@
             parameterType="com.dev.webApp.domain.NoticeVO">
         <![CDATA[
         /* 단일 공지사항 (상태) 수정 쿼리 */
-        UPDATE web_app_test.TB_NOTICE
+        UPDATE web_app_test.tb_notice
         SET USE_YN = #{useYnEnum}
           , MOD_DT = CURRENT_TIMESTAMP
         WHERE NOTICE_NO = #{noticeNo}
@@ -98,7 +98,7 @@
             parameterType="Long">
         <![CDATA[
         /* 단일 공지사항 리스트 삭제 쿼리 */
-        DELETE FROM web_app_test.TB_NOTICE
+        DELETE FROM web_app_test.tb_notice
         WHERE NOTICE_NO = #{noticeNo}
         ]]>
     </delete>
