@@ -2,6 +2,7 @@ package com.dev.webApp.mapper;
 
 import com.dev.webApp.domain.dto.InsertNoticeDTO;
 import com.dev.webApp.domain.vo.NoticeVO;
+import com.mysql.cj.protocol.x.Notice;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,9 @@ public class NoticeMapperTests {
     @Test
     public void getNoticeList() {
 
-        InsertNoticeDTO insertNoticeDTO = new InsertNoticeDTO();
-
-        insertNoticeDTO.setManyNoticeOrNot(false);
+        InsertNoticeDTO insertNoticeDTO = InsertNoticeDTO.builder()
+                .manyNoticeOrNot(false)
+                .build();
 
         noticeMapper
                 .selectNoticeList(insertNoticeDTO)
@@ -39,10 +40,10 @@ public class NoticeMapperTests {
     @Test
     public void insertNotice() {
 
-        NoticeVO noticeVO = new NoticeVO();
-
-        noticeVO.setTitle("삽입_테스트_제목");
-        noticeVO.setContent("삽입_테스트_내용");
+        NoticeVO noticeVO = NoticeVO.builder()
+                .title("삽입_테스트_제목")
+                .content("삽입_테스트_내용")
+                .build();
 
         int insertedNoticeCnt = noticeMapper.insertNotice(noticeVO);
 
@@ -53,10 +54,11 @@ public class NoticeMapperTests {
 
     @Test
     public void updateNotice() {
-        NoticeVO noticeVO = new NoticeVO();
-        noticeVO.setNoticeNo(10L);
-        noticeVO.setTitle("업데이트_테스트_제목");
-        noticeVO.setContent("업데이트_테스트_내용");
+        NoticeVO noticeVO = NoticeVO.builder()
+                .noticeNo(10L)
+                .title("업데이트_테스트_제목")
+                .content("업데이트_테스트_내용")
+                .build();
 
         int updatedNoticeCnt = noticeMapper.updateNotice(noticeVO);
 

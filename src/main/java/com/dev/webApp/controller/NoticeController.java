@@ -3,7 +3,6 @@ package com.dev.webApp.controller;
 import com.dev.webApp.domain.dto.InsertNoticeDTO;
 import com.dev.webApp.domain.vo.NoticeVO;
 import com.dev.webApp.service.NoticeService;
-import com.mysql.cj.protocol.x.Notice;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +27,6 @@ public class NoticeController {
 
         model.addAttribute("list", noticeService.getNoticeList(insertNoticeDTO));
     }
-
 
     @GetMapping("/content")
     public void getContent(

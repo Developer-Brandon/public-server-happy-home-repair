@@ -27,10 +27,10 @@ public class NoticeServiceTests {
     @Test
     public void serviceRegisterTest() throws Exception {
 
-        NoticeVO noticeVO = new NoticeVO();
-
-        noticeVO.setTitle("새로 작성하는 글");
-        noticeVO.setContent("새로 작성하는 내용");
+        NoticeVO noticeVO = NoticeVO.builder()
+                .title("새로 작성하는 글")
+                .content("새로 작성하는 내용")
+                .build();
 
         Long registerSuccessorNot = noticeService.registerNotice(noticeVO);
 
