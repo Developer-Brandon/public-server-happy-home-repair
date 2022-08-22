@@ -1,0 +1,2 @@
+/WEB-INF 경로는 브라우저에서 직접 접근할 수 없는 경로입니다.
+즉 /notice/list를 반환하기로 하였으면 최종적인 url은 /WEB-INF/views/notice/list.jsp가 되는 것입니다.

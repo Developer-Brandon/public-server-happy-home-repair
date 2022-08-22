@@ -16,7 +16,7 @@ public class NoticeController {
     private NoticeService noticeService;
 
     @GetMapping("/content/list")
-    public void selectNoticeList(Model model) {
+    public String selectNoticeList(Model model) {
 
         // 우선은 1000개로 지정하겠습니다.
 
@@ -25,7 +25,14 @@ public class NoticeController {
                 .noticeSize(1000)
                 .build();
 
+        // todo:
+        // https://ecsimsw.tistory.com/entry/Spring-Controller%EC%97%90%EC%84%9C-View%EB%A1%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%A0%84%EB%8B%AC%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95
+
+        // 위 링크 보고 다시...
+
         model.addAttribute("list", noticeService.getNoticeList(insertNoticeDTO));
+
+        return "notice/list";
     }
 
     @GetMapping("/content")
@@ -39,7 +46,7 @@ public class NoticeController {
                 .noticeNo(noticeNo)
                 .build();
 
-        model.addAttribute("board", noticeService.getNotice(noticeVO));
+        model.addAttribute("notice", noticeService.getNotice(noticeVO));
     }
 
     @PostMapping("/content")
@@ -50,7 +57,7 @@ public class NoticeController {
         redirectAttributes.addFlashAttribute("result", noticeVO.getNoticeNo());
 
         // 내부적으로 response.sendRedirect를 처리해주게끔 처리합니다.
-        return "redirect:/post/list";
+        return "redirect:/notice/list";
     }
 
     @PutMapping("/content")
