@@ -1,6 +1,6 @@
 package com.dev.webApp.mapper;
 
-import com.dev.webApp.domain.FaqVO;
+import com.dev.webApp.domain.vo.FaqVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

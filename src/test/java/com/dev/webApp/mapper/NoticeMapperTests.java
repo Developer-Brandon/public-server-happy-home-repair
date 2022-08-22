@@ -1,6 +1,7 @@
 package com.dev.webApp.mapper;
 
-import com.dev.webApp.domain.NoticeVO;
+import com.dev.webApp.domain.dto.InsertNoticeDTO;
+import com.dev.webApp.domain.vo.NoticeVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,13 @@ public class NoticeMapperTests {
 
     @Test
     public void getNoticeList() {
-        noticeMapper.selectNoticeList()
+
+        InsertNoticeDTO insertNoticeDTO = new InsertNoticeDTO();
+
+        insertNoticeDTO.setManyNoticeOrNot(false);
+
+        noticeMapper
+                .selectNoticeList(insertNoticeDTO)
                 .forEach(notice -> System.out.println(notice.getTitle()));
     }
 

@@ -1,7 +1,6 @@
 package com.dev.webApp.mapper;
 
-import com.dev.webApp.domain.FaqVO;
-import com.dev.webApp.domain.FaqVO;
+import com.dev.webApp.domain.vo.FaqVO;
 
 import java.util.List;
 

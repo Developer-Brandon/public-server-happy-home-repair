@@ -1,14 +1,13 @@
 package com.dev.webApp.mapper;
 
-import com.dev.webApp.domain.NoticeVO;
+import com.dev.webApp.domain.dto.InsertNoticeDTO;
+import com.dev.webApp.domain.vo.NoticeVO;
 
 import java.util.List;
 
 public interface NoticeMapper {
 
-    List<NoticeVO> selectNoticeList();
-
-    List<NoticeVO> selectNoticeListBySize(Integer size);
+    List<NoticeVO> selectNoticeList(InsertNoticeDTO insertNoticeDTO);
 
     NoticeVO selectNotice(Long noticeNo);
 

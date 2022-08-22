@@ -1,6 +1,7 @@
 package com.dev.webApp.service;
 
-import com.dev.webApp.domain.NoticeVO;
+import com.dev.webApp.domain.dto.InsertNoticeDTO;
+import com.dev.webApp.domain.vo.NoticeVO;
 import com.dev.webApp.mapper.NoticeMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,54 +17,23 @@ public class NoticeServiceImpl implements NoticeService{
     private final NoticeMapper noticeMapper;
 
     @Override
-    public boolean registerNotice(NoticeVO noticeVO) throws Exception {
+    public Long registerNotice(NoticeVO noticeVO) throws Exception {
 
         if(noticeMapper.insertNotice(noticeVO) != 1) {
             throw new Exception();
         }
 
-        return true;
+        // 반환값으로 삽입된 게시물의 번호를 반환합니다.
+        return noticeVO.getNoticeNo();
     }
 
     @Override
-    public boolean registerNoticeList(List<NoticeVO> noticeVOList) throws Exception {
+    public void registerNoticeList(List<NoticeVO> noticeVOList) throws Exception {
 
         // 게시물 리스트 정보를 통째로 등록하는 메소드입니다.
         if(noticeMapper.insertNoticeList(noticeVOList) == 0) {
             throw new Exception();
         }
-
-        return true;
-    }
-
-    @Override
-    public boolean modifyNotice(NoticeVO noticeVO) throws Exception {
-
-        if(noticeMapper.updateNotice(noticeVO) != 1) {
-            throw new Exception();
-        }
-
-        return true;
-    }
-
-    @Override
-    public boolean modifyNoticeState(NoticeVO noticeVO) throws Exception {
-
-        if(noticeMapper.updateNoticeState(noticeVO) != 1) {
-            throw new Exception();
-        }
-
-        return true;
-    }
-
-    @Override
-    public boolean removeNotice(Long noticeNo) throws Exception {
-
-        if(noticeMapper.deleteNotice(noticeNo) != 1) {
-            throw new Exception();
-        }
-
-        return true;
     }
 
     @Override
@@ -73,14 +43,32 @@ public class NoticeServiceImpl implements NoticeService{
     }
 
     @Override
-    public List<NoticeVO> getNoticeList() {
+    public List<NoticeVO> getNoticeList(InsertNoticeDTO insertNoticeDTO) {
 
-        return noticeMapper.selectNoticeList();
+        return noticeMapper.selectNoticeList(insertNoticeDTO);
     }
 
     @Override
-    public List<NoticeVO> getNoticeListBySize(Integer size) {
+    public void modifyNotice(NoticeVO noticeVO) throws Exception {
 
-        return noticeMapper.selectNoticeListBySize(size);
+        if(noticeMapper.updateNotice(noticeVO) != 1) {
+            throw new Exception();
+        }
+    }
+
+    @Override
+    public void modifyNoticeState(NoticeVO noticeVO) throws Exception {
+
+        if(noticeMapper.updateNoticeState(noticeVO) != 1) {
+            throw new Exception();
+        }
+    }
+
+    @Override
+    public void removeNotice(Long noticeNo) throws Exception {
+
+        if(noticeMapper.deleteNotice(noticeNo) != 1) {
+            throw new Exception();
+        }
     }
 }

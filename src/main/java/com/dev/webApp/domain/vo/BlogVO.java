@@ -1,4 +1,4 @@
-package com.dev.webApp.domain;
+package com.dev.webApp.domain.vo;
 
 import lombok.Builder;
 import lombok.Getter;

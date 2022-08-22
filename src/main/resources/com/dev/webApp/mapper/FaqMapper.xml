@@ -5,7 +5,7 @@
 <mapper namespace="com.dev.webApp.mapper.FaqMapper">
 
     <select id="selectFaqList"
-            resultType="com.dev.webApp.domain.FaqVO">
+            resultType="com.dev.webApp.domain.vo.FaqVO">
         <![CDATA[
             /* 전체 자주하는 질문 리스트 조회 쿼리 */
 
@@ -21,7 +21,7 @@
 
     <select id="selectFaq"
             parameterType="Long"
-            resultType="com.dev.webApp.domain.FaqVO">
+            resultType="com.dev.webApp.domain.vo.FaqVO">
        <![CDATA[
         /* 단일 자주하는 질문 리스트 조회 쿼리 */
 
@@ -38,7 +38,7 @@
 
     <select id="selectFaqListBySize"
             parameterType="Integer"
-            resultType="com.dev.webApp.domain.FaqVO">
+            resultType="com.dev.webApp.domain.vo.FaqVO">
         <![CDATA[
         /* 전체 자주하는 질문 리스트 조회를 개수로 가져오는 쿼리 */
 
@@ -54,7 +54,7 @@
     </select>
 
     <insert id="insertFaq"
-            parameterType="com.dev.webApp.domain.FaqVO">
+            parameterType="com.dev.webApp.domain.vo.FaqVO">
         <![CDATA[
         /* 특정 자주하는 질문 삽입 쿼리 */
         INSERT INTO web_app_test.tb_faq(TITLE, CONTENT)
@@ -71,7 +71,7 @@
     </insert>
 
     <update id="updateFaq"
-            parameterType="com.dev.webApp.domain.FaqVO">
+            parameterType="com.dev.webApp.domain.vo.FaqVO">
         <![CDATA[
         /* 단일 자주하는 질문 리스트 수정 쿼리 */
         UPDATE web_app_test.tb_faq
@@ -84,7 +84,7 @@
     </update>
 
     <update id="updateFaqState"
-            parameterType="com.dev.webApp.domain.FaqVO">
+            parameterType="com.dev.webApp.domain.vo.FaqVO">
         <![CDATA[
         /* 단일 자주하는 질문 (상태) 수정 쿼리 */
         UPDATE web_app_test.tb_faq
