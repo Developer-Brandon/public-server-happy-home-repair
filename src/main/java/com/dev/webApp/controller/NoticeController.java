@@ -4,6 +4,8 @@ import com.dev.webApp.domain.dto.InsertNoticeDTO;
 import com.dev.webApp.domain.vo.NoticeVO;
 import com.dev.webApp.service.NoticeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -11,10 +13,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @RequestMapping("/notice")
-@RequiredArgsConstructor
-@RestController
+@Controller // JSP로 이동하려면 json을 반환하는 RestController가 아닌,
 public class NoticeController {
 
+    @Autowired
     private NoticeService noticeService;
 
     @GetMapping("/content/list")
@@ -23,31 +25,29 @@ public class NoticeController {
         // 우선은 1000개로 지정하겠습니다.
         InsertNoticeDTO insertNoticeDTO = InsertNoticeDTO.builder()
                 .manyNoticeOrNot(false)
-                .noticeSize(1000)
+                .noticeSize(10000)
                 .build();
 
-        // todo:
-        // https://ecsimsw.tistory.com/entry/Spring-Controller%EC%97%90%EC%84%9C-View%EB%A1%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%A0%84%EB%8B%AC%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95
+        List<NoticeVO> noticeVOList = noticeService.getNoticeList(insertNoticeDTO);
+        model.addAttribute("list", noticeVOList);
 
-        // 위 링크 보고 다시...
-        // List<NoticeVO> noticeVOList = noticeService.getNoticeList(insertNoticeDTO);
-        model.addAttribute("list", "test-test");
-
-        return "/notice/list";
+        return "/notice/list_page";
     }
 
     @GetMapping("/content")
-    public void getContent(
-            @RequestParam
-            Long noticeNo
+    public String getContent(
+            @RequestParam("noticeNo")
+            String noticeNo
             , Model model
     ) {
 
         NoticeVO noticeVO = NoticeVO.builder()
-                .noticeNo(noticeNo)
+                .noticeNo(Long.valueOf(noticeNo))
                 .build();
 
         model.addAttribute("notice", noticeService.getNotice(noticeVO));
+
+        return "/notice/page";
     }
 
     @PostMapping("/content")

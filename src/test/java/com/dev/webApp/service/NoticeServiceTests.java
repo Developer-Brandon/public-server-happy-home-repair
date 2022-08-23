@@ -53,6 +53,5 @@ public class NoticeServiceTests {
         noticeVOList.stream().forEach(System.out::println);
 
         assertNotNull(noticeVOList);
-
     }
 }

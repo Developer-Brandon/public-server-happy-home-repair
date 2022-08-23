@@ -26,7 +26,6 @@
             resultType="com.dev.webApp.domain.vo.NoticeVO">
        <![CDATA[
         /* 단일 공지사항 리스트 조회 쿼리 */
-
         SELECT NOTICE_NO AS noticeNo
             , TITLE AS title
             , CONTENT AS content
@@ -54,6 +53,7 @@
         <if test="manyNoticeOrNot==true">
             LIMIT #{noticeSize}
         </if>
+        ORDER BY NOTICE_NO DESC
     </select>
 
     <update id="updateNotice"

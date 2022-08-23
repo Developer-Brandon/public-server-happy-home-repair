@@ -8,10 +8,14 @@
 	<title>Notice</title>
 </head>
 <body>
-<h1>
-	NoticeList
-</h1>
-
-<%--<P>  The list is ${list}. </P>--%>
+    <h1>
+        Notice
+    </h1>
+    <span>${notice.noticeNo}</span>
+    <span>${notice.title}</span>
+    <span>${notice.content}</span>
+    <span>${notice.useYnEnum}</span>
+    <span>${notice.regDt}</span>
+    <span>${notice.modDt}</span>
 </body>
 </html>

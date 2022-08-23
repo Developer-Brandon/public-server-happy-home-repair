@@ -39,6 +39,8 @@ public class NoticeServiceImpl implements NoticeService{
     @Override
     public NoticeVO getNotice(NoticeVO noticeVO) {
 
+        // todo: 예외처리 추가하기
+
         return noticeMapper.selectNotice(noticeVO.getNoticeNo());
     }
 
