@@ -3,8 +3,8 @@ package com.dev.webApp.controller;
 import com.dev.webApp.domain.dto.InsertNoticeDTO;
 import com.dev.webApp.domain.vo.NoticeVO;
 import com.dev.webApp.service.NoticeService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,14 +13,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @RequestMapping("/notice")
-@Controller // JSP로 이동하려면 json을 반환하는 RestController가 아닌,
+@Controller // JSP로 이동하려면 json을 반환하는 RestController가 아닌, 그냥 controller를 사용해야 합니다
 public class NoticeController {
 
     @Autowired
     private NoticeService noticeService;
 
     @GetMapping("/content/list")
-    public String selectNoticeList(Model model) {
+    public String getNoticeListAndView(Model model) throws Exception {
 
         // 우선은 1000개로 지정하겠습니다.
         InsertNoticeDTO insertNoticeDTO = InsertNoticeDTO.builder()
@@ -35,11 +35,11 @@ public class NoticeController {
     }
 
     @GetMapping("/content")
-    public String getContent(
-            @RequestParam("noticeNo")
+    public String getNoticeAndView(
+            @RequestParam
             String noticeNo
             , Model model
-    ) {
+    ) throws Exception {
 
         NoticeVO noticeVO = NoticeVO.builder()
                 .noticeNo(Long.valueOf(noticeNo))
@@ -48,6 +48,16 @@ public class NoticeController {
         model.addAttribute("notice", noticeService.getNotice(noticeVO));
 
         return "/notice/page";
+    }
+
+    @ResponseBody
+    @GetMapping("/list")
+    public ResponseEntity getNoticeList() throws Exception {
+
+        // todo
+        // 아래 코드서부터 다시
+
+        return null;
     }
 
     @PostMapping("/content")

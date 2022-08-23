@@ -17,7 +17,7 @@ public interface NoticeService {
 
     void removeNotice(Long noticeNo) throws Exception;
 
-    NoticeVO getNotice(NoticeVO noticeVO);
+    NoticeVO getNotice(NoticeVO noticeVO) throws Exception;
 
-    List<NoticeVO> getNoticeList(InsertNoticeDTO insertNoticeDTO);
+    List<NoticeVO> getNoticeList(InsertNoticeDTO insertNoticeDTO) throws Exception;
 }

@@ -37,15 +37,19 @@ public class NoticeServiceImpl implements NoticeService{
     }
 
     @Override
-    public NoticeVO getNotice(NoticeVO noticeVO) {
+    public NoticeVO getNotice(NoticeVO noticeVO) throws Exception {
 
-        // todo: 예외처리 추가하기
+        NoticeVO selectedNoticeVO = noticeMapper.selectNotice(noticeVO.getNoticeNo());
 
-        return noticeMapper.selectNotice(noticeVO.getNoticeNo());
+        if(selectedNoticeVO.getNoticeNo() != 1L) {
+            throw new Exception();
+        }
+
+        return selectedNoticeVO;
     }
 
     @Override
-    public List<NoticeVO> getNoticeList(InsertNoticeDTO insertNoticeDTO) {
+    public List<NoticeVO> getNoticeList(InsertNoticeDTO insertNoticeDTO) throws Exception{
 
         return noticeMapper.selectNoticeList(insertNoticeDTO);
     }
