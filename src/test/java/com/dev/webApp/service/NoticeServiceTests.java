@@ -1,11 +1,14 @@
 package com.dev.webApp.service;
 
+import com.dev.webApp.domain.dto.InsertNoticeDTO;
 import com.dev.webApp.domain.vo.NoticeVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.List;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -35,5 +38,21 @@ public class NoticeServiceTests {
         Long registerSuccessorNot = noticeService.registerNotice(noticeVO);
 
         assertNotNull(registerSuccessorNot);
+    }
+
+    @Test
+    public void serviceGetNoticeListTest() throws Exception {
+
+        InsertNoticeDTO insertNoticeDTO = InsertNoticeDTO.builder()
+                .manyNoticeOrNot(false)
+                .noticeSize(10000)
+                .build();
+
+        List<NoticeVO> noticeVOList = noticeService.getNoticeList(insertNoticeDTO);
+
+        noticeVOList.stream().forEach(System.out::println);
+
+        assertNotNull(noticeVOList);
+
     }
 }

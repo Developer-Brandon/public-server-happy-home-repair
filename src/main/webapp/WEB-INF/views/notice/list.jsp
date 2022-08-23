@@ -12,6 +12,6 @@
 	NoticeList
 </h1>
 
-<P>  The list is ${list}. </P>
+<%--<P>  The list is ${list}. </P>--%>
 </body>
 </html>
