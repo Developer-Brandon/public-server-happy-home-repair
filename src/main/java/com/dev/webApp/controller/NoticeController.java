@@ -31,7 +31,7 @@ public class NoticeController {
         List<NoticeVO> noticeVOList = noticeService.getNoticeList(insertNoticeDTO);
         model.addAttribute("list", noticeVOList);
 
-        return "/notice/list_page";
+        return "/notice/get_list_page";
     }
 
     @GetMapping("/content")
@@ -47,17 +47,7 @@ public class NoticeController {
 
         model.addAttribute("notice", noticeService.getNotice(noticeVO));
 
-        return "/notice/page";
-    }
-
-    @ResponseBody
-    @GetMapping("/list")
-    public ResponseEntity getNoticeList() throws Exception {
-
-        // todo
-        // 아래 코드서부터 다시
-
-        return null;
+        return "get_page";
     }
 
     @PostMapping("/content")
@@ -68,7 +58,7 @@ public class NoticeController {
         redirectAttributes.addFlashAttribute("result", noticeVO.getNoticeNo());
 
         // 내부적으로 response.sendRedirect를 처리해주게끔 처리합니다.
-        return "redirect:/notice/list";
+        return "redirect:/notice/get_list_page";
     }
 
     @PutMapping("/content")
@@ -76,7 +66,7 @@ public class NoticeController {
 
         noticeService.modifyNotice(noticeVO);
 
-        return "redirect:/notice/list";
+        return "redirect:/notice/get_list_page";
     }
 
     @DeleteMapping("/content")
@@ -84,6 +74,18 @@ public class NoticeController {
 
         noticeService.removeNotice(noticeNo);
 
-        return "redirect:/notice/list";
+        return "redirect:/notice/get_list_page";
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////
+
+    @ResponseBody
+    @GetMapping("/list")
+    public ResponseEntity getNoticeList() throws Exception {
+
+        // todo
+        // client쪽 코드는 추후 개발
+
+        return null;
     }
 }
