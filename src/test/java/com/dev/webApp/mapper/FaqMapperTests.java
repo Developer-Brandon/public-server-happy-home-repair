@@ -1,5 +1,6 @@
 package com.dev.webApp.mapper;
 
+import com.dev.webApp.domain.dto.SelectFaqDTO;
 import com.dev.webApp.domain.vo.FaqVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +17,12 @@ public class FaqMapperTests {
 
     @Test
     public void getFaqList() {
-        faqMapper.selectFaqList()
+
+        SelectFaqDTO selectFaqDTO = SelectFaqDTO.builder()
+                .manyFaqOrNot(false)
+                .build();
+
+        faqMapper.selectFaqList(selectFaqDTO)
                 .forEach(faq -> System.out.println(faq.getTitle()));
     }
 

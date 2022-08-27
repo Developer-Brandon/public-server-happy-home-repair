@@ -38,7 +38,7 @@
     </select>
 
     <select id="selectNoticeList"
-            parameterType="com.dev.webApp.domain.dto.InsertNoticeDTO"
+            parameterType="com.dev.webApp.domain.dto.SelectNoticeDTO"
             resultType="com.dev.webApp.domain.vo.NoticeVO">
         <![CDATA[
             /* 전체 공지사항 리스트 조회 쿼리 */
@@ -59,7 +59,7 @@
     <update id="updateNotice"
             parameterType="com.dev.webApp.domain.vo.NoticeVO">
         <![CDATA[
-        /* 단일 공지사항 리스트 수정 쿼리 */
+        /* 단일 공지사항 수정 쿼리 */
         update web_app_test.tb_notice
         set title = #{title}
             , content = #{content}

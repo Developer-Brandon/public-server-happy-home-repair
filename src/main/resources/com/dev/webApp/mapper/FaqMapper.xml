@@ -4,20 +4,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dev.webApp.mapper.FaqMapper">
 
-    <select id="selectFaqList"
-            resultType="com.dev.webApp.domain.vo.FaqVO">
+    <insert id="insertFaq"
+            parameterType="com.dev.webApp.domain.vo.FaqVO">
         <![CDATA[
-            /* 전체 자주하는 질문 리스트 조회 쿼리 */
-
-            SELECT FAQ_NO AS faqNo
-                 , TITLE AS title
-                 , CONTENT AS content
-                 , USE_YN AS useYnEnum
-                 , REG_DT AS regDt
-                 , MOD_DT AS modDt
-            FROM web_app_test.tb_faq
+        /* 특정 자주하는 질문 삽입 쿼리 */
+        insert into web_app_test.tb_faq(title, content)
+        value (#{title}, #{content})
         ]]>
-    </select>
+        <selectKey
+                keyProperty="faqNo"
+                order="AFTER"
+                resultType="long">
+            /* 특정 자주하는 질문 삽입 쿼리 */
+            select max(faq_no)
+            from web_app_test.tb_faq
+        </selectKey>
+    </insert>
 
     <select id="selectFaq"
             parameterType="Long"
@@ -25,61 +27,46 @@
        <![CDATA[
         /* 단일 자주하는 질문 리스트 조회 쿼리 */
 
-        SELECT FAQ_NO AS faqNo
-            , TITLE AS title
-            , CONTENT AS content
-            , USE_YN AS useYnEnum
-            , REG_DT AS regDt
-            , MOD_DT AS modDt
-        FROM web_app_test.tb_faq
-        WHERE FAQ_NO = #{faqNo}
+        select faq_no as faqNo
+             , title as title
+             , content as content
+             , use_yn as useYnEnum
+             , reg_dt as regDt
+             , mod_dt as modDt
+        from web_app_test.tb_faq
+        where faq_no = #{faqNo}
         ]]>
     </select>
 
-    <select id="selectFaqListBySize"
-            parameterType="Integer"
+    <select id="selectFaqList"
+            parameterType="com.dev.webApp.domain.dto.SelectFaqDTO"
             resultType="com.dev.webApp.domain.vo.FaqVO">
         <![CDATA[
-        /* 전체 자주하는 질문 리스트 조회를 개수로 가져오는 쿼리 */
-
-        SELECT FAQ_NO AS faqNo
-             , TITLE AS title
-             , CONTENT AS content
-             , USE_YN AS useYnEnum
-             , REG_DT AS regDt
-             , MOD_DT AS modDt
-        FROM web_app_test.tb_faq
-        LIMIT #{size}
+            /* 전체 자주하는 질문 리스트 조회 쿼리 */
         ]]>
+        select faq_no as faqNo
+             , title as title
+             , content aS content
+             , use_yn as useYnEnum
+             , reg_dt as regDt
+             , mod_dt as modDt
+        from web_app_test.tb_faq
+        <if test="manyFaqOrNot==true">
+        limit #{faqSize}
+        </if>
+        order by faq_no desc
     </select>
-
-    <insert id="insertFaq"
-            parameterType="com.dev.webApp.domain.vo.FaqVO">
-        <![CDATA[
-        /* 특정 자주하는 질문 삽입 쿼리 */
-        INSERT INTO web_app_test.tb_faq(TITLE, CONTENT)
-        VALUE (#{title}, #{content})
-        ]]>
-        <selectKey
-            keyProperty="faqNo"
-            order="AFTER"
-            resultType="long">
-                /* 특정 자주하는 질문 삽입 쿼리 */
-                SELECT MAX(FAQ_NO)
-                FROM web_app_test.tb_faq
-        </selectKey>
-    </insert>
 
     <update id="updateFaq"
             parameterType="com.dev.webApp.domain.vo.FaqVO">
         <![CDATA[
-        /* 단일 자주하는 질문 리스트 수정 쿼리 */
-        UPDATE web_app_test.tb_faq
-        SET TITLE = #{title}
-            , CONTENT = #{content}
-            , USE_YN = #{useYnEnum}
-            , MOD_DT = CURRENT_TIMESTAMP
-        WHERE FAQ_NO = #{faqNo}
+        /* 단일 자주하는 질문 수정 쿼리 */
+        update web_app_test.tb_faq
+        set title = #{title}
+            , content = #{content}
+            , use_yn = #{useYnEnum}
+            , mod_dt = current_timestamp
+        where faq_no = #{faqNo}
         ]]>
     </update>
 
@@ -87,10 +74,10 @@
             parameterType="com.dev.webApp.domain.vo.FaqVO">
         <![CDATA[
         /* 단일 자주하는 질문 (상태) 수정 쿼리 */
-        UPDATE web_app_test.tb_faq
-        SET USE_YN = #{useYnEnum}
-          , MOD_DT = CURRENT_TIMESTAMP
-        WHERE FAQ_NO = #{faqNo}
+        update web_app_test.tb_faq
+        set use_yn = #{useYnEnum}
+          , mod_dt = current_timestamp
+        where faq_no = #{faqNo}
         ]]>
     </update>
 
@@ -98,8 +85,17 @@
             parameterType="Long">
         <![CDATA[
         /* 단일 자주하는 질문 리스트 삭제 쿼리 */
-        DELETE FROM web_app_test.tb_faq
-        WHERE FAQ_NO = #{faqNo}
+        delete from web_app_test.tb_faq
+        where faq_no = #{faqNo}
         ]]>
     </delete>
+
+    <select id="getTotalCnt" resultType="Integer">
+        <![CDATA[
+        /* 전체 faq의 개수를 조회하는 쿼리 */
+        ]]>
+        select count(*)
+        from web_app_test.tb_faq
+        where faq_no > 0
+    </select>
 </mapper>

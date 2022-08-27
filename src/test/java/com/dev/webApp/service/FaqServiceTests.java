@@ -1,7 +1,7 @@
 package com.dev.webApp.service;
 
-import com.dev.webApp.domain.dto.SelectNoticeDTO;
-import com.dev.webApp.domain.vo.NoticeVO;
+import com.dev.webApp.domain.dto.SelectFaqDTO;
+import com.dev.webApp.domain.vo.FaqVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,44 +14,44 @@ import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
-public class NoticeServiceTests {
+public class FaqServiceTests {
 
-    // TODO: notice 서비스쪽부터 로직 추가 예정
+    // TODO: faq 서비스쪽부터 로직 추가 예정
 
     @Autowired
-    private NoticeService noticeService;
+    private FaqService faqService;
 
     @Test
     public void serviceExistTest() {
-        assertNotNull(noticeService);
+        assertNotNull(faqService);
 
     }
 
     @Test
     public void serviceRegisterTest() throws Exception {
 
-        NoticeVO noticeVO = NoticeVO.builder()
+        FaqVO faqVO = FaqVO.builder()
                 .title("새로 작성하는 글")
                 .content("새로 작성하는 내용")
                 .build();
 
-        Long registerSuccessorNot = noticeService.registerNotice(noticeVO);
+        Long registerSuccessorNot = faqService.registerFaq(faqVO);
 
         assertNotNull(registerSuccessorNot);
     }
 
     @Test
-    public void serviceGetNoticeListTest() throws Exception {
+    public void serviceGetFaqListTest() throws Exception {
 
-        SelectNoticeDTO selectNoticeDTO = SelectNoticeDTO.builder()
-                .manyNoticeOrNot(false)
-                .noticeSize(10000)
+        SelectFaqDTO selectFaqDTO = SelectFaqDTO.builder()
+                .manyFaqOrNot(false)
+                .faqSize(10000)
                 .build();
 
-        List<NoticeVO> noticeVOList = noticeService.getNoticeList(selectNoticeDTO);
+        List<FaqVO> faqVOList = faqService.getFaqList(selectFaqDTO);
 
-        noticeVOList.stream().forEach(System.out::println);
+        faqVOList.stream().forEach(System.out::println);
 
-        assertNotNull(noticeVOList);
+        assertNotNull(faqVOList);
     }
 }

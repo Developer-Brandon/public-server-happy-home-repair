@@ -1,6 +1,6 @@
 package com.dev.webApp.controller;
 
-import com.dev.webApp.domain.dto.InsertNoticeDTO;
+import com.dev.webApp.domain.dto.SelectNoticeDTO;
 import com.dev.webApp.domain.vo.NoticeVO;
 import com.dev.webApp.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +23,12 @@ public class NoticeController {
     public String getNoticeListAndView(Model model) throws Exception {
 
         // 우선은 1000개로 지정하겠습니다.
-        InsertNoticeDTO insertNoticeDTO = InsertNoticeDTO.builder()
+        SelectNoticeDTO selectNoticeDTO = SelectNoticeDTO.builder()
                 .manyNoticeOrNot(false)
                 .noticeSize(10000)
                 .build();
 
-        List<NoticeVO> noticeVOList = noticeService.getNoticeList(insertNoticeDTO);
+        List<NoticeVO> noticeVOList = noticeService.getNoticeList(selectNoticeDTO);
         model.addAttribute("list", noticeVOList);
 
         return "/notice/get_list_page";

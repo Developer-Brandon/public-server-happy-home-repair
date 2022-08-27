@@ -1,6 +1,6 @@
 package com.dev.webApp.service;
 
-import com.dev.webApp.domain.dto.InsertNoticeDTO;
+import com.dev.webApp.domain.dto.SelectNoticeDTO;
 import com.dev.webApp.domain.vo.NoticeVO;
 
 import java.util.List;
@@ -19,5 +19,5 @@ public interface NoticeService {
 
     NoticeVO getNotice(NoticeVO noticeVO) throws Exception;
 
-    List<NoticeVO> getNoticeList(InsertNoticeDTO insertNoticeDTO) throws Exception;
+    List<NoticeVO> getNoticeList(SelectNoticeDTO selectNoticeDTO) throws Exception;
 }

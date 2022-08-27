@@ -1,8 +1,8 @@
 package com.dev.webApp.mapper;
 
-import com.dev.webApp.domain.dto.InsertNoticeDTO;
+import com.dev.webApp.domain.dto.SelectNoticeDTO;
 import com.dev.webApp.domain.vo.NoticeVO;
-import com.mysql.cj.protocol.x.Notice;
+import com.dev.webApp.util.NoticeUseYnEnum;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +19,12 @@ public class NoticeMapperTests {
     @Test
     public void getNoticeList() {
 
-        InsertNoticeDTO insertNoticeDTO = InsertNoticeDTO.builder()
+        SelectNoticeDTO selectNoticeDTO = SelectNoticeDTO.builder()
                 .manyNoticeOrNot(false)
                 .build();
 
         noticeMapper
-                .selectNoticeList(insertNoticeDTO)
+                .selectNoticeList(selectNoticeDTO)
                 .forEach(notice -> System.out.println(notice.getTitle()));
     }
 
@@ -58,6 +58,7 @@ public class NoticeMapperTests {
                 .noticeNo(10L)
                 .title("업데이트_테스트_제목")
                 .content("업데이트_테스트_내용")
+                .useYnEnum(NoticeUseYnEnum.Y)
                 .build();
 
         int updatedNoticeCnt = noticeMapper.updateNotice(noticeVO);

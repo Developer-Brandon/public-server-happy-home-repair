@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 @Builder
 @AllArgsConstructor
-public class InsertNoticeDTO {
+public class SelectNoticeDTO {
     Boolean manyNoticeOrNot;
     Integer noticeSize;
 }

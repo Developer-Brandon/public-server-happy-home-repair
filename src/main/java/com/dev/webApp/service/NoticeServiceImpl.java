@@ -1,6 +1,6 @@
 package com.dev.webApp.service;
 
-import com.dev.webApp.domain.dto.InsertNoticeDTO;
+import com.dev.webApp.domain.dto.SelectNoticeDTO;
 import com.dev.webApp.domain.vo.NoticeVO;
 import com.dev.webApp.mapper.NoticeMapper;
 import lombok.RequiredArgsConstructor;
@@ -49,9 +49,9 @@ public class NoticeServiceImpl implements NoticeService{
     }
 
     @Override
-    public List<NoticeVO> getNoticeList(InsertNoticeDTO insertNoticeDTO) throws Exception{
+    public List<NoticeVO> getNoticeList(SelectNoticeDTO selectNoticeDTO) throws Exception{
 
-        return noticeMapper.selectNoticeList(insertNoticeDTO);
+        return noticeMapper.selectNoticeList(selectNoticeDTO);
     }
 
     @Override
