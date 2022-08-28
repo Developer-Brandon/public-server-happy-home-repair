@@ -41,7 +41,7 @@ public class NoticeServiceImpl implements NoticeService{
 
         NoticeVO selectedNoticeVO = noticeMapper.selectNotice(noticeVO.getNoticeNo());
 
-        if(selectedNoticeVO.getNoticeNo() != 1L) {
+        if(selectedNoticeVO.getNoticeNo() == 0L) {
             throw new Exception();
         }
 

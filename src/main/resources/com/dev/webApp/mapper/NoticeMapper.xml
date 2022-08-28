@@ -50,7 +50,7 @@
              , reg_dt as regDt
              , mod_dt as modDt
         from web_app_test.tb_notice
-        <if test="manyNoticeOrNot==true">
+        <if test="manyNoticeOrNot == true">
             limit #{noticeSize}
         </if>
         order by notice_no desc

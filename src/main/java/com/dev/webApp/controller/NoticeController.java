@@ -4,12 +4,15 @@ import com.dev.webApp.domain.dto.SelectNoticeDTO;
 import com.dev.webApp.domain.vo.NoticeVO;
 import com.dev.webApp.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.xml.ws.Response;
 import java.util.List;
 
 @RequestMapping("/notice")
@@ -80,12 +83,103 @@ public class NoticeController {
     //////////////////////////////////////////////////////////////////////////////////////////////
 
     @ResponseBody
-    @GetMapping("/list")
-    public ResponseEntity getNoticeList() throws Exception {
+    @GetMapping(
+            value = "/list"
+            , produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
+    )
+    public ResponseEntity<List<NoticeVO>> getNoticeList(
+            @RequestParam
+            Boolean manyNoticeOrNot
+            , @RequestParam
+            Integer noticeSize
+    ) throws Exception {
 
-        // todo
-        // client쪽 코드는 추후 개발
+        SelectNoticeDTO selectNoticeDTO = SelectNoticeDTO.builder()
+                .manyNoticeOrNot(manyNoticeOrNot)
+                .noticeSize(noticeSize)
+                .build();
 
-        return null;
+        List<NoticeVO> noticeVOList = noticeService.getNoticeList(selectNoticeDTO);
+
+        return new ResponseEntity<>(noticeVOList, HttpStatus.OK);
+    }
+
+    @ResponseBody
+    @GetMapping(
+            value=""
+            ,produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
+    )
+    public ResponseEntity<NoticeVO> getNotice(
+            @RequestParam
+            Long noticeNo
+    ) throws Exception {
+
+        NoticeVO requestNoticeVO = NoticeVO.builder()
+                .noticeNo(noticeNo)
+                .build();
+
+        NoticeVO noticeVO = noticeService.getNotice(requestNoticeVO);
+
+        return new ResponseEntity<>(noticeVO, HttpStatus.OK);
+    }
+
+    @ResponseBody
+    @PostMapping(
+            value=""
+            ,produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
+    )
+    public ResponseEntity<Long> insertNotice(
+          @RequestBody
+          NoticeVO noticeVO
+    ) throws Exception {
+
+        Long noticeNo = noticeService.registerNotice(noticeVO);
+
+        return new ResponseEntity<>(noticeNo, HttpStatus.OK);
+    }
+
+    @ResponseBody
+    @PutMapping(
+            value=""
+            ,produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
+    )
+    public ResponseEntity updateNotice(
+            @RequestBody
+                    NoticeVO noticeVO
+    ) throws Exception {
+
+        noticeService.modifyNotice(noticeVO);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @ResponseBody
+    @PutMapping(
+            value="/state"
+            ,produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
+    )
+    public ResponseEntity updateNoticeState(
+            @RequestBody
+                    NoticeVO noticeVO
+    ) throws Exception {
+
+        noticeService.modifyNoticeState(noticeVO);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @ResponseBody
+    @DeleteMapping(
+            value=""
+            ,produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
+    )
+    public ResponseEntity deleteNotice(
+            @RequestParam
+            Long noticeNo
+    ) throws Exception {
+
+        noticeService.removeNotice(noticeNo);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
