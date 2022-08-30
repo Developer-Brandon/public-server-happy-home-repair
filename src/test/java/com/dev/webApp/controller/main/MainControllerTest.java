@@ -1,4 +1,4 @@
-package com.dev.webApp.controller;
+package com.dev.webApp.controller.main;
 
 import junit.framework.TestCase;
 import org.junit.Before;
@@ -38,7 +38,7 @@ public class MainControllerTest extends TestCase {
 
         //
         mockMvc.perform(
-                    get("/main/getText")
+                    get("/main/test")
                 )
                 .andExpect(status().is(200))
                 .andReturn();
