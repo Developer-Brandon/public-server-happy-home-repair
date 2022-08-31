@@ -1,12 +1,13 @@
 package com.dev.webApp.controller;
 
-import com.dev.webApp.domain.vo.BlogVO;
+import com.dev.webApp.domain.vo.BlogPostingVO;
 import com.dev.webApp.service.BlogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,10 +37,23 @@ public class BlogController {
             value = "/list"
             , produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
     )
-    public ResponseEntity<List<BlogVO>> getRepairStateList() throws Exception {
+    public ResponseEntity<List<BlogPostingVO>> getBlogPostingList() throws Exception {
 
-        List<BlogVO> blogList = blogService.getBlogList();
+        List<BlogPostingVO> blogList = blogService.getBlogList();
 
         return new ResponseEntity<>(blogList, HttpStatus.OK);
+    }
+
+    // 3. 크롤링한 데이터를 바로 insert하는 쿼리
+    // (최초 한번만 써야하는 api, 하지만 예외처리 되어있으니 덜 조심해도 될듯)
+    @GetMapping(
+            value = "/list/bulk"
+            , produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
+    )
+    public ResponseEntity insertBlogPostingList() throws Exception {
+
+        blogService.setBlogList();
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
