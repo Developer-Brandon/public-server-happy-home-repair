@@ -4,7 +4,6 @@ import com.dev.webApp.domain.dto.InsertBlogPostingListDTO;
 import com.dev.webApp.domain.vo.BlogPostingVO;
 import com.dev.webApp.domain.vo.RawBlogPostingVO;
 import com.dev.webApp.mapper.BlogMapper;
-import lombok.RequiredArgsConstructor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -38,7 +37,7 @@ public class BlogServiceImpl implements BlogService{
         return (Elements) getConnection().select("li.p_date span");
     }
 
-    private List<RawBlogPostingVO> getRawBlogPostingList() throws Exception{
+    private List<RawBlogPostingVO> getRawBlogPostingListByCrawling() throws Exception{
 
 
         // 1. 메인에서 타이틀과 이미지 경로를 불러옵니다.
@@ -111,7 +110,7 @@ public class BlogServiceImpl implements BlogService{
     @Override
     public void setBlogList() throws Exception {
 
-        List<RawBlogPostingVO> rawBlogPostingVOList = getRawBlogPostingList();
+        List<RawBlogPostingVO> rawBlogPostingVOList = getRawBlogPostingListByCrawling();
 
         /*
         rawBlogPostingVOList = rawBlogPostingVOList
@@ -132,12 +131,12 @@ public class BlogServiceImpl implements BlogService{
         */
 
         // 찾다 찾다가 안나오니까 임시로....
+        // 가장 최근의 element는 삭제하는 것으로....
         rawBlogPostingVOList.remove(0);
 
-        rawBlogPostingVOList.forEach(e -> {
-
-            System.out.println("is it true? : " + e.getPostingRegDt());
-        });
+        //        rawBlogPostingVOList.forEach(e -> {
+        //            System.out.println("is it true? : " + e.getPostingRegDt());
+        //        });
 
         InsertBlogPostingListDTO insertBlogPostingListDTO = InsertBlogPostingListDTO.builder()
                 .insertBlogPostingDTOList(rawBlogPostingVOList)
@@ -147,5 +146,23 @@ public class BlogServiceImpl implements BlogService{
         if(blogMapper.insertBlogPostingList(insertBlogPostingListDTO) == 0) {
             throw new Exception();
         }
+    }
+
+    @Override
+    public void setDifferentBlogList() throws Exception {
+
+        List<RawBlogPostingVO> rawBlogPostingVOListFromDB = getRawBlogPostingListByCrawling();
+
+        List<RawBlogPostingVO> rawBlogPostingVOListByCrawling = getRawBlogPostingListByCrawling();
+
+        // 1. list 두개를 비교합니다
+
+        // 2. 상위 5개의 항목을 비교합니다.
+
+        // 3. 다른 리스트가 하나라도 있다면, 다른 리스트를 또다른 리스트로 넣습니다.
+
+        // 4. 만약 다른 리스트가 하나도 없다면, 아무것도 하지 않습니다.
+
+
     }
 }

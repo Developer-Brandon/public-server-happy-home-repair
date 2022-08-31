@@ -7,4 +7,5 @@ import java.util.List;
 public interface BlogService {
     List<BlogPostingVO> getBlogList() throws Exception;
     void setBlogList() throws Exception;
+    void setDifferentBlogList() throws Exception;
 }
