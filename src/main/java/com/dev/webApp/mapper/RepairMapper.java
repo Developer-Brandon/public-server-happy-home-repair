@@ -3,6 +3,9 @@ package com.dev.webApp.mapper;
 //    import com.dev.webApp.domain.dto.SelectRepairApplyDTO;
 //    import com.dev.webApp.domain.vo.RepairApplyVO;
 
+import com.dev.webApp.domain.dto.SelectRepairLocationDTO;
+import com.dev.webApp.domain.dto.SelectRepairStateDTO;
+import com.dev.webApp.domain.dto.SelectRepairTypeDTO;
 import com.dev.webApp.domain.vo.RepairLocationVO;
 import com.dev.webApp.domain.vo.RepairStateVO;
 import com.dev.webApp.domain.vo.RepairTypeVO;
@@ -11,17 +14,15 @@ import java.util.List;
 
 public interface RepairMapper {
 
-    // todo: 여기서 부터 다시...
-
-    List<RepairTypeVO> selectRepairTypeList();
+    List<RepairTypeVO> selectRepairTypeList(SelectRepairTypeDTO selectRepairTypeDTO);
 
     RepairTypeVO selectRepairType(Integer repairTypeNo);
 
-    List<RepairLocationVO> selectRepairLocationList();
+    List<RepairLocationVO> selectRepairLocationList(SelectRepairLocationDTO selectRepairLocationDTO);
 
     RepairLocationVO selectRepairLocation(Integer repairLocationNo);
 
-    List<RepairStateVO> selectRepairStateList();
+    List<RepairStateVO> selectRepairStateList(SelectRepairStateDTO selectRepairStateDTO);
 
     RepairStateVO selectRepairState(Integer repairStateNo);
 

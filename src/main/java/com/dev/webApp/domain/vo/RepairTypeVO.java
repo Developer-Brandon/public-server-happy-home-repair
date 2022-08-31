@@ -9,6 +9,8 @@ import java.sql.Timestamp;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class RepairTypeVO {
 
     private Integer repairTypeNo;
