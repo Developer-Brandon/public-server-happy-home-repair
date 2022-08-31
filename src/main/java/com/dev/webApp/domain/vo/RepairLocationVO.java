@@ -12,10 +12,9 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RepairLocationVO {
-
-    private Integer repairLocationNo;
-    private String name;
-    private String explanation;
-    private Timestamp regDt;
-    private Timestamp modDt;
+    Integer repairLocationNo;
+    String name;
+    String explanation;
+    Timestamp regDt;
+    Timestamp modDt;
 }

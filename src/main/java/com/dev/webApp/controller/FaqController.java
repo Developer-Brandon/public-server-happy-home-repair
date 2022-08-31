@@ -129,7 +129,7 @@ public class FaqController {
     )
     public ResponseEntity<Long> insertFaq(
             @RequestBody
-                    FaqVO faqVO
+            FaqVO faqVO
     ) throws Exception {
 
         Long faqNo = faqService.registerFaq(faqVO);

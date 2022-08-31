@@ -34,7 +34,7 @@
              , reg_dt as regDt
              , mod_dt as modDt
         from web_app_test.tb_repair_type
-        where r_type_no = ${repairTypeNo}
+        where r_type_no = #{repairTypeNo}
         ]]>
     </select>
 
@@ -67,7 +67,7 @@
              , reg_dt as regDt
              , mod_dt as modDt
         from web_app_test.tb_repair_location
-        where r_location_no = ${repairLocationNo}
+        where r_location_no = #{repairLocationNo}
         ]]>
     </select>
 
@@ -101,103 +101,118 @@
              , reg_dt as regDt
              , mod_dt as modDt
         from web_app_test.tb_repair_location
-        where r_location_no = ${repairLocationNo}
+        where r_location_no = #{repairLocationNo}
         ]]>
     </select>
 
+    <!-- 견적문의 시작 -->
 
-    <!--    <insert id="insertFaq"-->
-<!--            parameterType="com.dev.webApp.domain.vo.FaqVO">-->
-<!--        <![CDATA[-->
-<!--        /* 특정 자주하는 질문 삽입 쿼리 */-->
-<!--        insert into web_app_test.tb_faq(title, content)-->
-<!--        value (#{title}, #{content})-->
-<!--        ]]>-->
-<!--        <selectKey-->
-<!--                keyProperty="faqNo"-->
-<!--                order="AFTER"-->
-<!--                resultType="long">-->
-<!--            /* 특정 자주하는 질문 삽입 쿼리 */-->
-<!--            select max(faq_no)-->
-<!--            from web_app_test.tb_faq-->
-<!--        </selectKey>-->
-<!--    </insert>-->
+    <insert id="insertRepairApply"
+        parameterType="com.dev.webApp.domain.dto.InsertRepairApplyDTO">
+    <![CDATA[
+    /* 특정 견적문의 삽입 쿼리 */
+    insert into web_app_test.tb_repair_apply(
+        r_type_no, r_location_no, r_state_no, user_type, phone_number, agree_or_not, explanation
+    ) value(
+        #{repairTypeNo}, #{repairLocationNo}, #{repairStateNo}, #{userTypeEnum}, #{phoneNumber}, #{agreeOrNotEnum}, #{explanation}
+    )
+    ]]>
+    <selectKey
+            keyProperty="insertedRepairApplyNo"
+            order="AFTER"
+            resultType="Integer">
+        /*  */
+        select max(r_type_no)
+        from web_app_test.tb_repair_apply
+    </selectKey>
+    </insert>
 
-<!--    <select id="selectFaq"-->
-<!--            parameterType="Long"-->
-<!--            resultType="com.dev.webApp.domain.vo.FaqVO">-->
-<!--       <![CDATA[-->
-<!--        /* 단일 자주하는 질문 리스트 조회 쿼리 */-->
+    <select id="selectRepairApply"
+        parameterType="Integer"
+        resultType="com.dev.webApp.domain.vo.RepairApplyVO">
+    <![CDATA[
+    /* 단일 견적 문의 조회 쿼리 */
+    select tb_r_apply.r_apply_no as repairApplyNo
+         , tb_r_apply.r_type_no as repairTypeNo
+         , tb_r_location.r_location_no as repairLocationNo
+         , tb_r_state.r_state_no as repairStateNo
+         , tb_r_apply.user_type as userTypeEnum
+         , tb_r_apply.phone_number as phoneNumber
+         , tb_r_apply.agree_or_not as agreeOrNotEnum
+         , tb_r_apply.explanation as explanation
+         , tb_r_apply.reg_dt as regDt
+         , tb_r_apply.mod_dt as modDt
+    from web_app_test.tb_repair_apply as tb_r_apply
+             inner join web_app_test.tb_repair_type as tb_r_type
+                        on tb_r_apply.r_type_no = tb_r_type.r_type_no
+             inner join web_app_test.tb_repair_state as tb_r_state
+                        on tb_r_apply.r_state_no = tb_r_state.r_state_no
+             inner join web_app_test.tb_repair_location as tb_r_location
+                        on tb_r_apply.r_location_no = tb_r_location.r_location_no
+    where tb_r_apply.r_apply_no = #{repairApplyNo}
+    ]]>
+    </select>
 
-<!--        select faq_no as faqNo-->
-<!--             , title as title-->
-<!--             , content as content-->
-<!--             , use_yn as useYnEnum-->
-<!--             , reg_dt as regDt-->
-<!--             , mod_dt as modDt-->
-<!--        from web_app_test.tb_faq-->
-<!--        where faq_no = #{faqNo}-->
-<!--        ]]>-->
-<!--    </select>-->
+    <select id="selectRepairApplyList"
+        parameterType="com.dev.webApp.domain.dto.SelectRepairApplyDTO"
+        resultType="com.dev.webApp.domain.vo.RepairApplyVO">
+    <![CDATA[
+        /* 견적 문의 리스트 조회 쿼리 */
+    ]]>
+    select tb_r_apply.r_apply_no as repairApplyNo
+            , tb_r_apply.r_type_no as repairTypeNo
+            , tb_r_location.r_location_no as repairLocationNo
+            , tb_r_state.r_state_no as repairStateNo
+            , tb_r_apply.user_type as userTypeEnum
+            , tb_r_apply.phone_number as phoneNumber
+            , tb_r_apply.agree_or_not as agreeOrNotEnum
+            , tb_r_apply.explanation as explanation
+            , tb_r_apply.reg_dt as regDt
+            , tb_r_apply.mod_dt as modDt
+        from web_app_test.tb_repair_apply as tb_r_apply
+            inner join web_app_test.tb_repair_type as tb_r_type
+                on tb_r_apply.r_type_no = tb_r_type.r_type_no
+            inner join web_app_test.tb_repair_state as tb_r_state
+                on tb_r_apply.r_state_no = tb_r_state.r_state_no
+            inner join web_app_test.tb_repair_location as tb_r_location
+                on tb_r_apply.r_location_no = tb_r_location.r_location_no
+        order by tb_r_apply.r_apply_no desc
+        <!-- <if test="itemCnt != 0">
+            limit #{itemCnt}
+        </if> -->
+    </select>
 
-<!--    <select id="selectFaqList"-->
-<!--            parameterType="com.dev.webApp.domain.dto.SelectFaqDTO"-->
-<!--            resultType="com.dev.webApp.domain.vo.FaqVO">-->
-<!--        <![CDATA[-->
-<!--            /* 전체 자주하는 질문 리스트 조회 쿼리 */-->
-<!--        ]]>-->
-<!--        select faq_no as faqNo-->
-<!--             , title as title-->
-<!--             , content aS content-->
-<!--             , use_yn as useYnEnum-->
-<!--             , reg_dt as regDt-->
-<!--             , mod_dt as modDt-->
-<!--        from web_app_test.tb_faq-->
-<!--        <if test="manyFaqOrNot==true">-->
-<!--        limit #{faqSize}-->
-<!--        </if>-->
-<!--        order by faq_no desc-->
-<!--    </select>-->
+    <update id="updateRepairApply"
+        parameterType="com.dev.webApp.domain.dto.UpdateRepairApplyDTO">
+    <![CDATA[
+    /* 단일 견적 문의 수정 쿼리 */
+    update web_app_test.tb_repair_apply
+        set r_type_no = #{repairTypeNo}
+          , r_location_no = #{repairLocationNo}
+          , r_state_no = #{repairStateNo}
+          , user_type = #{userTypeEnum}
+          , phone_number = #{phoneNumber}
+          , explanation = #{explanation}
+          , mod_dt = current_timestamp
+    where r_apply_no = #{repairApplyNo}
+    ]]>
+    </update>
 
-<!--    <update id="updateFaq"-->
-<!--            parameterType="com.dev.webApp.domain.vo.FaqVO">-->
-<!--        <![CDATA[-->
-<!--        /* 단일 자주하는 질문 수정 쿼리 */-->
-<!--        update web_app_test.tb_faq-->
-<!--        set title = #{title}-->
-<!--            , content = #{content}-->
-<!--            , use_yn = #{useYnEnum}-->
-<!--            , mod_dt = current_timestamp-->
-<!--        where faq_no = #{faqNo}-->
-<!--        ]]>-->
-<!--    </update>-->
+    <delete id="deleteRepairApply"
+        parameterType="Integer">
+    <![CDATA[
+    /* 단일 견적문의 삭제 쿼리 */
+    delete from web_app_test.tb_repair_apply
+    where r_apply_no = #{repairApplyNo}
+    ]]>
+    </delete>
 
-<!--    <update id="updateFaqState"-->
-<!--            parameterType="com.dev.webApp.domain.vo.FaqVO">-->
-<!--        <![CDATA[-->
-<!--        /* 단일 자주하는 질문 (상태) 수정 쿼리 */-->
-<!--        update web_app_test.tb_faq-->
-<!--        set use_yn = #{useYnEnum}-->
-<!--          , mod_dt = current_timestamp-->
-<!--        where faq_no = #{faqNo}-->
-<!--        ]]>-->
-<!--    </update>-->
-
-<!--    <delete id="deleteFaq"-->
-<!--            parameterType="Long">-->
-<!--        <![CDATA[-->
-<!--        /* 단일 자주하는 질문 리스트 삭제 쿼리 */-->
-<!--        delete from web_app_test.tb_faq-->
-<!--        where faq_no = #{faqNo}-->
-<!--        ]]>-->
-<!--    </delete>-->
-
-<!--    <select id="getTotalCnt" resultType="Integer">-->
-<!--        <![CDATA[-->
-<!--        /* 전체 faq의 개수를 조회하는 쿼리 */-->
-<!--        ]]>-->
-<!--        select count(*)-->
-<!--        from web_app_test.tb_faq-->
-<!--        where faq_no > 0-->
-<!--    </select>-->
+    <select id="getTotalCnt" resultType="Integer">
+    <![CDATA[
+    /* 전체 견적문의의 개수를 조회하는 쿼리 */
+    ]]>
+    select count(*)
+    from web_app_test.tb_repair_apply
+    where r_apply_no > 0
+    </select>
 </mapper>

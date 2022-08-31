@@ -1,10 +1,7 @@
 package com.dev.webApp.service;
 
-import com.dev.webApp.domain.dto.SelectFaqDTO;
-import com.dev.webApp.domain.dto.SelectRepairLocationDTO;
-import com.dev.webApp.domain.dto.SelectRepairStateDTO;
-import com.dev.webApp.domain.dto.SelectRepairTypeDTO;
-import com.dev.webApp.domain.vo.FaqVO;
+import com.dev.webApp.domain.dto.*;
+import com.dev.webApp.domain.vo.RepairApplyVO;
 import com.dev.webApp.domain.vo.RepairLocationVO;
 import com.dev.webApp.domain.vo.RepairStateVO;
 import com.dev.webApp.domain.vo.RepairTypeVO;
@@ -12,6 +9,8 @@ import com.dev.webApp.domain.vo.RepairTypeVO;
 import java.util.List;
 
 public interface RepairService {
+
+    // 견적 문의 시 필요한 기본 정보들을 불러오는 api list
     List<RepairTypeVO> getRepairTypeList(SelectRepairTypeDTO selectRepairTypeDTO);
     RepairTypeVO getRepairType(Integer repairTypeNo);
     List<RepairLocationVO> getRepairLocationList(SelectRepairLocationDTO selectRepairLocationDTO);
@@ -19,17 +18,12 @@ public interface RepairService {
     List<RepairStateVO> getRepairStateList(SelectRepairStateDTO selectRepairStateDTO);
     RepairStateVO getRepairState(Integer repairStateNo);
 
-//    Long registerFaq(FaqVO FaqVO) throws Exception;
-//
-//    void registerFaqList(List<FaqVO> FaqVOList) throws Exception;
-//
-//    void modifyFaq(FaqVO FaqVO) throws Exception;
-//
-//    void modifyFaqState(FaqVO FaqVO) throws Exception;
-//
-//    void removeFaq(Long FaqNo) throws Exception;
-//
-//    FaqVO getFaq(FaqVO FaqVO) throws Exception;
-//
-//    List<FaqVO> getFaqList(SelectFaqDTO selectFaqDTO) throws Exception;
+    // 견적문의 관련 메소드 모음
+    Integer registerRepairApply(InsertRepairApplyDTO insertRepairApplyDTO) throws Exception;
+    // void registerRepairApplyList(List<RepairApplyVO> RepairApplyVOList) throws Exception;
+    void modifyRepairApply(UpdateRepairApplyDTO updateRepairApplyDTO) throws Exception;
+    // void modifyRepairApplyState(RepairApplyVO RepairApplyVO) throws Exception;
+    void removeRepairApply(Integer repairApplyNo) throws Exception;
+    RepairApplyVO getRepairApply(Integer repairApplyNo) throws Exception;
+    List<RepairApplyVO> getRepairApplyList(SelectRepairApplyDTO selectRepairApplyDTO) throws Exception;
 }

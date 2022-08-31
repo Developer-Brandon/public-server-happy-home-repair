@@ -1,18 +1,13 @@
 package com.dev.webApp.service;
 
-import com.dev.webApp.domain.dto.SelectFaqDTO;
-import com.dev.webApp.domain.dto.SelectRepairLocationDTO;
-import com.dev.webApp.domain.dto.SelectRepairStateDTO;
-import com.dev.webApp.domain.dto.SelectRepairTypeDTO;
-import com.dev.webApp.domain.vo.FaqVO;
-import com.dev.webApp.domain.vo.RepairLocationVO;
-import com.dev.webApp.domain.vo.RepairStateVO;
-import com.dev.webApp.domain.vo.RepairTypeVO;
+import com.dev.webApp.domain.dto.*;
+import com.dev.webApp.domain.vo.*;
 import com.dev.webApp.mapper.FaqMapper;
 import com.dev.webApp.mapper.RepairMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sun.reflect.annotation.ExceptionProxy;
 
 import java.util.List;
 
@@ -51,5 +46,43 @@ public class RepairServiceImpl implements RepairService{
     @Override
     public RepairStateVO getRepairState(Integer repairStateNo) {
         return repairMapper.selectRepairState(repairStateNo);
+    }
+
+    @Override
+    public Integer registerRepairApply(InsertRepairApplyDTO insertRepairApplyDTO) throws Exception {
+
+        if(repairMapper.insertRepairApply(insertRepairApplyDTO) != 1) {
+            throw new Exception();
+        }
+
+        return insertRepairApplyDTO.getInsertedRepairApplyNo();
+    }
+
+    @Override
+    public void modifyRepairApply(UpdateRepairApplyDTO updateRepairApplyDTO) throws Exception {
+
+        if(repairMapper.updateRepairApply(updateRepairApplyDTO) != 1) {
+            throw new Exception();
+        }
+    }
+
+    @Override
+    public void removeRepairApply(Integer repairApplyNo) throws Exception {
+
+        if(repairMapper.deleteRepairApply(repairApplyNo) != 1) {
+            throw new Exception();
+        }
+    }
+
+    @Override
+    public RepairApplyVO getRepairApply(Integer repairApplyNo) throws Exception {
+
+        return repairMapper.selectRepairApply(repairApplyNo);
+    }
+
+    @Override
+    public List<RepairApplyVO> getRepairApplyList(SelectRepairApplyDTO selectRepairApplyDTO) throws Exception {
+
+        return repairMapper.selectRepairApplyList(selectRepairApplyDTO);
     }
 }

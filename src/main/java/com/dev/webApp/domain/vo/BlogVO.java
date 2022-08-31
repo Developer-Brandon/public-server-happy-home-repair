@@ -10,12 +10,11 @@ import java.util.Date;
 @Getter
 @Setter
 public class BlogVO {
-
-    private Integer postingNo;
-    private String title;
-    private String type;
-    private String imgSrc;
-    private Date postRegDt;
-    private Date regDt;
-    private Date modDt;
+    Integer postingNo;
+    String title;
+    String type;
+    String imgSrc;
+    Date postRegDt;
+    Date regDt;
+    Date modDt;
 }

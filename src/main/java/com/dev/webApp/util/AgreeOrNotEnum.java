@@ -1,6 +1,6 @@
 package com.dev.webApp.util;
 
-public enum AgreeOrNotENum {
+public enum AgreeOrNotEnum {
     Y
     , N
 }
