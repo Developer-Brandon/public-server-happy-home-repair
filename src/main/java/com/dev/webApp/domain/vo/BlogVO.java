@@ -1,20 +1,18 @@
 package com.dev.webApp.domain.vo;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 
 @Builder
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class BlogVO {
     Integer postingNo;
     String title;
-    String type;
+    String content;
     String imgSrc;
-    Date postRegDt;
+    Date postingRegDt;
     Date regDt;
-    Date modDt;
 }
