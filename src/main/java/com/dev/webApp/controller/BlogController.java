@@ -19,7 +19,7 @@ public class BlogController {
 
     // 1.
     @GetMapping(
-            value = "/list/${type}"
+            value = "/list/{type}"
             , produces = "text/plain; charset=UTF-8"
     )
     public ResponseEntity<String> checkBlogPostingListStatus(

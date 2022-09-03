@@ -37,7 +37,7 @@ public class BlogServiceImpl implements BlogService{
         return (Elements) getConnection().select("li.p_date span");
     }
 
-    private List<RawBlogPostingVO> getRawBlogPostingListByCrawling() throws Exception{
+    public List<RawBlogPostingVO> getRawBlogPostingListByCrawling() throws Exception{
 
 
         // 1. 메인에서 타이틀과 이미지 경로를 불러옵니다.
@@ -94,8 +94,7 @@ public class BlogServiceImpl implements BlogService{
 
                 // N시간 전 <- 이런식으로 posting 되는 string 방지
                 // if(!regDt.matches(".*[시간]+.*")) {
-                    blogInfoMapListForImage.get(i)
-                            .setPostingRegDt(regDt);
+                blogInfoMapListForImage.get(i).setPostingRegDt(regDt);
             }
         };
 
@@ -110,40 +109,40 @@ public class BlogServiceImpl implements BlogService{
     @Override
     public void setBlogList() throws Exception {
 
-        List<RawBlogPostingVO> rawBlogPostingVOList = getRawBlogPostingListByCrawling();
+        if(getBlogList().size() == 0) {
 
-        /*
-        rawBlogPostingVOList = rawBlogPostingVOList
-                .stream()
-                .map(e -> {
-                    String regDt = e.getPostingRegDt();
+            List<RawBlogPostingVO> rawBlogPostingVOList = getRawBlogPostingListByCrawling();
 
-                    if(regDt != null || regDt != "null" || !regDt.isEmpty()) {
-                        return e;
-                    } else {
+            /*
+            rawBlogPostingVOList = rawBlogPostingVOList
+                    .stream()
+                    .map(e -> {
+                        String regDt = e.getPostingRegDt();
 
-                        e.setPostingRegDt("최근");
+                        if(regDt != null || regDt != "null" || !regDt.isEmpty()) {
+                            return e;
+                        } else {
 
-                        return e;
-                    }
-                })
-                .collect(Collectors.toList());
-        */
+                            e.setPostingRegDt("최근");
 
-        // 찾다 찾다가 안나오니까 임시로....
-        // 가장 최근의 element는 삭제하는 것으로....
-        rawBlogPostingVOList.remove(0);
+                            return e;
+                        }
+                    })
+                    .collect(Collectors.toList());
+            */
 
-        //        rawBlogPostingVOList.forEach(e -> {
-        //            System.out.println("is it true? : " + e.getPostingRegDt());
-        //        });
+            // 찾다 찾다가 안나오니까 임시로....가장 최근의 element는 삭제하는 것으로....
+            rawBlogPostingVOList.remove(0);
 
-        InsertBlogPostingListDTO insertBlogPostingListDTO = InsertBlogPostingListDTO.builder()
-                .insertBlogPostingDTOList(rawBlogPostingVOList)
-                .build();
+            InsertBlogPostingListDTO insertBlogPostingListDTO = InsertBlogPostingListDTO.builder()
+                    .insertBlogPostingDTOList(rawBlogPostingVOList)
+                    .build();
 
+            if(blogMapper.insertBlogPostingList(insertBlogPostingListDTO) == 0) {
+                throw new Exception();
+            }
+        } else {
 
-        if(blogMapper.insertBlogPostingList(insertBlogPostingListDTO) == 0) {
             throw new Exception();
         }
     }
@@ -151,18 +150,60 @@ public class BlogServiceImpl implements BlogService{
     @Override
     public void setDifferentBlogList() throws Exception {
 
-        List<RawBlogPostingVO> rawBlogPostingVOListFromDB = getRawBlogPostingListByCrawling();
+        // todo: 아래 두개의 메소드를 비교할 때, 조회할때 포스팅이 등록된 날짜 기준으로 제대로 조회하고 있는지 확인이 필요합니다.
 
-        List<RawBlogPostingVO> rawBlogPostingVOListByCrawling = getRawBlogPostingListByCrawling();
+        List<RawBlogPostingVO> rawBlogPostingVOListFromDB = getBlogList()
+                .stream()
+                .map(e -> {
 
-        // 1. list 두개를 비교합니다
+                    RawBlogPostingVO rawBlogPostingVO = RawBlogPostingVO.builder()
+                            .postingTypeNo(1)
+                            .title(e.getTitle())
+                            .imgSrc(e.getImgSrc())
+                            .postingRegDt(e.getPostingRegDt())
+                            .build();
 
-        // 2. 상위 5개의 항목을 비교합니다.
+                    return rawBlogPostingVO;
+                })
+                .collect(Collectors.toList());
 
-        // 3. 다른 리스트가 하나라도 있다면, 다른 리스트를 또다른 리스트로 넣습니다.
+        List<RawBlogPostingVO> rawBlogPostingVOListByCrawling = getRawBlogPostingListByCrawling()
+                .stream()
+                .map(e -> {
 
-        // 4. 만약 다른 리스트가 하나도 없다면, 아무것도 하지 않습니다.
+                    e.setPostingTypeNo(1);
+
+                    return e;
+                })
+                .collect(Collectors.toList());
+
+        // 여기서도 임시로...
+        rawBlogPostingVOListByCrawling.remove(0);
+
+        // 1. list 두개의 제목을 비교합니다
+        RawBlogPostingVO topRawBlogPostingVO = rawBlogPostingVOListFromDB.get(0);
+
+        RawBlogPostingVO topRawBlogPostingVOByCrawling = rawBlogPostingVOListByCrawling.get(0);
+
+        // 1-1. 만약, 가장 상단에 있는 아이템을 하나씩 뺴서 비교한후 다르다면?
+        if(!topRawBlogPostingVO.getTitle().equals(topRawBlogPostingVOByCrawling.getTitle())) {
+
+            // 2. 다른 리스트가 하나라도 있다면, 기존의 불러온 crawling list를 기준으로 db에서 불러온 list만큼 삭제시켜줍니다.
+                rawBlogPostingVOListByCrawling.removeAll(rawBlogPostingVOListFromDB);
+
+                // 4. 해당 리스트를 전부, insert해줍니다.
+                InsertBlogPostingListDTO insertBlogPostingListDTO = InsertBlogPostingListDTO.builder()
+                        .insertBlogPostingDTOList(rawBlogPostingVOListByCrawling)
+                        .build();
+
+                if(blogMapper.insertBlogPostingList(insertBlogPostingListDTO) == 0) {
+                    throw new Exception();
+                }
 
 
+        } else {
+
+            // 3. 만약 다른 리스트가 하나도 없다면, 아무것도 하지 않습니다.
+        }
     }
 }

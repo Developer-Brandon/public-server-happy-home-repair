@@ -12,6 +12,6 @@ public class BlogPostingVO {
     Integer postingNo;
     String title;
     String imgSrc;
-    Date postingRegDt;
+    String postingRegDt;
     Date regDt;
 }

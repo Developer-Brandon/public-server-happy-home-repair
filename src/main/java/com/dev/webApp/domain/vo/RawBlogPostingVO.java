@@ -3,6 +3,7 @@ package com.dev.webApp.domain.vo;
 import lombok.*;
 
 
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
