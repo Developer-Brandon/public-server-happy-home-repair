@@ -61,4 +61,6 @@ public class BlogControllerTest extends TestCase {
                 .andDo(print())
                 .andReturn();
     }
+
+    // todo: bulk 메소드도 추가 작성 예정
 }
