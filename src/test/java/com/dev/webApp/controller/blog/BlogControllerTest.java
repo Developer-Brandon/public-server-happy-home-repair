@@ -63,4 +63,5 @@ public class BlogControllerTest extends TestCase {
     }
 
     // todo: bulk 메소드도 추가 작성 예정
+    // todo: bulk 메소드 만들때, 데이터 싹 밀어버리고 추가하도록 개발
 }
