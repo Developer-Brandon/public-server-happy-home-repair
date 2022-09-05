@@ -277,6 +277,18 @@
                     <mainClass>org.test.int1.Main</mainClass>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>8.0.0</version>
+                <configuration>
+                    <user>root</user>
+                    <password>MomentFactory1!1!1!</password>
+                    <schemas>
+                        <schema>web_app_test</schema>
+                    </schemas>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
