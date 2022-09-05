@@ -1,5 +1,7 @@
 # https://www.baeldung.com/database-migrations-with-flyway
 # https://devbksheen.tistory.com/entry/Spring-boot-Flyway%EB%A1%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%ED%98%95%EC%83%81%EA%B4%80%EB%A6%AC
+# https://www.youtube.com/watch?v=_psxzw9xs_M
+# https://velog.io/@backtony/Spring-Flyway-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0
 
 # 1. 공지사항 테이블
 
