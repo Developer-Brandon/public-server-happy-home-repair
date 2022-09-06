@@ -2,12 +2,10 @@ package com.dev.webApp.service;
 
 import com.dev.webApp.domain.dto.*;
 import com.dev.webApp.domain.vo.*;
-import com.dev.webApp.mapper.FaqMapper;
 import com.dev.webApp.mapper.RepairMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sun.reflect.annotation.ExceptionProxy;
 
 import java.util.List;
 
