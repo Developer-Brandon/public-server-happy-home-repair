@@ -3,11 +3,17 @@ package com.dev.webApp.mapper;
 import com.dev.webApp.domain.dto.SelectNoticeDTO;
 import com.dev.webApp.domain.vo.NoticeVO;
 import com.dev.webApp.util.NoticeUseYnEnum;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.greaterThan;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
@@ -15,6 +21,10 @@ public class NoticeMapperTests {
 
     @Autowired
     private NoticeMapper noticeMapper;
+
+    @Before
+    public void init() {
+    }
 
     @Test
     public void getNoticeList() {
@@ -30,26 +40,44 @@ public class NoticeMapperTests {
 
     @Test
     public void getNotice() {
-        Long noticeNo = 1L;
 
-        NoticeVO noticeVO = noticeMapper.selectNotice(noticeNo);
-
-        System.out.println("noticeVO" + noticeVO);
-    }
-
-    @Test
-    public void insertNotice() {
+        // 1. 조회 전 삽입
 
         NoticeVO noticeVO = NoticeVO.builder()
                 .title("삽입_테스트_제목")
                 .content("삽입_테스트_내용")
                 .build();
 
-        int insertedNoticeCnt = noticeMapper.insertNotice(noticeVO);
+        Boolean insertedNoticeCnt = noticeMapper.insertNotice(noticeVO) == 1;
 
-        System.out.println("insertedNoticeCnt" + insertedNoticeCnt);
+        assertThat(insertedNoticeCnt, is(true));
+        assertThat(noticeVO.getNoticeNo(), is(greaterThan(1L)));
 
-        System.out.println("insertedNoticeNo" + noticeVO.getNoticeNo());
+        ///////////////////////////////////////////////////////////
+
+        // 2. 삽입된 데이터로 조회
+
+        Long noticeNo = noticeVO.getNoticeNo();
+
+        NoticeVO noticeVO2 = noticeMapper.selectNotice(noticeNo);
+
+        assertThat(noticeVO2, is(notNullValue()));
+    }
+
+    @Test
+    public void insertNotice() {
+
+        // 1. 삽입 테스트
+
+        NoticeVO noticeVO = NoticeVO.builder()
+                .title("삽입_테스트_제목")
+                .content("삽입_테스트_내용")
+                .build();
+
+        Boolean insertedOrNot = noticeMapper.insertNotice(noticeVO) == 1;
+
+        assertThat(insertedOrNot, is(true));
+        assertThat(noticeVO.getNoticeNo(), is(greaterThan(1L)));
     }
 
     @Test

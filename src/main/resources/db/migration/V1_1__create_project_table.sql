@@ -28,7 +28,7 @@ create table if not exists web_app_test.tb_faq (
      faq_no int unsigned auto_increment comment '자주하는 질문 번호' primary key,
      title varchar(20) not null comment '자주하는 질문 제목',
      content text not null comment '자주하는 질문 내용',
-     use_yn enum('y', 'n') default 'y' not null comment '자주하는 질문 사용여부',
+     use_yn enum('Y', 'N') default 'Y' not null comment '자주하는 질문 사용여부',
      mod_dt datetime default current_timestamp not null comment '자주하는 질문 수정날짜',
      reg_dt datetime default current_timestamp not null comment '자주하는 질문 등록날짜'
 ) engine=innodb default charset=utf8mb4 comment '자주하는 질문';
