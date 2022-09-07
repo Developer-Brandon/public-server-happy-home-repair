@@ -16,10 +16,10 @@
             , reg_dt as regDt
             , mod_dt as modDt
         from web_app_test.tb_repair_type
+        order by r_type_no desc
         <if test="itemCnt != 0">
             limit #{itemCnt}
         </if>
-        order by r_type_no desc
     </select>
 
     <select id="selectRepairType"
@@ -50,10 +50,10 @@
         , reg_dt as regDt
         , mod_dt as modDt
         from web_app_test.tb_repair_location
+        order by r_location_no desc
         <if test="itemCnt != 0">
             limit #{itemCnt}
         </if>
-        order by r_location_no desc
     </select>
 
     <select id="selectRepairLocation"
@@ -83,10 +83,10 @@
         , reg_dt as regDt
         , mod_dt as modDt
         from web_app_test.tb_repair_state
+        order by r_state_no desc
         <if test="itemCnt != 0">
             limit #{itemCnt}
         </if>
-        order by r_state_no desc
     </select>
 
     <select id="selectRepairState"
@@ -94,14 +94,13 @@
             resultType="com.dev.webApp.domain.vo.RepairStateVO">
        <![CDATA[
         /* 단일 수리 상태 조회 쿼리 */
-        select r_location_no as repairLocationNo
-             , r_location_order as repairLocationOrder
+        select r_state_no as repairStateNo
              , name as name
              , explanation as explanation
              , reg_dt as regDt
              , mod_dt as modDt
-        from web_app_test.tb_repair_location
-        where r_location_no = #{repairLocationNo}
+        from web_app_test.tb_repair_state
+        where r_state_no = #{repairStateNo}
         ]]>
     </select>
 

@@ -169,12 +169,7 @@ public class BlogServiceImpl implements BlogService{
 
         List<RawBlogPostingVO> rawBlogPostingVOListByCrawling = getRawBlogPostingListByCrawling()
                 .stream()
-                .map(e -> {
-
-                    e.setPostingTypeNo(1);
-
-                    return e;
-                })
+                .peek(e -> e.setPostingTypeNo(1))
                 .collect(Collectors.toList());
 
         // 여기서도 임시로...

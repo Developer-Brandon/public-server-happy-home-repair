@@ -1,8 +1,5 @@
 package com.dev.webApp.mapper;
 
-//    import com.dev.webApp.domain.dto.SelectRepairApplyDTO;
-//    import com.dev.webApp.domain.vo.RepairApplyVO;
-
 import com.dev.webApp.domain.dto.*;
 import com.dev.webApp.domain.vo.RepairApplyVO;
 import com.dev.webApp.domain.vo.RepairLocationVO;
@@ -31,8 +28,6 @@ public interface RepairMapper {
     RepairApplyVO selectRepairApply(@Param("repairApplyNo")Integer repairApplyNo);
 
     List<RepairApplyVO> selectRepairApplyList(SelectRepairApplyDTO selectRepairApplyDTO);
-
-    // int insertRepairApplyList(List<RepairApplyVO> repairApplyVOList);
 
     int updateRepairApply(UpdateRepairApplyDTO updateRepairApplyDTO);
 

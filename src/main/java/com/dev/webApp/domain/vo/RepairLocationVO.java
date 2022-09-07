@@ -13,8 +13,8 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 public class RepairLocationVO {
     Integer repairLocationNo;
+    Integer repairLocationOrder;
     String name;
-    String explanation;
     Timestamp regDt;
     Timestamp modDt;
 }
