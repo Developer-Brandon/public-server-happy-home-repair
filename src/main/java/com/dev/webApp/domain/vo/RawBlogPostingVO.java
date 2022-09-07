@@ -11,7 +11,10 @@ public class RawBlogPostingVO {
 
     @Builder.Default
     Integer postingTypeNo = 1;
+
     String title;
+
     String imgSrc;
+
     String postingRegDt;
 }

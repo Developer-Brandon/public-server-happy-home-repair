@@ -1,7 +1,8 @@
-package com.dev.webApp.mapper;
+package com.dev.webApp.mapper.faq;
 
 import com.dev.webApp.domain.dto.SelectFaqDTO;
 import com.dev.webApp.domain.vo.FaqVO;
+import com.dev.webApp.mapper.FaqMapper;
 import com.dev.webApp.util.FaqUseYnEnum;
 import org.junit.Before;
 import org.junit.Test;

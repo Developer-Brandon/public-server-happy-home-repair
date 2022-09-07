@@ -1,7 +1,8 @@
-package com.dev.webApp.mapper;
+package com.dev.webApp.mapper.notice;
 
 import com.dev.webApp.domain.dto.SelectNoticeDTO;
 import com.dev.webApp.domain.vo.NoticeVO;
+import com.dev.webApp.mapper.NoticeMapper;
 import com.dev.webApp.util.NoticeUseYnEnum;
 import org.junit.Before;
 import org.junit.Test;

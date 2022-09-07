@@ -27,7 +27,7 @@
         <selectKey
                 keyProperty="insertedPostingNo"
                 order="AFTER"
-                resultType="long">
+                resultType="Integer">
             /* 특정 포스팅 질문 삽입 쿼리 */
             select max(n_b_p_no)
             from web_app_test.tb_blog_posting_info
@@ -53,23 +53,4 @@
             )
         </foreach>
     </insert>
-
-    <!--
-    <select id="selectFaq"
-        parameterType="Long"
-        resultType="com.dev.webApp.domain.vo.FaqVO">
-   <![CDATA[
-    /* 단일 자주하는 질문 리스트 조회 쿼리 */
-
-    select faq_no as faqNo
-         , title as title
-         , content as content
-         , use_yn as useYnEnum
-         , reg_dt as regDt
-         , mod_dt as modDt
-    from web_app_test.tb_faq
-    where faq_no = #{faqNo}
-    ]]>
-</select>
--->
 </mapper>
