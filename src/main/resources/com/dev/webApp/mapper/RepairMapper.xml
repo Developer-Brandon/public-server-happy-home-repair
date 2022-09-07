@@ -120,7 +120,7 @@
             order="AFTER"
             resultType="Integer">
         /*  */
-        select max(r_type_no)
+        select max(r_apply_no)
         from web_app_test.tb_repair_apply
     </selectKey>
     </insert>
@@ -175,9 +175,9 @@
             inner join web_app_test.tb_repair_location as tb_r_location
                 on tb_r_apply.r_location_no = tb_r_location.r_location_no
         order by tb_r_apply.r_apply_no desc
-        <!-- <if test="itemCnt != 0">
+        <if test="itemCnt != 0">
             limit #{itemCnt}
-        </if> -->
+        </if>
     </select>
 
     <update id="updateRepairApply"

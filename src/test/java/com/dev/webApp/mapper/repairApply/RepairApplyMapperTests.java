@@ -4,6 +4,9 @@ import com.dev.webApp.domain.dto.*;
 import com.dev.webApp.domain.vo.*;
 import com.dev.webApp.mapper.BlogMapper;
 import com.dev.webApp.mapper.RepairMapper;
+import com.dev.webApp.util.AgreeOrNotEnum;
+import com.dev.webApp.util.FaqUseYnEnum;
+import com.dev.webApp.util.UserTypeEnum;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,151 +29,165 @@ public class RepairApplyMapperTests {
     private RepairMapper repairMapper;
 
     @Test
-    public void getRepairTypeList() {
+    public void insertRepairApply() {
 
-        // 1. 리스트 조회 테스트
-
-        SelectRepairTypeDTO selectRepairTypeDTO = SelectRepairTypeDTO.builder()
-                .itemCnt(5)
+        // 1. 삽입 테스트
+        InsertRepairApplyDTO insertRepairApplyDTO = InsertRepairApplyDTO.builder()
+                .repairTypeNo(1)
+                .repairLocationNo(1)
+                .repairStateNo(1)
+                .userTypeEnum(UserTypeEnum.CLIENT)
+                .phoneNumber("01088884444")
+                .agreeOrNotEnum(AgreeOrNotEnum.Y)
+                .explanation("테스트_데이터")
                 .build();
 
-        List<RepairTypeVO> repairTypeVOList = repairMapper.selectRepairTypeList(selectRepairTypeDTO);
+        Boolean insertedOrNot = repairMapper.insertRepairApply(insertRepairApplyDTO) == 1;
 
-        assertThat(repairTypeVOList, is(notNullValue()));
-        assertThat(repairTypeVOList.size(), is(greaterThan(1)));
+        assertThat(insertedOrNot, is(true));
+        assertThat(insertRepairApplyDTO.getInsertedRepairApplyNo(), is(greaterThan(1)));
     }
 
     @Test
-    public void getRepairType() {
+    public void getRepairApply() {
 
-        // 1. 여기서 삽입테스트는 먼저 하지 않아도 되는 것이, repairType은 반드시 raw data가 존재해야하는 data입니다.
+        // 1. 삽입 테스트
+
+        InsertRepairApplyDTO insertRepairApplyDTO = InsertRepairApplyDTO.builder()
+                .repairTypeNo(1)
+                .repairLocationNo(1)
+                .repairStateNo(1)
+                .userTypeEnum(UserTypeEnum.CLIENT)
+                .phoneNumber("01088884444")
+                .agreeOrNotEnum(AgreeOrNotEnum.Y)
+                .explanation("테스트_데이터")
+                .build();
+
+        Boolean insertedOrNot = repairMapper.insertRepairApply(insertRepairApplyDTO) == 1;
+
+        assertThat(insertedOrNot, is(true));
+        assertThat(insertRepairApplyDTO.getInsertedRepairApplyNo(), is(greaterThan(1)));
 
         //////////////////////////////////////////////////////////
 
         // 2. 조회 테스트
-        RepairTypeVO repairTypeVO = repairMapper.selectRepairType(1);
+        RepairApplyVO repairApplyVO = repairMapper.selectRepairApply(insertRepairApplyDTO.getInsertedRepairApplyNo());
 
         //
-        assertThat(repairTypeVO, is(notNullValue()));
-        assertThat(repairTypeVO.getTitle(), is("PAINT"));
-        assertThat(repairTypeVO.getExplanation(), is("친환경 페인트"));
+        assertThat(repairApplyVO, is(notNullValue()));
+        assertThat(repairApplyVO.getPhoneNumber(), is("01088884444"));
+        assertThat(repairApplyVO.getExplanation(), is("테스트_데이터"));
     }
 
+
     @Test
-    public void getRepairLocationList() {
+    public void getRepairApplyList() {
 
         // 1. 리스트 조회 테스트
 
-        SelectRepairLocationDTO selectRepairLocationDTO = SelectRepairLocationDTO.builder()
+        SelectRepairApplyDTO selectRepairApplyDTO = SelectRepairApplyDTO.builder()
                 .itemCnt(5)
                 .build();
 
-        List<RepairLocationVO> repairLocationVOList = repairMapper.selectRepairLocationList(selectRepairLocationDTO);
+        List<RepairApplyVO> selectRepairTypeList = repairMapper.selectRepairApplyList(selectRepairApplyDTO);
 
-        assertThat(repairLocationVOList, is(notNullValue()));
-        assertThat(repairLocationVOList.size(), is(greaterThan(1)));
+        assertThat(selectRepairTypeList, is(notNullValue()));
+        assertThat(selectRepairTypeList.size(), is(greaterThan(1)));
     }
 
     @Test
-    public void getRepairLocation() {
+    public void updateRepairApply() {
 
-        // 1. 여기서 삽입테스트는 먼저 하지 않아도 되는 것이, repairLocation은 반드시 raw data가 존재해야하는 data입니다.
+        // 1. 조회 전 삽입
+        InsertRepairApplyDTO insertRepairApplyDTO = InsertRepairApplyDTO.builder()
+                .repairTypeNo(1)
+                .repairLocationNo(1)
+                .repairStateNo(1)
+                .userTypeEnum(UserTypeEnum.CLIENT)
+                .phoneNumber("01088884444")
+                .agreeOrNotEnum(AgreeOrNotEnum.Y)
+                .explanation("테스트_데이터")
+                .build();
+
+        Boolean insertedOrNot = repairMapper.insertRepairApply(insertRepairApplyDTO) == 1;
+
+        assertThat(insertedOrNot, is(true));
+        assertThat(insertRepairApplyDTO.getInsertedRepairApplyNo(), is(greaterThan(1)));
+
+        ///////////////////////////////////////////////////////////
+
+        // 2. 조회 테스트
+        RepairApplyVO repairApplyVO = repairMapper.selectRepairApply(insertRepairApplyDTO.getInsertedRepairApplyNo());
+
+        //
+        assertThat(repairApplyVO, is(notNullValue()));
+        assertThat(repairApplyVO.getPhoneNumber(), is("01088884444"));
+        assertThat(repairApplyVO.getExplanation(), is("테스트_데이터"));
+
+        ///////////////////////////////////////////////////////////
+
+        // 3. 다시 조회된 데이터로 업데이트
+        UpdateRepairApplyDTO updateRepairApplyDTO = UpdateRepairApplyDTO.builder()
+                .repairApplyNo(insertRepairApplyDTO.getInsertedRepairApplyNo())
+                .repairTypeNo(2)
+                .repairLocationNo(2)
+                .repairStateNo(2)
+                .userTypeEnum(UserTypeEnum.CLIENT)
+                .phoneNumber("01099994444")
+                .explanation("업데이트_테스트_내용")
+                .build();
+
+        int updatedRepairApplyCnt = repairMapper.updateRepairApply(updateRepairApplyDTO);
+
+        assertThat(updatedRepairApplyCnt, is(1));
+
+        ///////////////////////////////////////////////////////////
+
+        // 4. 업데이트 여부 검증
+
+        RepairApplyVO repairApplyVO2 = repairMapper.selectRepairApply(insertRepairApplyDTO.getInsertedRepairApplyNo());
+
+        //
+        assertThat(repairApplyVO2, is(notNullValue()));
+        assertThat(repairApplyVO2.getPhoneNumber(), is("01099994444"));
+        assertThat(repairApplyVO2.getExplanation(), is("업데이트_테스트_내용"));
+    }
+
+    @Test
+    public void deleteFaq() {
+
+        // 1. 조회 전 삽입
+        InsertRepairApplyDTO insertRepairApplyDTO = InsertRepairApplyDTO.builder()
+                .repairTypeNo(1)
+                .repairLocationNo(1)
+                .repairStateNo(1)
+                .userTypeEnum(UserTypeEnum.CLIENT)
+                .phoneNumber("01088884444")
+                .agreeOrNotEnum(AgreeOrNotEnum.Y)
+                .explanation("테스트_데이터")
+                .build();
+
+        Boolean insertedOrNot = repairMapper.insertRepairApply(insertRepairApplyDTO) == 1;
+
+        assertThat(insertedOrNot, is(true));
+        assertThat(insertRepairApplyDTO.getInsertedRepairApplyNo(), is(greaterThan(1)));
 
         //////////////////////////////////////////////////////////
 
         // 2. 조회 테스트
-        RepairLocationVO repairLocationVO = repairMapper.selectRepairLocation(1);
+        RepairApplyVO repairApplyVO = repairMapper.selectRepairApply(insertRepairApplyDTO.getInsertedRepairApplyNo());
 
         //
-        assertThat(repairLocationVO, is(notNullValue()));
-        assertThat(repairLocationVO.getName(), is("SEOUL"));
+        assertThat(repairApplyVO, is(notNullValue()));
+        assertThat(repairApplyVO.getPhoneNumber(), is("01088884444"));
+        assertThat(repairApplyVO.getExplanation(), is("테스트_데이터"));
+
+        ///////////////////////////////////////////////////////////
+
+        // 3. 조회된 데이터로 삭제
+
+        Boolean deletedOrNot = repairMapper.deleteRepairApply(insertRepairApplyDTO.getInsertedRepairApplyNo()) == 1;
+
+        assertThat(deletedOrNot, is(true));
     }
-
-    @Test
-    public void getRepairStateList() {
-
-        // 1. 리스트 조회 테스트
-
-        SelectRepairStateDTO selectRepairStateDTO = SelectRepairStateDTO.builder()
-                .itemCnt(5)
-                .build();
-
-        List<RepairStateVO> selectRepairLocationList = repairMapper.selectRepairStateList(selectRepairStateDTO);
-
-        assertThat(selectRepairLocationList, is(notNullValue()));
-        assertThat(selectRepairLocationList.size(), is(greaterThan(1)));
-    }
-
-    @Test
-    public void getRepairState() {
-
-        // 1. 여기서 삽입테스트는 먼저 하지 않아도 되는 것이, repairState은 반드시 raw data가 존재해야하는 data입니다.
-
-        //////////////////////////////////////////////////////////
-
-        // 2. 조회 테스트
-        RepairStateVO repairStateVO = repairMapper.selectRepairState(1);
-
-        //
-        assertThat(repairStateVO, is(notNullValue()));
-        assertThat(repairStateVO.getName(), is("APPLY"));
-        assertThat(repairStateVO.getExplanation(), is("접수"));
-    }
-//
-//
-//    @Test
-//    public void insertBlog() {
-//
-//        // 1. 삽입 테스트
-//
-//        InsertBlogPostingDTO insertBlogPostingDTO = InsertBlogPostingDTO.builder()
-//                .postingTitle("제목_테스트")
-//                .postingTypeNo(1)
-//                .postingImageSrc("이미지경로_테스트")
-//                .postingRegDt("2022-09-07 12:48:52")
-//                .build();
-//
-//        Boolean insertedOrNot = blogMapper.insertBlogPosting(insertBlogPostingDTO) == 1;
-//
-//        assertThat(insertedOrNot, is(true));
-//        assertThat(insertBlogPostingDTO.getInsertedPostingNo(), is(greaterThan(1)));
-//    }
-//
-//    @Test
-//    public void insertBlogList() {
-//
-//        // 1. 리스트 삽입 테스트
-//
-//        RawBlogPostingVO rawBlogPostingVO = RawBlogPostingVO.builder()
-//                .title("제목_테스트")
-//                .imgSrc("이미지경로_테스트")
-//                .postingRegDt("2022-09-07 12:48:52")
-//                .build();
-//
-//        RawBlogPostingVO rawBlogPostingVO2 = RawBlogPostingVO.builder()
-//                .title("제목_테스트2")
-//                .imgSrc("이미지경로_테스트2")
-//                .postingRegDt("2022-09-07 12:48:52")
-//                .build();
-//
-//        RawBlogPostingVO rawBlogPostingVO3 = RawBlogPostingVO.builder()
-//                .title("제목_테스트3")
-//                .imgSrc("이미지경로_테스트3")
-//                .postingRegDt("2022-09-07 12:48:52")
-//                .build();
-//
-//        //
-//        List<RawBlogPostingVO> insertBlogPostingDTOList = new ArrayList<>();
-//        insertBlogPostingDTOList.add(rawBlogPostingVO);
-//        insertBlogPostingDTOList.add(rawBlogPostingVO2);
-//        insertBlogPostingDTOList.add(rawBlogPostingVO3);
-//
-//        InsertBlogPostingListDTO insertBlogPostingListDTO = InsertBlogPostingListDTO.builder()
-//                .insertBlogPostingDTOList(insertBlogPostingDTOList)
-//                .build();
-//
-//        Boolean insertedOrNot = blogMapper.insertBlogPostingList(insertBlogPostingListDTO) == 3;
-//
-//        assertThat(insertedOrNot, is(true));
-//    }
 }
