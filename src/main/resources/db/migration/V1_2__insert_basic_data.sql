@@ -27,12 +27,12 @@ delete from web_app_test.tb_from_post_type;
 insert into web_app_test.tb_from_post_type(type) value('MAIN');
 
 insert into web_app_test.tb_blog_posting_info(
-    f_t_no, title, content, img_src, posted_reg_dt
+    f_t_no, title, img_src, posted_reg_dt
 ) values(
-    1, '제목_테스트', '내용_테스트', '이미지경로_테스트', current_timestamp()
+    1, '제목_테스트', '이미지경로_테스트', current_timestamp()
 )
        ,        (
-    1, '제목_테스트2', '내용_테스트2', '이미지경로_테스트2', current_timestamp()
+    1, '제목_테스트2', '이미지경로_테스트2', current_timestamp()
 );
 
 ###########################################################################################################

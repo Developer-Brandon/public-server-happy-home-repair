@@ -6,12 +6,13 @@
 
 # 1. 공지사항 테이블
 create table if not exists web_app_test.tb_notice (
-    NOTICE_NO INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '공지사항 번호' PRIMARY KEY,
-    TITLE VARCHAR(20) NOT NULL COMMENT '공지사항 제목',
-    CONTENT TEXT NOT NULL COMMENT '공지사항 내용',
-    REG_DT DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '공지사항 등록날짜',
-    MOD_DT DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '공지사항 수정날짜'
-) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COMMENT '공지사항';
+    notice_no int unsigned not null auto_increment comment '공지사항 번호' primary key,
+    title varchar(20) not null comment '공지사항 제목',
+    content text not null comment '공지사항 내용',
+    use_yn enum('Y','N') not null default 'Y' comment '공지사항 사용여부',
+    reg_dt datetime not null default current_timestamp comment '등록날짜',
+    mod_dt datetime not null default current_timestamp comment '수정날짜'
+) engine=innodb default charset=utf8mb4 comment '공지사항';
 
 INSERT INTO web_app_test.tb_notice(TITLE, CONTENT)
 VALUES ('테스트_제목1', '테스트_내용1')
@@ -29,8 +30,8 @@ create table if not exists web_app_test.tb_faq (
      title varchar(20) not null comment '자주하는 질문 제목',
      content text not null comment '자주하는 질문 내용',
      use_yn enum('Y', 'N') default 'Y' not null comment '자주하는 질문 사용여부',
-     mod_dt datetime default current_timestamp not null comment '자주하는 질문 수정날짜',
-     reg_dt datetime default current_timestamp not null comment '자주하는 질문 등록날짜'
+     reg_dt datetime not null default current_timestamp comment '등록날짜',
+     mod_dt datetime not null default current_timestamp comment '수정날짜'
 ) engine=innodb default charset=utf8mb4 comment '자주하는 질문';
 
 insert into web_app_test.tb_faq(title, content)
@@ -48,7 +49,6 @@ create table if not exists web_app_test.tb_blog_posting_info(
     n_b_p_no int unsigned not null comment '포스팅 번호' auto_increment primary key
     , f_t_no int unsigned not null comment '출처 타입 번호'
     , title text not null comment '포스팅 제목'
-    , content text not null comment '포스팅 내용'
     , img_src text not null comment '포스팅 메인사진 풀 이미지 경로'
     , posted_reg_dt datetime not null comment '포스팅 등록날짜'
     , reg_dt datetime not null default current_timestamp comment '등록날짜'
@@ -78,8 +78,8 @@ create table if not exists web_app_test.tb_repair_apply(
     , phone_number varchar(15) not null comment '견적문의 핸드폰 번호'
     , agree_or_not enum('Y', 'N') not null default 'Y' comment '견적문의 개인정보 동의 여부'
     , explanation varchar(200) not null comment '견적문의 상세내용'
-    , reg_dt datetime not null default current_timestamp comment '견적문의 등록날짜'
-    , mod_dt datetime not null default current_timestamp comment '견적문의 수정날짜'
+    , reg_dt datetime not null default current_timestamp comment '등록날짜'
+    , mod_dt datetime not null default current_timestamp comment '수정날짜'
 ) engine=innodb default charset=utf8mb4 comment '견적문의';
 
 #
@@ -88,27 +88,27 @@ create table if not exists web_app_test.tb_repair_type(
     , r_type_order int unsigned not null comment '수리종류 순서'
     , title varchar(30) not null comment '수리종류 제목'
     , explanation text not null comment '수리종류 내용'
-    , reg_dt datetime not null default current_timestamp comment '수리종류 등록날짜'
-    , mod_dt datetime not null default current_timestamp comment '수리종류 수정날짜'
-    ) engine=innodb default charset=utf8mb4 comment '수리종류(타입)';
+    , reg_dt datetime not null default current_timestamp comment '등록날짜'
+    , mod_dt datetime not null default current_timestamp comment '수정날짜'
+) engine=innodb default charset=utf8mb4 comment '수리종류(타입)';
 
 #
 create table if not exists web_app_test.tb_repair_location(
     r_location_no int unsigned not null comment '수리지역 번호' auto_increment primary key
     , r_location_order int unsigned not null comment '수리지역 순서'
     , name varchar(20) not null comment '수리지역 이름'
-    , reg_dt datetime not null default current_timestamp comment '수리지역 등록날짜'
-    , mod_dt datetime not null default current_timestamp comment '수리지역 수정날짜'
-    ) engine=innodb default charset=utf8mb4 comment '수리지역';
+    , reg_dt datetime not null default current_timestamp comment '등록날짜'
+    , mod_dt datetime not null default current_timestamp comment '수정날짜'
+) engine=innodb default charset=utf8mb4 comment '수리지역';
 
 #
 create table if not exists web_app_test.tb_repair_state(
     r_state_no int unsigned not null comment '수리상태 번호' auto_increment primary key
     , name varchar(20) not null comment '수리상태 이름'
     , explanation text not null comment '수리상태 내용'
-    , reg_dt datetime not null default current_timestamp comment '수리상태 등록날짜'
-    , mod_dt datetime not null default current_timestamp comment '수리상태 수정날짜'
-    ) engine=innodb default charset=utf8mb4 comment '수리상태';
+    , reg_dt datetime not null default current_timestamp comment '등록날짜'
+    , mod_dt datetime not null default current_timestamp comment '수정날짜'
+) engine=innodb default charset=utf8mb4 comment '수리상태';
 
 # 4-1. FK 설정
 alter table web_app_test.tb_repair_apply add foreign key(r_type_no)
