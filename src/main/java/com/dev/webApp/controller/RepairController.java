@@ -7,11 +7,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 @RequestMapping("/repair")
 public class RepairController {
@@ -22,6 +23,7 @@ public class RepairController {
             value = "/list"
             , produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
     )
+    @ResponseBody
     public ResponseEntity<List<RepairApplyVO>> getRepairApplyList(
             @RequestParam(required = false)
             Integer itemSize
@@ -40,6 +42,7 @@ public class RepairController {
             value = ""
             , produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
     )
+    @ResponseBody
     public ResponseEntity<RepairApplyVO> getRepairApply(
             @RequestParam
             Integer repairApplyNo
@@ -54,6 +57,7 @@ public class RepairController {
             value = ""
             , produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
     )
+    @ResponseBody
     public ResponseEntity<Integer> insertRepairApply(
             @RequestBody
             InsertRepairApplyDTO insertRepairApplyDTO
@@ -68,6 +72,7 @@ public class RepairController {
             value = ""
             , produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
     )
+    @ResponseBody
     public ResponseEntity updateRepairApply(
             @RequestBody
                     UpdateRepairApplyDTO updateRepairApplyDTO
@@ -82,6 +87,7 @@ public class RepairController {
             value = ""
             , produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
     )
+    @ResponseBody
     public ResponseEntity deleteRepairApply(
             @RequestBody
             Integer repairApplyNo
@@ -90,5 +96,10 @@ public class RepairController {
         repairService.removeRepairApply(repairApplyNo);
 
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/apply/index")
+    public String goApplyIndexPage() {
+        return "/apply/index";
     }
 }

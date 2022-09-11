@@ -21,8 +21,10 @@
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="/resources/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="/resources/css/font-awesome.css" rel="stylesheet">
+    <link href="/resources/css/font-awesome-ie7.css" rel="stylesheet">
     <link href="/resources/css/style.css" rel="stylesheet">
     <link href="/resources/css/reset-font.css" rel="stylesheet">
     <link href="/resources/css/reset-elements.css" rel="stylesheet">
+    <%--    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">--%>
 </head>
 

@@ -14,13 +14,12 @@
         <p class="build-time text-primary">BuildTime<br />${serverTime}.</p>
         <br />
         <button type="button"
-                class="btn btn-primary go-to-admin-button"
-                onclick="location.href='main/index'">Go to Admin page
+                class="btn go-to-admin-button"
+                onclick="location.href='main/index'">이동하기
         </button>
     </div>
 
     <style type="text/css">
-
         .wrap-announce-box{
             position: absolute;
             top: 50%;

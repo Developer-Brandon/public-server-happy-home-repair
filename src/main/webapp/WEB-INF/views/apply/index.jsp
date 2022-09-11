@@ -3,15 +3,19 @@
          contentType="text/html;charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ page session="false" import="java.util.*" %>
-<html>
-<head>
-	<title>Main</title>
-</head>
+<!doctype html>
+<%@ include file="../includes/meta_head.jsp"%>
+<%@ include file="../includes/header.jsp"%>
+<%@ include file="../includes/apply_navbar.jsp"%>
+<html lang="en">
 <body>
-<h1>
-	Main Hello world!
-</h1>
+<div class="container">
+    <h1>
+        apply 개발중
+    </h1>
+</div>
 
-<P>  The time on the server is ${serverTime}. </P>
 </body>
 </html>
+<%@ include file="../includes/footer.jsp"%>
+<%@ include file="../includes/meta_footer.jsp"%>

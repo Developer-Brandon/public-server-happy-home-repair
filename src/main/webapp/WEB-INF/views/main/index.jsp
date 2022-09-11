@@ -4,15 +4,18 @@
          pageEncoding="UTF-8" %>
 <%@ page session="false" import="java.util.*" %>
 <!doctype html>
-<html lang="en">
 <%@ include file="../includes/meta_head.jsp"%>
 <%@ include file="../includes/header.jsp"%>
+<%@ include file="../includes/main_navbar.jsp"%>
+<html lang="en">
 <body>
-    <nav></nav>
+    <div class="container">
+        <h1>
+            대시보드 개발중
+        </h1>
+    </div>
 
-    <h1>
-        Main Hello world!
-    </h1>
 </body>
-<%@ include file="../includes/footer.jsp"%>
 </html>
+<%@ include file="../includes/footer.jsp"%>
+<%@ include file="../includes/meta_footer.jsp"%>
