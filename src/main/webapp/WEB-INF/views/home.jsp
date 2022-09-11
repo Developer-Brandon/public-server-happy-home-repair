@@ -5,24 +5,7 @@
 <%@ page session="false" import="java.util.*" %>
 <!doctype html>
 <html lang="en">
-<head>
-    <!-- required meta tags -->
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width
-          , user-scalable=no
-          , initial-scale=1.0
-          , maximum-scale=1.0
-          , minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Happy home repair admin home</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
-          crossorigin="anonymous">
-    <link rel="stylesheet" href="/resources/css/reset-font.css">
-    <link rel="stylesheet" href="/resources/css/reset-elements.css">
-</head>
+<%@ include file="includes/meta_head.jsp"%>
 <body>
     <%-- 해피 홈 리페어 메인 --%>
     <div class="wrap-announce-box">
@@ -32,7 +15,7 @@
         <br />
         <button type="button"
                 class="btn btn-primary go-to-admin-button"
-                onclick="location.href='main/index.jsp'">Go to Admin page
+                onclick="location.href='main/index'">Go to Admin page
         </button>
     </div>
 
@@ -51,7 +34,7 @@
         .wrap-announce-box{
             position: absolute;
             top: 50%;
-            left: 50%;
+            left: 72%;
             width: 320px;
             height: 240px;
             margin: -140px 0 0 -180px;

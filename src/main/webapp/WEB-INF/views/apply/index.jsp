@@ -3,16 +3,15 @@
          contentType="text/html;charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ page session="false" import="java.util.*" %>
-<!doctype html>
-<html lang="en">
-<%@ include file="../includes/meta_head.jsp"%>
-<%@ include file="../includes/header.jsp"%>
+<html>
+<head>
+	<title>Main</title>
+</head>
 <body>
-    <nav></nav>
+<h1>
+	Main Hello world!
+</h1>
 
-    <h1>
-        Main Hello world!
-    </h1>
+<P>  The time on the server is ${serverTime}. </P>
 </body>
-<%@ include file="../includes/footer.jsp"%>
 </html>
