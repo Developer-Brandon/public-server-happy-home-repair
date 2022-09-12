@@ -23,10 +23,9 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        &nbsp;&nbsp;
+                        &nbsp;
                         <div class="pull-right">
-                            <button id="regBtn" type="button" class="btn btn-primary btn-xs">등록하기</button>
-                            <button id="modBtn" type="button" class="btn btn-warning btn-xs">수정하기</button>
+                            <button id="regBtn" type="button" class="btn btn-default btn-xs">등록하기</button>
                         </div>
                     </div>
                     <!-- /.panel-heading -->
@@ -37,21 +36,27 @@
                                     <th>공지 번호</th>
                                     <th>제목</th>
                                     <th>내용</th>
-                                    <th>사용 여부</th>
+                                    <%--                                    <th>사용 여부</th>--%>
                                     <th>등록일자</th>
-                                    <th>수정일자</th>
+                                    <%--                                    <th>수정일자</th>--%>
                                 </tr>
                             </thead>
                             <!-- tbody start -->
                             <c:forEach items="${noticeList}" var="notice">
-                                <tr>
-                                    <td><c:out value="${notice.noticeNo}"/></td>
-                                    <td><c:out value="${notice.title}"/></td>
-                                    <td><c:out value="${notice.content}"/></td>
-                                    <td><c:out value="${notice.useYnEnum}"/></td>
-                                    <td><c:out value="${notice.regDt}"/></td>
-                                    <td><c:out value="${notice.modDt}"/></td>
-                                </tr>
+                                    <tr>
+                                        <td>
+                                            <c:out value="${notice.noticeNo}"/></td>
+                                        <td>
+                                            <a target="_blank" href='/notice/content?noticeNo=<c:out value="${notice.noticeNo}"/>'>
+                                                <c:out value="${notice.title}"/>
+                                            </a>
+                                        </td>
+
+                                        <td><c:out value="${notice.content}"/></td>
+                                        <%--                                    <td><c:out value="${notice.useYnEnum}"/></td>--%>
+                                        <td><c:out value="${notice.regDt}"/></td>
+                                        <%--                                    <td><c:out value="${notice.modDt}"/></td>--%>
+                                    </tr>
                             </c:forEach>
                             <!-- tbody end -->
                         </table>

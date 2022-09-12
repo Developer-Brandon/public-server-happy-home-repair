@@ -36,7 +36,6 @@
                             </div>
                             <div class="pull-right">
                                 <button type="submit" class="btn btn-default">등록하기</button>
-                                <button type="reset" class="btn btn-default">새로고침</button>
                             </div>
                         </form>
                     </div>

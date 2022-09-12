@@ -19,8 +19,7 @@ public class NoticeVO {
 
     String content;
 
-    @Builder.Default
-    NoticeUseYnEnum useYnEnum = NoticeUseYnEnum.Y;
+    NoticeUseYnEnum useYnEnum;
 
     Timestamp regDt;
 
