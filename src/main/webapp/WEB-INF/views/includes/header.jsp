@@ -15,7 +15,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/main/index">&nbsp;<i class="fa fa-home fa-fw"></i>&nbsp;해피 홈 리페어 어드민 페이지</a>
+        <a class="navbar-brand" href="/main/index" style="font-weight: 900">&nbsp;<i class="fa fa-home fa-fw"></i>&nbsp;해피 홈 리페어 어드민 페이지</a>
     </div>
     <!-- /.navbar-header -->
 
@@ -72,7 +72,7 @@
                 <li>
                     <a href="/blog/index" class="text-muted" style="font-weight:500">
                         <i class="fa fa-clipboard fa-fw"></i>
-                        블로그 게시글
+                        블로그 게시글 현황
                     </a>
                 </li>
             </ul>
