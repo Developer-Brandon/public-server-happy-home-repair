@@ -1,13 +1,7 @@
 package com.dev.webApp.controller;
 
-import com.dev.webApp.domain.dto.SelectNoticeDTO;
-import com.dev.webApp.domain.dto.SelectRepairLocationDTO;
-import com.dev.webApp.domain.dto.SelectRepairStateDTO;
-import com.dev.webApp.domain.dto.SelectRepairTypeDTO;
-import com.dev.webApp.domain.vo.NoticeVO;
-import com.dev.webApp.domain.vo.RepairLocationVO;
-import com.dev.webApp.domain.vo.RepairStateVO;
-import com.dev.webApp.domain.vo.RepairTypeVO;
+import com.dev.webApp.domain.dto.*;
+import com.dev.webApp.domain.vo.*;
 import com.dev.webApp.service.RepairService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -94,14 +88,42 @@ public class MainController {
     @GetMapping("/index")
     public String goIndexPage(Model model) throws Exception {
 
-    //        // 우선은 1000개로 지정하겠습니다.
-    //        SelectNoticeDTO selectNoticeDTO = SelectNoticeDTO.builder()
-    //                .manyNoticeOrNot(false)
-    //                .noticeSize(10000)
-    //                .build();
-    //
-    //        List<NoticeVO> noticeVOList = noticeService.getNoticeList(selectNoticeDTO);
-    //        model.addAttribute("list", noticeVOList);
+        //
+        SelectRepairTypeDTO selectRepairTypeDTO = SelectRepairTypeDTO.builder()
+                .itemCnt(0)
+                .build();
+
+        List<RepairTypeVO> repairTypeVOList = repairService.getRepairTypeList(selectRepairTypeDTO);
+
+        model.addAttribute("repairTypeList", repairTypeVOList);
+
+        //
+        SelectRepairLocationDTO selectRepairLocationDTO = SelectRepairLocationDTO.builder()
+                .itemCnt(0)
+                .build();
+
+        List<RepairLocationVO> repairLocationVOList = repairService.getRepairLocationList(selectRepairLocationDTO);
+
+        model.addAttribute("repairLocationList", repairLocationVOList);
+
+        //
+        SelectRepairStateDTO selectRepairStateDTO = SelectRepairStateDTO.builder()
+                .itemCnt(0)
+                .build();
+
+        List<RepairStateVO> repairStateVOList = repairService.getRepairStateList(selectRepairStateDTO);
+
+        model.addAttribute("repairStateList", repairStateVOList);
+
+        //
+        SelectRepairApplyDTO selectRepairApplyDTO = SelectRepairApplyDTO.builder()
+                .itemCnt(1000)
+                .build();
+
+        List<RepairApplyVO> repairApplyVOList = repairService.getRepairApplyList(selectRepairApplyDTO);
+
+
+        model.addAttribute("repairApplyList", repairApplyVOList);
 
         return "/main/index";
     }
