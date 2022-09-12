@@ -21,9 +21,9 @@ public class NoticeController {
     @Autowired
     private NoticeService noticeService;
 
-    // 공지사항 리스트 페이지
+    // 공지사항 리스트 페이지로 이동하는 api
     @GetMapping("/index")
-    public String goNoticePage(Model model) throws Exception {
+    public String goNoticeListPage(Model model) throws Exception {
 
         SelectNoticeDTO selectNoticeDTO = SelectNoticeDTO.builder()
                 .manyNoticeOrNot(true)
@@ -42,6 +42,23 @@ public class NoticeController {
     public String goNoticeRegisterPage(Model model) throws Exception {
 
         return "/notice/register";
+    }
+
+    // 공지사항 조회 페이지로 이동하는 api
+    @GetMapping("/content")
+    public String goNoticePage(
+            @RequestParam
+                    String noticeNo
+            , Model model
+    ) throws Exception {
+
+        NoticeVO noticeVO = NoticeVO.builder()
+                .noticeNo(Long.valueOf(noticeNo))
+                .build();
+
+        model.addAttribute("notice", noticeService.getNotice(noticeVO));
+
+        return "/notice/getter";
     }
 
     // 공지사항 단일 등록 후 리스트로 이동하는 api
@@ -69,29 +86,13 @@ public class NoticeController {
         return "redirect:/notice/index";
     }
 
-    // 공지사항 조회 페이지
-    @GetMapping("/content")
-    public String getNoticeAndView(
-            @RequestParam
-            String noticeNo
-            , Model model
-    ) throws Exception {
-
-        NoticeVO noticeVO = NoticeVO.builder()
-                .noticeNo(Long.valueOf(noticeNo))
-                .build();
-
-        model.addAttribute("notice", noticeService.getNotice(noticeVO));
-
-        return "/notice/getter";
-    }
-
-    // 공지사항 수정  페이지
+    // 공지사항 수정 페이지로 이동하는 api
     @GetMapping("/modifier")
     public String goNoticeModifierPage(
             @RequestParam
             String noticeNo
-            , Model model) throws Exception {
+            , Model model
+    ) throws Exception {
 
         NoticeVO noticeVO = NoticeVO.builder()
                 .noticeNo(Long.valueOf(noticeNo))
@@ -104,7 +105,7 @@ public class NoticeController {
 
     // 공지사항 단일 수정 후 리스트로 이동하는 api
     @PostMapping("/modify")
-    public String putNotice(NoticeVO noticeVO, RedirectAttributes redirectAttributes) throws Exception {
+    public String goNoticeListPageAfterModify(NoticeVO noticeVO, RedirectAttributes redirectAttributes) throws Exception {
 
         noticeService.modifyNotice(noticeVO);
 
@@ -125,7 +126,7 @@ public class NoticeController {
 
     // 공지사항 단일 삭제 후 리스트로 이동하는 api
     @PostMapping("/remove")
-    public String deleteNotice(Long noticeNo, RedirectAttributes redirectAttributes) throws Exception {
+    public String goNoticeListPageAfterRemove(Long noticeNo, RedirectAttributes redirectAttributes) throws Exception {
 
         noticeService.removeNotice(noticeNo);
 

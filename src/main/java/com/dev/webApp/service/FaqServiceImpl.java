@@ -41,7 +41,7 @@ public class FaqServiceImpl implements FaqService{
 
         FaqVO selectedFaqVO = faqMapper.selectFaq(FaqVO.getFaqNo());
 
-        if(selectedFaqVO.getFaqNo() != 1L) {
+        if(selectedFaqVO.getFaqNo() == 0L) {
             throw new Exception();
         }
 

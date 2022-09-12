@@ -13,6 +13,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 public class NoticeVO {
+
     Long noticeNo;
 
     String title;

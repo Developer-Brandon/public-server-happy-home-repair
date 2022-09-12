@@ -14,15 +14,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
-@RequestMapping("/faq")
 @Controller
+@RequestMapping("/faq")
 public class FaqController {
 
     @Autowired
     private FaqService faqService;
 
-    @GetMapping("/content/list")
-    public String getFaqListAndView(Model model) throws Exception {
+    // 자주하는질문 리스트 페이지로 이동하는 api
+    @GetMapping("/index")
+    public String goFaqListPage(Model model) throws Exception {
 
         // 우선은 1000개로 지정하겠습니다.
         SelectFaqDTO selectFaqDTO = SelectFaqDTO.builder()
@@ -31,13 +32,21 @@ public class FaqController {
                 .build();
 
         List<FaqVO> faqVOList = faqService.getFaqList(selectFaqDTO);
-        model.addAttribute("list", faqVOList);
+        model.addAttribute("faqList", faqVOList);
 
-        return "/faq/get_list_page";
+        return "/faq/index";
     }
 
+    // 자주하는질문 등록하기 페이지로 이동하는 api
+    @GetMapping("/register")
+    public String goFaqRegisterPage(Model model) throws Exception {
+
+        return "/faq/register";
+    }
+
+    // 자주하는질문 조회 페이지로 이동하는 api
     @GetMapping("/content")
-    public String getFaqAndView(
+    public String goFaqPage(
             @RequestParam
                     String faqNo
             , Model model
@@ -49,34 +58,86 @@ public class FaqController {
 
         model.addAttribute("faq", faqService.getFaq(faqVO));
 
-        return "get_page";
+        return "/faq/getter";
     }
 
+    // 자주하는질문 단일 등록 후 리스트로 이동하는 api
     @PostMapping("/content")
     public String postFaq(FaqVO faqVO, RedirectAttributes redirectAttributes) throws Exception {
 
         faqService.registerFaq(faqVO);
 
-        redirectAttributes.addFlashAttribute("result", faqVO.getFaqNo());
+        // 우선은 1000개로 지정하겠습니다.
+        SelectFaqDTO selectFaqDTO = SelectFaqDTO.builder()
+                .manyFaqOrNot(false)
+                .faqSize(10000)
+                .build();
+
+        List<FaqVO> faqVOList = faqService.getFaqList(selectFaqDTO);
+
+        redirectAttributes.addFlashAttribute("faqList", faqVOList);
 
         // 내부적으로 response.sendRedirect를 처리해주게끔 처리합니다.
-        return "redirect:/faq/get_list_page";
+        // 데이터 등록 후 리스트 페이지로 이동하게끔 처리
+        return "redirect:/faq/index";
     }
 
-    @PutMapping("/content")
-    public String putFaq(FaqVO faqVO, RedirectAttributes redirectAttributes) throws Exception {
+    // 공지사항 수정 페이지로 이동하는 api
+    @GetMapping("/modifier")
+    public String goFaqModifierPage(
+            @RequestParam
+            String faqNo
+            , Model model
+    ) throws Exception {
+
+        FaqVO faqVO = FaqVO.builder()
+                .faqNo(Long.valueOf(faqNo))
+                .build();
+
+        model.addAttribute("faq", faqService.getFaq(faqVO));
+
+        return "/faq/modifier";
+    }
+
+
+    @PostMapping("/modify")
+    public String goFaqListPageAfterModify(FaqVO faqVO, RedirectAttributes redirectAttributes) throws Exception {
 
         faqService.modifyFaq(faqVO);
 
-        return "redirect:/faq/get_list_page";
+        // 우선은 1000개로 지정하겠습니다.
+        SelectFaqDTO selectFaqDTO = SelectFaqDTO.builder()
+                .manyFaqOrNot(false)
+                .faqSize(10000)
+                .build();
+
+        List<FaqVO> faqVOList = faqService.getFaqList(selectFaqDTO);
+
+        redirectAttributes.addFlashAttribute("faqList", faqVOList);
+
+        // 내부적으로 response.sendRedirect를 처리해주게끔 처리합니다.
+        // 데이터 등록 후 리스트 페이지로 이동하게끔 처리
+        return "redirect:/faq/index";
     }
 
-    @DeleteMapping("/content")
-    public String deleteFaq(Long faqNo, RedirectAttributes redirectAttributes) throws Exception {
+    @PostMapping("/remove")
+    public String goFaqListPageAfterRemove(Long faqNo, RedirectAttributes redirectAttributes) throws Exception {
 
         faqService.removeFaq(faqNo);
 
-        return "redirect:/faq/get_list_page";
+        // 우선은 1000개로 지정하겠습니다.
+        SelectFaqDTO selectFaqDTO = SelectFaqDTO.builder()
+                .manyFaqOrNot(false)
+                .faqSize(10000)
+                .build();
+
+        List<FaqVO> faqVOList = faqService.getFaqList(selectFaqDTO);
+
+        redirectAttributes.addFlashAttribute("faqList", faqVOList);
+
+        // 내부적으로 response.sendRedirect를 처리해주게끔 처리합니다.
+        // 데이터 등록 후 리스트 페이지로 이동하게끔 처리
+        return "redirect:/faq/index";
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////
