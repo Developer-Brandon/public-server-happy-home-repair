@@ -14,9 +14,15 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 public class NoticeVO {
     Long noticeNo;
+
     String title;
+
     String content;
-    NoticeUseYnEnum useYnEnum;
+
+    @Builder.Default
+    NoticeUseYnEnum useYnEnum = NoticeUseYnEnum.Y;
+
     Timestamp regDt;
+
     Timestamp modDt;
 }

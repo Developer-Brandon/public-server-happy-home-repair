@@ -97,9 +97,4 @@ public class RepairController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-    @GetMapping("/apply/index")
-    public String goApplyIndexPage() {
-        return "/apply/index";
-    }
 }

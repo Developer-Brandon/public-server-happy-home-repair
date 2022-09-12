@@ -48,7 +48,8 @@
 
     <link href="/resources/dist/css/reset-font.css" rel="stylesheet">
 
-<%--    <link href="/resources/dist/css/reset-elements.css" rel="stylesheet">--%>
+    <%-- 아이콘이 깨지는 문제때문에 별도의 reset-elements import 취소 --%>
+    <%-- <link href="/resources/dist/css/reset-elements.css" rel="stylesheet"> --%>
 
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

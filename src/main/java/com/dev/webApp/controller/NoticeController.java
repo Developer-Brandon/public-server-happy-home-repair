@@ -55,12 +55,25 @@ public class NoticeController {
     @PostMapping("/content")
     public String postNotice(NoticeVO noticeVO, RedirectAttributes redirectAttributes) throws Exception {
 
-        noticeService.registerNotice(noticeVO);
+        // 삽입한 번호를 반환하는 로직
 
-        redirectAttributes.addFlashAttribute("result", noticeVO.getNoticeNo());
+        noticeService.registerNotice(noticeVO);
+        //
+        //        redirectAttributes.addFlashAttribute("result", noticeVO.getNoticeNo());
+
+        // 전체 리스트를 조회해서 attribute로 설정해주는 로직
+
+        SelectNoticeDTO selectNoticeDTO = SelectNoticeDTO.builder()
+                .manyNoticeOrNot(true)
+                .noticeSize(1000)
+                .build();
+
+        List<NoticeVO> noticeVOList = noticeService.getNoticeList(selectNoticeDTO);
+
+        redirectAttributes.addFlashAttribute("noticeList", noticeVOList);
 
         // 내부적으로 response.sendRedirect를 처리해주게끔 처리합니다.
-        return "redirect:/notice/get_list_page";
+        return "redirect:/notice/index";
     }
 
     @PutMapping("/content")
@@ -77,6 +90,27 @@ public class NoticeController {
         noticeService.removeNotice(noticeNo);
 
         return "redirect:/notice/get_list_page";
+    }
+
+    @GetMapping("/index")
+    public String goNoticePage(Model model) throws Exception {
+
+        SelectNoticeDTO selectNoticeDTO = SelectNoticeDTO.builder()
+                .manyNoticeOrNot(true)
+                .noticeSize(1000)
+                .build();
+
+        List<NoticeVO> noticeVOList = noticeService.getNoticeList(selectNoticeDTO);
+
+        model.addAttribute("noticeList", noticeVOList);
+
+        return "/notice/index";
+    }
+
+    @GetMapping("/register")
+    public String goNoticeRegisterPage(Model model) throws Exception {
+
+        return "/notice/register";
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////
