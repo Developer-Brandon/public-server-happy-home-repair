@@ -49,6 +49,7 @@
     <link href="/resources/dist/css/reset-font.css" rel="stylesheet">
 
     <%-- 아이콘이 깨지는 문제때문에 별도의 reset-elements import 취소 --%>
+    <%-- 아이콘 관련 문제가 있어서 font-weight를 만질때 각별히 조심해야 할 듯 --%>
     <%-- <link href="/resources/dist/css/reset-elements.css" rel="stylesheet"> --%>
 
     <!-- jQuery -->

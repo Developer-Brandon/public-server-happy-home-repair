@@ -83,7 +83,7 @@ public class NoticeController {
 
         model.addAttribute("notice", noticeService.getNotice(noticeVO));
 
-        return "/notice/get";
+        return "/notice/getter";
     }
 
     // 공지사항 수정  페이지
