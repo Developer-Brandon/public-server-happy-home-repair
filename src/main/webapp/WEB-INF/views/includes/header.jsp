@@ -52,25 +52,25 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
                 <li>
-                    <a href="/main/index">
+                    <a href="/main/index" class="text-muted" style="font-weight:500">
                         <i class="fa fa-table fa-fw"></i>
                         수리 신청 현황
                     </a>
                 </li>
                 <li>
-                    <a href="/notice/index">
+                    <a href="/notice/index" class="text-muted" style="font-weight:500">
                         <i class="fa fa-info-circle fa-fw"></i>
                         공지사항
                     </a>
                 </li>
                 <li>
-                    <a href="/faq/index">
+                    <a href="/faq/index" class="text-muted" style="font-weight:500">
                         <i class="fa fa-question-circle fa-fw"></i>
                         자주하는질문
                     </a>
                 </li>
                 <li>
-                    <a href="/blog/index">
+                    <a href="/blog/index" class="text-muted" style="font-weight:500">
                         <i class="fa fa-clipboard fa-fw"></i>
                         블로그 게시글
                     </a>
