@@ -6,7 +6,6 @@
 <!doctype html>
 <%@ include file="../includes/meta_head.jsp"%>
 <%@ include file="../includes/header.jsp"%>
-<%@ include file="../includes/apply_navbar.jsp"%>
 <html lang="en">
 <body>
 <div class="container">
