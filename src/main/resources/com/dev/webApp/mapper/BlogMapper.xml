@@ -8,7 +8,7 @@
         <![CDATA[
             /* 전체 블로그 포스팅 리스트 조회 쿼리 */
         ]]>
-        select f_t_no as postingNo
+        select n_b_p_no as postingNo
              , title as title
              , img_src as imgSrc
              , posted_reg_dt as postingRegDt

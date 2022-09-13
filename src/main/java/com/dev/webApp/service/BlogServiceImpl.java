@@ -51,6 +51,7 @@ public class BlogServiceImpl implements BlogService{
 
                             RawBlogPostingVO blogInfoMap = new RawBlogPostingVO();
 
+                            blogInfoMap.setPostingTypeNo(1);
                             blogInfoMap.setTitle(Element.attr("title"));
                             blogInfoMap.setImgSrc(Element.attr("src"));
 
@@ -97,6 +98,8 @@ public class BlogServiceImpl implements BlogService{
                 blogInfoMapListForImage.get(i).setPostingRegDt(regDt);
             }
         };
+
+        blogInfoMapListForImage.forEach(System.out::println);
 
         return blogInfoMapListForImage;
     }

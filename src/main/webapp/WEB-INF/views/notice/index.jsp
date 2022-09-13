@@ -21,12 +21,18 @@
         <!-- /.row -->
         <div class="row">
             <div class="col-lg-12">
+                <div class="pull-right">
+                    <p>
+                        <button id="regBtn" type="button" class="btn btn-default">등록하기</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         &nbsp;
-                        <div class="pull-right">
-                            <button id="regBtn" type="button" class="btn btn-default btn-xs">등록하기</button>
-                        </div>
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">

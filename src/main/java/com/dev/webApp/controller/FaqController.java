@@ -142,11 +142,11 @@ public class FaqController {
 
     //////////////////////////////////////////////////////////////////////////////////////////////
 
-    @ResponseBody
     @GetMapping(
             value = "/list"
             , produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
     )
+    @ResponseBody
     public ResponseEntity<List<FaqVO>> getFaqList(
             @RequestParam
                     Boolean manyFaqOrNot
@@ -164,11 +164,11 @@ public class FaqController {
         return new ResponseEntity<>(faqVOList, HttpStatus.OK);
     }
 
-    @ResponseBody
     @GetMapping(
             value=""
             ,produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
     )
+    @ResponseBody
     public ResponseEntity<FaqVO> getFaq(
             @RequestParam
                     Long faqNo
@@ -183,11 +183,11 @@ public class FaqController {
         return new ResponseEntity<>(faqVO, HttpStatus.OK);
     }
 
-    @ResponseBody
     @PostMapping(
             value=""
             ,produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
     )
+    @ResponseBody
     public ResponseEntity<Long> insertFaq(
             @RequestBody
             FaqVO faqVO
@@ -198,11 +198,11 @@ public class FaqController {
         return new ResponseEntity<>(faqNo, HttpStatus.OK);
     }
 
-    @ResponseBody
     @PutMapping(
             value=""
             ,produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
     )
+    @ResponseBody
     public ResponseEntity updateFaq(
             @RequestBody
                     FaqVO faqVO
@@ -213,11 +213,11 @@ public class FaqController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @ResponseBody
     @PutMapping(
             value="/state"
             ,produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
     )
+    @ResponseBody
     public ResponseEntity updateFaqState(
             @RequestBody
                     FaqVO faqVO
@@ -228,11 +228,11 @@ public class FaqController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @ResponseBody
     @DeleteMapping(
             value=""
             ,produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
     )
+    @ResponseBody
     public ResponseEntity deleteFaq(
             @RequestParam
                     Long faqNo
