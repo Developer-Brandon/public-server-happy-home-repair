@@ -66,6 +66,16 @@
                             </c:forEach>
                             <!-- tbody end -->
                         </table>
+                        <!-- pagination start -->
+                        <div class="pull-right">
+                            <ul class="pagination">
+                                <li class="paginate_button previous">
+                                    <a href="#">이전</a></li>
+                                <li class="paginate_button"><a href="#">1</a></li>
+                                <li class="paginate_button next"><a href="#">다음</a></li>
+                            </ul>
+                        </div>
+                        <!-- pagination end -->
                     </div>
                     <!-- /.panel-body -->
                 </div>
@@ -84,6 +94,10 @@
   $("#regBtn").on("click", function() {
    self.location = "/notice/register";
   })
+
+  // 1. startPage, endPage가 넘어와야됨
+  // 2. prev, next가 지정되어야 함
+  // todo: https://freehoon.tistory.com/112
  });
 </script>
 
