@@ -1,6 +1,7 @@
 package com.dev.webApp.service;
 
 import com.dev.webApp.domain.dto.SelectNoticeDTO;
+import com.dev.webApp.domain.dto.SelectNoticePaginationDTO;
 import com.dev.webApp.domain.vo.NoticeVO;
 
 import java.util.List;
@@ -20,4 +21,8 @@ public interface NoticeService {
     NoticeVO getNotice(NoticeVO noticeVO) throws Exception;
 
     List<NoticeVO> getNoticeList(SelectNoticeDTO selectNoticeDTO) throws Exception;
+
+    List<NoticeVO> getNoticePaginationList(SelectNoticePaginationDTO selectNoticePaginationDTO) throws Exception;
+
+    Integer getTotalCnt() throws Exception;
 }

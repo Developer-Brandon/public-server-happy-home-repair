@@ -1,6 +1,7 @@
 package com.dev.webApp.mapper.notice;
 
 import com.dev.webApp.domain.dto.SelectNoticeDTO;
+import com.dev.webApp.domain.dto.SelectNoticePaginationDTO;
 import com.dev.webApp.domain.vo.NoticeVO;
 import com.dev.webApp.mapper.NoticeMapper;
 import com.dev.webApp.util.NoticeUseYnEnum;
@@ -37,6 +38,25 @@ public class NoticeMapperTests {
         noticeMapper
                 .selectNoticeList(selectNoticeDTO)
                 .forEach(notice -> System.out.println(notice.getTitle()));
+    }
+
+    @Test
+    public void getNoticePaginationList() {
+
+        SelectNoticePaginationDTO selectNoticePaginationDTO = SelectNoticePaginationDTO.builder()
+                .offset(1)
+                .pageSize(1) // itemCntOfSize의 뜻과 같은 뜻이라고 봐도 무방합니다
+                .build();
+
+        noticeMapper
+                .selectNoticePaginationList(selectNoticePaginationDTO)
+                .forEach(notice -> System.out.println(notice.getTitle()));
+
+        ///////////////////////////////////////////////////////////
+
+        Integer totalCnt = noticeMapper.getTotalCnt();
+
+        System.out.println("총 아이템의 개수 : " + totalCnt);
     }
 
     @Test

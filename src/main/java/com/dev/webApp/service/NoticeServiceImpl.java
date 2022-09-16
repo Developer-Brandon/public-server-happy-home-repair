@@ -1,6 +1,7 @@
 package com.dev.webApp.service;
 
 import com.dev.webApp.domain.dto.SelectNoticeDTO;
+import com.dev.webApp.domain.dto.SelectNoticePaginationDTO;
 import com.dev.webApp.domain.vo.NoticeVO;
 import com.dev.webApp.mapper.NoticeMapper;
 import lombok.RequiredArgsConstructor;
@@ -55,6 +56,12 @@ public class NoticeServiceImpl implements NoticeService{
     }
 
     @Override
+    public List<NoticeVO> getNoticePaginationList(SelectNoticePaginationDTO selectNoticePaginationDTO) throws Exception {
+
+        return noticeMapper.selectNoticePaginationList(selectNoticePaginationDTO);
+    }
+
+    @Override
     public void modifyNotice(NoticeVO noticeVO) throws Exception {
 
         if(noticeMapper.updateNotice(noticeVO) != 1) {
@@ -76,5 +83,10 @@ public class NoticeServiceImpl implements NoticeService{
         if(noticeMapper.deleteNotice(noticeNo) != 1) {
             throw new Exception();
         }
+    }
+
+    @Override
+    public Integer getTotalCnt() throws Exception {
+        return noticeMapper.getTotalCnt();
     }
 }

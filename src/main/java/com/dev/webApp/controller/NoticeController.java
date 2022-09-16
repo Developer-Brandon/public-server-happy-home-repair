@@ -1,6 +1,7 @@
 package com.dev.webApp.controller;
 
 import com.dev.webApp.domain.dto.SelectNoticeDTO;
+import com.dev.webApp.domain.dto.SelectNoticePaginationDTO;
 import com.dev.webApp.domain.vo.NoticeVO;
 import com.dev.webApp.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,9 @@ public class NoticeController {
 
     // 공지사항 리스트 페이지로 이동하는 api
     @GetMapping("/index")
-    public String goNoticeListPage(Model model) throws Exception {
+    public String goNoticeListPage(
+        Model model
+    ) throws Exception {
 
         SelectNoticeDTO selectNoticeDTO = SelectNoticeDTO.builder()
                 .manyNoticeOrNot(true)
@@ -33,6 +36,31 @@ public class NoticeController {
         List<NoticeVO> noticeVOList = noticeService.getNoticeList(selectNoticeDTO);
 
         model.addAttribute("noticeList", noticeVOList);
+
+        return "/notice/index";
+    }
+
+    @GetMapping("/content/list")
+    public String goNoticePageList(
+            @RequestParam
+                    Integer offset
+            , @RequestParam
+                    Integer pageSize
+            ,Model model
+    ) throws Exception {
+
+        SelectNoticePaginationDTO selectNoticePaginationDTO = SelectNoticePaginationDTO.builder()
+                .offset(offset)
+                .pageSize(pageSize)
+                .build();
+
+        List<NoticeVO> noticeVOList = noticeService.getNoticePaginationList(selectNoticePaginationDTO);
+
+        model.addAttribute("noticeList", noticeVOList);
+
+        Integer totalCnt = noticeService.getTotalCnt();
+
+        model.addAttribute("totalCnt", totalCnt);
 
         return "/notice/index";
     }

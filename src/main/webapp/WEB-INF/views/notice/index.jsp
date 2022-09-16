@@ -75,6 +75,24 @@
                                 <li class="paginate_button next"><a href="#">다음</a></li>
                             </ul>
                         </div>
+
+                        <%-- todo: 여기서부터 다시.... --%>
+                        <%--                        <c:if test="${totalCnt != null && totalCnt != 0}">--%>
+                        <%--                            <c:if test="${ph.showPrev}">--%>
+                        <%--                                <a class="page" href="<c:url value="/board/list${ph.sc.getQueryString(ph.beginPage-1)}"/>">&lt;</a>--%>
+                        <%--                            </c:if>--%>
+                        <%--                            <c:forEach var="i"--%>
+                        <%--                                       begin="${ph.beginPage}"--%>
+                        <%--                                       end="${ph.endPage}">--%>
+                        <%--                                <a class="page ${i==ph.sc.page? "paging-active" : ""}"--%>
+                        <%--                                   href="<c:url value="/board/list${ph.sc.getQueryString(i)}"/>">--%>
+                        <%--                                        ${i}--%>
+                        <%--                                </a>--%>
+                        <%--                            </c:forEach>--%>
+                        <%--                            <c:if test="${ph.showNext}">--%>
+                        <%--                                <a class="page" href="<c:url value="/board/list${ph.sc.getQueryString(ph.endPage+1)}"/>">&gt;</a>--%>
+                        <%--                            </c:if>--%>
+                        <%--                        </c:if>--%>
                         <!-- pagination end -->
                     </div>
                     <!-- /.panel-body -->
