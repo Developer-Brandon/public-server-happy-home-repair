@@ -17,8 +17,8 @@ public class PageHandlerTest{
 
         assertThat(pageHandler.getBeginPage(), is(1));
         assertThat(pageHandler.getEndPage(), is(10));
-        assertThat(pageHandler.isShowPrev(), is(false));
-        assertThat(pageHandler.isShowNext(), is(true));
+        assertThat(pageHandler.getShowPrev(), is(false));
+        assertThat(pageHandler.getShowNext(), is(true));
     }
 
     // 전체 게시물이 250개이고 현재의 페이지가 11일때, 나머지 설정들이 제대로 설정되었는지
@@ -29,8 +29,8 @@ public class PageHandlerTest{
 
         assertThat(pageHandler.getBeginPage(), is(11));
         assertThat(pageHandler.getEndPage(), is(20));
-        assertThat(pageHandler.isShowPrev(), is(true));
-        assertThat(pageHandler.isShowNext(), is(true));
+        assertThat(pageHandler.getShowPrev(), is(true));
+        assertThat(pageHandler.getShowNext(), is(true));
     }
 
     // 전체 게시물이 250개이고 현재의 페이지가 25(마지막 페이지)일때, 나머지 설정들이 제대로 설정되었는지
@@ -41,8 +41,8 @@ public class PageHandlerTest{
 
         assertThat(pageHandler.getBeginPage(), is(21));
         assertThat(pageHandler.getEndPage(), is(25));
-        assertThat(pageHandler.isShowPrev(), is(true));
-        assertThat(pageHandler.isShowNext(), is(false));
+        assertThat(pageHandler.getShowPrev(), is(true));
+        assertThat(pageHandler.getShowNext(), is(false));
     }
 
 }

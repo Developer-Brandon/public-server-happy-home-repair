@@ -22,10 +22,10 @@ public class PageHandler {
     private int totalPage;
 
     // 이후를 보여줄지의 여부. endPage==totalPage이면, showNext는 false
-    private boolean showNext = false;
+    private boolean showNext;
 
     // 이전을 보여줄지의 여부. beginPage==1이 아니면 showPrev는 false
-    private boolean showPrev = false;
+    private boolean showPrev;
 
     public PageHandler(int totalCnt, Integer currentPage) {
 
@@ -52,14 +52,12 @@ public class PageHandler {
         // 1. 전체 게시물의 개수를 하나의 네비게이션에서 보여주고자 하는 개수만큼 나눕니다.
         // 2. 전체 게시물의 개수에서 하나의 네비게이션에서 보여주고자 하는 개수만큼 나누었을때 나머지가 0이 아니라면 1, 맞다면 0으로 값을 바꾼 후에
         // 하나의 페이지를 더 더해줍니다(totalCnt % sc.getPageSize() == 0 ? 0 : 1)
-        System.out.println("totalCnt: " + totalCnt);
-        System.out.println("pageSize: " + sc.getPageSize());
 
-        this.totalPage = totalCnt / sc.getPageSize() + (totalCnt % sc.getPageSize() == 0 ? 0 : 1);
+        totalPage = totalCnt / sc.getPageSize() + (totalCnt % sc.getPageSize() == 0 ? 0 : 1);
 
         // [현재의 page가 totalPage보다 크지 않게 조정해줍니다]
         //
-        this.sc.setPage(Math.min(sc.getPage(), totalPage));
+        sc.setPage(Math.min(sc.getPage(), totalPage));
 
         // [beginPage 구하는 식]
         // 현재의 페이지가 5면, beginPage는 1
@@ -67,25 +65,16 @@ public class PageHandler {
         // 현재의 페이지가 23이면, beginPage는 21
 
         // 나누기 10을하고, 곱하기 10을 하면 1의자리수가 날아갑니다.
-        this.beginPage = (this.sc.getPage() - 1) / NAV_SIZE * NAV_SIZE + 1;
+        beginPage = (sc.getPage() - 1) / NAV_SIZE * NAV_SIZE + 1;
 
         // [endPage를 구하는 식]
         // 가장 마지막 페이지를 구할 때에, 지금 현재 페이지의 beginPage에서 보여주고자 하는 navSize를 더해서 endPage를 구합니다.
         // 단, totalPage 보다 크면안되니까, 둘중 비교해서 작은값으로 endPage를 setting 해줍니다.
-        this.endPage = Math.min(beginPage + NAV_SIZE - 1, totalPage);
+        endPage = Math.min(beginPage + NAV_SIZE - 1, totalPage);
 
-        System.out.println("beginPage: " + beginPage);
-        System.out.println("endPage: " + endPage);
+        showPrev = beginPage != 1;
 
-        // todo: 이거 계속 false로 뜨는것 부터가 문제라서 이것부터 고치기
-        System.out.println("setShowPrev: " + (this.beginPage != 1));
-        System.out.println("setShowNext: " + (this.endPage != this.totalPage));
-
-        this.setShowPrev(this.beginPage != 1);
-
-        this.setShowNext(this.endPage != this.totalPage);
-
-        print();
+        showNext = endPage != totalPage;
     }
 
     public String getQueryString() {
@@ -107,13 +96,13 @@ public class PageHandler {
 
         System.out.println("page=" + sc.getPage());
 
-        System.out.print(isShowPrev() ? "PREV " : "");
+        System.out.print(showPrev ? "PREV " : "");
 
         for (int i = beginPage; i <= endPage; i++) {
             System.out.print(i + " ");
         }
 
-        System.out.println(isShowPrev() ? " NEXT" : "");
+        System.out.println(showNext ? " NEXT" : "");
     }
 
     public SearchCondition getSc() {
@@ -130,14 +119,6 @@ public class PageHandler {
 
     public void setTotalCnt(int totalCnt) {
         this.totalCnt = totalCnt;
-    }
-
-    public boolean isShowNext() {
-        return this.showNext;
-    }
-
-    public void setShowNext(boolean showNext) {
-        this.showNext = showNext;
     }
 
     public int getBeginPage() {
@@ -168,12 +149,20 @@ public class PageHandler {
         this.endPage = endPage;
     }
 
-    public boolean isShowPrev() {
-        return this.showPrev;
+    public void setShowPrev(Boolean showPrev) {
+        this.showPrev = showPrev;
     }
 
-    public void setShowPrev(boolean showPrev) {
-        this.showPrev = showPrev;
+    public boolean getShowPrev() {
+        return showPrev;
+    }
+
+    public void setShowNext(Boolean showNext) {
+        this.showNext = showNext;
+    }
+
+    public boolean getShowNext() {
+        return showNext;
     }
 
     @Override
@@ -181,12 +170,12 @@ public class PageHandler {
         return "PageHandler{" +
                 "sc=" + sc +
                 ", totalCnt=" + totalCnt +
-                ", showNext=" + showNext +
                 ", beginPage=" + beginPage +
                 ", NAV_SIZE=" + NAV_SIZE +
                 ", totalPage=" + totalPage +
                 ", endPage=" + endPage +
                 ", showPrev=" + showPrev +
+                ", showNext=" + showNext +
                 '}';
     }
 }

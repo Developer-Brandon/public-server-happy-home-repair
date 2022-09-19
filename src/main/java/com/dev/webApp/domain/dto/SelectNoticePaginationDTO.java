@@ -11,6 +11,9 @@ public class SelectNoticePaginationDTO {
 
     @Builder.Default
     Integer currentPage = 1;
+
     Integer offset;
-    Integer pageSize;
+
+    @Builder.Default
+    Integer pageSize = 10;
 }
