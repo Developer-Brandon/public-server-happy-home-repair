@@ -5,8 +5,8 @@
          pageEncoding="UTF-8" %>
 <%@ page session="false" import="java.util.*" %>
 <!doctype html>
-<%@ include file="../includes/meta_head.jsp"%>
-<%@ include file="../includes/header.jsp"%>
+<%@ include file="../includes/meta_head.jsp" %>
+<%@ include file="../includes/header.jsp" %>
 <html lang="en">
 <body>
 
@@ -38,26 +38,27 @@
                     <div class="panel-body">
                         <table width="100%" class="table table-striped table-bordered table-hover">
                             <thead>
-                                <tr>
-                                    <th>공지 번호</th>
-                                    <th>제목</th>
-                                    <th>내용</th>
-                                    <th>등록일자</th>
-                                </tr>
+                            <tr>
+                                <th>공지 번호</th>
+                                <th>제목</th>
+                                <th>내용</th>
+                                <th>등록일자</th>
+                            </tr>
                             </thead>
                             <!-- tbody start -->
                             <c:forEach items="${noticeList}" var="notice">
-                                    <tr>
-                                        <td>
-                                            <c:out value="${notice.noticeNo}"/></td>
-                                        <td>
-                                            <a target="_blank" href='/notice/content?noticeNo=<c:out value="${notice.noticeNo}"/>'>
-                                                <c:out value="${notice.title}"/>
-                                            </a>
-                                        </td>
-                                        <td><c:out value="${notice.content}"/></td>
-                                        <td><c:out value="${notice.regDt}"/></td>
-                                    </tr>
+                                <tr>
+                                    <td>
+                                        <c:out value="${notice.noticeNo}"/></td>
+                                    <td>
+                                        <a target="_blank"
+                                           href='/notice/content?noticeNo=<c:out value="${notice.noticeNo}"/>'>
+                                            <c:out value="${notice.title}"/>
+                                        </a>
+                                    </td>
+                                    <td><c:out value="${notice.content}"/></td>
+                                    <td><c:out value="${notice.regDt}"/></td>
+                                </tr>
                             </c:forEach>
                             <!-- tbody end -->
                         </table>
@@ -102,18 +103,14 @@
 
 <!-- Page-Level Demo Scripts - Tables - Use for reference -->
 <script>
- $(document).ready(function() {
-  $("#regBtn").on("click", function() {
+ $(document).ready(function () {
+  $("#regBtn").on("click", function () {
    self.location = "/notice/register";
   })
-
-  // 1. startPage, endPage가 넘어와야됨
-  // 2. prev, next가 지정되어야 함
-  // todo: https://freehoon.tistory.com/112
  });
 </script>
 
 </body>
 </html>
-<%@ include file="../includes/meta_footer.jsp"%>
-<%@ include file="../includes/footer.jsp"%>
+<%@ include file="../includes/meta_footer.jsp" %>
+<%@ include file="../includes/footer.jsp" %>

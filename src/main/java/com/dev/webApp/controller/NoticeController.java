@@ -27,7 +27,7 @@ public class NoticeController {
     @GetMapping("/index")
     public String goNoticeListPage(
             @RequestParam(required = false)
-            Integer currentPage
+                    Integer currentPage
             , Model model
     ) throws Exception {
 
@@ -47,7 +47,7 @@ public class NoticeController {
     @GetMapping("/content/list")
     public String goNoticePageList(
             @RequestParam
-            Integer currentPage
+                    Integer currentPage
             , Model model
     ) throws Exception {
 
@@ -117,7 +117,7 @@ public class NoticeController {
     @GetMapping("/modifier")
     public String goNoticeModifierPage(
             @RequestParam
-            String noticeNo
+                    String noticeNo
             , Model model
     ) throws Exception {
 
@@ -177,13 +177,13 @@ public class NoticeController {
     @ResponseBody
     @GetMapping(
             value = "/list"
-            , produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
+            , produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}
     )
     public ResponseEntity<List<NoticeVO>> getNoticeList(
             @RequestParam
-            Boolean manyNoticeOrNot
+                    Boolean manyNoticeOrNot
             , @RequestParam
-            Integer noticeSize
+                    Integer noticeSize
     ) throws Exception {
 
         SelectNoticeDTO selectNoticeDTO = SelectNoticeDTO.builder()
@@ -198,12 +198,12 @@ public class NoticeController {
 
     @ResponseBody
     @GetMapping(
-            value=""
-            ,produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
+            value = ""
+            , produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}
     )
     public ResponseEntity<NoticeVO> getNotice(
             @RequestParam
-            Long noticeNo
+                    Long noticeNo
     ) throws Exception {
 
         NoticeVO requestNoticeVO = NoticeVO.builder()
@@ -217,12 +217,12 @@ public class NoticeController {
 
     @ResponseBody
     @PostMapping(
-            value=""
-            ,produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
+            value = ""
+            , produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}
     )
     public ResponseEntity<Long> insertNotice(
-          @RequestBody
-          NoticeVO noticeVO
+            @RequestBody
+                    NoticeVO noticeVO
     ) throws Exception {
 
         Long noticeNo = noticeService.registerNotice(noticeVO);
@@ -232,8 +232,8 @@ public class NoticeController {
 
     @ResponseBody
     @PutMapping(
-            value=""
-            ,produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
+            value = ""
+            , produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}
     )
     public ResponseEntity updateNotice(
             @RequestBody
@@ -247,8 +247,8 @@ public class NoticeController {
 
     @ResponseBody
     @PutMapping(
-            value="/state"
-            ,produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
+            value = "/state"
+            , produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}
     )
     public ResponseEntity updateNoticeState(
             @RequestBody
@@ -262,12 +262,12 @@ public class NoticeController {
 
     @ResponseBody
     @DeleteMapping(
-            value=""
-            ,produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
+            value = ""
+            , produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}
     )
     public ResponseEntity deleteNotice(
             @RequestParam
-            Long noticeNo
+                    Long noticeNo
     ) throws Exception {
 
         noticeService.removeNotice(noticeNo);
