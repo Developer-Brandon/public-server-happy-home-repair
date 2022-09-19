@@ -49,10 +49,10 @@ public class SearchCondition {
 
         // ?currentPage=10&pageSize=10&option=A&keyword=title
         return UriComponentsBuilder.newInstance()
-                .queryParam("currentPage",     currentPage)
+                .queryParam("currentPage", currentPage)
                 .queryParam("pageSize", pageSize)
-                .queryParam("option",   option)
-                .queryParam("keyword",  keyword)
+                .queryParam("option", option)
+                .queryParam("keyword", keyword)
                 .build().toString();
     }
     public Integer getPage() {

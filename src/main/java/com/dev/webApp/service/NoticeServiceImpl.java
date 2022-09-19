@@ -64,13 +64,18 @@ public class NoticeServiceImpl implements NoticeService{
 
         PageHandler pageHandler = new PageHandler(totalCnt, selectNoticePaginationDTO.getCurrentPage());
 
-        selectNoticePaginationDTO.setOffset(pageHandler.getBeginPage() * 10);
+        // todo: 이거 오프셋만 제대로 지정하면 전부 다 제대로 작동할 듯 하다.
+        // 이건 강의를 봐야할듯. offset을 계산해야함.
+        selectNoticePaginationDTO.setOffset(pageHandler.getBeginPage());
+        System.out.println("offset: " + selectNoticePaginationDTO.getOffset());
 
         selectNoticePaginationDTO.setPageSize(pageHandler.getNAV_SIZE());
+        System.out.println("pageSize: " + selectNoticePaginationDTO.getPageSize());
+
 
         return PaginationNoticeVO.builder()
                 .noticeVOList(noticeMapper.selectNoticePaginationList(selectNoticePaginationDTO))
-                .totalCnt(pageHandler.getTotalCnt())
+                .pageHandler(pageHandler)
                 .build();
     }
 

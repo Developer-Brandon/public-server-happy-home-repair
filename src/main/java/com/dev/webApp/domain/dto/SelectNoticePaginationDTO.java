@@ -8,7 +8,9 @@ import lombok.Data;
 @Builder
 @AllArgsConstructor
 public class SelectNoticePaginationDTO {
-    Integer currentPage;
+
+    @Builder.Default
+    Integer currentPage = 1;
     Integer offset;
     Integer pageSize;
 }

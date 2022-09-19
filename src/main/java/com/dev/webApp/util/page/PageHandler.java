@@ -52,9 +52,13 @@ public class PageHandler {
         // 1. 전체 게시물의 개수를 하나의 네비게이션에서 보여주고자 하는 개수만큼 나눕니다.
         // 2. 전체 게시물의 개수에서 하나의 네비게이션에서 보여주고자 하는 개수만큼 나누었을때 나머지가 0이 아니라면 1, 맞다면 0으로 값을 바꾼 후에
         // 하나의 페이지를 더 더해줍니다(totalCnt % sc.getPageSize() == 0 ? 0 : 1)
+        System.out.println("totalCnt: " + totalCnt);
+        System.out.println("pageSize: " + sc.getPageSize());
+
         this.totalPage = totalCnt / sc.getPageSize() + (totalCnt % sc.getPageSize() == 0 ? 0 : 1);
 
         // [현재의 page가 totalPage보다 크지 않게 조정해줍니다]
+        //
         this.sc.setPage(Math.min(sc.getPage(), totalPage));
 
         // [beginPage 구하는 식]
@@ -63,12 +67,15 @@ public class PageHandler {
         // 현재의 페이지가 23이면, beginPage는 21
 
         // 나누기 10을하고, 곱하기 10을 하면 1의자리수가 날아갑니다.
-        this.beginPage = ((this.sc.getPage() - 1) / NAV_SIZE) * NAV_SIZE + 1;
+        this.beginPage = (this.sc.getPage() - 1) / NAV_SIZE * NAV_SIZE + 1;
 
         // [endPage를 구하는 식]
         // 가장 마지막 페이지를 구할 때에, 지금 현재 페이지의 beginPage에서 보여주고자 하는 navSize를 더해서 endPage를 구합니다.
         // 단, totalPage 보다 크면안되니까, 둘중 비교해서 작은값으로 endPage를 setting 해줍니다.
         this.endPage = Math.min(beginPage + NAV_SIZE - 1, totalPage);
+
+        System.out.println("beginPage: " + beginPage);
+        System.out.println("endPage: " + endPage);
 
         this.showPrev = beginPage != 1;
 

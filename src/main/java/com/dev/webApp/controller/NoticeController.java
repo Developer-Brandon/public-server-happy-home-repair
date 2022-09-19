@@ -26,17 +26,20 @@ public class NoticeController {
     // 공지사항 리스트 페이지로 이동하는 api
     @GetMapping("/index")
     public String goNoticeListPage(
-        Model model
+            @RequestParam(required = false)
+            Integer currentPage
+            , Model model
     ) throws Exception {
 
-        SelectNoticeDTO selectNoticeDTO = SelectNoticeDTO.builder()
-                .manyNoticeOrNot(true)
-                .noticeSize(1000)
+        SelectNoticePaginationDTO selectNoticePaginationDTO = SelectNoticePaginationDTO.builder()
+                .currentPage(currentPage)
                 .build();
 
-        List<NoticeVO> noticeVOList = noticeService.getNoticeList(selectNoticeDTO);
+        PaginationNoticeVO paginationNoticeVO = noticeService.getNoticePaginationList(selectNoticePaginationDTO);
 
-        model.addAttribute("noticeList", noticeVOList);
+        model.addAttribute("noticeList", paginationNoticeVO.getNoticeVOList());
+
+        model.addAttribute("pageHandler", paginationNoticeVO.getPageHandler());
 
         return "/notice/index";
     }
@@ -44,24 +47,19 @@ public class NoticeController {
     @GetMapping("/content/list")
     public String goNoticePageList(
             @RequestParam
-                    Integer offset
-            , @RequestParam
-                    Integer pageSize
-            ,Model model
+            Integer currentPage
+            , Model model
     ) throws Exception {
 
         SelectNoticePaginationDTO selectNoticePaginationDTO = SelectNoticePaginationDTO.builder()
-                .offset(offset)
-                .pageSize(pageSize)
+                .currentPage(currentPage)
                 .build();
 
         PaginationNoticeVO paginationNoticeVO = noticeService.getNoticePaginationList(selectNoticePaginationDTO);
 
         model.addAttribute("noticeList", paginationNoticeVO.getNoticeVOList());
 
-        Integer totalCnt = paginationNoticeVO.getTotalCnt();
-
-        model.addAttribute("totalCnt", totalCnt);
+        model.addAttribute("pageHandler", paginationNoticeVO.getPageHandler());
 
         return "/notice/index";
     }
