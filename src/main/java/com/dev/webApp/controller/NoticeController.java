@@ -3,6 +3,7 @@ package com.dev.webApp.controller;
 import com.dev.webApp.domain.dto.SelectNoticeDTO;
 import com.dev.webApp.domain.dto.SelectNoticePaginationDTO;
 import com.dev.webApp.domain.vo.NoticeVO;
+import com.dev.webApp.domain.vo.PaginationNoticeVO;
 import com.dev.webApp.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -54,11 +55,11 @@ public class NoticeController {
                 .pageSize(pageSize)
                 .build();
 
-        List<NoticeVO> noticeVOList = noticeService.getNoticePaginationList(selectNoticePaginationDTO);
+        PaginationNoticeVO paginationNoticeVO = noticeService.getNoticePaginationList(selectNoticePaginationDTO);
 
-        model.addAttribute("noticeList", noticeVOList);
+        model.addAttribute("noticeList", paginationNoticeVO.getNoticeVOList());
 
-        Integer totalCnt = noticeService.getTotalCnt();
+        Integer totalCnt = paginationNoticeVO.getTotalCnt();
 
         model.addAttribute("totalCnt", totalCnt);
 

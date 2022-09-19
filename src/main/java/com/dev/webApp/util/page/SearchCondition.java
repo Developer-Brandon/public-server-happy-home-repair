@@ -3,55 +3,64 @@ package com.dev.webApp.util.page;
 
 import static java.lang.Math.*;
 
+import lombok.ToString;
 import org.springframework.web.util.UriComponentsBuilder;
 
+@ToString
 public class SearchCondition {
 
-    private Integer page = 1;
 
+    public static final int DEFAULT_PAGE_SIZE = 10;
+    public static final int MIN_PAGE_SIZE = 5;
+    public static final int MAX_PAGE_SIZE = 50;
+
+    // 현재 페이지
+    private Integer currentPage = 1;
+
+    // 하나의 네비게이션에서 보여주고자 하는 페이지의 사이즈
     private Integer pageSize = DEFAULT_PAGE_SIZE;
 
+    // 검색 옵션
     private String  option = "";
 
+    // 검색 페이지네이션
     private String  keyword = "";
-
-    public static final int MIN_PAGE_SIZE = 5;
-    public static final int DEFAULT_PAGE_SIZE = 10;
-    public static final int MAX_PAGE_SIZE = 50;
 
     public SearchCondition(){}
 
-    public SearchCondition(Integer page, Integer pageSize) {
-        this(page, pageSize, "", "");
+    public SearchCondition(Integer currentPage, Integer pageSize) {
+
+        this(currentPage, pageSize, "", "");
     }
 
-    public SearchCondition(Integer page, Integer pageSize, String option, String keyword) {
-        this.page = page;
+    public SearchCondition(Integer currentPage, Integer pageSize, String option, String keyword) {
+
+        this.currentPage = currentPage;
         this.pageSize = pageSize;
         this.option = option;
         this.keyword = keyword;
     }
 
     public String getQueryString() {
-        return getQueryString(page);
+        return getQueryString(currentPage);
     }
 
-    public String getQueryString(Integer page) {
+    public String getQueryString(Integer currentPage) {
 
-        // ?page=10&pageSize=10&option=A&keyword=title
+        // ?currentPage=10&pageSize=10&option=A&keyword=title
         return UriComponentsBuilder.newInstance()
-                .queryParam("page",     page)
+                .queryParam("currentPage",     currentPage)
                 .queryParam("pageSize", pageSize)
                 .queryParam("option",   option)
                 .queryParam("keyword",  keyword)
                 .build().toString();
     }
     public Integer getPage() {
-        return page;
+        return currentPage;
     }
 
-    public void setPage(Integer page) {
-        this.page = page;
+    public void setPage(Integer currentPage) {
+        this.currentPage = currentPage;
     }
 
     public Integer getPageSize() {
@@ -82,16 +91,6 @@ public class SearchCondition {
     }
 
     public Integer getOffset() {
-        return (page-1)*pageSize;
-    }
-
-    @Override
-    public String toString() {
-        return "SearchCondition{" +
-                "page=" + page +
-                ", pageSize=" + pageSize +
-                ", option='" + option + '\'' +
-                ", keyword='" + keyword + '\'' +
-                '}';
+        return (currentPage-1) * pageSize;
     }
 }

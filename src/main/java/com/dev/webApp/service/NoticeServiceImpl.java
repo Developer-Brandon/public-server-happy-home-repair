@@ -3,7 +3,9 @@ package com.dev.webApp.service;
 import com.dev.webApp.domain.dto.SelectNoticeDTO;
 import com.dev.webApp.domain.dto.SelectNoticePaginationDTO;
 import com.dev.webApp.domain.vo.NoticeVO;
+import com.dev.webApp.domain.vo.PaginationNoticeVO;
 import com.dev.webApp.mapper.NoticeMapper;
+import com.dev.webApp.util.page.PageHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,9 +58,20 @@ public class NoticeServiceImpl implements NoticeService{
     }
 
     @Override
-    public List<NoticeVO> getNoticePaginationList(SelectNoticePaginationDTO selectNoticePaginationDTO) throws Exception {
+    public PaginationNoticeVO getNoticePaginationList(SelectNoticePaginationDTO selectNoticePaginationDTO) throws Exception {
 
-        return noticeMapper.selectNoticePaginationList(selectNoticePaginationDTO);
+        Integer totalCnt = noticeMapper.getTotalCnt();
+
+        PageHandler pageHandler = new PageHandler(totalCnt, selectNoticePaginationDTO.getCurrentPage());
+
+        selectNoticePaginationDTO.setOffset(pageHandler.getBeginPage() * 10);
+
+        selectNoticePaginationDTO.setPageSize(pageHandler.getNAV_SIZE());
+
+        return PaginationNoticeVO.builder()
+                .noticeVOList(noticeMapper.selectNoticePaginationList(selectNoticePaginationDTO))
+                .totalCnt(pageHandler.getTotalCnt())
+                .build();
     }
 
     @Override
@@ -87,6 +100,7 @@ public class NoticeServiceImpl implements NoticeService{
 
     @Override
     public Integer getTotalCnt() throws Exception {
-        return noticeMapper.getTotalCnt();
+        return noticeMapper.getTotalCnt()
+                ;
     }
 }

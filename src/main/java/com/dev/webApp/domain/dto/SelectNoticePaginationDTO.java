@@ -8,6 +8,7 @@ import lombok.Data;
 @Builder
 @AllArgsConstructor
 public class SelectNoticePaginationDTO {
+    Integer currentPage;
     Integer offset;
     Integer pageSize;
 }

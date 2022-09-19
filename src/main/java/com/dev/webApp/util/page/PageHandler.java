@@ -6,31 +6,40 @@ public class PageHandler {
 
     private SearchCondition sc;
 
-    public final int NAV_SIZE = 10; // page navigation size
+    // 하나의 네비게이션의 사이즈e
+    public final int NAV_SIZE = 10;
 
-    private int totalCnt; // 게시물의 총 갯수
+    // 화면에 보여줄(Navigation의) 첫 페이지
+    private int beginPage;
 
-    private int totalPage; // 전체 페이지의 갯수
+    // 화면에 보여줄(Navigation의) 마지막 페이지
+    private int endPage;
 
-    private int beginPage; // 화면에 보여줄 첫 페이지
+    // 게시물의 총 갯수
+    private int totalCnt;
 
-    private int endPage; // 화면에 보여줄 마지막 페이지
+    // 전체 페이지의 갯수
+    private int totalPage;
 
-    private boolean showNext = false; // 이후를 보여줄지의 여부. endPage==totalPage이면, showNext는 false
+    // 이후를 보여줄지의 여부. endPage==totalPage이면, showNext는 false
+    private boolean showNext = false;
 
-    private boolean showPrev = false; // 이전을 보여줄지의 여부. beginPage==1이 아니면 showPrev는 false
+    // 이전을 보여줄지의 여부. beginPage==1이 아니면 showPrev는 false
+    private boolean showPrev = false;
 
-    // todo: 소스코드 수정 예정
+    public PageHandler(int totalCnt, Integer currentPage) {
 
-    public PageHandler(int totalCnt, Integer page) {
-        this(totalCnt, new SearchCondition(page, 10));
+        this(totalCnt, new SearchCondition(currentPage, 10));
     }
 
-    public PageHandler(int totalCnt, Integer page, Integer pageSize) {
-        this(totalCnt, new SearchCondition(page, pageSize));
+    public PageHandler(int totalCnt, Integer currentPage, Integer pageSize) {
+
+        // 총 게시물의 수, 현재 페이지, 페이지 사이즈
+        this(totalCnt, new SearchCondition(currentPage, pageSize));
     }
 
     public PageHandler(int totalCnt, SearchCondition sc) {
+
         this.totalCnt = totalCnt;
         this.sc = sc;
 
@@ -38,11 +47,31 @@ public class PageHandler {
     }
 
     private void doPaging(int totalCnt, SearchCondition sc) {
+
+        // [총 페이지의 개수를 구하는 식]
+        // 1. 전체 게시물의 개수를 하나의 네비게이션에서 보여주고자 하는 개수만큼 나눕니다.
+        // 2. 전체 게시물의 개수에서 하나의 네비게이션에서 보여주고자 하는 개수만큼 나누었을때 나머지가 0이 아니라면 1, 맞다면 0으로 값을 바꾼 후에
+        // 하나의 페이지를 더 더해줍니다(totalCnt % sc.getPageSize() == 0 ? 0 : 1)
         this.totalPage = totalCnt / sc.getPageSize() + (totalCnt % sc.getPageSize() == 0 ? 0 : 1);
-        this.sc.setPage(Math.min(sc.getPage(), totalPage));  // page가 totalPage보다 크지 않게
-        this.beginPage = (this.sc.getPage() - 1) / NAV_SIZE * NAV_SIZE + 1; // 11 -> 11, 10 -> 1, 15->11. 따로 떼어내서 테스트
+
+        // [현재의 page가 totalPage보다 크지 않게 조정해줍니다]
+        this.sc.setPage(Math.min(sc.getPage(), totalPage));
+
+        // [beginPage 구하는 식]
+        // 현재의 페이지가 5면, beginPage는 1
+        // 현재의 페이지가 11이면, beginPage는 11
+        // 현재의 페이지가 23이면, beginPage는 21
+
+        // 나누기 10을하고, 곱하기 10을 하면 1의자리수가 날아갑니다.
+        this.beginPage = ((this.sc.getPage() - 1) / NAV_SIZE) * NAV_SIZE + 1;
+
+        // [endPage를 구하는 식]
+        // 가장 마지막 페이지를 구할 때에, 지금 현재 페이지의 beginPage에서 보여주고자 하는 navSize를 더해서 endPage를 구합니다.
+        // 단, totalPage 보다 크면안되니까, 둘중 비교해서 작은값으로 endPage를 setting 해줍니다.
         this.endPage = Math.min(beginPage + NAV_SIZE - 1, totalPage);
+
         this.showPrev = beginPage != 1;
+
         this.showNext = endPage != totalPage;
     }
 
@@ -51,6 +80,7 @@ public class PageHandler {
     }
 
     public String getQueryString(Integer page) {
+
         // ?page=10&pageSize=10&option=A&keyword=title
         return UriComponentsBuilder.newInstance()
                 .queryParam("page", page)
@@ -61,12 +91,16 @@ public class PageHandler {
     }
 
     void print() {
+
+
         System.out.println("page=" + sc.getPage());
+
         System.out.print(showPrev ? "PREV " : "");
 
         for (int i = beginPage; i <= endPage; i++) {
             System.out.print(i + " ");
         }
+
         System.out.println(showNext ? " NEXT" : "");
     }
 
