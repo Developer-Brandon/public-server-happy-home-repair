@@ -70,7 +70,7 @@
                         <c:if test="${pageHandler.totalCnt != null && pageHandler.totalCnt != 0}">
                             <div class="pull-right">
                                 <ul class="pagination">
-                                    <c:if test="${pageHandler.isShowPrev}">
+                                    <c:if test="${pageHandler.showPrev}">
                                         <li class="paginate_button previous">
                                             <a href="<c:url value="/notice/index${pageHandler.sc.getQueryString(pageHandler.beginPage-1)}"/>">이전</a>
                                         </li>
@@ -84,7 +84,7 @@
                                         </li>
                                     </c:forEach>
 
-                                    <c:if test="${pageHandler.isShowNext}">
+                                    <c:if test="${pageHandler.showNext}">
                                         <li class="paginate_button next">
                                             <a href="<c:url value="/notice/index${pageHandler.sc.getQueryString(pageHandler.endPage+1)}"/>">다음</a>
                                         </li>
