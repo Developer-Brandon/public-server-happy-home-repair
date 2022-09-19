@@ -77,9 +77,15 @@ public class PageHandler {
         System.out.println("beginPage: " + beginPage);
         System.out.println("endPage: " + endPage);
 
-        this.showPrev = beginPage != 1;
+        // todo: 이거 계속 false로 뜨는것 부터가 문제라서 이것부터 고치기
+        System.out.println("setShowPrev: " + (this.beginPage != 1));
+        System.out.println("setShowNext: " + (this.endPage != this.totalPage));
 
-        this.showNext = endPage != totalPage;
+        this.setShowPrev(this.beginPage != 1);
+
+        this.setShowNext(this.endPage != this.totalPage);
+
+        print();
     }
 
     public String getQueryString() {
@@ -99,16 +105,15 @@ public class PageHandler {
 
     void print() {
 
-
         System.out.println("page=" + sc.getPage());
 
-        System.out.print(showPrev ? "PREV " : "");
+        System.out.print(isShowPrev() ? "PREV " : "");
 
         for (int i = beginPage; i <= endPage; i++) {
             System.out.print(i + " ");
         }
 
-        System.out.println(showNext ? " NEXT" : "");
+        System.out.println(isShowPrev() ? " NEXT" : "");
     }
 
     public SearchCondition getSc() {
@@ -128,7 +133,7 @@ public class PageHandler {
     }
 
     public boolean isShowNext() {
-        return showNext;
+        return this.showNext;
     }
 
     public void setShowNext(boolean showNext) {
@@ -164,7 +169,7 @@ public class PageHandler {
     }
 
     public boolean isShowPrev() {
-        return showPrev;
+        return this.showPrev;
     }
 
     public void setShowPrev(boolean showPrev) {
