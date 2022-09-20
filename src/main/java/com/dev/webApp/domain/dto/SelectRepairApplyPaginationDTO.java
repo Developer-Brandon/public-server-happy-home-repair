@@ -9,8 +9,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SelectRepairApplyDTO {
+public class SelectRepairApplyPaginationDTO {
 
     @Builder.Default
-    Integer itemCnt = 100;
+    Integer currentPage = 1;
+
+    Integer offset;
+
+    @Builder.Default
+    Integer pageSize = 10;
 }

@@ -44,8 +44,7 @@ public class NoticeServiceTests {
     public void serviceGetNoticeListTest() throws Exception {
 
         SelectNoticeDTO selectNoticeDTO = SelectNoticeDTO.builder()
-                .manyNoticeOrNot(false)
-                .noticeSize(10000)
+                .noticeSize(10)
                 .build();
 
         List<NoticeVO> noticeVOList = noticeService.getNoticeList(selectNoticeDTO);

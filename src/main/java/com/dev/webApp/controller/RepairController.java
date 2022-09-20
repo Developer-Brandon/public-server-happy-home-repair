@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,30 +21,160 @@ public class RepairController {
 
     private final RepairService repairService;
 
+    // 수리 신청 현황 페이지로 이동하는 api
+    @GetMapping("/index")
+    public String goIndexPage(
+            @RequestParam(required = false)
+                    Integer currentPage
+            , Model model
+    ) throws Exception {
+
+        if(StringUtils.isEmpty(currentPage)) {
+            currentPage = 1;
+        }
+
+        List<RepairTypeVO> repairTypeVOList = repairService.getRepairTypeList(SelectRepairTypeDTO.builder().build());
+
+        model.addAttribute("repairTypeList", repairTypeVOList);
+
+        List<RepairLocationVO> repairLocationVOList = repairService.getRepairLocationList(SelectRepairLocationDTO.builder().build());
+
+        model.addAttribute("repairLocationList", repairLocationVOList);
+
+        List<RepairStateVO> repairStateVOList = repairService.getRepairStateList(SelectRepairStateDTO.builder().build());
+
+        model.addAttribute("repairStateList", repairStateVOList);
+
+        SelectRepairApplyPaginationDTO selectRepairApplyPaginationDTO = SelectRepairApplyPaginationDTO.builder()
+                .currentPage(currentPage)
+                .build();
+
+        PaginationRepairApplyVO repairApplyVO = repairService.getRepairApplyList(selectRepairApplyPaginationDTO);
+
+        model.addAttribute("repairApplyList", repairApplyVO.getRepairApplyVOList());
+
+        model.addAttribute("pageHandler", repairApplyVO.getPageHandler());
+
+        return "/repair/index";
+    }
+
+    // 수리 신청 현황 페이지 진입 후 추가로 paginnation 불러오는 api
+    @GetMapping("/content/list")
+    public String getRepairApplyListAtPage(
+            @RequestParam
+                Integer currentPage
+            , Model model
+    ) throws Exception {
+
+        List<RepairTypeVO> repairTypeVOList = repairService.getRepairTypeList(SelectRepairTypeDTO.builder().build());
+
+        model.addAttribute("repairTypeList", repairTypeVOList);
+
+        List<RepairLocationVO> repairLocationVOList = repairService.getRepairLocationList(SelectRepairLocationDTO.builder().build());
+
+        model.addAttribute("repairLocationList", repairLocationVOList);
+
+        List<RepairStateVO> repairStateVOList = repairService.getRepairStateList(SelectRepairStateDTO.builder().build());
+
+        model.addAttribute("repairStateList", repairStateVOList);
+
+        SelectRepairApplyPaginationDTO selectRepairApplyPaginationDTO = SelectRepairApplyPaginationDTO.builder()
+                .currentPage(currentPage)
+                .build();
+
+        PaginationRepairApplyVO repairApplyVO = repairService.getRepairApplyList(selectRepairApplyPaginationDTO);
+
+        model.addAttribute("repairApplyList", repairApplyVO.getRepairApplyVOList());
+
+        model.addAttribute("pageHandler", repairApplyVO.getPageHandler());
+
+        return "/repair/index";
+    }
+
+    //////////////////////////////////////////////////////////////
+
+    @ResponseBody
+    @GetMapping(
+            value = "/repair-type/list"
+            , produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
+    )
+    public ResponseEntity<List<RepairTypeVO>> getRepairTypeList() {
+
+        SelectRepairTypeDTO selectRepairTypeDTO = SelectRepairTypeDTO.builder()
+                .itemCnt(0)
+                .build();
+
+        List<RepairTypeVO> repairTypeVOList = repairService.getRepairTypeList(selectRepairTypeDTO);
+
+        return new ResponseEntity<>(repairTypeVOList, HttpStatus.OK);
+    }
+
+    @ResponseBody
+    @GetMapping(
+            value = "/repair-location/list"
+            , produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
+    )
+    public ResponseEntity<List<RepairLocationVO>> getRepairLocationList() {
+
+        SelectRepairLocationDTO selectRepairLocationDTO = SelectRepairLocationDTO.builder()
+                .itemCnt(0)
+                .build();
+
+        List<RepairLocationVO> repairLocationVOList = repairService.getRepairLocationList(selectRepairLocationDTO);
+
+        return new ResponseEntity<>(repairLocationVOList, HttpStatus.OK);
+    }
+
+    @ResponseBody
+    @GetMapping(
+            value = "/repair-state/list"
+            , produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
+    )
+    public ResponseEntity<List<RepairStateVO>> getRepairStateList() {
+
+        SelectRepairStateDTO selectRepairStateDTO = SelectRepairStateDTO.builder()
+                .itemCnt(0)
+                .build();
+
+        List<RepairStateVO> repairStateVOList = repairService.getRepairStateList(selectRepairStateDTO);
+
+        return new ResponseEntity<>(repairStateVOList, HttpStatus.OK);
+    }
+
+    //////////////////////////////////////////////////////////////
+
+    // 수리 신청 현황 리스트만 json형식으로 불러오는 api
+    @ResponseBody
     @GetMapping(
             value = "/list"
             , produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
     )
-    @ResponseBody
     public ResponseEntity<List<RepairApplyVO>> getRepairApplyList(
             @RequestParam(required = false)
-            Integer itemSize
+            Integer currentPage
     ) throws Exception {
 
-        SelectRepairApplyDTO selectRepairApplyDTO = SelectRepairApplyDTO.builder()
-                .itemCnt(itemSize)
+        if(StringUtils.isEmpty(currentPage)) {
+            currentPage = 1;
+        }
+
+        SelectRepairApplyPaginationDTO selectRepairApplyPaginationDTO = SelectRepairApplyPaginationDTO.builder()
+                .currentPage(currentPage)
                 .build();
 
-        List<RepairApplyVO> repairApplyVOList = repairService.getRepairApplyList(selectRepairApplyDTO);
+        List<RepairApplyVO> repairApplyVOList = repairService
+                .getRepairApplyList(selectRepairApplyPaginationDTO)
+                .getRepairApplyVOList();
 
         return new ResponseEntity<>(repairApplyVOList, HttpStatus.OK);
     }
 
+    // 단일 수리 신청 현황만 json형식으로 불러오는 api
+    @ResponseBody
     @GetMapping(
             value = ""
             , produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
     )
-    @ResponseBody
     public ResponseEntity<RepairApplyVO> getRepairApply(
             @RequestParam
             Integer repairApplyNo
@@ -53,11 +185,12 @@ public class RepairController {
         return new ResponseEntity<>(repairApplyVO, HttpStatus.OK);
     }
 
+    // 단일 수리 신청 현황만 삽입하는 api
+    @ResponseBody
     @PostMapping(
             value = ""
             , produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
     )
-    @ResponseBody
     public ResponseEntity<Integer> insertRepairApply(
             @RequestBody
             InsertRepairApplyDTO insertRepairApplyDTO
@@ -68,11 +201,12 @@ public class RepairController {
         return new ResponseEntity<>(insertedRepairApplyNo, HttpStatus.OK);
     }
 
+    // 단일 수리 신청 현황만 수정하는 api
+    @ResponseBody
     @PutMapping(
             value = ""
             , produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
     )
-    @ResponseBody
     public ResponseEntity updateRepairApply(
             @RequestBody
                     UpdateRepairApplyDTO updateRepairApplyDTO
@@ -83,11 +217,14 @@ public class RepairController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    // 이곳에서는 단일 수리 신청 현황만 수정하는 api는 필요없다고 판단되어 넣지 않았습니다.
+
+    // 단일 수리 신청 현황만 삭제하는 api
+    @ResponseBody
     @DeleteMapping(
             value = ""
             , produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
     )
-    @ResponseBody
     public ResponseEntity deleteRepairApply(
             @RequestBody
             Integer repairApplyNo
@@ -97,8 +234,4 @@ public class RepairController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-    //////////////////////////////////////////////////////////////
-
-
 }

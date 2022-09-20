@@ -15,7 +15,7 @@
         <br />
         <button type="button"
                 class="btn go-to-admin-button"
-                onclick="location.href='main/index'">이동하기
+                onclick="location.href='repair/index'">이동하기
         </button>
     </div>
 

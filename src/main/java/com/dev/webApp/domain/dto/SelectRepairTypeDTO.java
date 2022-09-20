@@ -8,5 +8,7 @@ import lombok.Data;
 @Builder
 @AllArgsConstructor
 public class SelectRepairTypeDTO {
-    Integer itemCnt;
+
+    @Builder.Default
+    Integer itemCnt = 10;
 }

@@ -32,7 +32,7 @@ public class NoticeMapperTests {
     public void getNoticeList() {
 
         SelectNoticeDTO selectNoticeDTO = SelectNoticeDTO.builder()
-                .manyNoticeOrNot(false)
+                .noticeSize(10)
                 .build();
 
         noticeMapper

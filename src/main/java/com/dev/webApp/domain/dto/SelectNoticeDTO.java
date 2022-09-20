@@ -8,6 +8,5 @@ import lombok.Data;
 @Builder
 @AllArgsConstructor
 public class SelectNoticeDTO {
-    Boolean manyNoticeOrNot;
     Integer noticeSize;
 }

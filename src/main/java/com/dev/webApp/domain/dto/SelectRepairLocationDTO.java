@@ -10,5 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SelectRepairLocationDTO {
-    Integer itemCnt;
+
+    @Builder.Default
+    Integer itemCnt = 10;
 }

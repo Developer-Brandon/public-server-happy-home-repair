@@ -2,10 +2,8 @@ package com.dev.webApp.mapper.repairApply;
 
 import com.dev.webApp.domain.dto.*;
 import com.dev.webApp.domain.vo.*;
-import com.dev.webApp.mapper.BlogMapper;
 import com.dev.webApp.mapper.RepairMapper;
 import com.dev.webApp.util.AgreeOrNotEnum;
-import com.dev.webApp.util.FaqUseYnEnum;
 import com.dev.webApp.util.UserTypeEnum;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -85,11 +82,11 @@ public class RepairApplyMapperTests {
 
         // 1. 리스트 조회 테스트
 
-        SelectRepairApplyDTO selectRepairApplyDTO = SelectRepairApplyDTO.builder()
-                .itemCnt(5)
+        SelectRepairApplyPaginationDTO selectRepairApplyPaginationDTO = SelectRepairApplyPaginationDTO.builder()
+                .currentPage(1)
                 .build();
 
-        List<RepairApplyVO> selectRepairTypeList = repairMapper.selectRepairApplyList(selectRepairApplyDTO);
+        List<RepairApplyVO> selectRepairTypeList = repairMapper.selectRepairApplyList(selectRepairApplyPaginationDTO);
 
         assertThat(selectRepairTypeList, is(notNullValue()));
         assertThat(selectRepairTypeList.size(), is(greaterThan(1)));

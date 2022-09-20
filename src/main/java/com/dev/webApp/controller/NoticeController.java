@@ -5,49 +5,65 @@ import com.dev.webApp.domain.dto.SelectNoticePaginationDTO;
 import com.dev.webApp.domain.vo.NoticeVO;
 import com.dev.webApp.domain.vo.PaginationNoticeVO;
 import com.dev.webApp.service.NoticeService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
-@RequestMapping("/notice")
 @Controller // JSP로 이동하려면 json을 반환하는 RestController가 아닌, 그냥 controller를 사용해야 합니다
+@RequiredArgsConstructor
+@RequestMapping("/notice")
 public class NoticeController {
 
-    @Autowired
-    private NoticeService noticeService;
+    private final NoticeService noticeService;
 
-    // 공지사항 리스트 페이지로 이동하는 api
+    private Model addNoticeListToModel(Model model, PaginationNoticeVO paginationNoticeVO) {
+
+        model.addAttribute("noticeList", paginationNoticeVO.getNoticeVOList());
+
+        model.addAttribute("pageHandler", paginationNoticeVO.getPageHandler());
+
+        return model;
+    }
+
+    // 공지사항 메인 페이지로 이동하는 api
     @GetMapping("/index")
-    public String goNoticeListPage(
+    public String goNoticeIndexPage(
             @RequestParam(required = false)
                     Integer currentPage
             , Model model
     ) throws Exception {
 
+        // requestParam empty값 예외처리
+        // https://big-brown-bear93.tistory.com/37
+
+        if(StringUtils.isEmpty(currentPage)) {
+            currentPage = 1;
+        }
+
         SelectNoticePaginationDTO selectNoticePaginationDTO = SelectNoticePaginationDTO.builder()
                 .currentPage(currentPage)
                 .build();
 
         PaginationNoticeVO paginationNoticeVO = noticeService.getNoticePaginationList(selectNoticePaginationDTO);
 
-        model.addAttribute("noticeList", paginationNoticeVO.getNoticeVOList());
-
-        model.addAttribute("pageHandler", paginationNoticeVO.getPageHandler());
+        addNoticeListToModel(model, paginationNoticeVO);
 
         return "/notice/index";
     }
 
+    // 공지사항 페이지 진입 후 추가로 pagination 불러오는 api
     @GetMapping("/content/list")
-    public String goNoticePageList(
+    public String getNoticeListAtPage(
             @RequestParam
-                    Integer currentPage
+            Integer currentPage
             , Model model
     ) throws Exception {
 
@@ -57,9 +73,7 @@ public class NoticeController {
 
         PaginationNoticeVO paginationNoticeVO = noticeService.getNoticePaginationList(selectNoticePaginationDTO);
 
-        model.addAttribute("noticeList", paginationNoticeVO.getNoticeVOList());
-
-        model.addAttribute("pageHandler", paginationNoticeVO.getPageHandler());
+        addNoticeListToModel(model, paginationNoticeVO);
 
         return "/notice/index";
     }
@@ -71,7 +85,7 @@ public class NoticeController {
         return "/notice/register";
     }
 
-    // 공지사항 조회 페이지로 이동하는 api
+    // 공지사항 상세 조회 페이지로 이동하는 api
     @GetMapping("/content")
     public String goNoticePage(
             @RequestParam
@@ -92,24 +106,11 @@ public class NoticeController {
     @PostMapping("/content")
     public String postNotice(NoticeVO noticeVO, RedirectAttributes redirectAttributes) throws Exception {
 
-        // 삽입한 번호를 반환하는 로직
-
         noticeService.registerNotice(noticeVO);
-        //
-        //        redirectAttributes.addFlashAttribute("result", noticeVO.getNoticeNo());
-
-        // 전체 리스트를 조회해서 attribute로 설정해주는 로직
-        SelectNoticeDTO selectNoticeDTO = SelectNoticeDTO.builder()
-                .manyNoticeOrNot(true)
-                .noticeSize(1000)
-                .build();
-
-        List<NoticeVO> noticeVOList = noticeService.getNoticeList(selectNoticeDTO);
-
-        redirectAttributes.addFlashAttribute("noticeList", noticeVOList);
 
         // 내부적으로 response.sendRedirect를 처리해주게끔 처리합니다.
         // 데이터 등록 후 리스트 페이지로 이동하게끔 처리
+        // (현재는 그냥 첫번째 페이지로 이동하도록 설정합니다)
         return "redirect:/notice/index";
     }
 
@@ -136,18 +137,9 @@ public class NoticeController {
 
         noticeService.modifyNotice(noticeVO);
 
-        // 전체 리스트를 조회해서 attribute로 설정해주는 로직
-        SelectNoticeDTO selectNoticeDTO = SelectNoticeDTO.builder()
-                .manyNoticeOrNot(true)
-                .noticeSize(1000)
-                .build();
-
-        List<NoticeVO> noticeVOList = noticeService.getNoticeList(selectNoticeDTO);
-
-        redirectAttributes.addFlashAttribute("noticeList", noticeVOList);
-
         // 내부적으로 response.sendRedirect를 처리해주게끔 처리합니다.
         // 데이터 등록 후 리스트 페이지로 이동하게끔 처리
+        // (현재는 그냥 첫번째 페이지로 이동하도록 설정합니다)
         return "redirect:/notice/index";
     }
 
@@ -157,37 +149,30 @@ public class NoticeController {
 
         noticeService.removeNotice(noticeNo);
 
-        // 전체 리스트를 조회해서 attribute로 설정해주는 로직
-        SelectNoticeDTO selectNoticeDTO = SelectNoticeDTO.builder()
-                .manyNoticeOrNot(true)
-                .noticeSize(1000)
-                .build();
-
-        List<NoticeVO> noticeVOList = noticeService.getNoticeList(selectNoticeDTO);
-
-        redirectAttributes.addFlashAttribute("noticeList", noticeVOList);
-
         // 내부적으로 response.sendRedirect를 처리해주게끔 처리합니다.
         // 데이터 등록 후 리스트 페이지로 이동하게끔 처리
+        // (현재는 그냥 첫번째 페이지로 이동하도록 설정합니다)
         return "redirect:/notice/index";
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////
 
+    // 공지사항 리스트만 json형식으로 불러오는 api
     @ResponseBody
     @GetMapping(
             value = "/list"
             , produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}
     )
     public ResponseEntity<List<NoticeVO>> getNoticeList(
-            @RequestParam
-                    Boolean manyNoticeOrNot
-            , @RequestParam
-                    Integer noticeSize
+            @RequestParam(required = false)
+            Integer noticeSize
     ) throws Exception {
 
+        if(StringUtils.isEmpty(noticeSize)) {
+            noticeSize = 10;
+        }
+
         SelectNoticeDTO selectNoticeDTO = SelectNoticeDTO.builder()
-                .manyNoticeOrNot(manyNoticeOrNot)
                 .noticeSize(noticeSize)
                 .build();
 
@@ -196,6 +181,7 @@ public class NoticeController {
         return new ResponseEntity<>(noticeVOList, HttpStatus.OK);
     }
 
+    // 단일 공지사항만 json형식으로 불러오는 api
     @ResponseBody
     @GetMapping(
             value = ""
@@ -215,6 +201,7 @@ public class NoticeController {
         return new ResponseEntity<>(noticeVO, HttpStatus.OK);
     }
 
+    // 단일 공지사항만 삽입하는 api
     @ResponseBody
     @PostMapping(
             value = ""
@@ -230,6 +217,7 @@ public class NoticeController {
         return new ResponseEntity<>(noticeNo, HttpStatus.OK);
     }
 
+    // 단일 공지사항만 수정하는 api
     @ResponseBody
     @PutMapping(
             value = ""
@@ -245,6 +233,7 @@ public class NoticeController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    // 단일 공지사항 상태만 수정하는 api
     @ResponseBody
     @PutMapping(
             value = "/state"
@@ -260,6 +249,7 @@ public class NoticeController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    // 단일 공지사항만 삭제하는 api
     @ResponseBody
     @DeleteMapping(
             value = ""

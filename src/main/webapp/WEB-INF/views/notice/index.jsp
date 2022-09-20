@@ -46,7 +46,8 @@
                             </tr>
                             </thead>
                             <!-- tbody start -->
-                            <c:forEach items="${noticeList}" var="notice">
+                            <c:forEach items="${noticeList}"
+                                       var="notice">
                                 <tr>
                                     <td>
                                         <c:out value="${notice.noticeNo}"/></td>
@@ -68,7 +69,7 @@
                                 <ul class="pagination">
                                     <c:if test="${pageHandler.showPrev}">
                                         <li class="paginate_button previous">
-                                            <a href="<c:url value="/notice/index${pageHandler.sc.getQueryString(pageHandler.beginPage - 1)}"/>">이전</a>
+                                            <a href="<c:url value="/notice/content/list${pageHandler.sc.getQueryString(pageHandler.beginPage - 1)}"/>">이전</a>
                                         </li>
                                     </c:if>
 
@@ -76,13 +77,13 @@
                                                begin="${pageHandler.beginPage}"
                                                end="${pageHandler.endPage}">
                                         <li class="paginate_button ${i==pageHandler.sc.page? "active" : ""}">
-                                            <a href="<c:url value="/notice/index${pageHandler.sc.getQueryString(i)}"/>">${i}</a>
+                                            <a href="<c:url value="/notice/content/list${pageHandler.sc.getQueryString(i)}"/>">${i}</a>
                                         </li>
                                     </c:forEach>
 
                                     <c:if test="${pageHandler.showNext}">
                                         <li class="paginate_button next">
-                                            <a href="<c:url value="/notice/index${pageHandler.sc.getQueryString(pageHandler.endPage + 1)}"/>">다음</a>
+                                            <a href="<c:url value="/notice/content/list${pageHandler.sc.getQueryString(pageHandler.endPage + 1)}"/>">다음</a>
                                         </li>
                                     </c:if>
                                 </ul>

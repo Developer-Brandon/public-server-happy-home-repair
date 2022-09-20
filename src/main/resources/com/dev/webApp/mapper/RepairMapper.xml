@@ -3,6 +3,22 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dev.webApp.mapper.RepairMapper">
+
+    <select id="getTotalCnt" resultType="Integer">
+        <![CDATA[
+            /* 전체 견적문의의 개수를 조회하는 쿼리 */
+        ]]>
+        select count(*)
+        from web_app_test.tb_repair_apply as tb_r_apply
+                 inner join web_app_test.tb_repair_type as tb_r_type
+                            on tb_r_apply.r_type_no = tb_r_type.r_type_no
+                 inner join web_app_test.tb_repair_state as tb_r_state
+                            on tb_r_apply.r_state_no = tb_r_state.r_state_no
+                 inner join web_app_test.tb_repair_location as tb_r_location
+                            on tb_r_apply.r_location_no = tb_r_location.r_location_no
+        from web_app_test.tb_repair_apply
+    </select>
+
     <select id="selectRepairTypeList"
             parameterType="com.dev.webApp.domain.dto.SelectRepairTypeDTO"
             resultType="com.dev.webApp.domain.vo.RepairTypeVO">
@@ -17,9 +33,7 @@
             , mod_dt as modDt
         from web_app_test.tb_repair_type
         order by r_type_no desc
-        <if test="itemCnt != 0">
-            limit #{itemCnt}
-        </if>
+        limit #{itemCnt}
     </select>
 
     <select id="selectRepairType"
@@ -152,7 +166,7 @@
     </select>
 
     <select id="selectRepairApplyList"
-        parameterType="com.dev.webApp.domain.dto.SelectRepairApplyDTO"
+        parameterType="com.dev.webApp.domain.dto.SelectRepairApplyPaginationDTO"
         resultType="com.dev.webApp.domain.vo.RepairApplyVO">
     <![CDATA[
         /* 견적 문의 리스트 조회 쿼리 */
@@ -174,10 +188,8 @@
                 on tb_r_apply.r_state_no = tb_r_state.r_state_no
             inner join web_app_test.tb_repair_location as tb_r_location
                 on tb_r_apply.r_location_no = tb_r_location.r_location_no
-        order by tb_r_apply.r_apply_no desc
-        <if test="itemCnt != 0">
-            limit #{itemCnt}
-        </if>
+            order by regDt desc, repairApplyNo desc
+        limit #{offset}, #{pageSize}
     </select>
 
     <update id="updateRepairApply"

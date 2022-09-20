@@ -51,9 +51,7 @@
              , mod_dt as modDt
         from web_app_test.tb_notice
         order by notice_no desc
-        <if test="manyNoticeOrNot == true">
-            limit #{noticeSize}
-        </if>
+        limit #{noticeSize}
     </select>
 
     <select id="selectNoticePaginationList"

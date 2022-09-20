@@ -1,10 +1,7 @@
 package com.dev.webApp.service;
 
 import com.dev.webApp.domain.dto.*;
-import com.dev.webApp.domain.vo.RepairApplyVO;
-import com.dev.webApp.domain.vo.RepairLocationVO;
-import com.dev.webApp.domain.vo.RepairStateVO;
-import com.dev.webApp.domain.vo.RepairTypeVO;
+import com.dev.webApp.domain.vo.*;
 
 import java.util.List;
 
@@ -25,5 +22,5 @@ public interface RepairService {
     // void modifyRepairApplyState(RepairApplyVO RepairApplyVO) throws Exception;
     void removeRepairApply(Integer repairApplyNo) throws Exception;
     RepairApplyVO getRepairApply(Integer repairApplyNo) throws Exception;
-    List<RepairApplyVO> getRepairApplyList(SelectRepairApplyDTO selectRepairApplyDTO) throws Exception;
+    PaginationRepairApplyVO getRepairApplyList(SelectRepairApplyPaginationDTO selectRepairApplyPaginationDTO) throws Exception;
 }

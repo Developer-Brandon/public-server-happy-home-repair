@@ -10,7 +10,6 @@
 <html lang="en">
 <body>
 
-<!-- todo: 추후 main page를 꾸미고 싶다면 작업 예정입니다 -->
 <div id="wrapper">
     <div id="page-wrapper">
         <div class="row">
@@ -87,7 +86,8 @@
                                 </tr>
                             </thead>
                             <!-- tbody start -->
-                            <c:forEach items="${repairApplyList}" var="repairApply">
+                            <c:forEach items="${repairApplyList}"
+                                       var="repairApply">
                                 <tr>
                                     <td><c:out value="${repairApply.repairApplyNo}"/></td>
                                     <td><c:out value="${repairApply.repairTypeNo}"/></td>
@@ -102,6 +102,33 @@
                             </c:forEach>
                             <!-- tbody end -->
                         </table>
+                        <!-- pagination start -->
+                        <c:if test="${pageHandler.totalCnt != null && pageHandler.totalCnt != 0}">
+                            <div class="pull-right">
+                                <ul class="pagination">
+                                    <c:if test="${pageHandler.showPrev}">
+                                        <li class="paginate_button previous">
+                                            <a href="<c:url value="/repair/content/list${pageHandler.sc.getQueryString(pageHandler.beginPage - 1)}"/>">이전</a>
+                                        </li>
+                                    </c:if>
+
+                                    <c:forEach var="i"
+                                               begin="${pageHandler.beginPage}"
+                                               end="${pageHandler.endPage}">
+                                        <li class="paginate_button ${i==pageHandler.sc.page? "active" : ""}">
+                                            <a href="<c:url value="/repair/content/list${pageHandler.sc.getQueryString(i)}"/>">${i}</a>
+                                        </li>
+                                    </c:forEach>
+
+                                    <c:if test="${pageHandler.showNext}">
+                                        <li class="paginate_button next">
+                                            <a href="<c:url value="/repair/content/list${pageHandler.sc.getQueryString(pageHandler.endPage + 1)}"/>">다음</a>
+                                        </li>
+                                    </c:if>
+                                </ul>
+                            </div>
+                        </c:if>
+                        <!-- pagination end -->
                     </div>
                     <!-- /.panel-body -->
                 </div>

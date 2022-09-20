@@ -53,6 +53,7 @@
 <!-- Page-Level Demo Scripts - Tables - Use for reference -->
 <script>
  $(document).ready(function() {
+  // nothing to do....
  });
 </script>
 

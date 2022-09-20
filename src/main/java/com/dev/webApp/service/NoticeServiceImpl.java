@@ -6,6 +6,7 @@ import com.dev.webApp.domain.vo.NoticeVO;
 import com.dev.webApp.domain.vo.PaginationNoticeVO;
 import com.dev.webApp.mapper.NoticeMapper;
 import com.dev.webApp.util.page.PageHandler;
+import com.mysql.cj.protocol.x.Notice;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -64,15 +65,21 @@ public class NoticeServiceImpl implements NoticeService{
 
         PageHandler pageHandler = new PageHandler(totalCnt, selectNoticePaginationDTO.getCurrentPage());
 
-        selectNoticePaginationDTO.setOffset(Math.max(selectNoticePaginationDTO.getCurrentPage()-1, 1) * selectNoticePaginationDTO.getPageSize());
-        System.out.println("offset: " + selectNoticePaginationDTO.getOffset());
+        // 만약 현재의 페이지가...
+        // 1 -> 0
+        // 2 -> 1
+        // 3 -> 2
+        // 4 -> 3
+        Integer offset = selectNoticePaginationDTO.getCurrentPage() - 1;
+
+        selectNoticePaginationDTO.setOffset(offset * selectNoticePaginationDTO.getPageSize());
 
         selectNoticePaginationDTO.setPageSize(pageHandler.getNAV_SIZE());
-        System.out.println("pageSize: " + selectNoticePaginationDTO.getPageSize());
 
+        List<NoticeVO> noticeVOList = noticeMapper.selectNoticePaginationList(selectNoticePaginationDTO);
 
         return PaginationNoticeVO.builder()
-                .noticeVOList(noticeMapper.selectNoticePaginationList(selectNoticePaginationDTO))
+                .noticeVOList(noticeVOList)
                 .pageHandler(pageHandler)
                 .build();
     }

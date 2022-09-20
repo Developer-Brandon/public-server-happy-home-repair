@@ -11,6 +11,8 @@ import java.util.List;
 
 public interface RepairMapper {
 
+    int getTotalCnt();
+
     List<RepairTypeVO> selectRepairTypeList(SelectRepairTypeDTO selectRepairTypeDTO);
 
     RepairTypeVO selectRepairType(@Param("repairTypeNo")Integer repairTypeNo);
@@ -27,7 +29,7 @@ public interface RepairMapper {
 
     RepairApplyVO selectRepairApply(@Param("repairApplyNo")Integer repairApplyNo);
 
-    List<RepairApplyVO> selectRepairApplyList(SelectRepairApplyDTO selectRepairApplyDTO);
+    List<RepairApplyVO> selectRepairApplyList(SelectRepairApplyPaginationDTO selectRepairApplyPaginationDTO);
 
     int updateRepairApply(UpdateRepairApplyDTO updateRepairApplyDTO);
 

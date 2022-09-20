@@ -3,6 +3,7 @@ package com.dev.webApp.service;
 import com.dev.webApp.domain.dto.*;
 import com.dev.webApp.domain.vo.*;
 import com.dev.webApp.mapper.RepairMapper;
+import com.dev.webApp.util.page.PageHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,6 +47,28 @@ public class RepairServiceImpl implements RepairService{
         return repairMapper.selectRepairState(repairStateNo);
     }
 
+
+    @Override
+    public PaginationRepairApplyVO getRepairApplyList(SelectRepairApplyPaginationDTO selectRepairApplyPaginationDTO) throws Exception {
+
+        Integer totalCnt = repairMapper.getTotalCnt();
+
+        PageHandler pageHandler = new PageHandler(totalCnt, selectRepairApplyPaginationDTO.getCurrentPage());
+
+        Integer offset = selectRepairApplyPaginationDTO.getCurrentPage() - 1;
+
+        selectRepairApplyPaginationDTO.setOffset(offset * selectRepairApplyPaginationDTO.getPageSize());
+
+        selectRepairApplyPaginationDTO.setPageSize(pageHandler.getNAV_SIZE());
+
+        List<RepairApplyVO> repairApplyVOList = repairMapper.selectRepairApplyList(selectRepairApplyPaginationDTO);
+
+        return PaginationRepairApplyVO.builder()
+                .pageHandler(pageHandler)
+                .repairApplyVOList(repairApplyVOList)
+                .build();
+    }
+
     @Override
     public Integer registerRepairApply(InsertRepairApplyDTO insertRepairApplyDTO) throws Exception {
 
@@ -76,11 +99,5 @@ public class RepairServiceImpl implements RepairService{
     public RepairApplyVO getRepairApply(Integer repairApplyNo) throws Exception {
 
         return repairMapper.selectRepairApply(repairApplyNo);
-    }
-
-    @Override
-    public List<RepairApplyVO> getRepairApplyList(SelectRepairApplyDTO selectRepairApplyDTO) throws Exception {
-
-        return repairMapper.selectRepairApplyList(selectRepairApplyDTO);
     }
 }

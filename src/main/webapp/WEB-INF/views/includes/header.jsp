@@ -15,7 +15,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/main/index" style="font-weight: 900">&nbsp;<i class="fa fa-home fa-fw"></i>&nbsp;해피 홈 리페어 어드민 페이지</a>
+        <a class="navbar-brand" href="/repair/index" style="font-weight: 900">&nbsp;<i class="fa fa-home fa-fw"></i>&nbsp;해피 홈 리페어 어드민 페이지</a>
     </div>
     <!-- /.navbar-header -->
 
@@ -52,7 +52,7 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
                 <li>
-                    <a href="/main/index" class="text-muted" style="font-weight:500">
+                    <a href="/repair/index" class="text-muted" style="font-weight:500">
                         <i class="fa fa-table fa-fw"></i>
                         수리 신청 현황
                     </a>
