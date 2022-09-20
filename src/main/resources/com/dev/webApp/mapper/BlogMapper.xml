@@ -3,10 +3,20 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dev.webApp.mapper.BlogMapper">
-    <select id="selectBlogPostingList"
+
+    <select id="getTotalCnt" resultType="Integer">
+        <![CDATA[
+        /* 전체 블로그 포스팅 개수 조회 쿼리 */
+        ]]>
+        select count(*)
+        from web_app_test.tb_blog_posting_info as tb_posting_info
+    </select>
+
+    <select id="selectAllBlogPostingList"
+            parameterType="com.dev.webApp.domain.dto.SelectBlogPostingPaginationDTO"
             resultType="com.dev.webApp.domain.vo.BlogPostingVO">
         <![CDATA[
-            /* 전체 블로그 포스팅 리스트 조회 쿼리 */
+        /* 전체 블로그 포스팅 리스트 조회 쿼리 */
         ]]>
         select n_b_p_no as postingNo
              , title as title
@@ -14,7 +24,22 @@
              , posted_reg_dt as postingRegDt
              , reg_dt as regDt
         from web_app_test.tb_blog_posting_info as tb_posting_info
-        order by tb_posting_info.f_t_no desc
+    </select>
+
+    <select id="selectBlogPostingList"
+            parameterType="com.dev.webApp.domain.dto.SelectBlogPostingPaginationDTO"
+            resultType="com.dev.webApp.domain.vo.BlogPostingVO">
+        <![CDATA[
+            /* 전체 블로그 포스팅 리스트 조회 쿼리(client에서 조회할 일이 없어서, pagination 워딩 넣지 않았습니다.) */
+        ]]>
+        select n_b_p_no as postingNo
+             , title as title
+             , img_src as imgSrc
+             , posted_reg_dt as postingRegDt
+             , reg_dt as regDt
+        from web_app_test.tb_blog_posting_info as tb_posting_info
+            order by postingNo desc
+        limit #{offset}, #{pageSize}
     </select>
 
     <insert id="insertBlogPosting"

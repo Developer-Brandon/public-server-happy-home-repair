@@ -1,9 +1,10 @@
 package com.dev.webApp.service;
 
 import com.dev.webApp.domain.dto.InsertBlogPostingListDTO;
-import com.dev.webApp.domain.vo.BlogPostingVO;
-import com.dev.webApp.domain.vo.RawBlogPostingVO;
+import com.dev.webApp.domain.dto.SelectBlogPostingPaginationDTO;
+import com.dev.webApp.domain.vo.*;
 import com.dev.webApp.mapper.BlogMapper;
+import com.dev.webApp.util.page.PageHandler;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -105,14 +106,37 @@ public class BlogServiceImpl implements BlogService{
     }
 
     @Override
-    public List<BlogPostingVO> getBlogList() throws Exception {
-        return blogMapper.selectBlogPostingList();
+    public List<BlogPostingVO> getAllBlogList() {
+        return blogMapper.selectAllBlogPostingList();
+    }
+
+    @Override
+    public PaginationBlogPostingVO getBlogList(SelectBlogPostingPaginationDTO selectBlogPostingPaginationDTO) throws Exception {
+
+        Integer totalCnt = blogMapper.getTotalCnt();
+
+        PageHandler pageHandler = new PageHandler(totalCnt, selectBlogPostingPaginationDTO.getCurrentPage());
+
+        Integer offset = selectBlogPostingPaginationDTO.getCurrentPage() - 1;
+
+        selectBlogPostingPaginationDTO.setOffset(offset * selectBlogPostingPaginationDTO.getPageSize());
+
+        selectBlogPostingPaginationDTO.setPageSize(pageHandler.getNAV_SIZE());
+
+        List<BlogPostingVO> blogPostingVOList = blogMapper.selectBlogPostingList(selectBlogPostingPaginationDTO);
+
+        return PaginationBlogPostingVO.builder()
+                .pageHandler(pageHandler)
+                .blogPostingVOList(blogPostingVOList)
+                .build();
     }
 
     @Override
     public void setBlogList() throws Exception {
 
-        if(getBlogList().size() == 0) {
+        Integer totalCnt = blogMapper.getTotalCnt();
+
+        if(totalCnt == 0) {
 
             List<RawBlogPostingVO> rawBlogPostingVOList = getRawBlogPostingListByCrawling();
 
@@ -155,7 +179,7 @@ public class BlogServiceImpl implements BlogService{
 
         // todo: 아래 두개의 메소드를 비교할 때, 조회할때 포스팅이 등록된 날짜 기준으로 제대로 조회하고 있는지 확인이 필요합니다.
 
-        List<RawBlogPostingVO> rawBlogPostingVOListFromDB = getBlogList()
+        List<RawBlogPostingVO> rawBlogPostingVOListFromDB = getAllBlogList()
                 .stream()
                 .map(e -> {
 
@@ -197,7 +221,6 @@ public class BlogServiceImpl implements BlogService{
                 if(blogMapper.insertBlogPostingList(insertBlogPostingListDTO) == 0) {
                     throw new Exception();
                 }
-
 
         } else {
 

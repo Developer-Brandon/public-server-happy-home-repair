@@ -35,22 +35,6 @@
         limit #{itemCnt}
     </select>
 
-    <select id="selectRepairType"
-            parameterType="Integer"
-            resultType="com.dev.webApp.domain.vo.RepairTypeVO">
-       <![CDATA[
-        /* 단일 수리 종류 조회 쿼리 */
-        select r_type_no as repairTypeNo
-             , r_type_order as repairTypeOrder
-             , title as title
-             , explanation as explanation
-             , reg_dt as regDt
-             , mod_dt as modDt
-        from web_app_test.tb_repair_type
-        where r_type_no = #{repairTypeNo}
-        ]]>
-    </select>
-
     <select id="selectRepairLocationList"
             parameterType="com.dev.webApp.domain.dto.SelectRepairLocationDTO"
             resultType="com.dev.webApp.domain.vo.RepairLocationVO">
@@ -67,6 +51,22 @@
         <if test="itemCnt != 0">
             limit #{itemCnt}
         </if>
+    </select>
+
+    <select id="selectRepairType"
+            parameterType="Integer"
+            resultType="com.dev.webApp.domain.vo.RepairTypeVO">
+       <![CDATA[
+        /* 단일 수리 종류 조회 쿼리 */
+        select r_type_no as repairTypeNo
+             , r_type_order as repairTypeOrder
+             , title as title
+             , explanation as explanation
+             , reg_dt as regDt
+             , mod_dt as modDt
+        from web_app_test.tb_repair_type
+        where r_type_no = #{repairTypeNo}
+        ]]>
     </select>
 
     <select id="selectRepairLocation"
@@ -168,7 +168,7 @@
         parameterType="com.dev.webApp.domain.dto.SelectRepairApplyPaginationDTO"
         resultType="com.dev.webApp.domain.vo.RepairApplyVO">
     <![CDATA[
-        /* 견적 문의 리스트 조회 쿼리 */
+        /* 견적 문의 리스트 조회 쿼리(client에서 조회할 일이 없어서, pagination 워딩 넣지 않았습니다.) */
     ]]>
     select tb_r_apply.r_apply_no as repairApplyNo
             , tb_r_apply.r_type_no as repairTypeNo

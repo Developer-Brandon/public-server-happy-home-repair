@@ -31,7 +31,7 @@ public class BlogMapperTests {
 
         // 1. 조회 테스트
 
-        List<BlogPostingVO> blogPostingVOList = blogMapper.selectBlogPostingList();
+        List<BlogPostingVO> blogPostingVOList = blogMapper.selectAllBlogPostingList();
 
         assertThat(blogPostingVOList, is(notNullValue()));
         assertThat(blogPostingVOList.size(), is(greaterThan(1)));

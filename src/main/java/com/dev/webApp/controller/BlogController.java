@@ -1,8 +1,7 @@
 package com.dev.webApp.controller;
 
-import com.dev.webApp.domain.dto.SelectFaqDTO;
-import com.dev.webApp.domain.vo.BlogPostingVO;
-import com.dev.webApp.domain.vo.FaqVO;
+import com.dev.webApp.domain.dto.*;
+import com.dev.webApp.domain.vo.*;
 import com.dev.webApp.service.BlogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -10,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,17 +23,49 @@ public class BlogController {
 
     // 블로그 게시글 현황 리스트 페이지로 이동하는 api
     @GetMapping("/index")
-    public String goBlogListPage(Model model) throws Exception {
+    public String goIndexPage(
+            @RequestParam(required = false)
+                    Integer currentPage
+            , Model model
+    ) throws Exception {
 
-        // 우선은 1000개로 지정하겠습니다.
-        List<BlogPostingVO> blogList = blogService.getBlogList();
+        if(StringUtils.isEmpty(currentPage)) {
+            currentPage = 1;
+        }
 
-        model.addAttribute("blogList", blogList);
+        SelectBlogPostingPaginationDTO selectBlogPostingPaginationDTO = SelectBlogPostingPaginationDTO.builder()
+                .currentPage(currentPage)
+                .build();
+
+        PaginationBlogPostingVO paginationBlogPostingVO = blogService.getBlogList(selectBlogPostingPaginationDTO);
+
+        model.addAttribute("blogList", paginationBlogPostingVO.getBlogPostingVOList());
+
+        model.addAttribute("pageHandler", paginationBlogPostingVO.getPageHandler());
 
         return "/blog/index";
     }
 
-    // todo: 단일 조회하는 api 만들기
+    // 블로그 게시글 페이지 진입 후 추가로 paginnation 불러오는 api
+    @GetMapping("/content/list")
+    public String getBlogPostingListAtPage(
+            @RequestParam
+                    Integer currentPage
+            , Model model
+    ) throws Exception {
+
+        SelectBlogPostingPaginationDTO selectBlogPostingPaginationDTO = SelectBlogPostingPaginationDTO.builder()
+                .currentPage(currentPage)
+                .build();
+
+        PaginationBlogPostingVO paginationBlogPostingVO = blogService.getBlogList(selectBlogPostingPaginationDTO);
+
+        model.addAttribute("blogList", paginationBlogPostingVO.getBlogPostingVOList());
+
+        model.addAttribute("pageHandler", paginationBlogPostingVO.getPageHandler());
+
+        return "/blog/index";
+    }
 
     //////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -65,6 +97,7 @@ public class BlogController {
     }
 
     // 2. 데이터 베이스에 있는 포스팅 정보 리스트 불러오는 api
+    // 모든 데이터를 긁어오도록 개발하여 클라이언트단에서 pagination하는 것으로 임시 처리
     @GetMapping(
             value = "/list"
             , produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
@@ -72,8 +105,10 @@ public class BlogController {
     @ResponseBody
     public ResponseEntity<List<BlogPostingVO>> getBlogPostingList() throws Exception {
 
-        List<BlogPostingVO> blogList = blogService.getBlogList();
+        List<BlogPostingVO> allBlogList = blogService.getAllBlogList();
 
-        return new ResponseEntity<>(blogList, HttpStatus.OK);
+        return new ResponseEntity<>(allBlogList, HttpStatus.OK);
     }
+
+    // todo: 단일 조회하는 api 만들기
 }
