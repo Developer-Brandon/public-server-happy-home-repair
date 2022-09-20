@@ -44,8 +44,7 @@ public class FaqServiceTests {
     public void serviceGetFaqListTest() throws Exception {
 
         SelectFaqDTO selectFaqDTO = SelectFaqDTO.builder()
-                .manyFaqOrNot(false)
-                .faqSize(10000)
+                .faqSize(10)
                 .build();
 
         List<FaqVO> faqVOList = faqService.getFaqList(selectFaqDTO);

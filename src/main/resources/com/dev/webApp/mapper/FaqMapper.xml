@@ -51,10 +51,25 @@
              , reg_dt as regDt
              , mod_dt as modDt
         from web_app_test.tb_faq
-        <if test="manyFaqOrNot==true">
+        order by regDt desc, faqNo desc
         limit #{faqSize}
-        </if>
-        order by faq_no desc
+    </select>
+
+    <select id="selectFaqPaginationList"
+            parameterType="com.dev.webApp.domain.dto.SelectFaqPaginationDTO"
+            resultType="com.dev.webApp.domain.vo.FaqVO">
+        <![CDATA[
+        /* 전체 자주하는 질문 리스트 조회 쿼리(페이지네이션) */
+        ]]>
+        select faq_no as faqNo
+             , title as title
+             , content aS content
+             , use_yn as useYnEnum
+             , reg_dt as regDt
+             , mod_dt as modDt
+        from web_app_test.tb_faq
+        order by regDt desc, faqNo desc
+            limit #{offset}, #{pageSize}
     </select>
 
     <update id="updateFaq"

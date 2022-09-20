@@ -1,8 +1,13 @@
 package com.dev.webApp.service;
 
 import com.dev.webApp.domain.dto.SelectFaqDTO;
+import com.dev.webApp.domain.dto.SelectFaqPaginationDTO;
 import com.dev.webApp.domain.vo.FaqVO;
+import com.dev.webApp.domain.vo.NoticeVO;
+import com.dev.webApp.domain.vo.PaginationFaqVO;
+import com.dev.webApp.domain.vo.PaginationNoticeVO;
 import com.dev.webApp.mapper.FaqMapper;
+import com.dev.webApp.util.page.PageHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,6 +57,27 @@ public class FaqServiceImpl implements FaqService{
     public List<FaqVO> getFaqList(SelectFaqDTO selectFaqDTO) throws Exception{
 
         return faqMapper.selectFaqList(selectFaqDTO);
+    }
+
+    @Override
+    public PaginationFaqVO getFaqPaginationList(SelectFaqPaginationDTO selectFaqPaginationDTO) throws Exception {
+
+        Integer totalCnt = faqMapper.getTotalCnt();
+
+        PageHandler pageHandler = new PageHandler(totalCnt, selectFaqPaginationDTO.getCurrentPage());
+
+        Integer offset = selectFaqPaginationDTO.getCurrentPage() - 1;
+
+        selectFaqPaginationDTO.setOffset(offset * selectFaqPaginationDTO.getPageSize());
+
+        selectFaqPaginationDTO.setPageSize(pageHandler.getNAV_SIZE());
+
+        List<FaqVO> faqPaginationList = faqMapper.selectFaqPaginationList(selectFaqPaginationDTO);
+
+        return PaginationFaqVO.builder()
+                .faqVOList(faqPaginationList)
+                .pageHandler(pageHandler)
+                .build();
     }
 
     @Override

@@ -1,7 +1,9 @@
 package com.dev.webApp.service;
 
 import com.dev.webApp.domain.dto.SelectFaqDTO;
+import com.dev.webApp.domain.dto.SelectFaqPaginationDTO;
 import com.dev.webApp.domain.vo.FaqVO;
+import com.dev.webApp.domain.vo.PaginationFaqVO;
 
 import java.util.List;
 
@@ -20,4 +22,5 @@ public interface FaqService {
     FaqVO getFaq(FaqVO FaqVO) throws Exception;
 
     List<FaqVO> getFaqList(SelectFaqDTO selectFaqDTO) throws Exception;
+    PaginationFaqVO getFaqPaginationList(SelectFaqPaginationDTO selectFaqPaginationDTO) throws Exception;
 }

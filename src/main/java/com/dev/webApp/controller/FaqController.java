@@ -1,7 +1,9 @@
 package com.dev.webApp.controller;
 
 import com.dev.webApp.domain.dto.SelectFaqDTO;
+import com.dev.webApp.domain.dto.SelectFaqPaginationDTO;
 import com.dev.webApp.domain.vo.FaqVO;
+import com.dev.webApp.domain.vo.PaginationFaqVO;
 import com.dev.webApp.service.FaqService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -21,21 +24,55 @@ public class FaqController {
     @Autowired
     private FaqService faqService;
 
+    private void addFaqListToModel(Model model, PaginationFaqVO paginationFaqVO) {
+
+        model.addAttribute("faqList", paginationFaqVO.getFaqVOList());
+
+        model.addAttribute("pageHandler", paginationFaqVO.getPageHandler());
+    }
+
     // 자주하는질문 리스트 페이지로 이동하는 api
     @GetMapping("/index")
-    public String goFaqListPage(Model model) throws Exception {
+    public String goFaqListPage(
+            @RequestParam(required = false)
+                    Integer currentPage
+            , Model model
+    ) throws Exception {
 
-        // 우선은 1000개로 지정하겠습니다.
-        SelectFaqDTO selectFaqDTO = SelectFaqDTO.builder()
-                .manyFaqOrNot(false)
-                .faqSize(10000)
+        if(StringUtils.isEmpty(currentPage)) {
+            currentPage = 1;
+        }
+
+        SelectFaqPaginationDTO selectNoticePaginationDTO = SelectFaqPaginationDTO.builder()
+                .currentPage(currentPage)
                 .build();
 
-        List<FaqVO> faqVOList = faqService.getFaqList(selectFaqDTO);
-        model.addAttribute("faqList", faqVOList);
+        PaginationFaqVO paginationFaqVO = faqService.getFaqPaginationList(selectNoticePaginationDTO);
+
+        addFaqListToModel(model, paginationFaqVO);
 
         return "/faq/index";
     }
+
+    // 자주하는질문 페이지 진입 후 추가로 pagination 불러오는 api
+    @GetMapping("/content/list")
+    public String getFaqListAtPage(
+            @RequestParam
+                    Integer currentPage
+            , Model model
+    ) throws Exception {
+
+        SelectFaqPaginationDTO selectNoticePaginationDTO = SelectFaqPaginationDTO.builder()
+                .currentPage(currentPage)
+                .build();
+
+        PaginationFaqVO paginationFaqVO = faqService.getFaqPaginationList(selectNoticePaginationDTO);
+
+        addFaqListToModel(model, paginationFaqVO);
+
+        return "/faq/index";
+    }
+
 
     // 자주하는질문 등록하기 페이지로 이동하는 api
     @GetMapping("/register")
@@ -67,18 +104,9 @@ public class FaqController {
 
         faqService.registerFaq(faqVO);
 
-        // 우선은 1000개로 지정하겠습니다.
-        SelectFaqDTO selectFaqDTO = SelectFaqDTO.builder()
-                .manyFaqOrNot(false)
-                .faqSize(10000)
-                .build();
-
-        List<FaqVO> faqVOList = faqService.getFaqList(selectFaqDTO);
-
-        redirectAttributes.addFlashAttribute("faqList", faqVOList);
-
         // 내부적으로 response.sendRedirect를 처리해주게끔 처리합니다.
         // 데이터 등록 후 리스트 페이지로 이동하게끔 처리
+        // (현재는 그냥 첫번째 페이지로 이동하도록 설정합니다)
         return "redirect:/faq/index";
     }
 
@@ -105,18 +133,9 @@ public class FaqController {
 
         faqService.modifyFaq(faqVO);
 
-        // 우선은 1000개로 지정하겠습니다.
-        SelectFaqDTO selectFaqDTO = SelectFaqDTO.builder()
-                .manyFaqOrNot(false)
-                .faqSize(10000)
-                .build();
-
-        List<FaqVO> faqVOList = faqService.getFaqList(selectFaqDTO);
-
-        redirectAttributes.addFlashAttribute("faqList", faqVOList);
-
         // 내부적으로 response.sendRedirect를 처리해주게끔 처리합니다.
         // 데이터 등록 후 리스트 페이지로 이동하게끔 처리
+        // (현재는 그냥 첫번째 페이지로 이동하도록 설정합니다)
         return "redirect:/faq/index";
     }
 
@@ -125,37 +144,30 @@ public class FaqController {
 
         faqService.removeFaq(faqNo);
 
-        // 우선은 1000개로 지정하겠습니다.
-        SelectFaqDTO selectFaqDTO = SelectFaqDTO.builder()
-                .manyFaqOrNot(false)
-                .faqSize(10000)
-                .build();
-
-        List<FaqVO> faqVOList = faqService.getFaqList(selectFaqDTO);
-
-        redirectAttributes.addFlashAttribute("faqList", faqVOList);
-
         // 내부적으로 response.sendRedirect를 처리해주게끔 처리합니다.
         // 데이터 등록 후 리스트 페이지로 이동하게끔 처리
+        // (현재는 그냥 첫번째 페이지로 이동하도록 설정합니다)
         return "redirect:/faq/index";
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////
 
+    // 자주하는질문 리스트만 json형식으로 불러오는 api
+    @ResponseBody
     @GetMapping(
             value = "/list"
             , produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
     )
-    @ResponseBody
     public ResponseEntity<List<FaqVO>> getFaqList(
             @RequestParam
-                    Boolean manyFaqOrNot
-            , @RequestParam
                     Integer faqSize
     ) throws Exception {
 
+        if(StringUtils.isEmpty(faqSize)) {
+            faqSize = 10;
+        }
+
         SelectFaqDTO selectFaqDTO = SelectFaqDTO.builder()
-                .manyFaqOrNot(manyFaqOrNot)
                 .faqSize(faqSize)
                 .build();
 
@@ -164,11 +176,12 @@ public class FaqController {
         return new ResponseEntity<>(faqVOList, HttpStatus.OK);
     }
 
+    // 단일 자주하는질문만 json형식으로 불러오는 api
+    @ResponseBody
     @GetMapping(
             value=""
             ,produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
     )
-    @ResponseBody
     public ResponseEntity<FaqVO> getFaq(
             @RequestParam
                     Long faqNo
@@ -183,11 +196,12 @@ public class FaqController {
         return new ResponseEntity<>(faqVO, HttpStatus.OK);
     }
 
+    // 단일 자주하는질문만 삽입하는 api
+    @ResponseBody
     @PostMapping(
             value=""
             ,produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
     )
-    @ResponseBody
     public ResponseEntity<Long> insertFaq(
             @RequestBody
             FaqVO faqVO
@@ -198,11 +212,12 @@ public class FaqController {
         return new ResponseEntity<>(faqNo, HttpStatus.OK);
     }
 
+    // 단일 자주하는질문만 수정하는 api
+    @ResponseBody
     @PutMapping(
             value=""
             ,produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
     )
-    @ResponseBody
     public ResponseEntity updateFaq(
             @RequestBody
                     FaqVO faqVO
@@ -213,11 +228,12 @@ public class FaqController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    // 단일 자주하는질문만 상태만 수정하는 api
+    @ResponseBody
     @PutMapping(
             value="/state"
             ,produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
     )
-    @ResponseBody
     public ResponseEntity updateFaqState(
             @RequestBody
                     FaqVO faqVO
@@ -228,11 +244,12 @@ public class FaqController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    // 단일 자주하는질문만 삭제하는 api
+    @ResponseBody
     @DeleteMapping(
             value=""
             ,produces = { MediaType.APPLICATION_JSON_UTF8_VALUE }
     )
-    @ResponseBody
     public ResponseEntity deleteFaq(
             @RequestParam
                     Long faqNo

@@ -34,7 +34,7 @@ public class FaqMapperTests {
     public void getFaqList() {
 
         SelectFaqDTO selectFaqDTO = SelectFaqDTO.builder()
-                .manyFaqOrNot(false)
+                .faqSize(10)
                 .build();
 
         faqMapper.selectFaqList(selectFaqDTO)
