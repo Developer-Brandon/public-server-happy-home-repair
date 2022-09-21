@@ -165,20 +165,40 @@ public class NoticeController {
     )
     public ResponseEntity<List<NoticeVO>> getNoticeList(
             @RequestParam(required = false)
+            Integer currentPage,
+            @RequestParam(required = false)
             Integer noticeSize
     ) throws Exception {
+
+        if(StringUtils.isEmpty(currentPage)) {
+            currentPage = 1;
+        }
 
         if(StringUtils.isEmpty(noticeSize)) {
             noticeSize = 10;
         }
 
         SelectNoticeDTO selectNoticeDTO = SelectNoticeDTO.builder()
+                .currentPage(currentPage)
                 .noticeSize(noticeSize)
                 .build();
 
         List<NoticeVO> noticeVOList = noticeService.getNoticeList(selectNoticeDTO);
 
         return new ResponseEntity<>(noticeVOList, HttpStatus.OK);
+    }
+
+    // 공지사항의 개수를 불러오는 api
+    @ResponseBody
+    @GetMapping(
+            value = "/count"
+            , produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}
+    )
+    public ResponseEntity<Integer> getNoticeList() throws Exception {
+
+        Integer wholeNoticeCount = noticeService.getTotalCnt();
+
+        return new ResponseEntity<>(wholeNoticeCount, HttpStatus.OK);
     }
 
     // 단일 공지사항만 json형식으로 불러오는 api
@@ -202,6 +222,7 @@ public class NoticeController {
     }
 
     // 단일 공지사항만 삽입하는 api
+    // (admin에서만 필요할법한 기능이지만 혹시 몰라서 추가 개발)
     @ResponseBody
     @PostMapping(
             value = ""
@@ -218,6 +239,7 @@ public class NoticeController {
     }
 
     // 단일 공지사항만 수정하는 api
+    // (admin에서만 필요할법한 기능이지만 혹시 몰라서 추가 개발)
     @ResponseBody
     @PutMapping(
             value = ""
@@ -234,6 +256,7 @@ public class NoticeController {
     }
 
     // 단일 공지사항 상태만 수정하는 api
+    // (admin에서만 필요할법한 기능이지만 혹시 몰라서 추가 개발)
     @ResponseBody
     @PutMapping(
             value = "/state"
@@ -250,6 +273,7 @@ public class NoticeController {
     }
 
     // 단일 공지사항만 삭제하는 api
+    // (admin에서만 필요할법한 기능이지만 혹시 몰라서 추가 개발)
     @ResponseBody
     @DeleteMapping(
             value = ""

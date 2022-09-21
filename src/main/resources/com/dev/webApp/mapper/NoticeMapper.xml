@@ -51,7 +51,7 @@
              , mod_dt as modDt
         from web_app_test.tb_notice
         order by regDt desc, noticeNo desc
-        limit #{noticeSize}
+        limit #{offset}, #{noticeSize}
     </select>
 
     <select id="selectNoticePaginationList"

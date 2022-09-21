@@ -8,5 +8,7 @@ import lombok.Data;
 @Builder
 @AllArgsConstructor
 public class SelectNoticeDTO {
+    Integer offset;
+    Integer currentPage;
     Integer noticeSize;
 }

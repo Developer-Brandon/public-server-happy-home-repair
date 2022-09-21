@@ -55,6 +55,10 @@ public class NoticeServiceImpl implements NoticeService{
     @Override
     public List<NoticeVO> getNoticeList(SelectNoticeDTO selectNoticeDTO) throws Exception{
 
+        // 아래의 pageHandler와는 다르게, 현재의 페이지만을 넘겨서 offset만 계산해주면 된다.
+
+        selectNoticeDTO.setOffset((selectNoticeDTO.getCurrentPage() - 1) * 10);
+
         return noticeMapper.selectNoticeList(selectNoticeDTO);
     }
 
