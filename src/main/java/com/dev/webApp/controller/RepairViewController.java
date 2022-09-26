@@ -1,5 +1,6 @@
 package com.dev.webApp.controller;
 
+import com.dev.webApp.config.BaseConfigController;
 import com.dev.webApp.domain.dto.*;
 import com.dev.webApp.domain.vo.*;
 import com.dev.webApp.service.RepairService;
@@ -15,7 +16,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/repair")
-public class RepairViewController extends BaseController{
+public class RepairViewController extends BaseConfigController {
 
     private final RepairService repairService;
 

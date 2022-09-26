@@ -1,5 +1,6 @@
 package com.dev.webApp.controller;
 
+import com.dev.webApp.config.BaseConfigController;
 import com.dev.webApp.domain.dto.SelectFaqPaginationDTO;
 import com.dev.webApp.domain.vo.FaqVO;
 import com.dev.webApp.domain.vo.PaginationFaqVO;
@@ -14,7 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/faq")
-public class FaqViewController extends BaseController{
+public class FaqViewController extends BaseConfigController {
 
     private final FaqService faqService;
 

@@ -50,5 +50,5 @@ public class BlogViewController {
         return new ResponseEntity<>(allBlogList, HttpStatus.OK);
     }
 
-    // todo: 단일 조회하는 api 만들기
+    // 3. 단일 조회할 일이 없어서, 추후 필요한 일이 생기면 만드는 것으로.....
 }

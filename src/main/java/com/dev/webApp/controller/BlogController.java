@@ -1,5 +1,6 @@
 package com.dev.webApp.controller;
 
+import com.dev.webApp.config.BaseConfigController;
 import com.dev.webApp.domain.dto.*;
 import com.dev.webApp.domain.vo.*;
 import com.dev.webApp.service.BlogService;
@@ -17,7 +18,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/blog")
-public class BlogController {
+public class BlogController extends BaseConfigController {
 
     private final BlogService blogService;
 

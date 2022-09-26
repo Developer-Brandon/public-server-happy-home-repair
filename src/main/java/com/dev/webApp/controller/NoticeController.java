@@ -1,5 +1,6 @@
 package com.dev.webApp.controller;
 
+import com.dev.webApp.config.BaseConfigController;
 import com.dev.webApp.domain.dto.SelectNoticePaginationDTO;
 import com.dev.webApp.domain.vo.NoticeVO;
 import com.dev.webApp.service.NoticeService;
@@ -15,7 +16,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/notice")
-public class NoticeController extends BaseController{
+public class NoticeController extends BaseConfigController {
 
     private final NoticeService noticeService;
 

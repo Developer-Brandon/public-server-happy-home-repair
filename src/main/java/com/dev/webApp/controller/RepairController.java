@@ -1,14 +1,12 @@
 package com.dev.webApp.controller;
 
+import com.dev.webApp.config.BaseConfigController;
 import com.dev.webApp.domain.dto.*;
 import com.dev.webApp.domain.vo.*;
 import com.dev.webApp.service.RepairService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +16,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/repair")
-public class RepairController extends BaseController{
+public class RepairController extends BaseConfigController {
 
     private final RepairService repairService;
 

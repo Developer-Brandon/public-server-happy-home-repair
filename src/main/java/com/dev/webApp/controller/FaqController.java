@@ -1,5 +1,6 @@
 package com.dev.webApp.controller;
 
+import com.dev.webApp.config.BaseConfigController;
 import com.dev.webApp.domain.dto.SelectFaqPaginationDTO;
 import com.dev.webApp.domain.vo.FaqVO;
 import com.dev.webApp.service.FaqService;
@@ -14,7 +15,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/faq")
-public class FaqController extends BaseController{
+public class FaqController extends BaseConfigController {
 
     private final FaqService faqService;
 
