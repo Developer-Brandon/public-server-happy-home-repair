@@ -17,7 +17,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
-@Controller // JSP로 이동하려면 json을 반환하는 RestController가 아닌, 그냥 controller를 사용해야 합니다
+// JSP로 이동하려면 json을 반환하는 RestController가 아닌, 그냥 controller를 사용해야 합니다
+@Controller
 @RequiredArgsConstructor
 @RequestMapping("/notice")
 public class NoticeController {
@@ -37,12 +38,9 @@ public class NoticeController {
     @GetMapping("/index")
     public String goNoticeIndexPage(
             @RequestParam(required = false)
-                    Integer currentPage
+            Integer currentPage
             , Model model
     ) throws Exception {
-
-        // requestParam empty값 예외처리
-        // https://big-brown-bear93.tistory.com/37
 
         if(StringUtils.isEmpty(currentPage)) {
             currentPage = 1;
