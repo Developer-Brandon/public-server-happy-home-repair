@@ -51,6 +51,18 @@ public class BlogControllerTest extends TestCase {
     }
 
     @Test
+    public void insertBulkDataToDB() throws Exception {
+
+        //
+        mockMvc.perform(
+                get("/blog/list/bulk")
+        )
+                .andExpect(status().is(200))
+                .andDo(print())
+                .andReturn();
+    }
+
+    @Test
     public void updateDifferentBlogListToDB() throws Exception {
 
         //
@@ -61,9 +73,4 @@ public class BlogControllerTest extends TestCase {
                 .andDo(print())
                 .andReturn();
     }
-
-    // todo: bulk 메소드도 추가 작성 예정
-    // todo: bulk 메소드 만들때, 데이터 싹 밀어버리고 추가하도록 개발
-    // todo: 정말 싹 밀어버려도 괜찮을지 생각해봐야하는게, 크롤링으로 부분부분 데이터만 불러오기 때문에
-    // 고민이 필요
 }

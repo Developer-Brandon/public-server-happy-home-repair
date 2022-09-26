@@ -12,6 +12,14 @@
         from web_app_test.tb_blog_posting_info as tb_posting_info
     </select>
 
+    <delete id="deleteAll">
+        <![CDATA[
+        /* 디비에 쌓여있는 정체 포스팅 삭제 쿼리 */
+        ]]>
+        delete
+        from web_app_test.tb_blog_posting_info
+    </delete>
+
     <select id="selectAllBlogPostingList"
             parameterType="com.dev.webApp.domain.dto.SelectBlogPostingPaginationDTO"
             resultType="com.dev.webApp.domain.vo.BlogPostingVO">
@@ -24,6 +32,7 @@
              , posted_reg_dt as postingRegDt
              , reg_dt as regDt
         from web_app_test.tb_blog_posting_info
+        order by postingRegDt desc
     </select>
 
     <select id="selectBlogPostingList"
