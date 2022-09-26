@@ -16,8 +16,6 @@ import static org.junit.Assert.assertNotNull;
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 public class NoticeServiceTests {
 
-    // TODO: notice 서비스쪽부터 로직 추가 예정
-
     @Autowired
     private NoticeService noticeService;
 
@@ -44,7 +42,7 @@ public class NoticeServiceTests {
     public void serviceGetNoticeListTest() throws Exception {
 
         SelectNoticeDTO selectNoticeDTO = SelectNoticeDTO.builder()
-                .noticeSize(10)
+                .currentPage(1)
                 .build();
 
         List<NoticeVO> noticeVOList = noticeService.getNoticeList(selectNoticeDTO);
