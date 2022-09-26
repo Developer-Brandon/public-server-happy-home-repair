@@ -11,6 +11,8 @@ public interface BlogMapper {
 
     int getTotalCnt();
 
+    int deleteAll();
+
     List<BlogPostingVO> selectAllBlogPostingList();
 
     List<BlogPostingVO> selectBlogPostingList(SelectBlogPostingPaginationDTO selectRepairApplyPaginationDTO);
