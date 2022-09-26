@@ -4,20 +4,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dev.webApp.mapper.RepairMapper">
 
-    <select id="getTotalCnt" resultType="Integer">
-        <![CDATA[
-            /* 전체 견적문의의 개수를 조회하는 쿼리 */
-        ]]>
-        select count(*)
-        from web_app_test.tb_repair_apply as tb_r_apply
-                 inner join web_app_test.tb_repair_type as tb_r_type
-                            on tb_r_apply.r_type_no = tb_r_type.r_type_no
-                 inner join web_app_test.tb_repair_state as tb_r_state
-                            on tb_r_apply.r_state_no = tb_r_state.r_state_no
-                 inner join web_app_test.tb_repair_location as tb_r_location
-                            on tb_r_apply.r_location_no = tb_r_location.r_location_no
-    </select>
-
     <select id="selectRepairTypeList"
             parameterType="com.dev.webApp.domain.dto.SelectRepairTypeDTO"
             resultType="com.dev.webApp.domain.vo.RepairTypeVO">
@@ -31,26 +17,8 @@
             , reg_dt as regDt
             , mod_dt as modDt
         from web_app_test.tb_repair_type
-        order by r_type_no desc
+        order by regDt desc
         limit #{itemCnt}
-    </select>
-
-    <select id="selectRepairLocationList"
-            parameterType="com.dev.webApp.domain.dto.SelectRepairLocationDTO"
-            resultType="com.dev.webApp.domain.vo.RepairLocationVO">
-        <![CDATA[
-            /* 전체 수리 지역 리스트 조회 쿼리 */
-        ]]>
-        select r_location_no as repairLocationNo
-        , r_location_order as repairLocationOrder
-        , name as name
-        , reg_dt as regDt
-        , mod_dt as modDt
-        from web_app_test.tb_repair_location
-        order by r_location_no desc
-        <if test="itemCnt != 0">
-            limit #{itemCnt}
-        </if>
     </select>
 
     <select id="selectRepairType"
@@ -67,6 +35,24 @@
         from web_app_test.tb_repair_type
         where r_type_no = #{repairTypeNo}
         ]]>
+    </select>
+
+    <select id="selectRepairLocationList"
+            parameterType="com.dev.webApp.domain.dto.SelectRepairLocationDTO"
+            resultType="com.dev.webApp.domain.vo.RepairLocationVO">
+        <![CDATA[
+            /* 전체 수리 지역 리스트 조회 쿼리 */
+        ]]>
+        select r_location_no as repairLocationNo
+        , r_location_order as repairLocationOrder
+        , name as name
+        , reg_dt as regDt
+        , mod_dt as modDt
+        from web_app_test.tb_repair_location
+        order by regDt desc
+        <if test="itemCnt != 0">
+            limit #{itemCnt}
+        </if>
     </select>
 
     <select id="selectRepairLocation"
@@ -96,7 +82,7 @@
         , reg_dt as regDt
         , mod_dt as modDt
         from web_app_test.tb_repair_state
-        order by r_state_no desc
+        order by regDt desc
         <if test="itemCnt != 0">
             limit #{itemCnt}
         </if>
@@ -168,7 +154,8 @@
         parameterType="com.dev.webApp.domain.dto.SelectRepairApplyPaginationDTO"
         resultType="com.dev.webApp.domain.vo.RepairApplyVO">
     <![CDATA[
-        /* 견적 문의 리스트 조회 쿼리(client에서 조회할 일이 없어서, pagination 워딩 넣지 않았습니다.) */
+        /* 견적 문의 리스트 조회 쿼리
+           (client에서 조회할 일이 없어서, pagination 워딩 넣지 않았습니다.) */
     ]]>
     select tb_r_apply.r_apply_no as repairApplyNo
             , tb_r_apply.r_type_no as repairTypeNo
@@ -215,4 +202,19 @@
     where r_apply_no = #{repairApplyNo}
     ]]>
     </delete>
+
+
+    <select id="getTotalCnt" resultType="Integer">
+        <![CDATA[
+        /* 전체 견적문의의 개수를 조회하는 쿼리 */
+        ]]>
+        select count(*)
+        from web_app_test.tb_repair_apply as tb_r_apply
+             inner join web_app_test.tb_repair_type as tb_r_type
+                        on tb_r_apply.r_type_no = tb_r_type.r_type_no
+             inner join web_app_test.tb_repair_state as tb_r_state
+                        on tb_r_apply.r_state_no = tb_r_state.r_state_no
+             inner join web_app_test.tb_repair_location as tb_r_location
+                        on tb_r_apply.r_location_no = tb_r_location.r_location_no
+    </select>
 </mapper>

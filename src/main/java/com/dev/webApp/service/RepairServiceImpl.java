@@ -19,43 +19,48 @@ public class RepairServiceImpl implements RepairService{
 
     @Override
     public List<RepairTypeVO> getRepairTypeList(SelectRepairTypeDTO selectRepairTypeDTO) {
+
         return repairMapper.selectRepairTypeList(selectRepairTypeDTO);
     }
 
     @Override
     public RepairTypeVO getRepairType(Integer repairTypeNo) {
+
         return repairMapper.selectRepairType(repairTypeNo);
     }
 
     @Override
     public List<RepairLocationVO> getRepairLocationList(SelectRepairLocationDTO selectRepairLocationDTO) {
+
         return repairMapper.selectRepairLocationList(selectRepairLocationDTO);
     }
 
     @Override
     public RepairLocationVO getRepairLocation(Integer repairLocationNo) {
+
         return repairMapper.selectRepairLocation(repairLocationNo);
     }
 
     @Override
     public List<RepairStateVO> getRepairStateList(SelectRepairStateDTO selectRepairStateDTO) {
+
         return repairMapper.selectRepairStateList(selectRepairStateDTO);
     }
 
     @Override
     public RepairStateVO getRepairState(Integer repairStateNo) {
+
         return repairMapper.selectRepairState(repairStateNo);
     }
-
 
     @Override
     public PaginationRepairApplyVO getRepairApplyList(SelectRepairApplyPaginationDTO selectRepairApplyPaginationDTO) throws Exception {
 
-        Integer totalCnt = repairMapper.getTotalCnt();
+        int totalCnt = repairMapper.getTotalCnt();
 
         PageHandler pageHandler = new PageHandler(totalCnt, selectRepairApplyPaginationDTO.getCurrentPage());
 
-        Integer offset = selectRepairApplyPaginationDTO.getCurrentPage() - 1;
+        int offset = selectRepairApplyPaginationDTO.getCurrentPage() - 1;
 
         selectRepairApplyPaginationDTO.setOffset(offset * selectRepairApplyPaginationDTO.getPageSize());
 
@@ -67,6 +72,12 @@ public class RepairServiceImpl implements RepairService{
                 .pageHandler(pageHandler)
                 .repairApplyVOList(repairApplyVOList)
                 .build();
+    }
+
+    @Override
+    public RepairApplyVO getRepairApply(Integer repairApplyNo) throws Exception {
+
+        return repairMapper.selectRepairApply(repairApplyNo);
     }
 
     @Override
@@ -93,11 +104,5 @@ public class RepairServiceImpl implements RepairService{
         if(repairMapper.deleteRepairApply(repairApplyNo) != 1) {
             throw new Exception();
         }
-    }
-
-    @Override
-    public RepairApplyVO getRepairApply(Integer repairApplyNo) throws Exception {
-
-        return repairMapper.selectRepairApply(repairApplyNo);
     }
 }

@@ -84,6 +84,7 @@ public class RepairApplyMapperTests {
 
         SelectRepairApplyPaginationDTO selectRepairApplyPaginationDTO = SelectRepairApplyPaginationDTO.builder()
                 .currentPage(1)
+                .offset(1) // service 단에서 처리해주어야할 처리......
                 .build();
 
         List<RepairApplyVO> selectRepairTypeList = repairMapper.selectRepairApplyList(selectRepairApplyPaginationDTO);

@@ -1,7 +1,6 @@
 package com.dev.webApp.mapper.faq;
 
 import com.dev.webApp.domain.dto.SelectFaqPaginationDTO;
-import com.dev.webApp.domain.dto.SelectNoticePaginationDTO;
 import com.dev.webApp.domain.vo.FaqVO;
 import com.dev.webApp.mapper.FaqMapper;
 import com.dev.webApp.util.FaqUseYnEnum;

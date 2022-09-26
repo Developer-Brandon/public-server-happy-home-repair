@@ -23,8 +23,8 @@ public class NoticeController extends BaseController{
     @GetMapping(value = "/list")
     public ResponseEntity<List<NoticeVO>> getNoticeList(
             @RequestParam(required = false)
-            Integer currentPage,
-            @RequestParam(required = false)
+            Integer currentPage
+            , @RequestParam(required = false)
             Integer pageSize
     ) throws Exception {
 
