@@ -14,6 +14,7 @@ import java.sql.Timestamp;
 public class RepairLocationVO {
     Integer repairLocationNo;
     Integer repairLocationOrder;
+    String explanation;
     String name;
     Timestamp regDt;
     Timestamp modDt;

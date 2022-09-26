@@ -27,7 +27,7 @@
                     <div class="panel-body">
                         <c:forEach items="${repairTypeList}" var="repairType">
                         <ul>
-                            <li><c:out value="${repairType.repairTypeNo}"/> - <c:out value="${repairType.title}"/></li>
+                            <li><c:out value="${repairType.repairTypeNo}"/> / <c:out value="${repairType.title}"/> / <c:out value="${repairType.explanation}"/></li>
                         </ul>
                     </c:forEach>
                     </div>
@@ -41,7 +41,7 @@
                     <div class="panel-body">
                         <c:forEach items="${repairLocationList}" var="repairLocation">
                             <ul>
-                                <li><c:out value="${repairLocation.repairLocationNo}"/> - <c:out value="${repairLocation.name}"/></li>
+                                <li><c:out value="${repairLocation.repairLocationNo}"/> / <c:out value="${repairLocation.name}"/> / <c:out value="${repairLocation.explanation}"/></li>
                             </ul>
                         </c:forEach>
                     </div>
@@ -55,7 +55,7 @@
                     <div class="panel-body">
                         <c:forEach items="${repairStateList}" var="repairState">
                             <ul>
-                                <li><c:out value="${repairState.repairStateNo}"/> - <c:out value="${repairState.name}"/></li>
+                                <li><c:out value="${repairState.repairStateNo}"/> / <c:out value="${repairState.name}"/> / <c:out value="${repairState.explanation}"/></li>
                             </ul>
                         </c:forEach>
                     </div>

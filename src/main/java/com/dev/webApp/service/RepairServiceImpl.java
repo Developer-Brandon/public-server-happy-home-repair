@@ -20,6 +20,8 @@ public class RepairServiceImpl implements RepairService{
     @Override
     public List<RepairTypeVO> getRepairTypeList(SelectRepairTypeDTO selectRepairTypeDTO) {
 
+
+
         return repairMapper.selectRepairTypeList(selectRepairTypeDTO);
     }
 
