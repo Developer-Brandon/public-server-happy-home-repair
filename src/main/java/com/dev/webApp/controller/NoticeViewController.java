@@ -71,7 +71,7 @@ public class NoticeViewController extends BaseController{
     }
 
     // 공지사항 상세 조회 페이지로 이동하는 api
-    @GetMapping("/content")
+    @GetMapping(value ="/content", produces = TEXT_HTML_FORMAT)
     public String goNoticePage(
             @RequestParam
                     String noticeNo

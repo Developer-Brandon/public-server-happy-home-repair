@@ -1,6 +1,7 @@
 package com.dev.webApp.mapper.faq;
 
-import com.dev.webApp.domain.dto.SelectFaqDTO;
+import com.dev.webApp.domain.dto.SelectFaqPaginationDTO;
+import com.dev.webApp.domain.dto.SelectNoticePaginationDTO;
 import com.dev.webApp.domain.vo.FaqVO;
 import com.dev.webApp.mapper.FaqMapper;
 import com.dev.webApp.util.FaqUseYnEnum;
@@ -33,11 +34,12 @@ public class FaqMapperTests {
     @Test
     public void getFaqList() {
 
-        SelectFaqDTO selectFaqDTO = SelectFaqDTO.builder()
-                .faqSize(10)
+        SelectFaqPaginationDTO selectFaqPaginationDTO = SelectFaqPaginationDTO.builder()
+                .currentPage(1)
+                .offset(1) // service단에서 처리해주는 처리를 대신...
                 .build();
 
-        faqMapper.selectFaqList(selectFaqDTO)
+        faqMapper.selectFaqPaginationList(selectFaqPaginationDTO)
                 .forEach(faq -> System.out.println(faq.getTitle()));
     }
 
@@ -53,13 +55,13 @@ public class FaqMapperTests {
         Boolean insertedOrNot = faqMapper.insertFaq(faqVO) == 1;
 
         assertThat(insertedOrNot, is(true));
-        assertThat(faqVO.getFaqNo(), is(greaterThan(1L)));
+        assertThat(faqVO.getFaqNo(), is(greaterThan(1)));
 
         ///////////////////////////////////////////////////////////
 
         // 2. 삽입된 데이터로 조회
 
-        Long faqNo = faqVO.getFaqNo();
+        Integer faqNo = faqVO.getFaqNo();
 
         FaqVO faqVO2 = faqMapper.selectFaq(faqNo);
 
@@ -78,7 +80,7 @@ public class FaqMapperTests {
         Boolean insertedOrNot = faqMapper.insertFaq(faqVO) == 1;
 
         assertThat(insertedOrNot, is(true));
-        assertThat(faqVO.getFaqNo(), is(greaterThan(1L)));
+        assertThat(faqVO.getFaqNo(), is(greaterThan(1)));
     }
 
     @Test
@@ -93,13 +95,13 @@ public class FaqMapperTests {
         Boolean insertedOrNot = faqMapper.insertFaq(faqVO) == 1;
 
         assertThat(insertedOrNot, is(true));
-        assertThat(faqVO.getFaqNo(), is(greaterThan(1L)));
+        assertThat(faqVO.getFaqNo(), is(greaterThan(1)));
 
         ///////////////////////////////////////////////////////////
 
         // 2. 삽입된 데이터로 조회
 
-        Long faqNo = faqVO.getFaqNo();
+        Integer faqNo = faqVO.getFaqNo();
 
         FaqVO faqVO2 = faqMapper.selectFaq(faqNo);
 
@@ -142,13 +144,13 @@ public class FaqMapperTests {
         Boolean insertedOrNot = faqMapper.insertFaq(faqVO) == 1;
 
         assertThat(insertedOrNot, is(true));
-        assertThat(faqVO.getFaqNo(), is(greaterThan(1L)));
+        assertThat(faqVO.getFaqNo(), is(greaterThan(1)));
 
         ///////////////////////////////////////////////////////////
 
         // 2. 삽입된 데이터로 조회
 
-        Long faqNo = faqVO.getFaqNo();
+        Integer faqNo = faqVO.getFaqNo();
 
         FaqVO faqVO2 = faqMapper.selectFaq(faqNo);
 

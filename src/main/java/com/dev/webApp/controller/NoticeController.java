@@ -34,6 +34,7 @@ public class NoticeController extends BaseController{
 
         SelectNoticePaginationDTO selectNoticePaginationDTO = SelectNoticePaginationDTO.builder()
                 .currentPage(currentPage)
+                .pageSize(pageSize)
                 .build();
 
         List<NoticeVO> noticeVOList = noticeService
@@ -45,7 +46,7 @@ public class NoticeController extends BaseController{
 
     // 공지사항의 개수를 불러오는 api
     @GetMapping(value = "/count")
-    public ResponseEntity<Integer> getNoticeList() throws Exception {
+    public ResponseEntity<Integer> getWholeNoticeCount() throws Exception {
 
         Integer wholeNoticeCount = noticeService.getTotalCnt();
 
@@ -56,7 +57,7 @@ public class NoticeController extends BaseController{
     @GetMapping(value = "")
     public ResponseEntity<NoticeVO> getNotice(
             @RequestParam
-                    Integer noticeNo
+            Integer noticeNo
     ) throws Exception {
 
         NoticeVO requestNoticeVO = NoticeVO.builder()
@@ -73,7 +74,7 @@ public class NoticeController extends BaseController{
     @PostMapping(value = "")
     public ResponseEntity<Long> insertNotice(
             @RequestBody
-                    NoticeVO noticeVO
+            NoticeVO noticeVO
     ) throws Exception {
 
         Integer noticeNo = noticeService.registerNotice(noticeVO);
@@ -86,7 +87,7 @@ public class NoticeController extends BaseController{
     @PutMapping(value = "")
     public ResponseEntity updateNotice(
             @RequestBody
-                    NoticeVO noticeVO
+            NoticeVO noticeVO
     ) throws Exception {
 
         noticeService.modifyNotice(noticeVO);

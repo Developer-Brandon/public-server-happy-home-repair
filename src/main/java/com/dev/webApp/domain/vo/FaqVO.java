@@ -15,7 +15,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class FaqVO {
 
-    Long faqNo;
+    Integer faqNo;
 
     String title;
 

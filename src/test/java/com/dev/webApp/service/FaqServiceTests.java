@@ -1,6 +1,6 @@
 package com.dev.webApp.service;
 
-import com.dev.webApp.domain.dto.SelectFaqDTO;
+import com.dev.webApp.domain.dto.SelectFaqPaginationDTO;
 import com.dev.webApp.domain.vo.FaqVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,7 +35,7 @@ public class FaqServiceTests {
                 .content("새로 작성하는 내용")
                 .build();
 
-        Long registerSuccessorNot = faqService.registerFaq(faqVO);
+        Integer registerSuccessorNot = faqService.registerFaq(faqVO);
 
         assertNotNull(registerSuccessorNot);
     }
@@ -43,11 +43,13 @@ public class FaqServiceTests {
     @Test
     public void serviceGetFaqListTest() throws Exception {
 
-        SelectFaqDTO selectFaqDTO = SelectFaqDTO.builder()
-                .faqSize(10)
+        SelectFaqPaginationDTO selectFaqDTO = SelectFaqPaginationDTO.builder()
+                .currentPage(10)
                 .build();
 
-        List<FaqVO> faqVOList = faqService.getFaqList(selectFaqDTO);
+        List<FaqVO> faqVOList = faqService
+                .getFaqPaginationList(selectFaqDTO)
+                .getFaqVOList();
 
         faqVOList.stream().forEach(System.out::println);
 
