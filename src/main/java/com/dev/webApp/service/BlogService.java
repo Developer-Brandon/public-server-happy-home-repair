@@ -11,5 +11,5 @@ public interface BlogService {
     List<BlogPostingVO> getAllBlogList();
     PaginationBlogPostingVO getBlogList(SelectBlogPostingPaginationDTO selectBlogPostingPaginationDTO) throws Exception;
     void setBlogList() throws Exception;
-    void setDifferentBlogList() throws Exception;
+    void setOnlyDifferentBlogList() throws Exception;
 }

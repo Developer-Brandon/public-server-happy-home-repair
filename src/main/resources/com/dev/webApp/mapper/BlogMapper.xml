@@ -23,7 +23,7 @@
              , img_src as imgSrc
              , posted_reg_dt as postingRegDt
              , reg_dt as regDt
-        from web_app_test.tb_blog_posting_info as tb_posting_info
+        from web_app_test.tb_blog_posting_info
     </select>
 
     <select id="selectBlogPostingList"

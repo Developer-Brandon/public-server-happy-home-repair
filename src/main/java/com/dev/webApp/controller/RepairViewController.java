@@ -37,7 +37,7 @@ public class RepairViewController extends BaseController{
     }
 
     // 수리 신청 현황 메인 페이지로 이동하는 api
-    @GetMapping("/index")
+    @GetMapping(value = "/index", produces = TEXT_HTML_FORMAT)
     public String goIndexPage(
             @RequestParam(required = false)
             Integer currentPage
@@ -64,7 +64,7 @@ public class RepairViewController extends BaseController{
     }
 
     // 수리 신청 현황 페이지 진입 후 추가로 pagination 불러오는 api
-    @GetMapping("/content/list")
+    @GetMapping(value = "/content/list", produces = TEXT_HTML_FORMAT)
     public String getRepairApplyListAtPage(
             @RequestParam
                 Integer currentPage

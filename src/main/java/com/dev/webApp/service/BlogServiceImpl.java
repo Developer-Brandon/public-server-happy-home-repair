@@ -175,7 +175,7 @@ public class BlogServiceImpl implements BlogService{
     }
 
     @Override
-    public void setDifferentBlogList() throws Exception {
+    public void setOnlyDifferentBlogList() throws Exception {
 
         // todo: 아래 두개의 메소드를 비교할 때, 조회할때 포스팅이 등록된 날짜 기준으로 제대로 조회하고 있는지 확인이 필요합니다.
 
