@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 public class NoticeVO {
 
-    Long noticeNo;
+    Integer noticeNo;
 
     String title;
 

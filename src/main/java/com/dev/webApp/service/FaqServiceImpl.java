@@ -70,7 +70,7 @@ public class FaqServiceImpl implements FaqService{
 
         selectFaqPaginationDTO.setOffset(offset * selectFaqPaginationDTO.getPageSize());
 
-        selectFaqPaginationDTO.setPageSize(pageHandler.getNAV_SIZE());
+        selectFaqPaginationDTO.setPageSize(selectFaqPaginationDTO.getPageSize());
 
         List<FaqVO> faqPaginationList = faqMapper.selectFaqPaginationList(selectFaqPaginationDTO);
 

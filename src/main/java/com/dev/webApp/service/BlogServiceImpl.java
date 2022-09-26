@@ -121,7 +121,7 @@ public class BlogServiceImpl implements BlogService{
 
         selectBlogPostingPaginationDTO.setOffset(offset * selectBlogPostingPaginationDTO.getPageSize());
 
-        selectBlogPostingPaginationDTO.setPageSize(pageHandler.getNAV_SIZE());
+        selectBlogPostingPaginationDTO.setPageSize(selectBlogPostingPaginationDTO.getPageSize());
 
         List<BlogPostingVO> blogPostingVOList = blogMapper.selectBlogPostingList(selectBlogPostingPaginationDTO);
 

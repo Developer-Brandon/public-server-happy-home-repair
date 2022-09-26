@@ -6,8 +6,9 @@ public class PageHandler {
 
     private SearchCondition sc;
 
-    // 하나의 네비게이션의 사이즈e
-    public final int NAV_SIZE = 10;
+    // 하나의 네비게이션의 사이즈
+    // client에서 요청하는 page size와 동일
+    public final int PAGE_SIZE = 10;
 
     // 화면에 보여줄(Navigation의) 첫 페이지
     private int beginPage;
@@ -65,12 +66,12 @@ public class PageHandler {
         // 현재의 페이지가 23이면, beginPage는 21
 
         // 나누기 10을하고, 곱하기 10을 하면 1의자리수가 날아갑니다.
-        beginPage = (sc.getPage() - 1) / NAV_SIZE * NAV_SIZE + 1;
+        beginPage = (sc.getPage() - 1) / PAGE_SIZE * PAGE_SIZE + 1;
 
         // [endPage를 구하는 식]
         // 가장 마지막 페이지를 구할 때에, 지금 현재 페이지의 beginPage에서 보여주고자 하는 navSize를 더해서 endPage를 구합니다.
         // 단, totalPage 보다 크면안되니까, 둘중 비교해서 작은값으로 endPage를 setting 해줍니다.
-        endPage = Math.min(beginPage + NAV_SIZE - 1, totalPage);
+        endPage = Math.min(beginPage + PAGE_SIZE - 1, totalPage);
 
         showPrev = beginPage != 1;
 
@@ -129,8 +130,8 @@ public class PageHandler {
         this.beginPage = beginPage;
     }
 
-    public int getNAV_SIZE() {
-        return NAV_SIZE;
+    public int getPAGE_SIZE() {
+        return PAGE_SIZE;
     }
 
     public int getTotalPage() {
@@ -171,7 +172,7 @@ public class PageHandler {
                 "sc=" + sc +
                 ", totalCnt=" + totalCnt +
                 ", beginPage=" + beginPage +
-                ", NAV_SIZE=" + NAV_SIZE +
+                ", PAGE_SIZE=" + PAGE_SIZE +
                 ", totalPage=" + totalPage +
                 ", endPage=" + endPage +
                 ", showPrev=" + showPrev +

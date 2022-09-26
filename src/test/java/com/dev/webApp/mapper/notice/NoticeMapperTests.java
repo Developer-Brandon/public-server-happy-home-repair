@@ -1,6 +1,5 @@
 package com.dev.webApp.mapper.notice;
 
-import com.dev.webApp.domain.dto.SelectNoticeDTO;
 import com.dev.webApp.domain.dto.SelectNoticePaginationDTO;
 import com.dev.webApp.domain.vo.NoticeVO;
 import com.dev.webApp.mapper.NoticeMapper;
@@ -31,12 +30,13 @@ public class NoticeMapperTests {
     @Test
     public void getNoticeList() {
 
-        SelectNoticeDTO selectNoticeDTO = SelectNoticeDTO.builder()
-                .noticeSize(10)
+        SelectNoticePaginationDTO selectNoticePaginationDTO = SelectNoticePaginationDTO.builder()
+                .currentPage(1)
+                .offset(1) // service단에서 처리해주는 처리를 대신...
                 .build();
 
         noticeMapper
-                .selectNoticeList(selectNoticeDTO)
+                .selectNoticePaginationList(selectNoticePaginationDTO)
                 .forEach(notice -> System.out.println(notice.getTitle()));
     }
 
@@ -72,13 +72,13 @@ public class NoticeMapperTests {
         Boolean insertedNoticeCnt = noticeMapper.insertNotice(noticeVO) == 1;
 
         assertThat(insertedNoticeCnt, is(true));
-        assertThat(noticeVO.getNoticeNo(), is(greaterThan(1L)));
+        assertThat(noticeVO.getNoticeNo(), is(greaterThan(1)));
 
         ///////////////////////////////////////////////////////////
 
         // 2. 삽입된 데이터로 조회
 
-        Long noticeNo = noticeVO.getNoticeNo();
+        Integer noticeNo = noticeVO.getNoticeNo();
 
         NoticeVO noticeVO2 = noticeMapper.selectNotice(noticeNo);
 
@@ -98,13 +98,13 @@ public class NoticeMapperTests {
         Boolean insertedOrNot = noticeMapper.insertNotice(noticeVO) == 1;
 
         assertThat(insertedOrNot, is(true));
-        assertThat(noticeVO.getNoticeNo(), is(greaterThan(1L)));
+        assertThat(noticeVO.getNoticeNo(), is(greaterThan(1)));
     }
 
     @Test
     public void updateNotice() {
         NoticeVO noticeVO = NoticeVO.builder()
-                .noticeNo(10L)
+                .noticeNo(10)
                 .title("업데이트_테스트_제목")
                 .content("업데이트_테스트_내용")
                 .useYnEnum(NoticeUseYnEnum.Y)
@@ -118,7 +118,7 @@ public class NoticeMapperTests {
     @Test
     public void deleteNotice() {
 
-        Long noticeNo = 11L;
+        Integer noticeNo = 11;
 
         int deletedNoticeCnt = noticeMapper.deleteNotice(noticeNo);
 

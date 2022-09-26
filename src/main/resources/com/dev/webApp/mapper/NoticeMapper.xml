@@ -4,6 +4,39 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dev.webApp.mapper.NoticeMapper">
 
+    <select id="selectNoticePaginationList"
+            parameterType="com.dev.webApp.domain.dto.SelectNoticePaginationDTO"
+            resultType="com.dev.webApp.domain.vo.NoticeVO">
+        <![CDATA[
+        /* 전체 공지사항 리스트 조회 쿼리(페이지네이션) */
+        ]]>
+        select notice_no as noticeNo
+             , title as title
+             , content as content
+             , use_yn as useYnEnum
+             , reg_dt as regDt
+             , mod_dt as modDt
+        from web_app_test.tb_notice
+        order by regDt desc, noticeNo desc
+            limit #{offset}, #{pageSize}
+    </select>
+
+    <select id="selectNotice"
+            parameterType="Integer"
+            resultType="com.dev.webApp.domain.vo.NoticeVO">
+       <![CDATA[
+        /* 단일 공지사항 리스트 조회 쿼리 */
+        SELECT notice_no AS noticeNo
+             , title AS title
+             , content AS content
+             , use_yn AS useYnEnum
+             , reg_dt AS regDt
+             , mod_dt AS modDt
+        from web_app_test.tb_notice
+        where notice_no = #{noticeNo}
+        ]]>
+    </select>
+
     <insert id="insertNotice"
             parameterType="com.dev.webApp.domain.vo.NoticeVO">
         <![CDATA[
@@ -14,62 +47,12 @@
         <selectKey
                 keyProperty="noticeNo"
                 order="AFTER"
-                resultType="long">
+                resultType="Integer">
             /* 특정 공지사항 삽입 쿼리 */
             select max(notice_no)
             from web_app_test.tb_notice
         </selectKey>
     </insert>
-
-    <select id="selectNotice"
-            parameterType="Long"
-            resultType="com.dev.webApp.domain.vo.NoticeVO">
-       <![CDATA[
-        /* 단일 공지사항 리스트 조회 쿼리 */
-        SELECT notice_no AS noticeNo
-            , title AS title
-            , content AS content
-            , use_yn AS useYnEnum
-            , reg_dt AS regDt
-            , mod_dt AS modDt
-        from web_app_test.tb_notice
-        where notice_no = #{noticeNo}
-        ]]>
-    </select>
-
-    <select id="selectNoticeList"
-            parameterType="com.dev.webApp.domain.dto.SelectNoticeDTO"
-            resultType="com.dev.webApp.domain.vo.NoticeVO">
-        <![CDATA[
-            /* 전체 공지사항 리스트 조회 쿼리 */
-        ]]>
-        select notice_no as noticeNo
-             , title as title
-             , content as content
-             , use_yn as useYnEnum
-             , reg_dt as regDt
-             , mod_dt as modDt
-        from web_app_test.tb_notice
-        order by regDt desc, noticeNo desc
-        limit #{offset}, #{noticeSize}
-    </select>
-
-    <select id="selectNoticePaginationList"
-            parameterType="com.dev.webApp.domain.dto.SelectNoticePaginationDTO"
-            resultType="com.dev.webApp.domain.vo.NoticeVO">
-        <![CDATA[
-            /* 전체 공지사항 리스트 조회 쿼리(페이지네이션) */
-        ]]>
-        select notice_no as noticeNo
-        , title as title
-        , content as content
-        , use_yn as useYnEnum
-        , reg_dt as regDt
-        , mod_dt as modDt
-        from web_app_test.tb_notice
-            order by regDt desc, noticeNo desc
-        limit #{offset}, #{pageSize}
-    </select>
 
     <update id="updateNotice"
             parameterType="com.dev.webApp.domain.vo.NoticeVO">
@@ -96,7 +79,7 @@
     </update>
 
     <delete id="deleteNotice"
-            parameterType="Long">
+            parameterType="Integer">
         <![CDATA[
         /* 단일 공지사항 리스트 삭제 쿼리 */
         delete

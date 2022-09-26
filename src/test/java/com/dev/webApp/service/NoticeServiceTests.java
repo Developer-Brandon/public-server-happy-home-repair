@@ -1,6 +1,6 @@
 package com.dev.webApp.service;
 
-import com.dev.webApp.domain.dto.SelectNoticeDTO;
+import com.dev.webApp.domain.dto.SelectNoticePaginationDTO;
 import com.dev.webApp.domain.vo.NoticeVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,7 +33,7 @@ public class NoticeServiceTests {
                 .content("새로 작성하는 내용")
                 .build();
 
-        Long registerSuccessorNot = noticeService.registerNotice(noticeVO);
+        Integer registerSuccessorNot = noticeService.registerNotice(noticeVO);
 
         assertNotNull(registerSuccessorNot);
     }
@@ -41,13 +41,13 @@ public class NoticeServiceTests {
     @Test
     public void serviceGetNoticeListTest() throws Exception {
 
-        SelectNoticeDTO selectNoticeDTO = SelectNoticeDTO.builder()
+        SelectNoticePaginationDTO selectNoticePaginationDTO = SelectNoticePaginationDTO.builder()
                 .currentPage(1)
                 .build();
 
-        List<NoticeVO> noticeVOList = noticeService.getNoticeList(selectNoticeDTO);
-
-        noticeVOList.stream().forEach(System.out::println);
+        List<NoticeVO> noticeVOList = noticeService
+                .getNoticePaginationList(selectNoticePaginationDTO)
+                .getNoticeVOList();
 
         assertNotNull(noticeVOList);
     }

@@ -59,7 +59,7 @@ public class RepairServiceImpl implements RepairService{
 
         selectRepairApplyPaginationDTO.setOffset(offset * selectRepairApplyPaginationDTO.getPageSize());
 
-        selectRepairApplyPaginationDTO.setPageSize(pageHandler.getNAV_SIZE());
+        selectRepairApplyPaginationDTO.setPageSize(selectRepairApplyPaginationDTO.getPageSize());
 
         List<RepairApplyVO> repairApplyVOList = repairMapper.selectRepairApplyList(selectRepairApplyPaginationDTO);
 

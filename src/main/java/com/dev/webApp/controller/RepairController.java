@@ -89,8 +89,9 @@ public class RepairController {
         return "/repair/index";
     }
 
-    //////////////////////////////////////////////////////////////
+    // rest api start
 
+    // 수리 종류 리스트만 json형식으로 불러오는 api
     @ResponseBody
     @GetMapping(
             value = "/repair-type/list"
@@ -107,6 +108,7 @@ public class RepairController {
         return new ResponseEntity<>(repairTypeVOList, HttpStatus.OK);
     }
 
+    // 수리 지역 리스트만 json형식으로 불러오는 api
     @ResponseBody
     @GetMapping(
             value = "/repair-location/list"
@@ -123,6 +125,7 @@ public class RepairController {
         return new ResponseEntity<>(repairLocationVOList, HttpStatus.OK);
     }
 
+    // 수리 상태 리스트만 json형식으로 불러오는 api
     @ResponseBody
     @GetMapping(
             value = "/repair-state/list"
@@ -138,8 +141,6 @@ public class RepairController {
 
         return new ResponseEntity<>(repairStateVOList, HttpStatus.OK);
     }
-
-    //////////////////////////////////////////////////////////////
 
     // 수리 신청 현황 리스트만 json형식으로 불러오는 api
     @ResponseBody
@@ -200,6 +201,7 @@ public class RepairController {
     }
 
     // 단일 수리 신청 현황만 수정하는 api
+    // 이곳에서는 단일 수리 신청 현황 '상태'만 수정하는 api는 필요없다고 판단되어 넣지 않았습니다.
     @ResponseBody
     @PutMapping(
             value = ""
@@ -214,8 +216,6 @@ public class RepairController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-    // 이곳에서는 단일 수리 신청 현황만 수정하는 api는 필요없다고 판단되어 넣지 않았습니다.
 
     // 단일 수리 신청 현황만 삭제하는 api
     @ResponseBody
