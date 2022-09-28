@@ -17,8 +17,32 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 
-	<dependencies>
+    <!-- profiles 값들 -->
+    <!--    <profiles>-->
+    <!--        <profile>-->
+    <!--            <id>local</id>-->
+    <!--            <activation>-->
+    <!--                <activeByDefault>true</activeByDefault>-->
+    <!--            </activation>-->
+    <!--            <properties>-->
+    <!--                <env>local</env>-->
+    <!--            </properties>-->
+    <!--        </profile>-->
+    <!--        <profile>-->
+    <!--            <id>dev</id>-->
+    <!--            <properties>-->
+    <!--                <env>dev</env>-->
+    <!--            </properties>-->
+    <!--        </profile>-->
+    <!--        <profile>-->
+    <!--            <id>prod</id>-->
+    <!--            <properties>-->
+    <!--                <env>prod</env>-->
+    <!--            </properties>-->
+    <!--        </profile>-->
+    <!--    </profiles>-->
 
+    <dependencies>
 		<!-- 1. Spring -->
         <!-- 1-1. context configuration -->
         <dependency>
