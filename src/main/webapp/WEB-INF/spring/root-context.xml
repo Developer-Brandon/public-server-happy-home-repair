@@ -12,6 +12,7 @@
        http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
     <!-- Root Context: defines shared resources visible to all other web components -->
+    <context:property-placeholder location="classpath:config/application.properties" />
 
     <!-- 1. hikariConfig를 bean으로 등록합니다 -->
     <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
@@ -21,9 +22,9 @@
         <property name="maximumPoolSize" value="300" />
         <property name="minimumIdle" value="20" />
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
-        <property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/web_app_test?serverTimezone=Asia/Seoul" />
-        <property name="username" value="root" />
-        <property name="password" value="MomentFactory1!1!1!" />
+        <property name="jdbcUrl" value="${db.url}" />
+        <property name="username" value="${db.username}" />
+        <property name="password" value="${db.password}" />
     </bean>
 
     <!-- 2. data source를 등록합니다(hikariCP configuration) -->
