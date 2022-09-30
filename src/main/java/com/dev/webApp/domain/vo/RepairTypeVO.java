@@ -16,6 +16,6 @@ public class RepairTypeVO {
     Integer repairTypeOrder;
     String title;
     String explanation;
-    Timestamp regDt;
-    Timestamp modDt;
+    String regDt;
+    String modDt;
 }

@@ -23,6 +23,6 @@ public class RepairApplyVO {
     String phoneNumber;
     AgreeOrNotEnum agreeOrNotEnum;
     String explanation;
-    Timestamp regDt;
-    Timestamp modDt;
+    String regDt;
+    String modDt;
 }
