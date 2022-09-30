@@ -32,7 +32,7 @@
              , left(replace(posted_reg_dt, '. ', '-') ,length(replace(posted_reg_dt, '. ', '-')) - 1) as postingRegDt
              , date_format(reg_dt, '%Y-%m-%d') as regDt
         from web_app_test.tb_blog_posting_info
-        order by postingRegDt desc
+        order by str_to_date(postingRegDt, '%Y-%m-%d') desc
     </select>
 
     <select id="selectBlogPostingList"
@@ -47,7 +47,7 @@
              , left(replace(posted_reg_dt, '. ', '-') ,length(replace(posted_reg_dt, '. ', '-')) - 1) as postingRegDt
              , date_format(reg_dt, '%Y-%m-%d') as regDt
         from web_app_test.tb_blog_posting_info as tb_posting_info
-            order by postingRegDt desc
+            order by str_to_date(postingRegDt, '%Y-%m-%d') desc
         limit #{offset}, #{pageSize}
     </select>
 
