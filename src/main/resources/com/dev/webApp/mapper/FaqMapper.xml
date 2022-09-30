@@ -12,12 +12,12 @@
         ]]>
         select faq_no as faqNo
              , title as title
-             , content aS content
+             , content as content
              , use_yn as useYnEnum
-             , reg_dt as regDt
-             , mod_dt as modDt
+             , date_format(reg_dt, '%Y-%m-%d') as regDt
+             , date_format(mod_dt, '%Y-%m-%d') as modDt
         from web_app_test.tb_faq
-        order by regDt desc, faqNo desc
+        order by regDt desc
             limit #{offset}, #{pageSize}
     </select>
 
@@ -31,8 +31,8 @@
              , title as title
              , content as content
              , use_yn as useYnEnum
-             , reg_dt as regDt
-             , mod_dt as modDt
+             , date_format(reg_dt, '%Y-%m-%d') as regDt
+             , date_format(mod_dt, '%Y-%m-%d') as modDt
         from web_app_test.tb_faq
         where faq_no = #{faqNo}
         ]]>

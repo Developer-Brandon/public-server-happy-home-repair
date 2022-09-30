@@ -17,10 +17,9 @@ public class BlogPostingVO {
     String imgSrc;
 
     // todo: 추후 이동주소 추가하기
-    // (취우선 순위)
     // targetUrl
 
     String postingRegDt;
 
-    Date regDt;
+    String regDt;
 }

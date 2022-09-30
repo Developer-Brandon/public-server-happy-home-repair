@@ -7,7 +7,6 @@ import com.dev.webApp.service.FaqService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,18 +18,23 @@ public class FaqController extends BaseConfigController {
 
     private final FaqService faqService;
 
+    // 자주하는질문의 개수를 불러오는 api
+    @GetMapping(value = "/count", produces = JSON_FORMAT)
+    public ResponseEntity<Integer> getWholeFaqCount() throws Exception {
+
+        Integer wholeFaqCount = faqService.getTotalCnt();
+
+        return new ResponseEntity<>(wholeFaqCount, HttpStatus.OK);
+    }
+
     // 자주하는질문 리스트만 json형식으로 불러오는 api
-    @GetMapping(value = "/list")
+    @GetMapping(value = "/list", produces = JSON_FORMAT)
     public ResponseEntity<List<FaqVO>> getFaqList(
-            @RequestParam(required = false)
+            @RequestParam(required = false, defaultValue = "1")
             Integer currentPage,
-            @RequestParam(required = false)
+            @RequestParam(required = false, defaultValue = "10")
             Integer pageSize
     ) throws Exception {
-
-        if(StringUtils.isEmpty(currentPage)) {
-            currentPage = 1;
-        }
 
         SelectFaqPaginationDTO selectFaqPaginationDTO = SelectFaqPaginationDTO.builder()
                 .currentPage(currentPage)
@@ -44,17 +48,8 @@ public class FaqController extends BaseConfigController {
         return new ResponseEntity(faqVOList, HttpStatus.OK);
     }
 
-    // 자주하는질문의 개수를 불러오는 api
-    @GetMapping(value = "/count")
-    public ResponseEntity<Integer> getWholeFaqCount() throws Exception {
-
-        Integer wholeFaqCount = faqService.getTotalCnt();
-
-        return new ResponseEntity<>(wholeFaqCount, HttpStatus.OK);
-    }
-
     // 단일 자주하는질문만 json형식으로 불러오는 api
-    @GetMapping(value="")
+    @GetMapping(value="", produces = JSON_FORMAT)
     public ResponseEntity<FaqVO> getFaq(
             @RequestParam
             Integer faqNo
@@ -71,7 +66,7 @@ public class FaqController extends BaseConfigController {
 
     // 단일 자주하는질문만 삽입하는 api
     // (admin에서만 필요할법한 기능이지만 혹시 몰라서 추가 개발)
-    @PostMapping(value="")
+    @PostMapping(value="", produces = JSON_FORMAT)
     public ResponseEntity<Integer> insertFaq(
             @RequestBody
             FaqVO faqVO
@@ -84,7 +79,7 @@ public class FaqController extends BaseConfigController {
 
     // 단일 자주하는질문만 수정하는 api
     // (admin에서만 필요할법한 기능이지만 혹시 몰라서 추가 개발)
-    @PutMapping(value="")
+    @PutMapping(value="", produces = JSON_FORMAT)
     public ResponseEntity updateFaq(
             @RequestBody
             FaqVO faqVO
@@ -97,7 +92,7 @@ public class FaqController extends BaseConfigController {
 
     // 단일 자주하는질문만 상태만 수정하는 api
     // (admin에서만 필요할법한 기능이지만 혹시 몰라서 추가 개발)
-    @PutMapping(value="/state")
+    @PutMapping(value="/state", produces = JSON_FORMAT)
     public ResponseEntity updateFaqState(
             @RequestBody
             FaqVO faqVO
@@ -110,7 +105,7 @@ public class FaqController extends BaseConfigController {
 
     // 단일 자주하는질문만 삭제하는 api
     // (admin에서만 필요할법한 기능이지만 혹시 몰라서 추가 개발)
-    @DeleteMapping(value="")
+    @DeleteMapping(value="", produces = JSON_FORMAT)
     public ResponseEntity deleteFaq(
             @RequestParam
             Integer faqNo

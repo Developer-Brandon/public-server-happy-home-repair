@@ -8,7 +8,6 @@ import com.dev.webApp.service.FaqService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -29,17 +28,16 @@ public class FaqViewController extends BaseConfigController {
     // 자주하는질문 리스트 페이지로 이동하는 api
     @GetMapping(value ="/index", produces = TEXT_HTML_FORMAT)
     public String goFaqListPage(
-            @RequestParam(required = false)
+            @RequestParam(required = false, defaultValue = "1")
             Integer currentPage
+            , @RequestParam(required = false, defaultValue = "10")
+            Integer pageSize
             , Model model
     ) throws Exception {
 
-        if(StringUtils.isEmpty(currentPage)) {
-            currentPage = 1;
-        }
-
         SelectFaqPaginationDTO selectNoticePaginationDTO = SelectFaqPaginationDTO.builder()
                 .currentPage(currentPage)
+                .pageSize(pageSize)
                 .build();
 
         PaginationFaqVO paginationFaqVO = faqService.getFaqPaginationList(selectNoticePaginationDTO);
@@ -52,13 +50,16 @@ public class FaqViewController extends BaseConfigController {
     // 자주하는질문 페이지 진입 후 추가로 pagination 불러오는 api
     @GetMapping(value = "/content/list", produces = TEXT_HTML_FORMAT)
     public String getFaqListAtPage(
-            @RequestParam
+            @RequestParam(defaultValue = "1")
                     Integer currentPage
+            , @RequestParam(defaultValue = "10")
+                    Integer pageSize
             , Model model
     ) throws Exception {
 
         SelectFaqPaginationDTO selectNoticePaginationDTO = SelectFaqPaginationDTO.builder()
                 .currentPage(currentPage)
+                .pageSize(pageSize)
                 .build();
 
         PaginationFaqVO paginationFaqVO = faqService.getFaqPaginationList(selectNoticePaginationDTO);
@@ -72,12 +73,12 @@ public class FaqViewController extends BaseConfigController {
     @GetMapping("/content")
     public String goFaqPage(
             @RequestParam
-                    String faqNo
+                    Integer faqNo
             , Model model
     ) throws Exception {
 
         FaqVO faqVO = FaqVO.builder()
-                .faqNo(Integer.valueOf(faqNo))
+                .faqNo(faqNo)
                 .build();
 
         model.addAttribute("faq", faqService.getFaq(faqVO));

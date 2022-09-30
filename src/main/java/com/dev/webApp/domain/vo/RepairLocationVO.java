@@ -16,6 +16,6 @@ public class RepairLocationVO {
     Integer repairLocationOrder;
     String explanation;
     String name;
-    Timestamp regDt;
-    Timestamp modDt;
+    String regDt;
+    String modDt;
 }
