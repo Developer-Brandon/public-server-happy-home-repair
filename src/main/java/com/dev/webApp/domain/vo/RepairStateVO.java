@@ -15,6 +15,6 @@ public class RepairStateVO {
     Integer repairStateNo;
     String name;
     String explanation;
-    Timestamp regDt;
-    Timestamp modDt;
+    String regDt;
+    String modDt;
 }

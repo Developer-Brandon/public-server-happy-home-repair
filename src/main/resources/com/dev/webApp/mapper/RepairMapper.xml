@@ -14,8 +14,8 @@
             , r_type_order as repairTypeOrder
             , title as title
             , explanation as explanation
-            , reg_dt as regDt
-            , mod_dt as modDt
+            , date_format(reg_dt, '%Y-%m-%d') as regDt
+            , date_format(mod_dt, '%Y-%m-%d') as modDt
         from web_app_test.tb_repair_type
         order by regDt desc
         limit #{itemCnt}
@@ -30,8 +30,8 @@
              , r_type_order as repairTypeOrder
              , title as title
              , explanation as explanation
-             , reg_dt as regDt
-             , mod_dt as modDt
+             , date_format(reg_dt, '%Y-%m-%d') as regDt
+             , date_format(mod_dt, '%Y-%m-%d') as modDt
         from web_app_test.tb_repair_type
         where r_type_no = #{repairTypeNo}
         ]]>
@@ -47,8 +47,8 @@
         , r_location_order as repairLocationOrder
         , name as name
         , explanation as explanation
-        , reg_dt as regDt
-        , mod_dt as modDt
+        , date_format(reg_dt, '%Y-%m-%d') as regDt
+        , date_format(mod_dt, '%Y-%m-%d') as modDt
         from web_app_test.tb_repair_location
         order by regDt desc
         <if test="itemCnt != 0">
@@ -65,8 +65,8 @@
              , r_location_order as repairLocationOrder
              , name as name
              , explanation as explanation
-             , reg_dt as regDt
-             , mod_dt as modDt
+             , date_format(reg_dt, '%Y-%m-%d') as regDt
+             , date_format(mod_dt, '%Y-%m-%d') as modDt
         from web_app_test.tb_repair_location
         where r_location_no = #{repairLocationNo}
         ]]>
@@ -81,8 +81,8 @@
         select r_state_no as repairStateNo
         , name as name
         , explanation as explanation
-        , reg_dt as regDt
-        , mod_dt as modDt
+        , date_format(reg_dt, '%Y-%m-%d') as regDt
+        , date_format(mod_dt, '%Y-%m-%d') as modDt
         from web_app_test.tb_repair_state
         order by regDt desc
         <if test="itemCnt != 0">
@@ -98,8 +98,8 @@
         select r_state_no as repairStateNo
              , name as name
              , explanation as explanation
-             , reg_dt as regDt
-             , mod_dt as modDt
+             , date_format(reg_dt, '%Y-%m-%d') as regDt
+             , date_format(mod_dt, '%Y-%m-%d') as modDt
         from web_app_test.tb_repair_state
         where r_state_no = #{repairStateNo}
         ]]>
@@ -139,8 +139,8 @@
          , tb_r_apply.phone_number as phoneNumber
          , tb_r_apply.agree_or_not as agreeOrNotEnum
          , tb_r_apply.explanation as explanation
-         , tb_r_apply.reg_dt as regDt
-         , tb_r_apply.mod_dt as modDt
+         , date_format(tb_r_apply.reg_dt, '%Y-%m-%d') as regDt
+         , date_format(tb_r_apply.mod_dt, '%Y-%m-%d') as modDt
     from web_app_test.tb_repair_apply as tb_r_apply
              inner join web_app_test.tb_repair_type as tb_r_type
                         on tb_r_apply.r_type_no = tb_r_type.r_type_no
@@ -167,8 +167,8 @@
             , tb_r_apply.phone_number as phoneNumber
             , tb_r_apply.agree_or_not as agreeOrNotEnum
             , tb_r_apply.explanation as explanation
-            , tb_r_apply.reg_dt as regDt
-            , tb_r_apply.mod_dt as modDt
+            , date_format(tb_r_apply.reg_dt, '%Y-%m-%d') as regDt
+            , date_format(tb_r_apply.mod_dt, '%Y-%m-%d') as modDt
         from web_app_test.tb_repair_apply as tb_r_apply
             inner join web_app_test.tb_repair_type as tb_r_type
                 on tb_r_apply.r_type_no = tb_r_type.r_type_no

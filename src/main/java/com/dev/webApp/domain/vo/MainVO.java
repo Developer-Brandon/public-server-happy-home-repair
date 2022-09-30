@@ -11,5 +11,4 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 public class MainVO {
-
 }

@@ -9,11 +9,9 @@ import lombok.Data;
 @AllArgsConstructor
 public class SelectFaqPaginationDTO {
 
-    @Builder.Default
-    Integer currentPage = 1;
+    Integer currentPage;
 
     Integer offset;
 
-    @Builder.Default
-    Integer pageSize = 10;
+    Integer pageSize;
 }

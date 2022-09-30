@@ -23,7 +23,7 @@ public class FaqVO {
 
     FaqUseYnEnum useYnEnum;
 
-    Timestamp regDt;
+    String regDt;
 
-    Timestamp modDt;
+    String modDt;
 }

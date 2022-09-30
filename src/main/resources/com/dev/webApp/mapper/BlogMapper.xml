@@ -29,8 +29,8 @@
         select n_b_p_no as postingNo
              , title as title
              , img_src as imgSrc
-             , posted_reg_dt as postingRegDt
-             , reg_dt as regDt
+             , left(replace(posted_reg_dt, '. ', '-') ,length(replace(posted_reg_dt, '. ', '-')) - 1) as postingRegDt
+             , date_format(reg_dt, '%Y-%m-%d') as regDt
         from web_app_test.tb_blog_posting_info
         order by postingRegDt desc
     </select>
@@ -44,8 +44,8 @@
         select n_b_p_no as postingNo
              , title as title
              , img_src as imgSrc
-             , posted_reg_dt as postingRegDt
-             , reg_dt as regDt
+             , left(replace(posted_reg_dt, '. ', '-') ,length(replace(posted_reg_dt, '. ', '-')) - 1) as postingRegDt
+             , date_format(reg_dt, '%Y-%m-%d') as regDt
         from web_app_test.tb_blog_posting_info as tb_posting_info
             order by postingRegDt desc
         limit #{offset}, #{pageSize}

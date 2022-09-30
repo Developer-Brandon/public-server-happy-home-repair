@@ -22,7 +22,7 @@ public class NoticeVO {
 
     NoticeUseYnEnum useYnEnum;
 
-    Timestamp regDt;
+    String regDt;
 
-    Timestamp modDt;
+    String modDt;
 }
