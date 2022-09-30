@@ -127,8 +127,7 @@ public class FaqControllerTest extends TestCase {
                 .andDo(print());
 
         resultActions
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(BaseConfigController.JSON_FORMAT));
+                .andExpect(status().isOk());
     }
 
     @Test

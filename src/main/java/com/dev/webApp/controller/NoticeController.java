@@ -23,15 +23,11 @@ public class NoticeController extends BaseConfigController {
     // 공지사항 리스트만 json형식으로 불러오는 api
     @GetMapping(value = "/list")
     public ResponseEntity<List<NoticeVO>> getNoticeList(
-            @RequestParam(required = false)
+            @RequestParam(required = false, defaultValue = "1")
             Integer currentPage
-            , @RequestParam(required = false)
+            , @RequestParam(required = false, defaultValue = "10")
             Integer pageSize
     ) throws Exception {
-
-        if(StringUtils.isEmpty(currentPage)) {
-            currentPage = 1;
-        }
 
         SelectNoticePaginationDTO selectNoticePaginationDTO = SelectNoticePaginationDTO.builder()
                 .currentPage(currentPage)
