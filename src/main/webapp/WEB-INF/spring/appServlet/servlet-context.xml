@@ -41,9 +41,6 @@
     <mvc:cors>
         <mvc:mapping path="/**" allowed-origins="http://localhost:3003" allowed-methods="POST,GET,PUT,DELETE" allow-credentials="true"/>
         <mvc:mapping path="/**" allowed-origins="http://happy-home-repair-env.eba-atufrayj.ap-northeast-2.elasticbeanstalk.com" allowed-methods="POST,GET,PUT,DELETE" allow-credentials="true"/>
-        <mvc:mapping path="/**" allowed-origins="https://happy-home-repair-env.eba-atufrayj.ap-northeast-2.elasticbeanstalk.com" allowed-methods="POST,GET,PUT,DELETE" allow-credentials="true"/>
         <mvc:mapping path="/**" allowed-origins="http://hhr-client-app.s3-website.ap-northeast-2.amazonaws.com" allowed-methods="POST,GET,PUT,DELETE" allow-credentials="true"/>
-        <mvc:mapping path="/**" allowed-origins="http://happy-home-repair.com" allowed-methods="POST,GET,PUT,DELETE" allow-credentials="true"/>
-        <mvc:mapping path="/**" allowed-origins="https://happy-home-repair.com" allowed-methods="POST,GET,PUT,DELETE" allow-credentials="true"/>
     </mvc:cors>
 </beans:beans>
