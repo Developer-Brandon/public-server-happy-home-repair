@@ -39,8 +39,83 @@
 
     <!--    https://jwkim96.tistory.com/81-->
     <mvc:cors>
-        <mvc:mapping path="/**" allowed-origins="http://localhost:3003" allowed-methods="POST,GET,PUT,DELETE" allow-credentials="true"/>
-        <mvc:mapping path="/**" allowed-origins="http://happy-home-repair-env.eba-atufrayj.ap-northeast-2.elasticbeanstalk.com" allowed-methods="POST,GET,PUT,DELETE" allow-credentials="true"/>
-        <mvc:mapping path="/**" allowed-origins="http://hhr-client-app.s3-website.ap-northeast-2.amazonaws.com" allowed-methods="POST,GET,PUT,DELETE" allow-credentials="true"/>
+
+        <!-- vue로 부터의 평범한 http 요청 -->
+        <!--        <mvc:mapping-->
+        <!--                path="/**"-->
+        <!--                allowed-origins="localhost"-->
+        <!--                allowed-methods="POST,GET,PUT,DELETE"-->
+        <!--                allow-credentials="true"/>-->
+
+        <!--        <mvc:mapping-->
+        <!--                path="/**"-->
+        <!--                allowed-origins="http://localhost"-->
+        <!--                allowed-methods="POST,GET,PUT,DELETE"-->
+        <!--                allow-credentials="true"/>-->
+
+        <!--        <mvc:mapping-->
+        <!--                path="/**"-->
+        <!--                allowed-origins="**"-->
+        <!--                allowed-methods="POST,GET,PUT,DELETE"-->
+        <!--                allow-credentials="true"/>-->
+
+        <mvc:mapping path="/**"
+                     allowed-origins="*"
+                     allowed-headers="Content-Type
+                                     , Access-Control-Allow-Origin
+                                     , Access-Control-Allow-Headers
+                                     , Authorization
+                                     , X-Requested-With
+                                     , requestId
+                                     , Correlation-Id"
+                     allowed-methods="GET, PUT, POST, DELETE"
+                     allow-credentials="true"/>
+
+
+        <!-- 평범한 http 요청 -->
+        <!--        <mvc:mapping-->
+        <!--                path="/**"-->
+        <!--                allowed-origins="http://happy-home-repair-env.eba-atufrayj.ap-northeast-2.elasticbeanstalk.com"-->
+        <!--                allowed-methods="POST,GET,PUT,DELETE"-->
+        <!--                allow-credentials="true"/>-->
+
+        <!-- https 요청 -->
+        <!-- <mvc:mapping
+               path="/**"
+               allowed-origins="https://happy-home-repair-env.eba-atufrayj.ap-northeast-2.elasticbeanstalk.com"
+               allowed-methods="POST,GET,PUT,DELETE"
+               allow-credentials="true"/> -->
+
+        <!-- s3 버킷 http 요청 -->
+        <!--        <mvc:mapping-->
+        <!--                path="/**"-->
+        <!--                allowed-origins="http://hhr-client-app.s3.ap-northeast-2.amazonaws.com"-->
+        <!--                allowed-methods="POST,GET,PUT,DELETE"-->
+        <!--                allow-credentials="true"/>-->
+
+        <!--        <mvc:mapping-->
+        <!--                path="/**"-->
+        <!--                allowed-origins="http://hhr-client-app.s3-website.ap-northeast-2.amazonaws.com"-->
+        <!--                allowed-methods="POST,GET,PUT,DELETE"-->
+        <!--                allow-credentials="true"/>-->
+
+        <!--        <mvc:mapping-->
+        <!--                path="/**"-->
+        <!--                allowed-origins="http://hhr-client-app2.s3.ap-northeast-2.amazonaws.com"-->
+        <!--                allowed-methods="POST,GET,PUT,DELETE"-->
+        <!--                allow-credentials="true"/>-->
+
+        <!--        <mvc:mapping-->
+        <!--                path="/**"-->
+        <!--                allowed-origins="http://hhr-client-app2.s3-website.ap-northeast-2.amazonaws.com"-->
+        <!--                allowed-methods="POST,GET,PUT,DELETE"-->
+        <!--                allow-credentials="true"/>-->
+
+        <!-- s3 버킷 https 요청 -->
+        <!-- <mvc:mapping
+                path="/**"
+                allowed-origins="https://hhr-client-app.s3-website.ap-northeast-2.amazonaws.com"
+                allowed-methods="POST,GET,PUT,DELETE"
+                allow-credentials="true"/> -->
     </mvc:cors>
 </beans:beans>
