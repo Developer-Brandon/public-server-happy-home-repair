@@ -29,6 +29,6 @@ public class BlogServiceTests {
     @Test
     public void serviceBlogPostingListByCrawling() throws Exception {
 
-        List<RawBlogPostingVO> rawBlogPostingVOList = blogService.getRawBlogPostingListByCrawling();
+        List<RawBlogPostingVO> rawBlogPostingVOList = blogService.getRawBlogPostingListByCrawling(1000);
     }
 }

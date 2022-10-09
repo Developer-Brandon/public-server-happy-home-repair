@@ -40,7 +40,7 @@ public class BlogServiceImpl implements BlogService{
         return (Elements) getConnection().select("li.p_date span");
     }
 
-    public List<RawBlogPostingVO> getRawBlogPostingListByCrawling() throws Exception{
+    public List<RawBlogPostingVO> getRawBlogPostingListByCrawling(Integer crawlingCnt) throws Exception{
 
         // 1. 메인에서 타이틀과 이미지 경로를 불러옵니다.
         ArrayList<RawBlogPostingVO> blogInfoMapListForImage = new ArrayList<RawBlogPostingVO>();
@@ -65,7 +65,7 @@ public class BlogServiceImpl implements BlogService{
         // 15개만 뽑습니다. 3개씩 5줄이 출력되도록...
         blogInfoMapListForImage = (ArrayList<RawBlogPostingVO>) finalBlogInfoMapListForImage
                 .stream()
-                .limit(15)
+                .limit(crawlingCnt)
                 .collect(Collectors.toList());
 
         // 2. 메인에서 날짜를 불러옵니다.(1번에서 불러온 태그에 날짜가 존재하지 않았기때문....)
@@ -87,7 +87,7 @@ public class BlogServiceImpl implements BlogService{
 
         blogInfoMapListForDateTime = (ArrayList<RawBlogPostingVO>) finalBlogInfoMapListForDateTime
                 .stream()
-                .limit(15)
+                .limit(crawlingCnt)
                 .collect(Collectors.toList());
 
         // 임시코드
@@ -170,7 +170,7 @@ public class BlogServiceImpl implements BlogService{
         // 3. 제대로 삭제되었다면 크롤링을 하여 대량 insert를 진행합니다.
         if(totalCnt == 0) {
 
-            List<RawBlogPostingVO> rawBlogPostingVOList = getRawBlogPostingListByCrawling();
+            List<RawBlogPostingVO> rawBlogPostingVOList = getRawBlogPostingListByCrawling(15);
 
             InsertBlogPostingListDTO insertBlogPostingListDTO = InsertBlogPostingListDTO.builder()
                     .insertBlogPostingDTOList(rawBlogPostingVOList)
@@ -203,7 +203,7 @@ public class BlogServiceImpl implements BlogService{
                 })
                 .collect(Collectors.toList());
 
-        List<RawBlogPostingVO> rawBlogPostingVOListByCrawling = getRawBlogPostingListByCrawling()
+        List<RawBlogPostingVO> rawBlogPostingVOListByCrawling = getRawBlogPostingListByCrawling(1000)
                 .stream()
                 .peek(e -> e.setPostingTypeNo(1))
                 .collect(Collectors.toList());
