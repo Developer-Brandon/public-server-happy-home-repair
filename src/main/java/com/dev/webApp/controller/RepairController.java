@@ -1,6 +1,6 @@
 package com.dev.webApp.controller;
 
-import com.dev.webApp.config.BaseConfigController;
+import com.dev.webApp.config.controller.BaseConfigController;
 import com.dev.webApp.domain.dto.*;
 import com.dev.webApp.domain.vo.*;
 import com.dev.webApp.service.RepairService;

@@ -1,13 +1,12 @@
 package com.dev.webApp.controller;
 
-import com.dev.webApp.config.BaseConfigController;
+import com.dev.webApp.config.controller.BaseConfigController;
 import com.dev.webApp.domain.dto.SelectNoticePaginationDTO;
 import com.dev.webApp.domain.vo.NoticeVO;
 import com.dev.webApp.service.NoticeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

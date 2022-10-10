@@ -1,6 +1,6 @@
 package com.dev.webApp.controller.faq;
 
-import com.dev.webApp.config.BaseConfigController;
+import com.dev.webApp.config.controller.BaseConfigController;
 import com.dev.webApp.domain.vo.FaqVO;
 import com.dev.webApp.service.FaqService;
 import com.dev.webApp.util.FaqUseYnEnum;
@@ -20,7 +20,6 @@ import org.springframework.web.context.WebApplicationContext;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.Matchers.greaterThan;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;

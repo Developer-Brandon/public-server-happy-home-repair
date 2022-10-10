@@ -1,4 +1,4 @@
-package com.dev.webApp.config;
+package com.dev.webApp.config.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
