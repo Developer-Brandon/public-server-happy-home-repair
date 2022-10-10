@@ -33,9 +33,7 @@
 	</beans:bean>
 
     <context:component-scan
-            base-package="com.dev.webApp.controller"/>
-    <context:component-scan
-            base-package="com.dev.webApp.exception"/>
+            base-package="com.dev.webApp"/>
 
     <!--    https://jwkim96.tistory.com/81-->
     <mvc:cors>
