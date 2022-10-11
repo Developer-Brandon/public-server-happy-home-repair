@@ -1,39 +1,39 @@
 # 1. 공지사항 테이블
 delete from web_app_test.tb_notice;
-insert into web_app_test.tb_notice(title, content)
-values ('테스트_제목1', '테스트_내용1')
-     ,('테스트_제목2', '테스트_내용2')
-     ,('테스트_제목3', '테스트_내용3')
-     ,('테스트_제목4', '테스트_내용4')
-     ,('테스트_제목5', '테스트_내용5')
-     ,('테스트_제목6', '테스트_내용6');
+-- insert into web_app_test.tb_notice(title, content)
+-- values ('테스트_제목1', '테스트_내용1')
+--      ,('테스트_제목2', '테스트_내용2')
+--      ,('테스트_제목3', '테스트_내용3')
+--      ,('테스트_제목4', '테스트_내용4')
+--      ,('테스트_제목5', '테스트_내용5')
+--      ,('테스트_제목6', '테스트_내용6');
 
 ###################################################################################
 
 # 2. 자주하는 질문 테이블
 delete from web_app_test.tb_faq;
-insert into web_app_test.tb_faq(title, content)
-values ('테스트_제목1', '테스트_내용1')
-     ,('테스트_제목2', '테스트_내용2')
-     ,('테스트_제목3', '테스트_내용3')
-     ,('테스트_제목4', '테스트_내용4')
-     ,('테스트_제목5', '테스트_내용5')
-     ,('테스트_제목6', '테스트_내용6');
+-- insert into web_app_test.tb_faq(title, content)
+-- values ('테스트_제목1', '테스트_내용1')
+--      ,('테스트_제목2', '테스트_내용2')
+--      ,('테스트_제목3', '테스트_내용3')
+--      ,('테스트_제목4', '테스트_내용4')
+--      ,('테스트_제목5', '테스트_내용5')
+--      ,('테스트_제목6', '테스트_내용6');
 
 ###################################################################################
 
 # 3. 블로그 게시물 테이블
 delete from web_app_test.tb_from_post_type;
 insert into web_app_test.tb_from_post_type(type) value('MAIN');
-
-insert into web_app_test.tb_blog_posting_info(
-    f_t_no, title, img_src, posted_reg_dt
-) values(
-    1, '제목_테스트', '이미지경로_테스트', current_timestamp()
-)
-       ,        (
-    1, '제목_테스트2', '이미지경로_테스트2', current_timestamp()
-);
+--
+-- insert into web_app_test.tb_blog_posting_info(
+--     f_t_no, title, img_src, posted_reg_dt
+-- ) values(
+--     1, '제목_테스트', '이미지경로_테스트', current_timestamp()
+-- )
+--        ,        (
+--     1, '제목_테스트2', '이미지경로_테스트2', current_timestamp()
+-- );
 
 ###########################################################################################################
 

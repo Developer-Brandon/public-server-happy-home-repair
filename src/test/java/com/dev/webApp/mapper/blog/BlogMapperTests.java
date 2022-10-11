@@ -5,11 +5,15 @@ import com.dev.webApp.domain.dto.InsertBlogPostingListDTO;
 import com.dev.webApp.domain.vo.BlogPostingVO;
 import com.dev.webApp.domain.vo.RawBlogPostingVO;
 import com.dev.webApp.mapper.BlogMapper;
+import com.dev.webApp.mapper.faq.FaqMapperTests;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +23,12 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
 
+@Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 public class BlogMapperTests {
+
+    private static final Logger logger = LoggerFactory.getLogger(BlogMapperTests.class);
 
     @Autowired
     private BlogMapper blogMapper;
@@ -29,14 +36,29 @@ public class BlogMapperTests {
     @Test
     public void getBlogMapperList() {
 
-        // 1. 조회 테스트
+        // 1. 조회 전 삽입 테스트
+
+        InsertBlogPostingDTO insertBlogPostingDTO = InsertBlogPostingDTO.builder()
+                .postingTitle("제목_테스트")
+                .postingTypeNo(1)
+                .postingImageSrc("이미지경로_테스트")
+                .postingRegDt("2022-09-07 12:48:52")
+                .build();
+
+        Boolean insertedOrNot = blogMapper.insertBlogPosting(insertBlogPostingDTO) == 1;
+
+        assertThat(insertedOrNot, is(true));
+        assertThat(insertBlogPostingDTO.getInsertedPostingNo(), is(greaterThan(1)));
+
+        ////////////////////////////////////////////////////////////////////////
+
+        // 2. 조회 테스트
 
         List<BlogPostingVO> blogPostingVOList = blogMapper.selectAllBlogPostingList();
 
         assertThat(blogPostingVOList, is(notNullValue()));
-        assertThat(blogPostingVOList.size(), is(greaterThan(1)));
+        assertThat(blogPostingVOList.size(), is(greaterThan(0)));
     }
-
 
     @Test
     public void insertBlog() {
@@ -60,7 +82,6 @@ public class BlogMapperTests {
     public void insertBlogList() {
 
         // 1. 리스트 삽입 테스트
-
         RawBlogPostingVO rawBlogPostingVO = RawBlogPostingVO.builder()
                 .title("제목_테스트")
                 .imgSrc("이미지경로_테스트")

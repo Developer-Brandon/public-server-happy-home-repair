@@ -14,13 +14,13 @@ create table if not exists web_app_test.tb_notice (
     mod_dt datetime not null default current_timestamp comment '수정날짜'
 ) engine=innodb default charset=utf8mb4 comment '공지사항';
 
-INSERT INTO web_app_test.tb_notice(TITLE, CONTENT)
-VALUES ('테스트_제목1', '테스트_내용1')
-     ,('테스트_제목2', '테스트_내용2')
-     ,('테스트_제목3', '테스트_내용3')
-     ,('테스트_제목4', '테스트_내용4')
-     ,('테스트_제목5', '테스트_내용5')
-     ,('테스트_제목6', '테스트_내용6');
+# INSERT INTO web_app_test.tb_notice(TITLE, CONTENT)
+# VALUES ('테스트_제목1', '테스트_내용1')
+#      ,('테스트_제목2', '테스트_내용2')
+#      ,('테스트_제목3', '테스트_내용3')
+#      ,('테스트_제목4', '테스트_내용4')
+#      ,('테스트_제목5', '테스트_내용5')
+#      ,('테스트_제목6', '테스트_내용6');
 
 ###################################################################################
 
@@ -34,13 +34,13 @@ create table if not exists web_app_test.tb_faq (
      mod_dt datetime not null default current_timestamp comment '수정날짜'
 ) engine=innodb default charset=utf8mb4 comment '자주하는 질문';
 
-insert into web_app_test.tb_faq(title, content)
-values ('테스트_제목1', '테스트_내용1')
-     ,('테스트_제목2', '테스트_내용2')
-     ,('테스트_제목3', '테스트_내용3')
-     ,('테스트_제목4', '테스트_내용4')
-     ,('테스트_제목5', '테스트_내용5')
-     ,('테스트_제목6', '테스트_내용6');
+# insert into web_app_test.tb_faq(title, content)
+# values ('테스트_제목1', '테스트_내용1')
+#      ,('테스트_제목2', '테스트_내용2')
+#      ,('테스트_제목3', '테스트_내용3')
+#      ,('테스트_제목4', '테스트_내용4')
+#      ,('테스트_제목5', '테스트_내용5')
+#      ,('테스트_제목6', '테스트_내용6');
 
 ###################################################################################
 

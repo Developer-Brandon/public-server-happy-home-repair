@@ -1,8 +1,12 @@
 package com.dev.webApp.util.page;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.util.UriComponentsBuilder;
 
 public class PageHandler {
+
+    private static final Logger logger = LoggerFactory.getLogger(PageHandler.class);
 
     private SearchCondition sc;
 
@@ -95,15 +99,15 @@ public class PageHandler {
 
     void print() {
 
-        System.out.println("page=" + sc.getPage());
+        logger.info("page=", sc.getPage());
 
-        System.out.print(showPrev ? "PREV " : "");
+        logger.info(showPrev ? "PREV " : "");
 
         for (int i = beginPage; i <= endPage; i++) {
-            System.out.print(i + " ");
+            logger.info(String.valueOf(i));
         }
 
-        System.out.println(showNext ? " NEXT" : "");
+        logger.info(showNext ? " NEXT" : "");
     }
 
     public SearchCondition getSc() {

@@ -4,19 +4,25 @@ import com.dev.webApp.domain.dto.SelectFaqPaginationDTO;
 import com.dev.webApp.domain.vo.FaqVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 import static org.junit.Assert.assertNotNull;
 
+@Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 public class FaqServiceTests {
 
-    // TODO: faq 서비스쪽부터 로직 추가 예정
+    private static final Logger logger = LoggerFactory.getLogger(FaqServiceTests.class);
 
     @Autowired
     private FaqService faqService;
@@ -52,6 +58,10 @@ public class FaqServiceTests {
                 .getFaqVOList();
 
         faqVOList.stream().forEach(System.out::println);
+
+        faqVOList.forEach(e -> {
+            logger.info("faqVOList.forEach: {}", e);
+        });
 
         assertNotNull(faqVOList);
     }

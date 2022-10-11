@@ -4,8 +4,6 @@ import com.dev.webApp.domain.dto.SelectFaqPaginationDTO;
 import com.dev.webApp.domain.vo.FaqVO;
 import com.dev.webApp.domain.vo.PaginationFaqVO;
 
-import java.util.List;
-
 public interface FaqService {
 
     PaginationFaqVO getFaqPaginationList(SelectFaqPaginationDTO selectFaqPaginationDTO) throws Exception;

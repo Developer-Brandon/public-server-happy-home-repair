@@ -1,27 +1,35 @@
 package com.dev.webApp.mapper.faq;
 
+import com.dev.webApp.controller.HomeController;
 import com.dev.webApp.domain.dto.SelectFaqPaginationDTO;
 import com.dev.webApp.domain.vo.FaqVO;
 import com.dev.webApp.mapper.FaqMapper;
 import com.dev.webApp.util.FaqUseYnEnum;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
 
+@Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 public class FaqMapperTests {
 
     // greaterThan, lessThan
     // https://www.baeldung.com/hamcrest-number-matchers
+
+    private static final Logger logger = LoggerFactory.getLogger(FaqMapperTests.class);
 
     @Autowired
     private FaqMapper faqMapper;
@@ -30,6 +38,7 @@ public class FaqMapperTests {
     public void init() {
     }
 
+    @Ignore
     @Test
     public void getFaqList() {
 
@@ -39,7 +48,7 @@ public class FaqMapperTests {
                 .build();
 
         faqMapper.selectFaqPaginationList(selectFaqPaginationDTO)
-                .forEach(faq -> System.out.println(faq.getTitle()));
+                .forEach(faq -> logger.info("faq.geTitle(): {}", faq.getTitle()));
     }
 
     @Test

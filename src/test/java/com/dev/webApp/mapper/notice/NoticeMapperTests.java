@@ -7,18 +7,24 @@ import com.dev.webApp.util.NoticeUseYnEnum;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
 
+@Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 public class NoticeMapperTests {
+
+    private static final Logger logger = LoggerFactory.getLogger(NoticeMapperTests.class);
 
     @Autowired
     private NoticeMapper noticeMapper;
@@ -37,7 +43,7 @@ public class NoticeMapperTests {
 
         noticeMapper
                 .selectNoticePaginationList(selectNoticePaginationDTO)
-                .forEach(notice -> System.out.println(notice.getTitle()));
+                .forEach(notice -> logger.info(notice.getTitle()));
     }
 
     @Test
@@ -50,13 +56,13 @@ public class NoticeMapperTests {
 
         noticeMapper
                 .selectNoticePaginationList(selectNoticePaginationDTO)
-                .forEach(notice -> System.out.println(notice.getTitle()));
+                .forEach(notice -> logger.info(notice.getTitle()));
 
         ///////////////////////////////////////////////////////////
 
         Integer totalCnt = noticeMapper.getTotalCnt();
 
-        System.out.println("총 아이템의 개수 : " + totalCnt);
+        logger.info("총 아이템의 개수 : {}",totalCnt);
     }
 
     @Test
@@ -98,7 +104,7 @@ public class NoticeMapperTests {
         Boolean insertedOrNot = noticeMapper.insertNotice(noticeVO) == 1;
 
         assertThat(insertedOrNot, is(true));
-        assertThat(noticeVO.getNoticeNo(), is(greaterThan(1)));
+        assertThat(noticeVO.getNoticeNo(), is(greaterThan(0)));
     }
 
     @Test
@@ -112,7 +118,7 @@ public class NoticeMapperTests {
 
         int updatedNoticeCnt = noticeMapper.updateNotice(noticeVO);
 
-        System.out.println("updatedNoticeCnt" + updatedNoticeCnt);
+        logger.info("updatedNoticeCnt: {}", updatedNoticeCnt);
     }
 
     @Test
@@ -122,6 +128,6 @@ public class NoticeMapperTests {
 
         int deletedNoticeCnt = noticeMapper.deleteNotice(noticeNo);
 
-        System.out.println("deletedNoticeCnt" + deletedNoticeCnt);
+        logger.info("deletedNoticeCnt: {}", deletedNoticeCnt);
     }
 }

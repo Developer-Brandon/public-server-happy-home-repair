@@ -16,6 +16,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -25,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
-// todo: 추후 트렌젝션처리 및 응답결과를 세세하게 처리
+@Transactional
 @RunWith(SpringJUnit4ClassRunner.class) // test for using junit4
 @ContextConfiguration({
         "file:src/main/webapp/WEB-INF/spring/root-context.xml"

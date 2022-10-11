@@ -7,11 +7,15 @@ import com.dev.webApp.domain.vo.RepairLocationVO;
 import com.dev.webApp.domain.vo.RepairStateVO;
 import com.dev.webApp.domain.vo.RepairTypeVO;
 import com.dev.webApp.mapper.RepairMapper;
+import com.dev.webApp.persistence.DBConnectionTest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,9 +24,12 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
 
+@Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 public class RepairMapperTests {
+
+    private static Logger logger = LoggerFactory.getLogger(DBConnectionTest.class);
 
     @Autowired
     private RepairMapper repairMapper;
