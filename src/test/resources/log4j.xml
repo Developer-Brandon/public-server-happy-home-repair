@@ -2,52 +2,93 @@
 <!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
     <!-- Appenders -->
+    <!-- 로그를 어떻게 출력할지 설정할 수 있다. -->
     <appender name="console" class="org.apache.log4j.ConsoleAppender">
         <param name="Target" value="System.out" />
         <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern" value="%-5p: %c - %m%n" />
+
+            <!-- ConversionPattern로 로그를 어떻게 남길지 설정할 수도 있다. -->
+            <param name="ConversionPattern" value="%-5p: %c %C %M - %m%n" />
         </layout>
     </appender>
 
-    <!-- Application Loggers -->
-    <logger name="com.dev.webApp"  additivity="false">
-        <level value="debug" />
+    <!-- Log level은 아래와 같은 순서로 이루어져 있습니다. -->
+    <!-- TRACE : Debug보다 좀더 상세한 정보
+         DEBUG : 프로그램을 디버깅하기 위한 정보 지정
+         INFO : 상태변경과 같은 정보성 메시지
+         WARN : 처리 가능한 문제, 향후 시스템 에러의 원인이 될 수 있는 경고성 메시지
+         ERROR : 요청을 처리하는 중 문제가 발생한 경우
+         FATAL : 아주 심각한 에러가 발생한 상태, 시스템적으로 심각한 문제가 발생해서 어플리케이션 작동이 불가능할 경우
+    -->
+
+    <!-- Loggers 설정 시작 -->
+    <!-- 1.Application Loggers -->
+    <!-- additivity로 상속받지 않도록 조정 -->
+    <logger name="com.dev.webApp" additivity="false">
+        <!-- INFO ~ FATAL만 출력되도록 조정 -->
+        <level value="INFO" />
         <appender-ref ref="console"/>
     </logger>
 
-    <!--3rdparty Loggers -->
+    <!--2.3rdparty Loggers -->
+    <!-- Spring 내부적으로 발생하는 자체로그 -->
+    <!-- WARN ~ FATAL만 출력되도록 조정 -->
     <logger name="org.springframework.core">
-        <level value="info" />
+        <level value="WARN" />
     </logger>
 
     <logger name="org.springframework.beans">
-        <level value="info" />
+        <level value="WARN" />
     </logger>
 
     <logger name="org.springframework.context">
-        <level value="info" />
+        <level value="WARN" />
     </logger>
 
     <logger name="org.springframework.web">
-        <level value="info" />
+        <level value="WARN" />
     </logger>
 
-    <!-- test level에서는 jdbc의 warn만 노출되도록 설정 -->
-    <logger name="jdbc.audit">
-        <level value="warn"/>
+    <!-- jdbc 로그 -->
+    <!-- 일단, jdbc의 모든 로그가 출력되므로, 추가적인 설정을 진행합니다. -->
+    <logger name="jdbc">
+        <level value="OFF" />
     </logger>
 
-    <logger name="jdbc.resultset">
-        <level value="warn"/>
-    </logger>
-
+    <!-- 연결정보에 관한 정보를 OFF 합니다. -->
     <logger name="jdbc.connection">
-        <level value="warn"/>
+        <level value="OFF" />
+    </logger>
+
+    <!-- SQL문만을 로그로 남기며, PreparedStatement일 경우 관련된 argument 값으로 대체된 SQL문이 보입니다. -->
+    <logger name="jdbc.sqlonly">
+        <level value="OFF" />
+    </logger>
+
+    <!-- SQL문과 해당 SQL을 실행시키는데 수행된 시간 정보(milliseconds)를 포함합니다. -->
+    <logger name="jdbc.sqltiming">
+        <level value="DEBUG" />
+    </logger>
+
+    <!-- ResultSet을 제외한 모든 JDBC 호출 정보를 로그로 남깁니다. 많은 양의 로그가 생성되므로 권장되지 않습니다. -->
+    <logger name="jdbc.audit">
+        <level value="OFF" />
+    </logger>
+
+    <!-- ResultSet을 포함한 모든 JDBC 호출 정보를 로그로 남기므로 매우 방대한 양의 로그가 생성됩니다. -->
+    <logger name="jdbc.resultset">
+        <level value="OFF" />
+    </logger>
+
+    <!-- SQL 결과 조회된 데이터의 table을 로그로 남깁니다. -->
+    <logger name="jdbc.resultsettable">
+        <level value="DEBUG" />
     </logger>
 
     <!-- Root Logger -->
     <root>
-        <priority value="info" />
+        <priority value="off" />
+        <!--        -->
         <appender-ref ref="console" />
     </root>
 </log4j:configuration>

@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         ,"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"
 })
 @WebAppConfiguration // Test for controller
-public class BlogControllerTest extends TestCase {
+public class BlogController2Test extends TestCase {
 
     @Autowired
     private WebApplicationContext ctx;
