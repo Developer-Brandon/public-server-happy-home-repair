@@ -8,9 +8,8 @@
             <param name="ConversionPattern" value="%-5p: %c - %m%n" />
         </layout>
     </appender>
-
     <!-- Application Loggers -->
-    <logger name="com.dev.webApp"  additivity="false">
+    <logger name="com.mycompany.example"  additivity="false">
         <level value="debug" />
         <appender-ref ref="console"/>
     </logger>
@@ -32,23 +31,9 @@
         <level value="info" />
     </logger>
 
-    <!-- test level에서는 jdbc의 warn만 노출되도록 설정 -->
-    <logger name="jdbc.audit">
-        <level value="warn"/>
-    </logger>
-
-    <logger name="jdbc.resultset">
-        <level value="warn"/>
-    </logger>
-
-    <logger name="jdbc.connection">
-        <level value="warn"/>
-    </logger>
-
     <!-- Root Logger -->
     <root>
         <priority value="info" />
         <appender-ref ref="console" />
     </root>
-
 </log4j:configuration>

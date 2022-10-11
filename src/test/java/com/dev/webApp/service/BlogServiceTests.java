@@ -1,7 +1,7 @@
 package com.dev.webApp.service;
 
 import com.dev.webApp.domain.vo.RawBlogPostingVO;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertNotNull;
 
-@Slf4j
+@Log4j
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 public class BlogServiceTests {

@@ -1,18 +1,23 @@
 package com.dev.webApp.config.aop;
 
-import lombok.extern.slf4j.*;
+import lombok.extern.log4j.Log4j2;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
 
-@Aspect
-@Slf4j
-@Component
-public class LogAdvice {
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
-    @Before("execution(* com.dev.webApp.service.*(..))")
-    public void logBefore() {
-
-        log.info("=======================");
-    }
-}
+//@Log4j2
+//@Component
+//@Aspect
+//public class LogAdvice {
+//
+//    private static Logger logger = LogManager.getLogger(LogAdvice.class);
+//
+//    @Before("execution(* com.dev.webApp.service.*(..))")
+//    public void logBefore() {
+//
+//        logger.info("=======================");
+//    }
+//}

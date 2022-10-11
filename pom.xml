@@ -14,7 +14,8 @@
 		<java-version>1.8</java-version>
 		<org.springframework-version>5.0.7.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.9.0</org.aspectj-version>
-		<org.slf4j-version>1.6.6</org.slf4j-version>
+		<org.slf4j-version>1.7.25</org.slf4j-version>
+        <junit-version>4.12</junit-version>
 	</properties>
 
     <!-- profiles 값들 -->
@@ -122,7 +123,7 @@
         </dependency>
 
 		<!-- 3. Logging -->
-		<!-- 3-1. slf4j -->
+		<!-- 3-1. slf4j (logging interface) -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -140,7 +141,9 @@
             <version>${org.slf4j-version}</version>
             <scope>runtime</scope>
         </dependency>
+
         <!-- 3-2. log4j -->
+        <!-- 기존의 1.2.15 version을 1.2.17 version으로 upgrade -->
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
@@ -165,7 +168,9 @@
             </exclusions>
             <scope>runtime</scope>
         </dependency>
+
         <!-- 3-3. log4j2 -->
+        <!-- sql log를 제대로 보기 위해 log4jdbc-log4j2 라이브러리 사용 -->
         <dependency>
             <groupId>org.bgee.log4jdbc-log4j2</groupId>
             <artifactId>log4jdbc-log4j2-jdbc4</artifactId>
@@ -292,7 +297,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.12</version>
+			<version>${junit-version}</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -339,18 +344,6 @@
                     <mainClass>org.test.int1.Main</mainClass>
                 </configuration>
             </plugin>
-            <!--            <plugin>-->
-            <!--                <groupId>org.flywaydb</groupId>-->
-            <!--                <artifactId>flyway-maven-plugin</artifactId>-->
-            <!--                <version>8.0.0</version>-->
-            <!--                <configuration>-->
-            <!--                    <user>root</user>-->
-            <!--                    <password>MomentFactory1!1!1!</password>-->
-            <!--                    <schemas>-->
-            <!--                        <schema>web_app_test</schema>-->
-            <!--                    </schemas>-->
-            <!--                </configuration>-->
-            <!--            </plugin>-->
         </plugins>
     </build>
 </project>
