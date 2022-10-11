@@ -22,6 +22,8 @@
         <property name="maximumPoolSize" value="300" />
         <property name="minimumIdle" value="20" />
         <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
+
+        <!-- <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />-->
         <property name="jdbcUrl" value="${db.url}" />
         <property name="username" value="${db.username}" />
         <property name="password" value="${db.password}" />

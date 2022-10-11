@@ -156,8 +156,7 @@
         parameterType="com.dev.webApp.domain.dto.SelectRepairApplyPaginationDTO"
         resultType="com.dev.webApp.domain.vo.RepairApplyVO">
     <![CDATA[
-        /* 견적 문의 리스트 조회 쿼리
-           (client에서 조회할 일이 없어서, pagination 워딩 넣지 않았습니다.) */
+        /* 견적 문의 리스트 조회 쿼리 (client에서 조회할 일이 없어서, pagination 워딩 넣지 않았습니다.) */
     ]]>
     select tb_r_apply.r_apply_no as repairApplyNo
             , tb_r_apply.r_type_no as repairTypeNo

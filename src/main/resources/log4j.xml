@@ -19,7 +19,9 @@
         <appender-ref ref="console"/>
     </logger>
 
-    <!--2. (Spring 내부적으로 발생하는 자체로그) 3rdparty Loggers -->
+    <!--2.3rdparty Loggers -->
+
+    <!-- Spring 내부적으로 발생하는 자체로그 -->
     <logger name="org.springframework.core">
         <level value="info" />
     </logger>
@@ -34,6 +36,23 @@
 
     <logger name="org.springframework.web">
         <level value="info" />
+    </logger>
+
+    <!-- jdbc 로그 -->
+    <logger name="jdbc.resultset">
+        <level value="warn"/>
+    </logger>
+
+    <logger name="jdbc.connection">
+        <level value="warn"/>
+    </logger>
+
+    <logger name="jdbc.sqltiming">
+        <level value="warn"/>
+    </logger>
+
+    <logger name="jdbc.sqlonly">
+        <level value="warn"/>
     </logger>
     <!-- Loggers 설정 끝 -->
 
