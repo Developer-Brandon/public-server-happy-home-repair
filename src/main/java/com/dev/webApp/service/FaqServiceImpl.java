@@ -6,6 +6,8 @@ import com.dev.webApp.domain.vo.PaginationFaqVO;
 import com.dev.webApp.mapper.FaqMapper;
 import com.dev.webApp.util.page.PageHandler;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +17,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @Transactional(rollbackFor = Exception.class)
 public class FaqServiceImpl implements FaqService{
+
+    private static Logger logger = LoggerFactory.getLogger(FaqServiceImpl.class);
 
     private final FaqMapper faqMapper;
 
@@ -44,7 +48,9 @@ public class FaqServiceImpl implements FaqService{
 
         FaqVO selectedFaqVO = faqMapper.selectFaq(FaqVO.getFaqNo());
 
-        if(selectedFaqVO.getFaqNo() == 0L) {
+        logger.info("selectedFaqVO: {}", selectedFaqVO);
+
+        if(selectedFaqVO == null) {
             throw new Exception("게시물을 조회하는 과정에서 문제가 발생하였습니다.");
         }
 

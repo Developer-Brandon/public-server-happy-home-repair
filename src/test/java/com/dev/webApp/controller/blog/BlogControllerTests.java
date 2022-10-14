@@ -15,8 +15,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
-import static net.bytebuddy.matcher.ElementMatchers.is;
-import static net.bytebuddy.matcher.ElementMatchers.isArray;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -28,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         ,"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"
 })
 @WebAppConfiguration // Test for controller
-public class BlogController2Test extends TestCase {
+public class BlogControllerTests extends TestCase {
 
     @Autowired
     private WebApplicationContext ctx;
@@ -60,7 +58,7 @@ public class BlogController2Test extends TestCase {
     @Test
     public void selectBlogListByDBWhenDataExists() throws Exception {
 
-        // 데이터가 있다면, 블로그 리스트를 db에서 잘 불러오는지 확인
+        // 데이터를 아예 삽입하여, 블로그 리스트를 db에서 잘 불러오는지 확인
 
         // 1. data 통째로 삽입
 
@@ -74,7 +72,6 @@ public class BlogController2Test extends TestCase {
         // then
         resultActions
                 .andExpect(status().is(200));
-
 
         ////////////////////////////////////////////////////////////////
 
@@ -94,29 +91,31 @@ public class BlogController2Test extends TestCase {
                 .andExpect(jsonPath("$.[0].postingNo").exists())
                 .andExpect(jsonPath("$.[0].postingNo").isNumber())
                 .andExpect(jsonPath("$.[0].title").exists())
-                .andExpect(jsonPath("$.[0].title").isString());
-    }
-
-    @Test
-    public void insertBulkDataToDB() throws Exception {
-
-        //
-        mockMvc.perform(
-                get("/blog/list/bulk")
-        )
-                .andExpect(status().is(200))
-                .andDo(print())
-                .andReturn();
+                .andExpect(jsonPath("$.[0].title").isString())
+                .andExpect(jsonPath("$.[0].imgSrc").exists())
+                .andExpect(jsonPath("$.[0].imgSrc").isString())
+                .andExpect(jsonPath("$.[0].postingRegDt").exists())
+                .andExpect(jsonPath("$.[0].postingRegDt").isString())
+                .andExpect(jsonPath("$.[0].regDt").exists())
+                .andExpect(jsonPath("$.[0].regDt").isString());
     }
 
     @Test
     public void updateDifferentBlogListToDB() throws Exception {
 
-        //
+        // 데이터가 있다면, 다른 리트만큼만 띄어서 db에서 잘 삽입되고 있는지 확인
+
+        // 1. 다른데이터가 있는지 비교하고 확인
+
+        // 2. 다른 데이터의 리스트만큼 만업데이트 되는지 확인
+
+        // 위의 테스트는 컨트롤러에서는 자세하게 테스트하기
+
         mockMvc.perform(
                 get("/blog/list/diff-bulk")
         )
                 .andExpect(status().is(200))
+                .andExpect(content().contentType(BaseConfigController.JSON_FORMAT))
                 .andDo(print())
                 .andReturn();
     }

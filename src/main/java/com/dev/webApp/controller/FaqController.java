@@ -24,7 +24,7 @@ public class FaqController extends BaseConfigController {
 
         Integer wholeFaqCount = faqService.getTotalCnt();
 
-        return new ResponseEntity<>(wholeFaqCount, HttpStatus.OK);
+        return ResponseEntity.ok(wholeFaqCount);
     }
 
     // 자주하는질문 리스트만 json형식으로 불러오는 api
@@ -45,7 +45,7 @@ public class FaqController extends BaseConfigController {
                 .getFaqPaginationList(selectFaqPaginationDTO)
                 .getFaqVOList();
 
-        return new ResponseEntity(faqVOList, HttpStatus.OK);
+        return ResponseEntity.ok(faqVOList);
     }
 
     // 단일 자주하는질문만 json형식으로 불러오는 api
@@ -61,7 +61,7 @@ public class FaqController extends BaseConfigController {
 
         FaqVO faqVO = faqService.getFaq(requestFaqVO);
 
-        return new ResponseEntity(faqVO, HttpStatus.OK);
+        return ResponseEntity.ok(faqVO);
     }
 
     // 단일 자주하는질문만 삽입하는 api
@@ -74,7 +74,7 @@ public class FaqController extends BaseConfigController {
 
         Integer faqNo = faqService.registerFaq(faqVO);
 
-        return new ResponseEntity(faqNo, HttpStatus.OK);
+        return ResponseEntity.ok(faqNo);
     }
 
     // 단일 자주하는질문만 수정하는 api

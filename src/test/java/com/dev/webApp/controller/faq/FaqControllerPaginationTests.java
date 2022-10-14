@@ -2,8 +2,8 @@ package com.dev.webApp.controller.faq;
 
 import com.dev.webApp.config.controller.BaseConfigController;
 import com.dev.webApp.domain.vo.FaqVO;
-import com.dev.webApp.service.FaqService;
 import com.dev.webApp.util.FaqUseYnEnum;
+import com.dev.webApp.util.NumberUtil;
 import com.google.gson.Gson;
 import junit.framework.TestCase;
 import org.junit.Before;
@@ -19,8 +19,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -33,13 +33,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         ,"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"
 })
 @WebAppConfiguration // Test for controller
-public class FaqControllerTest extends TestCase {
+public class FaqControllerPaginationTests extends TestCase {
+
+    // Faq의 pagination을 test하기 위한 test case들입니다.
 
     @Autowired
     private WebApplicationContext ctx;
 
     @Autowired
-    private FaqService faqService;
+    private NumberUtil numberUtil;
 
     private MockMvc mockMvc;
 
@@ -49,34 +51,103 @@ public class FaqControllerTest extends TestCase {
     }
 
     @Test
-    public void selectFaqList() throws Exception {
+    public void insertFaqAndSelectFaqListTest() throws Exception {
 
-        String url = "/faq/list";
+        // faq list가 제대로 조회되는지 테스트 하기
+
+        // 1. 먼저, faq를 삽입하기
+
+        String url = "/faq";
+
+        int randomInteger = numberUtil.getRandomNumber();
+
+        FaqVO faqVO = FaqVO.builder()
+                .title("테스트" + randomInteger + "_자주하는질문_제목")
+                .content("테스트" + randomInteger + "_자주하는질문_내용")
+                .build();
+
+        String insertFaqDTO = new Gson().toJson(faqVO);
 
         ResultActions resultActions = mockMvc
                 .perform(
-                        get(url)
-                        .contentType(BaseConfigController.JSON_FORMAT)
+                        post(url)
+                                .contentType(BaseConfigController.JSON_FORMAT)
+                                .content(insertFaqDTO)
                 )
                 .andDo(print());
 
         resultActions
-                .andExpect(status().isOk())
+                .andExpect(status().is(200))
                 .andExpect(content().contentType(BaseConfigController.JSON_FORMAT));
+
+        /////////////////////////////////////////////////////////
+
+        // 2. 그 후, faq list 조회해서 방금 전 삽입한 faq가 제대로 삽입되었는지 확인하기
+        // (단일 조회는 아래에서 테스트 예정입니다)
+
+        String url2 = "/faq/list";
+
+        ResultActions resultActions2 = mockMvc
+                .perform(
+                        get(url2)
+                        .contentType(BaseConfigController.JSON_FORMAT)
+                )
+                .andDo(print());
+
+        resultActions2
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(BaseConfigController.JSON_FORMAT))
+                .andExpect(jsonPath("$.[0].title").exists())
+                .andExpect(jsonPath("$.[0].title").isString())
+                .andExpect(jsonPath("$.[0].title", is(containsString("테스트" + randomInteger))))
+                .andExpect(jsonPath("$.[0].content").exists())
+                .andExpect(jsonPath("$.[0].content").isString())
+                .andExpect(jsonPath("$.[0].content", is(containsString("테스트" + randomInteger))));
     }
 
     @Test
-    public void selectFaqList2() throws Exception {
+    public void insertAndSelectFaqTest() throws Exception {
 
-        String pageNo = "2";
+        // 단일 faq가 조회되는지 확인하기
 
-        String url = "/faq/list?currentPage=" + pageNo;
+        // 1. 먼저, faq를 삽입하기
+
+        String url = "/faq";
+
+        int randomInteger = numberUtil.getRandomNumber();
+
+        FaqVO faqVO = FaqVO.builder()
+                .title("테스트" + randomInteger + "_자주하는질문_제목")
+                .content("테스트" + randomInteger + "_자주하는질문_내용")
+                .build();
+
+        String insertFaqDTO = new Gson().toJson(faqVO);
 
         ResultActions resultActions = mockMvc
-                .perform(get(url))
+                .perform(
+                        post(url)
+                                .contentType(BaseConfigController.JSON_FORMAT)
+                                .content(insertFaqDTO)
+                )
                 .andDo(print());
 
         resultActions
+                .andExpect(status().is(200))
+                .andExpect(content().contentType(BaseConfigController.JSON_FORMAT));
+
+        /////////////////////////////////////////////////////////
+
+        // 2. 단일 faq 조회하기
+
+        String pageNo = "2";
+
+        String url2 = "/faq/list?currentPage=" + pageNo;
+
+        ResultActions resultActions2 = mockMvc
+                .perform(get(url2))
+                .andDo(print());
+
+        resultActions2
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(BaseConfigController.JSON_FORMAT));
     }
