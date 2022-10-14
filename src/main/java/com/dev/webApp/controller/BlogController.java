@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.dev.webApp.config.controller.BaseConfigController.JSON_FORMAT;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/blog")
@@ -17,7 +19,7 @@ public class BlogController {
     private final BlogService blogService;
 
     // todo: 아래 api의 경우 데이터만 주고 받는 식이니까, jsp를 return 하는 api도 만들기
-    @GetMapping("/list/{type}")
+    @GetMapping(value = "/list/{type}", produces = JSON_FORMAT)
     public ResponseEntity<String> checkBlogPostingListStatus(
             @PathVariable
             String type
@@ -42,12 +44,12 @@ public class BlogController {
     // 2. 데이터 베이스에 있는 포스팅 정보 리스트 불러오는 api
     // 모든 데이터를 긁어오도록 개발하여 클라이언트단에서 메인으로 뿌려주는 것으로 처리
     // (애초에 naver blog에서 불러오는 수가 정해져 있으므로, 그냥 사용해도 무관할 듯. 그리고 점점 수가 쌓여가는건 client에서 제한해서 사용해도 될 듯 )
-    @GetMapping("/list")
+    @GetMapping(value = "/list", produces = JSON_FORMAT)
     public ResponseEntity<List<BlogPostingVO>> getBlogPostingList() throws Exception {
 
         List<BlogPostingVO> allBlogList = blogService.getAllBlogList();
 
-        return new ResponseEntity<>(allBlogList, HttpStatus.OK);
+        return ResponseEntity.ok(allBlogList);
     }
 
     // 3. 단일 조회할 일이 없어서, 추후 필요한 일이 생기면 만드는 것으로.....
