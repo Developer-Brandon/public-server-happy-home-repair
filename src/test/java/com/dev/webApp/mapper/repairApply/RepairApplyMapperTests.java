@@ -54,7 +54,7 @@ public class RepairApplyMapperTests {
     }
 
     @Test
-    public void getRepairApply() {
+    public void getRepairApply() throws Exception {
 
         // 1. 삽입 테스트
 
@@ -76,7 +76,9 @@ public class RepairApplyMapperTests {
         //////////////////////////////////////////////////////////
 
         // 2. 조회 테스트
-        RepairApplyVO repairApplyVO = repairMapper.selectRepairApply(insertRepairApplyDTO.getInsertedRepairApplyNo());
+        RepairApplyVO repairApplyVO = repairMapper
+                .selectRepairApply(insertRepairApplyDTO.getInsertedRepairApplyNo())
+                .orElseThrow(Exception::new);
 
         //
         assertThat(repairApplyVO, is(notNullValue()));
@@ -123,7 +125,7 @@ public class RepairApplyMapperTests {
     }
 
     @Test
-    public void updateRepairApply() {
+    public void updateRepairApply() throws Exception {
 
         // 1. 조회 전 삽입
         InsertRepairApplyDTO insertRepairApplyDTO = InsertRepairApplyDTO.builder()
@@ -144,7 +146,9 @@ public class RepairApplyMapperTests {
         ///////////////////////////////////////////////////////////
 
         // 2. 조회 테스트
-        RepairApplyVO repairApplyVO = repairMapper.selectRepairApply(insertRepairApplyDTO.getInsertedRepairApplyNo());
+        RepairApplyVO repairApplyVO = repairMapper
+                .selectRepairApply(insertRepairApplyDTO.getInsertedRepairApplyNo())
+                .orElseThrow(Exception::new);
 
         //
         assertThat(repairApplyVO, is(notNullValue()));
@@ -172,7 +176,9 @@ public class RepairApplyMapperTests {
 
         // 4. 업데이트 여부 검증
 
-        RepairApplyVO repairApplyVO2 = repairMapper.selectRepairApply(insertRepairApplyDTO.getInsertedRepairApplyNo());
+        RepairApplyVO repairApplyVO2 = repairMapper
+                .selectRepairApply(insertRepairApplyDTO.getInsertedRepairApplyNo())
+                .orElseThrow(Exception::new);
 
         //
         assertThat(repairApplyVO2, is(notNullValue()));
@@ -181,7 +187,7 @@ public class RepairApplyMapperTests {
     }
 
     @Test
-    public void deleteFaq() {
+    public void deleteFaq() throws Exception {
 
         // 1. 삭제 전 삽입
         InsertRepairApplyDTO insertRepairApplyDTO = InsertRepairApplyDTO.builder()
@@ -202,7 +208,9 @@ public class RepairApplyMapperTests {
         //////////////////////////////////////////////////////////
 
         // 2. 조회 테스트
-        RepairApplyVO repairApplyVO = repairMapper.selectRepairApply(insertRepairApplyDTO.getInsertedRepairApplyNo());
+        RepairApplyVO repairApplyVO = repairMapper
+                .selectRepairApply(insertRepairApplyDTO.getInsertedRepairApplyNo())
+                .orElseThrow(Exception::new);
 
         //
         assertThat(repairApplyVO, is(notNullValue()));

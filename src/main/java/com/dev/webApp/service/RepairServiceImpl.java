@@ -5,6 +5,8 @@ import com.dev.webApp.domain.vo.*;
 import com.dev.webApp.mapper.RepairMapper;
 import com.dev.webApp.util.page.PageHandler;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,44 +17,74 @@ import java.util.List;
 @Transactional(rollbackFor = Exception.class)
 public class RepairServiceImpl implements RepairService{
 
+    private static Logger logger = LoggerFactory.getLogger(RepairServiceImpl.class);
+
     private final RepairMapper repairMapper;
 
     @Override
-    public List<RepairTypeVO> getRepairTypeList(SelectRepairTypeDTO selectRepairTypeDTO) {
+    public List<RepairTypeVO> getRepairTypeList(SelectRepairTypeDTO selectRepairTypeDTO) throws Exception {
 
+        List<RepairTypeVO> repairTypeVOList = repairMapper.selectRepairTypeList(selectRepairTypeDTO);
 
+        if(repairTypeVOList.size() == 0) {
+            throw new Exception("조회하는 과정에서 문제가 발생하였습니다. 반드시 존재해야하는 데이터입니다.");
+        }
 
-        return repairMapper.selectRepairTypeList(selectRepairTypeDTO);
+        return repairTypeVOList;
     }
 
     @Override
-    public RepairTypeVO getRepairType(Integer repairTypeNo) {
+    public RepairTypeVO getRepairType(Integer repairTypeNo) throws Exception {
 
-        return repairMapper.selectRepairType(repairTypeNo);
+        RepairTypeVO repairTypeVO = repairMapper
+                .selectRepairType(repairTypeNo)
+                .orElseThrow(Exception::new);
+
+        return repairTypeVO;
     }
 
     @Override
-    public List<RepairLocationVO> getRepairLocationList(SelectRepairLocationDTO selectRepairLocationDTO) {
+    public List<RepairLocationVO> getRepairLocationList(SelectRepairLocationDTO selectRepairLocationDTO) throws Exception {
 
-        return repairMapper.selectRepairLocationList(selectRepairLocationDTO);
+        List<RepairLocationVO> repairLocationVOList = repairMapper.selectRepairLocationList(selectRepairLocationDTO);
+
+        if(repairLocationVOList.size() == 0) {
+            throw new Exception("조회하는 과정에서 문제가 발생하였습니다. 반드시 존재해야하는 데이터입니다.");
+        }
+
+        return repairLocationVOList;
     }
 
     @Override
-    public RepairLocationVO getRepairLocation(Integer repairLocationNo) {
+    public RepairLocationVO getRepairLocation(Integer repairLocationNo) throws Exception {
 
-        return repairMapper.selectRepairLocation(repairLocationNo);
+        RepairLocationVO repairLocationVO = repairMapper
+                .selectRepairLocation(repairLocationNo)
+                .orElseThrow(Exception::new);
+
+        return repairLocationVO;
     }
 
     @Override
-    public List<RepairStateVO> getRepairStateList(SelectRepairStateDTO selectRepairStateDTO) {
+    public List<RepairStateVO> getRepairStateList(SelectRepairStateDTO selectRepairStateDTO) throws Exception {
 
-        return repairMapper.selectRepairStateList(selectRepairStateDTO);
+        List<RepairStateVO> repairStateVOS = repairMapper.selectRepairStateList(selectRepairStateDTO);
+
+        if(repairStateVOS.size() == 0) {
+            throw new Exception("조회하는 과정에서 문제가 발생하였습니다. 반드시 존재해야하는 데이터입니다.");
+        }
+
+        return repairStateVOS;
     }
 
     @Override
-    public RepairStateVO getRepairState(Integer repairStateNo) {
+    public RepairStateVO getRepairState(Integer repairStateNo) throws Exception {
 
-        return repairMapper.selectRepairState(repairStateNo);
+        RepairStateVO repairStateVO = repairMapper
+                .selectRepairState(repairStateNo)
+                .orElseThrow(Exception::new);
+
+        return repairStateVO;
     }
 
     @Override
@@ -79,7 +111,11 @@ public class RepairServiceImpl implements RepairService{
     @Override
     public RepairApplyVO getRepairApply(Integer repairApplyNo) throws Exception {
 
-        return repairMapper.selectRepairApply(repairApplyNo);
+        RepairApplyVO repairApplyVO = repairMapper
+                .selectRepairApply(repairApplyNo)
+                .orElseThrow(Exception::new);
+
+        return repairApplyVO;
     }
 
     @Override

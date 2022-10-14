@@ -20,7 +20,7 @@ public class NoticeController extends BaseConfigController {
     private final NoticeService noticeService;
 
     // 공지사항 리스트만 json형식으로 불러오는 api
-    @GetMapping(value = "/list")
+    @GetMapping(value = "/list", produces = JSON_FORMAT)
     public ResponseEntity<List<NoticeVO>> getNoticeList(
             @RequestParam(required = false, defaultValue = "1")
             Integer currentPage
@@ -37,11 +37,11 @@ public class NoticeController extends BaseConfigController {
                 .getNoticePaginationList(selectNoticePaginationDTO)
                 .getNoticeVOList();
 
-        return new ResponseEntity(noticeVOList, HttpStatus.OK);
+        return ResponseEntity.ok(noticeVOList);
     }
 
     // 공지사항의 개수를 불러오는 api
-    @GetMapping(value = "/count")
+    @GetMapping(value = "/count", produces = JSON_FORMAT)
     public ResponseEntity<Integer> getWholeNoticeCount() throws Exception {
 
         Integer wholeNoticeCount = noticeService.getTotalCnt();
@@ -50,7 +50,7 @@ public class NoticeController extends BaseConfigController {
     }
 
     // 단일 공지사항만 json형식으로 불러오는 api
-    @GetMapping(value = "")
+    @GetMapping(value = "", produces = JSON_FORMAT)
     public ResponseEntity<NoticeVO> getNotice(
             @RequestParam
             Integer noticeNo
@@ -62,25 +62,25 @@ public class NoticeController extends BaseConfigController {
 
         NoticeVO noticeVO = noticeService.getNotice(requestNoticeVO);
 
-        return new ResponseEntity(noticeVO, HttpStatus.OK);
+        return ResponseEntity.ok(noticeVO);
     }
 
     // 단일 공지사항만 삽입하는 api
     // (admin에서만 필요할법한 기능이지만 혹시 몰라서 추가 개발)
-    @PostMapping(value = "")
-    public ResponseEntity<Long> insertNotice(
+    @PostMapping(value = "", produces = JSON_FORMAT)
+    public ResponseEntity<Integer> insertNotice(
             @RequestBody
             NoticeVO noticeVO
     ) throws Exception {
 
         Integer noticeNo = noticeService.registerNotice(noticeVO);
 
-        return new ResponseEntity(noticeNo, HttpStatus.OK);
+        return ResponseEntity.ok(noticeNo);
     }
 
     // 단일 공지사항만 수정하는 api
     // (admin에서만 필요할법한 기능이지만 혹시 몰라서 추가 개발)
-    @PutMapping(value = "")
+    @PutMapping(value = "", produces = JSON_FORMAT)
     public ResponseEntity updateNotice(
             @RequestBody
             NoticeVO noticeVO
@@ -93,7 +93,7 @@ public class NoticeController extends BaseConfigController {
 
     // 단일 공지사항 상태만 수정하는 api
     // (admin에서만 필요할법한 기능이지만 혹시 몰라서 추가 개발)
-    @PutMapping(value = "/state")
+    @PutMapping(value = "/state", produces = JSON_FORMAT)
     public ResponseEntity updateNoticeState(
             @RequestBody
                     NoticeVO noticeVO
@@ -106,7 +106,7 @@ public class NoticeController extends BaseConfigController {
 
     // 단일 공지사항만 삭제하는 api
     // (admin에서만 필요할법한 기능이지만 혹시 몰라서 추가 개발)
-    @DeleteMapping(value = "")
+    @DeleteMapping(value = "", produces = JSON_FORMAT)
     public ResponseEntity deleteNotice(
             @RequestParam
                     Integer noticeNo

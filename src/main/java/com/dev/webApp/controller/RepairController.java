@@ -22,7 +22,7 @@ public class RepairController extends BaseConfigController {
 
     // 수리 종류 리스트만 json형식으로 불러오는 api
     @GetMapping(value = "/type/list")
-    public ResponseEntity<List<RepairTypeVO>> getRepairTypeList() {
+    public ResponseEntity<List<RepairTypeVO>> getRepairTypeList() throws Exception {
 
         SelectRepairTypeDTO selectRepairTypeDTO = SelectRepairTypeDTO.builder()
                 .itemCnt(0)
@@ -35,7 +35,7 @@ public class RepairController extends BaseConfigController {
 
     // 수리 지역 리스트만 json형식으로 불러오는 api
     @GetMapping(value = "/location/list")
-    public ResponseEntity<List<RepairLocationVO>> getRepairLocationList() {
+    public ResponseEntity<List<RepairLocationVO>> getRepairLocationList() throws Exception {
 
         SelectRepairLocationDTO selectRepairLocationDTO = SelectRepairLocationDTO.builder()
                 .itemCnt(0)
@@ -48,7 +48,7 @@ public class RepairController extends BaseConfigController {
 
     // 수리 상태 리스트만 json형식으로 불러오는 api
     @GetMapping(value = "/state/list")
-    public ResponseEntity<List<RepairStateVO>> getRepairStateList() {
+    public ResponseEntity<List<RepairStateVO>> getRepairStateList() throws Exception {
 
         SelectRepairStateDTO selectRepairStateDTO = SelectRepairStateDTO.builder()
                 .itemCnt(0)

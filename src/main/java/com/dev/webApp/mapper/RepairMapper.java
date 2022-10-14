@@ -8,6 +8,7 @@ import com.dev.webApp.domain.vo.RepairTypeVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface RepairMapper {
 
@@ -15,19 +16,19 @@ public interface RepairMapper {
 
     List<RepairTypeVO> selectRepairTypeList(SelectRepairTypeDTO selectRepairTypeDTO);
 
-    RepairTypeVO selectRepairType(@Param("repairTypeNo")Integer repairTypeNo);
+    Optional<RepairTypeVO> selectRepairType(@Param("repairTypeNo")Integer repairTypeNo);
 
     List<RepairLocationVO> selectRepairLocationList(SelectRepairLocationDTO selectRepairLocationDTO);
 
-    RepairLocationVO selectRepairLocation(@Param("repairLocationNo")Integer repairLocationNo);
+    Optional<RepairLocationVO> selectRepairLocation(@Param("repairLocationNo")Integer repairLocationNo);
 
     List<RepairStateVO> selectRepairStateList(SelectRepairStateDTO selectRepairStateDTO);
 
-    RepairStateVO selectRepairState(@Param("repairStateNo")Integer repairStateNo);
+    Optional<RepairStateVO> selectRepairState(@Param("repairStateNo")Integer repairStateNo);
 
     int insertRepairApply(InsertRepairApplyDTO insertRepairApplyDTO);
 
-    RepairApplyVO selectRepairApply(@Param("repairApplyNo")Integer repairApplyNo);
+    Optional<RepairApplyVO> selectRepairApply(@Param("repairApplyNo")Integer repairApplyNo);
 
     List<RepairApplyVO> selectRepairApplyList(SelectRepairApplyPaginationDTO selectRepairApplyPaginationDTO);
 

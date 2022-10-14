@@ -50,14 +50,16 @@ public class RepairMapperTests {
     }
 
     @Test
-    public void getRepairType() {
+    public void getRepairType() throws Exception {
 
         // 1. 여기서 삽입테스트는 먼저 하지 않아도 되는 것이, repairType은 반드시 raw data가 존재해야하는 data입니다.
 
         //////////////////////////////////////////////////////////
 
         // 2. 조회 테스트
-        RepairTypeVO repairTypeVO = repairMapper.selectRepairType(1);
+        RepairTypeVO repairTypeVO = repairMapper
+                .selectRepairType(1)
+                .orElseThrow(Exception::new);
 
         //
         assertThat(repairTypeVO, is(notNullValue()));
@@ -81,14 +83,16 @@ public class RepairMapperTests {
     }
 
     @Test
-    public void getRepairLocation() {
+    public void getRepairLocation() throws Exception {
 
         // 1. 여기서 삽입테스트는 먼저 하지 않아도 되는 것이, repairLocation은 반드시 raw data가 존재해야하는 data입니다.
 
         //////////////////////////////////////////////////////////
 
         // 2. 조회 테스트
-        RepairLocationVO repairLocationVO = repairMapper.selectRepairLocation(1);
+        RepairLocationVO repairLocationVO = repairMapper
+                .selectRepairLocation(1)
+                .orElseThrow(Exception::new);
 
         //
         assertThat(repairLocationVO, is(notNullValue()));
@@ -111,14 +115,16 @@ public class RepairMapperTests {
     }
 
     @Test
-    public void getRepairState() {
+    public void getRepairState() throws Exception {
 
         // 1. 여기서 삽입테스트는 먼저 하지 않아도 되는 것이, repairState은 반드시 raw data가 존재해야하는 data입니다.
 
         //////////////////////////////////////////////////////////
 
         // 2. 조회 테스트
-        RepairStateVO repairStateVO = repairMapper.selectRepairState(1);
+        RepairStateVO repairStateVO = repairMapper
+                .selectRepairState(1)
+                .orElseThrow(Exception::new);
 
         //
         assertThat(repairStateVO, is(notNullValue()));

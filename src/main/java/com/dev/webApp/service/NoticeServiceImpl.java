@@ -6,6 +6,8 @@ import com.dev.webApp.domain.vo.PaginationNoticeVO;
 import com.dev.webApp.mapper.NoticeMapper;
 import com.dev.webApp.util.page.PageHandler;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +17,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @Transactional(rollbackFor = Exception.class)
 public class NoticeServiceImpl implements NoticeService{
+
+    private static Logger logger = LoggerFactory.getLogger(NoticeServiceImpl.class);
 
     private final NoticeMapper noticeMapper;
 
@@ -46,7 +50,7 @@ public class NoticeServiceImpl implements NoticeService{
 
         NoticeVO selectedNoticeVO = noticeMapper.selectNotice(noticeVO.getNoticeNo());
 
-        if(selectedNoticeVO.getNoticeNo() == 0L) {
+        if(selectedNoticeVO == null) {
             throw new Exception("게시물을 조회하는 과정에서 문제가 발생하였습니다.");
         }
 

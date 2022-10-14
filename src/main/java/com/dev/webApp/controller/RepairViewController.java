@@ -20,7 +20,7 @@ public class RepairViewController extends BaseConfigController {
 
     private final RepairService repairService;
 
-    private Model addRepairItemsToModel(Model model) {
+    private Model addRepairItemsToModel(Model model) throws Exception {
 
         List<RepairTypeVO> repairTypeVOList = repairService.getRepairTypeList(SelectRepairTypeDTO.builder().build());
 
