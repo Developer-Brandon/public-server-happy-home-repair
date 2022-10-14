@@ -21,7 +21,7 @@ public class RepairController extends BaseConfigController {
     private final RepairService repairService;
 
     // 수리 종류 리스트만 json형식으로 불러오는 api
-    @GetMapping(value = "/type/list")
+    @GetMapping(value = "/type/list", produces = JSON_FORMAT)
     public ResponseEntity<List<RepairTypeVO>> getRepairTypeList() throws Exception {
 
         SelectRepairTypeDTO selectRepairTypeDTO = SelectRepairTypeDTO.builder()
@@ -30,11 +30,11 @@ public class RepairController extends BaseConfigController {
 
         List<RepairTypeVO> repairTypeVOList = repairService.getRepairTypeList(selectRepairTypeDTO);
 
-        return new ResponseEntity(repairTypeVOList, HttpStatus.OK);
+        return ResponseEntity.ok(repairTypeVOList);
     }
 
     // 수리 지역 리스트만 json형식으로 불러오는 api
-    @GetMapping(value = "/location/list")
+    @GetMapping(value = "/location/list", produces = JSON_FORMAT)
     public ResponseEntity<List<RepairLocationVO>> getRepairLocationList() throws Exception {
 
         SelectRepairLocationDTO selectRepairLocationDTO = SelectRepairLocationDTO.builder()
@@ -43,11 +43,11 @@ public class RepairController extends BaseConfigController {
 
         List<RepairLocationVO> repairLocationVOList = repairService.getRepairLocationList(selectRepairLocationDTO);
 
-        return new ResponseEntity(repairLocationVOList, HttpStatus.OK);
+        return ResponseEntity.ok(repairLocationVOList);
     }
 
     // 수리 상태 리스트만 json형식으로 불러오는 api
-    @GetMapping(value = "/state/list")
+    @GetMapping(value = "/state/list", produces = JSON_FORMAT)
     public ResponseEntity<List<RepairStateVO>> getRepairStateList() throws Exception {
 
         SelectRepairStateDTO selectRepairStateDTO = SelectRepairStateDTO.builder()
@@ -56,11 +56,11 @@ public class RepairController extends BaseConfigController {
 
         List<RepairStateVO> repairStateVOList = repairService.getRepairStateList(selectRepairStateDTO);
 
-        return new ResponseEntity(repairStateVOList, HttpStatus.OK);
+        return ResponseEntity.ok(repairStateVOList);
     }
 
     // 수리 신청 현황 리스트만 json형식으로 불러오는 api
-    @GetMapping(value = "/list")
+    @GetMapping(value = "/list", produces = JSON_FORMAT)
     public ResponseEntity<List<RepairApplyVO>> getRepairApplyList(
             @RequestParam(required = false)
             Integer currentPage
@@ -81,13 +81,13 @@ public class RepairController extends BaseConfigController {
                 .getRepairApplyList(selectRepairApplyPaginationDTO)
                 .getRepairApplyVOList();
 
-        return new ResponseEntity(repairApplyVOList, HttpStatus.OK);
+        return ResponseEntity.ok(repairApplyVOList);
     }
 
     // client에서 수리 신청 현황을 당장 볼 일이 없으므로, 수리 신청 현황의 전체 개수를 불러오지는 않아도 될 것 같습니다.
 
     // 단일 수리 신청 현황만 json형식으로 불러오는 api
-    @GetMapping(value = "")
+    @GetMapping(value = "", produces = JSON_FORMAT)
     public ResponseEntity<RepairApplyVO> getRepairApply(
             @RequestParam
             Integer repairApplyNo
@@ -95,12 +95,12 @@ public class RepairController extends BaseConfigController {
 
         RepairApplyVO repairApplyVO = repairService.getRepairApply(repairApplyNo);
 
-        return new ResponseEntity(repairApplyVO, HttpStatus.OK);
+        return ResponseEntity.ok(repairApplyVO);
     }
 
     // 단일 수리 신청 현황만 삽입하는 api
     // (admin에서만 필요할법한 기능이지만 혹시 몰라서 추가 개발)
-    @PostMapping(value = "")
+    @PostMapping(value = "", produces = JSON_FORMAT)
     public ResponseEntity<Integer> insertRepairApply(
             @RequestBody
             InsertRepairApplyDTO insertRepairApplyDTO
@@ -108,13 +108,13 @@ public class RepairController extends BaseConfigController {
 
         Integer insertedRepairApplyNo = repairService.registerRepairApply(insertRepairApplyDTO);
 
-        return new ResponseEntity(insertedRepairApplyNo, HttpStatus.OK);
+        return ResponseEntity.ok(insertedRepairApplyNo);
     }
 
     // 단일 수리 신청 현황만 수정하는 api
     // (admin에서만 필요할법한 기능이지만 혹시 몰라서 추가 개발)
     // (이곳에서는 단일 수리 신청 현황 '상태'만 수정하는 api는 필요없다고 판단되어 넣지 않았습니다.)
-    @PutMapping(value = "")
+    @PutMapping(value = "", produces = JSON_FORMAT)
     public ResponseEntity updateRepairApply(
             @RequestBody
                     UpdateRepairApplyDTO updateRepairApplyDTO
@@ -127,7 +127,7 @@ public class RepairController extends BaseConfigController {
 
     // 단일 수리 신청 현황만 삭제하는 api
     // (admin에서만 필요할법한 기능이지만 혹시 몰라서 추가 개발)
-    @DeleteMapping(value = "")
+    @DeleteMapping(value = "", produces = JSON_FORMAT)
     public ResponseEntity deleteRepairApply(
             @RequestBody
             Integer repairApplyNo
