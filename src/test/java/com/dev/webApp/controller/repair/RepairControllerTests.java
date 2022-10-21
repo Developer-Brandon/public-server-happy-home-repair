@@ -116,7 +116,7 @@ public class RepairControllerTests extends TestCase {
                 .andExpect(status().is(200))
                 .andExpect(jsonPath("$.[0].explanation").exists())
                 .andExpect(jsonPath("$.[0].explanation").isString())
-                .andExpect(jsonPath("$.[0].explanation", is(containsString("테스트" + randomInteger))));
+                .andExpect(jsonPath("$.[0].explanation", is(containsString("테스트_데이터" + randomInteger))));
     }
 
     @Test
@@ -182,7 +182,7 @@ public class RepairControllerTests extends TestCase {
                 .andExpect(status().is(200))
                 .andExpect(jsonPath("$.explanation").exists())
                 .andExpect(jsonPath("$.explanation").isString())
-                .andExpect(jsonPath("$.explanation", is(containsString("테스트" + randomInteger))));
+                .andExpect(jsonPath("$.explanation", is(containsString("테스트_데이터" + randomInteger))));
     }
 
     @Test
@@ -241,6 +241,7 @@ public class RepairControllerTests extends TestCase {
 
         // given
         UpdateRepairApplyDTO updateRepairApplyDTO = UpdateRepairApplyDTO.builder()
+                .repairApplyNo(Integer.valueOf(mvcResultToString))
                 .repairTypeNo(1)
                 .repairLocationNo(1)
                 .repairStateNo(1)
@@ -359,6 +360,6 @@ public class RepairControllerTests extends TestCase {
         // then
         resultActions3
                 .andExpect(status().is(200))
-                .andExpect(result -> assertNotNull(result.getResolvedException()));
+                .andExpect(result -> assertNull(result.getResolvedException()));
     }
 }

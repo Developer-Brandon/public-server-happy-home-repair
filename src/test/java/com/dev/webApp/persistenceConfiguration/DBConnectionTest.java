@@ -1,4 +1,4 @@
-package com.dev.webApp.persistence;
+package com.dev.webApp.persistenceConfiguration;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -35,15 +35,18 @@ public class DBConnectionTest {
 
         Connection connection = dataSource.getConnection();
 
-        logger.info("connection=", connection);
+        logger.info("connection={}", connection);
     }
 
     @Test
     public void testMyBatisConnection() throws Exception {
+
         SqlSession session = sqlSessionFactory.openSession();
+
+        logger.info("session={}", session);
+
         Connection connection = session.getConnection();
 
-        logger.info("session=", session);
-        logger.info("connection=", connection);
+        logger.info("connection={}", connection);
     }
 }

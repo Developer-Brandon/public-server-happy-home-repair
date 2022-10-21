@@ -341,8 +341,7 @@ public class FaqControllerTests extends TestCase {
 
         // then
         resultActions2
-                .andExpect(status().is(200))
-                .andExpect(content().contentType(BaseConfigController.JSON_FORMAT));
+                .andExpect(status().is(200));
 
         /////////////////////////////////////////////////////////
 

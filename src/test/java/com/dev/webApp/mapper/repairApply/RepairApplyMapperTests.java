@@ -58,7 +58,6 @@ public class RepairApplyMapperTests {
     public void getRepairApply() throws Exception {
 
         // 1. 삽입 테스트
-
         InsertRepairApplyDTO insertRepairApplyDTO = InsertRepairApplyDTO.builder()
                 .repairTypeNo(1)
                 .repairLocationNo(1)
@@ -78,8 +77,7 @@ public class RepairApplyMapperTests {
 
         // 2. 조회 테스트
         RepairApplyVO repairApplyVO = repairMapper
-                .selectRepairApply(insertRepairApplyDTO.getInsertedRepairApplyNo())
-                .orElseThrow(Exception::new);
+                .selectRepairApply(insertRepairApplyDTO.getInsertedRepairApplyNo());
 
         //
         assertThat(repairApplyVO, is(notNullValue()));
@@ -112,7 +110,6 @@ public class RepairApplyMapperTests {
         ///////////////////////////////////////////////////////////
 
         // 2. 리스트 조회 테스트
-
         SelectRepairApplyPaginationDTO selectRepairApplyPaginationDTO = SelectRepairApplyPaginationDTO.builder()
                 .currentPage(1) // pk가 뒤로 밀렷을때를 대비해서...
                 .offset(0) // service 단에서 처리해주어야할 처리, 하지만 transaction 처리로 인해 table이 텅텅 비었을 가능성이 있으므로, 0부터 count 하는 것으로 처리
@@ -121,6 +118,7 @@ public class RepairApplyMapperTests {
         List<RepairApplyVO> selectRepairTypeList = repairMapper.selectRepairApplyList(selectRepairApplyPaginationDTO);
 
         assertThat(selectRepairTypeList, is(notNullValue()));
+
         // service 단에서 처리해주어야할 처리, 하지만 transaction 처리로 인해 table이 텅텅 비었을 가능성이 있으므로, '1'로 처리
         assertThat(selectRepairTypeList.size(), is(1));
     }
@@ -148,8 +146,7 @@ public class RepairApplyMapperTests {
 
         // 2. 조회 테스트
         RepairApplyVO repairApplyVO = repairMapper
-                .selectRepairApply(insertRepairApplyDTO.getInsertedRepairApplyNo())
-                .orElseThrow(Exception::new);
+                .selectRepairApply(insertRepairApplyDTO.getInsertedRepairApplyNo());
 
         //
         assertThat(repairApplyVO, is(notNullValue()));
@@ -178,10 +175,8 @@ public class RepairApplyMapperTests {
         // 4. 업데이트 여부 검증
 
         RepairApplyVO repairApplyVO2 = repairMapper
-                .selectRepairApply(insertRepairApplyDTO.getInsertedRepairApplyNo())
-                .orElseThrow(Exception::new);
+                .selectRepairApply(insertRepairApplyDTO.getInsertedRepairApplyNo());
 
-        //
         assertThat(repairApplyVO2, is(notNullValue()));
         assertThat(repairApplyVO2.getPhoneNumber(), is("01099994444"));
         assertThat(repairApplyVO2.getExplanation(), is("업데이트_테스트_내용"));
@@ -210,8 +205,7 @@ public class RepairApplyMapperTests {
 
         // 2. 조회 테스트
         RepairApplyVO repairApplyVO = repairMapper
-                .selectRepairApply(insertRepairApplyDTO.getInsertedRepairApplyNo())
-                .orElseThrow(Exception::new);
+                .selectRepairApply(insertRepairApplyDTO.getInsertedRepairApplyNo());
 
         //
         assertThat(repairApplyVO, is(notNullValue()));

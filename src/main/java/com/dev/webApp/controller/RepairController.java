@@ -65,9 +65,9 @@ public class RepairController extends BaseConfigController {
     // 수리 신청 현황 리스트만 json형식으로 불러오는 api
     @GetMapping(value = "/list", produces = JSON_FORMAT)
     public ResponseEntity<List<RepairApplyVO>> getRepairApplyList(
-            @RequestParam(required = false)
+            @RequestParam(required = false, defaultValue = "1")
             Integer currentPage
-            , @RequestParam(required = false)
+            , @RequestParam(required = false, defaultValue = "10")
                     Integer pageSize
     ) throws Exception {
 

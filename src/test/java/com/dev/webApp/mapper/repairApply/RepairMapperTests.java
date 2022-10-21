@@ -7,7 +7,7 @@ import com.dev.webApp.domain.vo.RepairLocationVO;
 import com.dev.webApp.domain.vo.RepairStateVO;
 import com.dev.webApp.domain.vo.RepairTypeVO;
 import com.dev.webApp.mapper.RepairMapper;
-import com.dev.webApp.persistence.DBConnectionTest;
+import com.dev.webApp.persistenceConfiguration.DBConnectionTest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -58,8 +58,7 @@ public class RepairMapperTests {
 
         // 2. 조회 테스트
         RepairTypeVO repairTypeVO = repairMapper
-                .selectRepairType(1)
-                .orElseThrow(Exception::new);
+                .selectRepairType(1);
 
         //
         assertThat(repairTypeVO, is(notNullValue()));
@@ -91,8 +90,7 @@ public class RepairMapperTests {
 
         // 2. 조회 테스트
         RepairLocationVO repairLocationVO = repairMapper
-                .selectRepairLocation(1)
-                .orElseThrow(Exception::new);
+                .selectRepairLocation(1);
 
         //
         assertThat(repairLocationVO, is(notNullValue()));
@@ -123,8 +121,7 @@ public class RepairMapperTests {
 
         // 2. 조회 테스트
         RepairStateVO repairStateVO = repairMapper
-                .selectRepairState(1)
-                .orElseThrow(Exception::new);
+                .selectRepairState(1);
 
         //
         assertThat(repairStateVO, is(notNullValue()));

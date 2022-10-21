@@ -16,19 +16,19 @@ public interface RepairMapper {
 
     List<RepairTypeVO> selectRepairTypeList(SelectRepairTypeDTO selectRepairTypeDTO);
 
-    Optional<RepairTypeVO> selectRepairType(@Param("repairTypeNo")Integer repairTypeNo);
+    RepairTypeVO selectRepairType(@Param("repairTypeNo")Integer repairTypeNo);
 
     List<RepairLocationVO> selectRepairLocationList(SelectRepairLocationDTO selectRepairLocationDTO);
 
-    Optional<RepairLocationVO> selectRepairLocation(@Param("repairLocationNo")Integer repairLocationNo);
+    RepairLocationVO selectRepairLocation(@Param("repairLocationNo")Integer repairLocationNo);
 
     List<RepairStateVO> selectRepairStateList(SelectRepairStateDTO selectRepairStateDTO);
 
-    Optional<RepairStateVO> selectRepairState(@Param("repairStateNo")Integer repairStateNo);
+    RepairStateVO selectRepairState(@Param("repairStateNo")Integer repairStateNo);
 
     int insertRepairApply(InsertRepairApplyDTO insertRepairApplyDTO);
 
-    Optional<RepairApplyVO> selectRepairApply(@Param("repairApplyNo")Integer repairApplyNo);
+    RepairApplyVO selectRepairApply(@Param("repairApplyNo")Integer repairApplyNo);
 
     List<RepairApplyVO> selectRepairApplyList(SelectRepairApplyPaginationDTO selectRepairApplyPaginationDTO);
 

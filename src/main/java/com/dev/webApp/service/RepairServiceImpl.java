@@ -37,8 +37,7 @@ public class RepairServiceImpl implements RepairService{
     public RepairTypeVO getRepairType(Integer repairTypeNo) throws Exception {
 
         RepairTypeVO repairTypeVO = repairMapper
-                .selectRepairType(repairTypeNo)
-                .orElseThrow(Exception::new);
+                .selectRepairType(repairTypeNo);
 
         return repairTypeVO;
     }
@@ -59,8 +58,7 @@ public class RepairServiceImpl implements RepairService{
     public RepairLocationVO getRepairLocation(Integer repairLocationNo) throws Exception {
 
         RepairLocationVO repairLocationVO = repairMapper
-                .selectRepairLocation(repairLocationNo)
-                .orElseThrow(Exception::new);
+                .selectRepairLocation(repairLocationNo);
 
         return repairLocationVO;
     }
@@ -81,8 +79,7 @@ public class RepairServiceImpl implements RepairService{
     public RepairStateVO getRepairState(Integer repairStateNo) throws Exception {
 
         RepairStateVO repairStateVO = repairMapper
-                .selectRepairState(repairStateNo)
-                .orElseThrow(Exception::new);
+                .selectRepairState(repairStateNo);
 
         return repairStateVO;
     }
@@ -112,8 +109,7 @@ public class RepairServiceImpl implements RepairService{
     public RepairApplyVO getRepairApply(Integer repairApplyNo) throws Exception {
 
         RepairApplyVO repairApplyVO = repairMapper
-                .selectRepairApply(repairApplyNo)
-                .orElseThrow(Exception::new);
+                .selectRepairApply(repairApplyNo);
 
         return repairApplyVO;
     }

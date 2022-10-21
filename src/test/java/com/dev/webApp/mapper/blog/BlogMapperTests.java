@@ -62,25 +62,13 @@ public class BlogMapperTests {
     @Test
     public void insertBlog() {
 
-        // 1. 삽입 테스트
-
-        InsertBlogPostingDTO insertBlogPostingDTO = InsertBlogPostingDTO.builder()
-                .postingTitle("제목_테스트")
-                .postingTypeNo(1)
-                .postingImageSrc("이미지경로_테스트")
-                .postingRegDt("2022-09-07 12:48:52")
-                .build();
-
-        Boolean insertedOrNot = blogMapper.insertBlogPosting(insertBlogPostingDTO) == 1;
-
-        assertThat(insertedOrNot, is(true));
-        assertThat(insertBlogPostingDTO.getInsertedPostingNo(), is(greaterThan(1)));
+        // 위에서 검증했으므로 생략하겠습니다.
     }
 
     @Test
     public void insertBlogList() {
 
-        // 1. 리스트 삽입 테스트
+        // 1. 리스트 (대량) 삽입 테스트
         RawBlogPostingVO rawBlogPostingVO = RawBlogPostingVO.builder()
                 .title("제목_테스트")
                 .imgSrc("이미지경로_테스트")

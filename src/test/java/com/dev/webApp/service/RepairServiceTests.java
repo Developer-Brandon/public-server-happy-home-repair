@@ -1,6 +1,5 @@
-package com.dev.webApp.persistence;
+package com.dev.webApp.service;
 
-import com.dev.webApp.mapper.TestMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -10,18 +9,22 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import static org.junit.Assert.assertNotNull;
+
 @Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
-public class MybatisTests {
+public class RepairServiceTests {
 
-    private static Logger logger = LoggerFactory.getLogger(MybatisTests.class);
+    // todo: 추후 mocking 개념 도입 후 자세한 테스트 예정
+
+    private static final Logger logger = LoggerFactory.getLogger(RepairServiceTests.class);
 
     @Autowired
-    private TestMapper testMapper;
+    private RepairService blogService;
 
     @Test
-    public void testTimeMapper() {
-        logger.info("testMapper가 돌아가는 시간: {} ", testMapper.getTime());
+    public void serviceExistTest() {
+        assertNotNull(blogService);
     }
 }

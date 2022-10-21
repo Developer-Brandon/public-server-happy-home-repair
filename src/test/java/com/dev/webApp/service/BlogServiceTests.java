@@ -19,6 +19,8 @@ import static org.junit.Assert.assertNotNull;
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 public class BlogServiceTests {
 
+    // todo: 추후 mocking 개념 도입 후 자세한 테스트 예정
+
     private static final Logger logger = LoggerFactory.getLogger(BlogServiceTests.class);
 
     @Autowired
@@ -35,6 +37,8 @@ public class BlogServiceTests {
         List<RawBlogPostingVO> rawBlogPostingVOList = blogService.getRawBlogPostingListByCrawling(1000);
 
         rawBlogPostingVOList.forEach(e -> {
+
+            //
             logger.info("rawBlogPostingVOList.forEach e.getTitle: {}", e.getTitle());
         });
     }
