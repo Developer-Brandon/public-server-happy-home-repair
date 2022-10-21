@@ -113,7 +113,7 @@ public class RepairControllerTests extends TestCase {
 
         // then
         resultActions2
-                .andExpect(status().isOk())
+                .andExpect(status().is(200))
                 .andExpect(jsonPath("$.[0].explanation").exists())
                 .andExpect(jsonPath("$.[0].explanation").isString())
                 .andExpect(jsonPath("$.[0].explanation", is(containsString("테스트" + randomInteger))));
@@ -179,7 +179,7 @@ public class RepairControllerTests extends TestCase {
 
         // then
         resultActions2
-                .andExpect(status().isOk())
+                .andExpect(status().is(200))
                 .andExpect(jsonPath("$.explanation").exists())
                 .andExpect(jsonPath("$.explanation").isString())
                 .andExpect(jsonPath("$.explanation", is(containsString("테스트" + randomInteger))));
@@ -238,6 +238,8 @@ public class RepairControllerTests extends TestCase {
         /////////////////////////////////////////////////////////
 
         // 2. 수정하기
+
+        // given
         UpdateRepairApplyDTO updateRepairApplyDTO = UpdateRepairApplyDTO.builder()
                 .repairTypeNo(1)
                 .repairLocationNo(1)
@@ -249,6 +251,7 @@ public class RepairControllerTests extends TestCase {
 
         String updateRepairDTO = new Gson().toJson(updateRepairApplyDTO);
 
+        // when
         ResultActions resultActions2 = mockMvc
                 .perform(
                         put(url)
@@ -257,6 +260,7 @@ public class RepairControllerTests extends TestCase {
                 )
                 .andDo(print());
 
+        // then
         resultActions2
                 .andExpect(status().is(200));
 
@@ -274,7 +278,7 @@ public class RepairControllerTests extends TestCase {
 
         // then
         resultActions3
-                .andExpect(status().isOk())
+                .andExpect(status().is(200))
                 .andExpect(jsonPath("$.explanation").exists())
                 .andExpect(jsonPath("$.explanation").isString())
                 .andExpect(jsonPath("$.explanation", is(containsString("수정_테스트_데이터" + randomInteger))));
@@ -282,7 +286,6 @@ public class RepairControllerTests extends TestCase {
 
     @Test
     public void deleteAndSelectRepair() throws Exception {
-
 
         // 삽입한 repair의 상태를 수정한 후, 제대로 조회가 되는지 확인
 

@@ -5,7 +5,6 @@ import com.dev.webApp.domain.dto.InsertBlogPostingListDTO;
 import com.dev.webApp.domain.vo.BlogPostingVO;
 import com.dev.webApp.domain.vo.RawBlogPostingVO;
 import com.dev.webApp.mapper.BlogMapper;
-import com.dev.webApp.mapper.faq.FaqMapperTests;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
