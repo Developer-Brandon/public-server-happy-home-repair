@@ -68,8 +68,8 @@ public class NoticeControllerTests extends TestCase {
         int randomInteger = numberUtil.getRandomNumber();
 
         NoticeVO noticeVO = NoticeVO.builder()
-                .title("테스트" + randomInteger + "_자주하는질문_제목")
-                .content("테스트" + randomInteger + "_자주하는질문_내용")
+                .title("테스트" + randomInteger + "_공지사항_제목")
+                .content("테스트" + randomInteger + "_공지사항_내용")
                 .build();
 
         String insertNoticeDTO = new Gson().toJson(noticeVO);
@@ -129,8 +129,8 @@ public class NoticeControllerTests extends TestCase {
         int randomInteger = numberUtil.getRandomNumber();
 
         NoticeVO noticeVO = NoticeVO.builder()
-                .title("테스트" + randomInteger + "_자주하는질문_제목")
-                .content("테스트" + randomInteger + "_자주하는질문_내용")
+                .title("테스트" + randomInteger + "_공지사항_제목")
+                .content("테스트" + randomInteger + "_공지사항_내용")
                 .build();
 
         String insertNoticeDTO = new Gson().toJson(noticeVO);
@@ -200,8 +200,8 @@ public class NoticeControllerTests extends TestCase {
         int randomInteger = numberUtil.getRandomNumber();
 
         NoticeVO noticeVO = NoticeVO.builder()
-                .title("테스트" + randomInteger + "_자주하는질문_제목")
-                .content("테스트" + randomInteger + "_자주하는질문_내용")
+                .title("테스트" + randomInteger + "_공지사항_제목")
+                .content("테스트" + randomInteger + "_공지사항_내용")
                 .build();
 
         String insertNoticeDTO = new Gson().toJson(noticeVO);
@@ -232,8 +232,8 @@ public class NoticeControllerTests extends TestCase {
 
         NoticeVO updateNoticeVO = NoticeVO.builder()
                 .noticeNo(Integer.valueOf(mvcResultToString))
-                .title("테스트" + randomInteger + "_자주하는질문_제목")
-                .content("테스트" + randomInteger + "_자주하는질문_내용")
+                .title("테스트" + randomInteger + "_공지사항_제목")
+                .content("테스트" + randomInteger + "_공지사항_내용")
                 .useYnEnum(NoticeUseYnEnum.Y)
                 .build();
 
@@ -287,8 +287,8 @@ public class NoticeControllerTests extends TestCase {
         int randomInteger = numberUtil.getRandomNumber();
 
         NoticeVO noticeVO = NoticeVO.builder()
-                .title("테스트" + randomInteger + "_자주하는질문_제목")
-                .content("테스트" + randomInteger + "_자주하는질문_내용")
+                .title("테스트" + randomInteger + "_공지사항_제목")
+                .content("테스트" + randomInteger + "_공지사항_내용")
                 .build();
 
         String insertNoticeDTO = new Gson().toJson(noticeVO);
@@ -365,7 +365,6 @@ public class NoticeControllerTests extends TestCase {
     @Test
     public void deleteAndSelectNotice() throws Exception {
 
-
         // 삽입한 notice의 상태를 수정한 후, 제대로 조회가 되는지 확인
 
         // 1. 먼저, notice를 삽입하기
@@ -376,8 +375,8 @@ public class NoticeControllerTests extends TestCase {
         int randomInteger = numberUtil.getRandomNumber();
 
         NoticeVO noticeVO = NoticeVO.builder()
-                .title("테스트" + randomInteger + "_자주하는질문_제목")
-                .content("테스트" + randomInteger + "_자주하는질문_내용")
+                .title("테스트" + randomInteger + "_공지사항_제목")
+                .content("테스트" + randomInteger + "_공지사항_내용")
                 .build();
 
         String insertNoticeDTO = new Gson().toJson(noticeVO);
@@ -386,8 +385,8 @@ public class NoticeControllerTests extends TestCase {
         ResultActions resultActions = mockMvc
                 .perform(
                         post(url)
-                                .contentType(BaseConfigController.JSON_FORMAT)
-                                .content(insertNoticeDTO)
+                            .contentType(BaseConfigController.JSON_FORMAT)
+                            .content(insertNoticeDTO)
                 )
                 .andDo(print());
 
