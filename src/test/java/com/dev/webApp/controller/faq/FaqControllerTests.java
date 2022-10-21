@@ -229,6 +229,7 @@ public class FaqControllerTests extends TestCase {
 
         // 2. 수정하기
 
+        // given
         FaqVO updateFaqVO = FaqVO.builder()
                 .faqNo(Integer.valueOf(mvcResultToString))
                 .title("테스트" + randomInteger + "_자주하는질문_제목")
@@ -238,6 +239,7 @@ public class FaqControllerTests extends TestCase {
 
         String updateFaqDTO = new Gson().toJson(updateFaqVO);
 
+        // when
         ResultActions resultActions2 = mockMvc
                 .perform(
                         put(url)
@@ -246,6 +248,7 @@ public class FaqControllerTests extends TestCase {
                 )
                 .andDo(print());
 
+        // then
         resultActions2
                 .andExpect(status().is(200));
 
