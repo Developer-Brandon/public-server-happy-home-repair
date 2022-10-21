@@ -41,7 +41,7 @@ public class BlogControllerTests extends TestCase {
     @Test
     public void selectBlogListByDB() throws Exception {
 
-        // 데이터의 유무에 관계 없이, 블로그 리스트를 db에서 잘 불러오는지 확인
+        // 데이터의 유무에 관계 없이, 블로그 리스트를 db에서 잘 불러오는지 확인합니다.
 
         // given
         String url = "/blog/list";
@@ -52,13 +52,13 @@ public class BlogControllerTests extends TestCase {
 
         // then
         resultActions
-                .andExpect(content().contentType(BaseConfigController.JSON_FORMAT));
+                .andExpect(status().is(200));
     }
 
     @Test
     public void selectBlogListByDBWhenDataExists() throws Exception {
 
-        // 데이터를 아예 삽입하여, 블로그 리스트를 db에서 잘 불러오는지 확인
+        // 데이터를 아예 삽입하여, 블로그 리스트를 db에서 잘 불러오는지 확인합니다.
 
         // 1. data 통째로 삽입
 
@@ -103,19 +103,19 @@ public class BlogControllerTests extends TestCase {
     @Test
     public void updateDifferentBlogListToDB() throws Exception {
 
-        // 데이터가 있다면, 다른 리트만큼만 띄어서 db에서 잘 삽입되고 있는지 확인
+        // 데이터가 있다면, 다른 리트만큼만 띄어서 db에서 잘 삽입되고 있는지 확인합니다.
 
         // 1. 다른데이터가 있는지 비교하고 확인
 
         // 2. 다른 데이터의 리스트만큼 만업데이트 되는지 확인
 
-        // 위의 테스트는 컨트롤러에서는 자세하게 테스트하기
+        // 위의 테스트는 컨트롤러에서는 자세하게 테스트하기 어려운 주제의 테스트입니다.
+        // 하여 이곳에서는 개략적인 api 성공여부만을
 
         mockMvc.perform(
                 get("/blog/list/diff-bulk")
         )
                 .andExpect(status().is(200))
-                .andExpect(content().contentType(BaseConfigController.JSON_FORMAT))
                 .andDo(print())
                 .andReturn();
     }
