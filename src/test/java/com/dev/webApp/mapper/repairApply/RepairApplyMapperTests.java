@@ -1,7 +1,9 @@
 package com.dev.webApp.mapper.repairApply;
 
-import com.dev.webApp.domain.dto.*;
-import com.dev.webApp.domain.vo.*;
+import com.dev.webApp.domain.dto.InsertRepairApplyDTO;
+import com.dev.webApp.domain.dto.SelectRepairApplyPaginationDTO;
+import com.dev.webApp.domain.dto.UpdateRepairApplyDTO;
+import com.dev.webApp.domain.vo.RepairApplyVO;
 import com.dev.webApp.mapper.RepairMapper;
 import com.dev.webApp.service.BlogServiceTests;
 import com.dev.webApp.util.AgreeOrNotEnum;
@@ -21,7 +23,6 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.hasSize;
 
 @Transactional
 @RunWith(SpringJUnit4ClassRunner.class)

@@ -1,10 +1,11 @@
 package com.dev.webApp.util.page;
 
 
-import static java.lang.Math.*;
-
 import lombok.ToString;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 
 @ToString
 public class SearchCondition {

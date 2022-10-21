@@ -2,7 +2,9 @@ package com.dev.webApp.service;
 
 import com.dev.webApp.domain.dto.InsertBlogPostingListDTO;
 import com.dev.webApp.domain.dto.SelectBlogPostingPaginationDTO;
-import com.dev.webApp.domain.vo.*;
+import com.dev.webApp.domain.vo.BlogPostingVO;
+import com.dev.webApp.domain.vo.PaginationBlogPostingVO;
+import com.dev.webApp.domain.vo.RawBlogPostingVO;
 import com.dev.webApp.mapper.BlogMapper;
 import com.dev.webApp.util.page.PageHandler;
 import org.jsoup.Jsoup;

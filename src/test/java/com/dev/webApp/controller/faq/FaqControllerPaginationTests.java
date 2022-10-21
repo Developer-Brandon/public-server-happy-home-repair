@@ -2,9 +2,7 @@ package com.dev.webApp.controller.faq;
 
 import com.dev.webApp.config.controller.BaseConfigController;
 import com.dev.webApp.domain.vo.FaqVO;
-import com.dev.webApp.service.FaqService;
 import com.dev.webApp.util.FaqUseYnEnum;
-import com.dev.webApp.util.NumberUtil;
 import com.dev.webApp.util.TestUtil;
 import com.google.gson.Gson;
 import junit.framework.TestCase;
@@ -21,11 +19,10 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 // todo:
 // 제대로된 test case에 대해서 작성하려면, transaction 처리를 이용하여 data를 전부 지운 후에...

@@ -2,7 +2,10 @@ package com.dev.webApp.controller;
 
 import com.dev.webApp.config.controller.BaseConfigController;
 import com.dev.webApp.domain.dto.*;
-import com.dev.webApp.domain.vo.*;
+import com.dev.webApp.domain.vo.RepairApplyVO;
+import com.dev.webApp.domain.vo.RepairLocationVO;
+import com.dev.webApp.domain.vo.RepairStateVO;
+import com.dev.webApp.domain.vo.RepairTypeVO;
 import com.dev.webApp.service.RepairService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

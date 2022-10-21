@@ -1,7 +1,6 @@
 package com.dev.webApp.persistence;
 
 import com.dev.webApp.mapper.TestMapper;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;

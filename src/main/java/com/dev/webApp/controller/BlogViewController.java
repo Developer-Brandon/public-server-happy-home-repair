@@ -1,14 +1,16 @@
 package com.dev.webApp.controller;
 
 import com.dev.webApp.config.controller.BaseConfigController;
-import com.dev.webApp.domain.dto.*;
-import com.dev.webApp.domain.vo.*;
+import com.dev.webApp.domain.dto.SelectBlogPostingPaginationDTO;
+import com.dev.webApp.domain.vo.PaginationBlogPostingVO;
 import com.dev.webApp.service.BlogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
