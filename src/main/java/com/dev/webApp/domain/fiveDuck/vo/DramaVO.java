@@ -1,6 +1,6 @@
 package com.dev.webApp.domain.fiveDuck.vo;
 
-import com.dev.webApp.util.BookUseYnEnum;
+import com.dev.webApp.util.DramaUseYnEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,12 +12,13 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookVO {
-    Integer bookNo;
+public class DramaVO {
+    Integer dramaNo;
     Integer madeNatureNo;
-    String bookTitle;
-    String bookAuthor;
-    BookUseYnEnum bookUseYnEnum;
-    Date bookRegDt;
+    String dramaTitle;
+    String dramaAuthor;
+    Integer pagePerDramaCnt;
+    DramaUseYnEnum dramaUseYnEnum;
+    Date dramaRegDt;
     Date regDt;
 }
