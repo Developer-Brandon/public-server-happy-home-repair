@@ -100,3 +100,27 @@ create table if not exists web_app_test2.tb_youtube(
     youtube_reg_dt datetime not null default current_timestamp comment '(유투브 자체의)영상 등록일자',
     reg_dt datetime not null default current_timestamp comment '등록일자'
 ) engine=innodb default charset=utf8mb4 comment 'youtube';
+
+
+# 5. 회원가입 관련 테이블
+create table if not exists web_app_test2.tb_user(
+    user_no int unsigned not null auto_increment comment '유저 번호' primary key,
+    user_type_no int unsigned not null comment '유저 타입 번호',
+    email varchar(40) not null comment '유저 이메일',
+    password varchar(30) not null comment '유저 패스워드',
+    user_name varchar(20) not null comment '유저 이름',
+    use_yn enum('Y','N') not null default 'Y' comment '사용여부',
+    reg_dt datetime not null default current_timestamp comment '등록일자',
+    mod_dt datetime not null default current_timestamp comment '수정일자'
+) engine=innodb default charset=utf8mb4 comment '유저';
+
+create table if not exists web_app_test2.tb_user_type(
+    user_type_no int unsigned not null auto_increment comment '유저 타입 번호' primary key,
+    type varchar(40) not null comment '유저 타입',
+    use_yn enum('Y','N') not null default 'Y' comment '사용여부',
+    reg_dt datetime not null default current_timestamp comment '등록일자',
+    mod_dt datetime not null default current_timestamp comment '수정일자'
+) engine=innodb default charset=utf8mb4 comment '유저타입';
+
+alter table web_app_test2.tb_user add foreign key(user_type_no)
+    references web_app_test2.tb_user_type(user_type_no) on delete cascade;
