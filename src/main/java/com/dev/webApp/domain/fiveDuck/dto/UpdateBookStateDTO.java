@@ -1,5 +1,6 @@
 package com.dev.webApp.domain.fiveDuck.dto;
 
+import com.dev.webApp.util.BookUseYnEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,9 +10,7 @@ import java.util.Date;
 @Data
 @Builder
 @AllArgsConstructor
-public class InsertBookDTO {
-    Integer madeNatureNo;
-    String title;
-    String author;
-    Date bookRegDt;
+public class UpdateBookStateDTO {
+    Integer bookNo;
+    BookUseYnEnum bookUseYnEnum;
 }
