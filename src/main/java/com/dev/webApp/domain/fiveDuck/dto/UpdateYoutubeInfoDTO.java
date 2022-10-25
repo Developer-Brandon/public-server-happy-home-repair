@@ -9,8 +9,8 @@ import java.util.Date;
 @Data
 @Builder
 @AllArgsConstructor
-public class InsertYoutubeInfoDTO {
-    Integer insertedYoutubeNo;
+public class UpdateYoutubeInfoDTO {
+    Integer youtubeNo;
     String title;
     String youtuberName;
     Integer likeCnt;
