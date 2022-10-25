@@ -1,10 +1,8 @@
 package com.dev.webApp.mapper;
 
 import com.dev.webApp.domain.fiveDuck.dto.InsertYoutubeInfoDTO;
-import com.dev.webApp.domain.fiveDuck.dto.InsertYoutubeInfoDTO;
 import com.dev.webApp.domain.fiveDuck.dto.UpdateYoutubeInfoDTO;
 import com.dev.webApp.domain.fiveDuck.dto.UpdateYoutubeStateDTO;
-import com.dev.webApp.domain.fiveDuck.vo.YoutubeVO;
 import com.dev.webApp.domain.fiveDuck.vo.YoutubeVO;
 
 import java.util.List;
