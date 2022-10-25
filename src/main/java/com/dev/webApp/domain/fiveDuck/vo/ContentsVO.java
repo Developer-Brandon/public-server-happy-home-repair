@@ -12,7 +12,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ContentsMadeNatureVO {
+public class ContentsVO {
     Integer madeNatureNo;
     String englishName;
     String koreanName;

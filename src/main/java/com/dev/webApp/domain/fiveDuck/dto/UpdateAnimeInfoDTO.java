@@ -9,7 +9,8 @@ import java.util.Date;
 @Data
 @Builder
 @AllArgsConstructor
-public class InsertAnimeDTO {
+public class UpdateAnimeInfoDTO {
+    Integer animeNo;
     Integer madeNatureNo;
     String title;
     String author;

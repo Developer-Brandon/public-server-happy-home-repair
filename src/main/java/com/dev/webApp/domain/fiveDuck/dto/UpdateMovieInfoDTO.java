@@ -9,10 +9,11 @@ import java.util.Date;
 @Data
 @Builder
 @AllArgsConstructor
-public class InsertDramaDTO {
+public class UpdateMovieInfoDTO {
+    Integer movieNo;
     Integer madeNatureNo;
     String title;
-    String author;
-    Integer pagePerDramaCnt;
-    Date dramaRegDt;
+    String directorName;
+    Integer pagePerMovieCnt;
+    Date movieRegDt;
 }

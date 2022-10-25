@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dev.webApp.mapper.BlogMapper">
+<mapper namespace="com.dev.webApp.mapper.BookMapper">
 
     <select id="getBookTotalCnt" resultType="int">
         <![CDATA[
@@ -65,7 +65,7 @@
                 order="AFTER"
                 resultType="Integer">
             /* 책 정보 삽입 쿼리 */
-            select max(m_n_no)
+            select max(r_book_no)
             from web_app_test2.tb_book
         </selectKey>
     </insert>
@@ -93,12 +93,12 @@
         ]]>
     </update>
 
-    <update id="updateBookState"
-            parameterType="com.dev.webApp.domain.fiveDuck.dto.DeleteBookInfoDTO">
+    <delete id="deleteBookInfo"
+            parameterType="Integer">
         <![CDATA[
-        /* 단일 책 상태 수정 쿼리 */
+        /* 단일 책 삭제 쿼리 */
         delete from web_app_test2.tb_book
         where r_book_no = #{bookNo}
         ]]>
-    </update>
+    </delete>
 </mapper>

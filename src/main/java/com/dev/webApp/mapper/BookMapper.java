@@ -1,6 +1,7 @@
 package com.dev.webApp.mapper;
 
 import com.dev.webApp.domain.fiveDuck.dto.InsertBookInfoDTO;
+import com.dev.webApp.domain.fiveDuck.dto.SelectBookPaginationDTO;
 import com.dev.webApp.domain.fiveDuck.dto.UpdateBookInfoDTO;
 import com.dev.webApp.domain.fiveDuck.dto.UpdateBookStateDTO;
 import com.dev.webApp.domain.fiveDuck.vo.BookVO;
@@ -15,7 +16,7 @@ public interface BookMapper {
 
     List<BookVO> selectAllBookList();
 
-    List<BookVO> selectBookList();
+    List<BookVO> selectBookList(SelectBookPaginationDTO selectBookPaginationDTO);
 
     Integer insertBookInfo(InsertBookInfoDTO insertBookInfoDTO);
 

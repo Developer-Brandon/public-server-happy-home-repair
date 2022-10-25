@@ -9,9 +9,10 @@ import java.util.Date;
 @Data
 @Builder
 @AllArgsConstructor
-public class InsertComicBookDTO {
+public class InsertComicBookInfoDTO {
+    Integer insertedComicBookNo;
     Integer madeNatureNo;
     String title;
     String author;
-    Date bookRegDt;
+    Date comicBookRegDt;
 }

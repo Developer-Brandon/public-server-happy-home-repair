@@ -9,11 +9,9 @@ import java.util.Date;
 @Data
 @Builder
 @AllArgsConstructor
-public class InsertYoutubeDTO {
+public class InsertMp3InfoDTO {
+    Integer insertedMp3No;
     String title;
-    String youtuberName;
-    Integer likeCnt;
-    Integer dislikeCnt;
-    Integer viewCnt;
-    Date youtubeRegDt;
+    String singer;
+    Date songRegDt;
 }

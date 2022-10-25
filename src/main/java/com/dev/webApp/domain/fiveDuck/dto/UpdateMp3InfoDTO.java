@@ -9,10 +9,9 @@ import java.util.Date;
 @Data
 @Builder
 @AllArgsConstructor
-public class InsertMovieDTO {
-    Integer madeNatureNo;
+public class UpdateMp3InfoDTO {
+    Integer mp3No;
     String title;
-    String director;
-    Integer pagePerMovieCnt;
-    Date movieRegDt;
+    String singer;
+    Date songRegDt;
 }

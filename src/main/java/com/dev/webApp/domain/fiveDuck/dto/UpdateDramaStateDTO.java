@@ -1,16 +1,14 @@
 package com.dev.webApp.domain.fiveDuck.dto;
 
+import com.dev.webApp.util.DramaUseYnEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
 @Builder
 @AllArgsConstructor
-public class InsertMp3DTO {
-    String title;
-    String singer;
-    Date songRegDt;
+public class UpdateDramaStateDTO {
+    Integer dramaNo;
+    DramaUseYnEnum dramaUseYnEnum;
 }
