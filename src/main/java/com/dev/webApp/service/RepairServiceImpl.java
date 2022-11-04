@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional(rollbackFor = Exception.class)
-public class RepairServiceImpl implements RepairService{
+public class RepairServiceImpl implements RepairService {
 
     private static Logger logger = LoggerFactory.getLogger(RepairServiceImpl.class);
 
@@ -26,7 +26,7 @@ public class RepairServiceImpl implements RepairService{
 
         List<RepairTypeVO> repairTypeVOList = repairMapper.selectRepairTypeList(selectRepairTypeDTO);
 
-        if(repairTypeVOList.size() == 0) {
+        if (repairTypeVOList.size() == 0) {
             throw new Exception("조회하는 과정에서 문제가 발생하였습니다. 반드시 존재해야하는 데이터입니다.");
         }
 
@@ -47,7 +47,7 @@ public class RepairServiceImpl implements RepairService{
 
         List<RepairLocationVO> repairLocationVOList = repairMapper.selectRepairLocationList(selectRepairLocationDTO);
 
-        if(repairLocationVOList.size() == 0) {
+        if (repairLocationVOList.size() == 0) {
             throw new Exception("조회하는 과정에서 문제가 발생하였습니다. 반드시 존재해야하는 데이터입니다.");
         }
 
@@ -68,7 +68,7 @@ public class RepairServiceImpl implements RepairService{
 
         List<RepairStateVO> repairStateVOS = repairMapper.selectRepairStateList(selectRepairStateDTO);
 
-        if(repairStateVOS.size() == 0) {
+        if (repairStateVOS.size() == 0) {
             throw new Exception("조회하는 과정에서 문제가 발생하였습니다. 반드시 존재해야하는 데이터입니다.");
         }
 
@@ -117,7 +117,7 @@ public class RepairServiceImpl implements RepairService{
     @Override
     public Integer registerRepairApply(InsertRepairApplyDTO insertRepairApplyDTO) throws Exception {
 
-        if(repairMapper.insertRepairApply(insertRepairApplyDTO) != 1) {
+        if (repairMapper.insertRepairApply(insertRepairApplyDTO) != 1) {
             throw new Exception();
         }
 
@@ -127,7 +127,7 @@ public class RepairServiceImpl implements RepairService{
     @Override
     public void modifyRepairApply(UpdateRepairApplyDTO updateRepairApplyDTO) throws Exception {
 
-        if(repairMapper.updateRepairApply(updateRepairApplyDTO) != 1) {
+        if (repairMapper.updateRepairApply(updateRepairApplyDTO) != 1) {
             throw new Exception();
         }
     }
@@ -135,7 +135,7 @@ public class RepairServiceImpl implements RepairService{
     @Override
     public void removeRepairApply(Integer repairApplyNo) throws Exception {
 
-        if(repairMapper.deleteRepairApply(repairApplyNo) != 1) {
+        if (repairMapper.deleteRepairApply(repairApplyNo) != 1) {
             throw new Exception();
         }
     }

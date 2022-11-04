@@ -1,6 +1,9 @@
 package com.dev.webApp.mapper.fiveDucks;
 
-import com.dev.webApp.domain.fiveDuck.dto.*;
+import com.dev.webApp.domain.fiveDuck.dto.InsertAnimeInfoDTO;
+import com.dev.webApp.domain.fiveDuck.dto.SelectDramaPaginationDTO;
+import com.dev.webApp.domain.fiveDuck.dto.UpdateAnimeInfoDTO;
+import com.dev.webApp.domain.fiveDuck.dto.UpdateAnimeStateDTO;
 import com.dev.webApp.domain.fiveDuck.vo.AnimeVO;
 import org.apache.ibatis.annotations.Param;
 

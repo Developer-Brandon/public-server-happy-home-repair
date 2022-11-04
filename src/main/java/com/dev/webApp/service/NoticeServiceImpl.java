@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional(rollbackFor = Exception.class)
-public class NoticeServiceImpl implements NoticeService{
+public class NoticeServiceImpl implements NoticeService {
 
     private static Logger logger = LoggerFactory.getLogger(NoticeServiceImpl.class);
 
@@ -50,7 +50,7 @@ public class NoticeServiceImpl implements NoticeService{
 
         NoticeVO selectedNoticeVO = noticeMapper.selectNotice(noticeVO.getNoticeNo());
 
-        if(selectedNoticeVO == null) {
+        if (selectedNoticeVO == null) {
             throw new Exception("게시물을 조회하는 과정에서 문제가 발생하였습니다.");
         }
 
@@ -60,7 +60,7 @@ public class NoticeServiceImpl implements NoticeService{
     @Override
     public Integer registerNotice(NoticeVO noticeVO) throws Exception {
 
-        if(noticeMapper.insertNotice(noticeVO) != 1) {
+        if (noticeMapper.insertNotice(noticeVO) != 1) {
             throw new Exception("게시물을 삽입하는 과정에서 문제가 발생하였습니다.");
         }
 
@@ -71,7 +71,7 @@ public class NoticeServiceImpl implements NoticeService{
     @Override
     public void modifyNotice(NoticeVO noticeVO) throws Exception {
 
-        if(noticeMapper.updateNotice(noticeVO) != 1) {
+        if (noticeMapper.updateNotice(noticeVO) != 1) {
             throw new Exception("게시물을 수정하는 과정에서 문제가 발생하였습니다.");
         }
     }
@@ -79,7 +79,7 @@ public class NoticeServiceImpl implements NoticeService{
     @Override
     public void modifyNoticeState(NoticeVO noticeVO) throws Exception {
 
-        if(noticeMapper.updateNoticeState(noticeVO) != 1) {
+        if (noticeMapper.updateNoticeState(noticeVO) != 1) {
             throw new Exception("게시물의 상태를 수정하는 과정에서 문제가 발생하였습니다.");
         }
     }
@@ -87,7 +87,7 @@ public class NoticeServiceImpl implements NoticeService{
     @Override
     public void removeNotice(Integer noticeNo) throws Exception {
 
-        if(noticeMapper.deleteNotice(noticeNo) != 1) {
+        if (noticeMapper.deleteNotice(noticeNo) != 1) {
             throw new Exception("게시물을 삭제하는 과정에서 문제가 발생하였습니다.");
         }
     }

@@ -1,7 +1,6 @@
 package com.dev.webApp.domain.fiveDuck.vo;
 
 import com.dev.webApp.util.AnimeUseYnEnum;
-import com.dev.webApp.util.ComicBookUseYnEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

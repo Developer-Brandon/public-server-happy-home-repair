@@ -36,11 +36,11 @@ public class NoticeViewController extends BaseConfigController {
     @GetMapping(value = "/index", produces = TEXT_HTML_FORMAT)
     public String goNoticeIndexPage(
             @RequestParam(required = false)
-            Integer currentPage
+                    Integer currentPage
             , Model model
     ) throws Exception {
 
-        if(StringUtils.isEmpty(currentPage)) {
+        if (StringUtils.isEmpty(currentPage)) {
             currentPage = 1;
         }
 
@@ -59,7 +59,7 @@ public class NoticeViewController extends BaseConfigController {
     @GetMapping(value = "/content/list", produces = TEXT_HTML_FORMAT)
     public String getNoticeListAtPage(
             @RequestParam
-            Integer currentPage
+                    Integer currentPage
             , Model model
     ) throws Exception {
 
@@ -75,7 +75,7 @@ public class NoticeViewController extends BaseConfigController {
     }
 
     // 공지사항 상세 조회 페이지로 이동하는 api
-    @GetMapping(value ="/content", produces = TEXT_HTML_FORMAT)
+    @GetMapping(value = "/content", produces = TEXT_HTML_FORMAT)
     public String goNoticePage(
             @RequestParam
                     String noticeNo
@@ -114,9 +114,9 @@ public class NoticeViewController extends BaseConfigController {
     // 공지사항 수정 페이지로 이동하는 api
     @GetMapping(value = "/modifier", produces = TEXT_HTML_FORMAT)
     public String goNoticeModifierPage(
-        @RequestParam
-        String noticeNo
-        , Model model
+            @RequestParam
+                    String noticeNo
+            , Model model
     ) throws Exception {
 
         NoticeVO noticeVO = NoticeVO.builder()

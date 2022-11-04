@@ -29,12 +29,12 @@ public class FaqViewController extends BaseConfigController {
     }
 
     // 자주하는질문 리스트 페이지로 이동하는 api
-    @GetMapping(value ="/index", produces = TEXT_HTML_FORMAT)
+    @GetMapping(value = "/index", produces = TEXT_HTML_FORMAT)
     public String goFaqListPage(
             @RequestParam(required = false, defaultValue = "1")
-            Integer currentPage
+                    Integer currentPage
             , @RequestParam(required = false, defaultValue = "10")
-            Integer pageSize
+                    Integer pageSize
             , Model model
     ) throws Exception {
 
@@ -113,7 +113,7 @@ public class FaqViewController extends BaseConfigController {
     @GetMapping("/modifier")
     public String goFaqModifierPage(
             @RequestParam
-            String faqNo
+                    String faqNo
             , Model model
     ) throws Exception {
 

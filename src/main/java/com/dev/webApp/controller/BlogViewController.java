@@ -23,11 +23,11 @@ public class BlogViewController extends BaseConfigController {
     @GetMapping("/index")
     public String goIndexPage(
             @RequestParam(required = false)
-            Integer currentPage
+                    Integer currentPage
             , Model model
     ) throws Exception {
 
-        if(StringUtils.isEmpty(currentPage)) {
+        if (StringUtils.isEmpty(currentPage)) {
             currentPage = 1;
         }
 
@@ -48,7 +48,7 @@ public class BlogViewController extends BaseConfigController {
     @GetMapping("/content/list")
     public String getBlogPostingListAtPage(
             @RequestParam
-            Integer currentPage
+                    Integer currentPage
             , Model model
     ) throws Exception {
 

@@ -31,9 +31,9 @@ public class FaqController extends BaseConfigController {
     @GetMapping(value = "/list", produces = JSON_FORMAT)
     public ResponseEntity<List<FaqVO>> getFaqList(
             @RequestParam(required = false, defaultValue = "1")
-            Integer currentPage,
+                    Integer currentPage,
             @RequestParam(required = false, defaultValue = "10")
-            Integer pageSize
+                    Integer pageSize
     ) throws Exception {
 
         SelectFaqPaginationDTO selectFaqPaginationDTO = SelectFaqPaginationDTO.builder()
@@ -49,10 +49,10 @@ public class FaqController extends BaseConfigController {
     }
 
     // 단일 자주하는질문만 json형식으로 불러오는 api
-    @GetMapping(value="", produces = JSON_FORMAT)
+    @GetMapping(value = "", produces = JSON_FORMAT)
     public ResponseEntity<FaqVO> getFaq(
             @RequestParam
-            Integer faqNo
+                    Integer faqNo
     ) throws Exception {
 
         FaqVO requestFaqVO = FaqVO.builder()
@@ -66,10 +66,10 @@ public class FaqController extends BaseConfigController {
 
     // 단일 자주하는질문만 삽입하는 api
     // (admin에서만 필요할법한 기능이지만 혹시 몰라서 추가 개발)
-    @PostMapping(value="", produces = JSON_FORMAT)
+    @PostMapping(value = "", produces = JSON_FORMAT)
     public ResponseEntity<Integer> insertFaq(
             @RequestBody
-            FaqVO faqVO
+                    FaqVO faqVO
     ) throws Exception {
 
         Integer faqNo = faqService.registerFaq(faqVO);
@@ -79,10 +79,10 @@ public class FaqController extends BaseConfigController {
 
     // 단일 자주하는질문만 수정하는 api
     // (admin에서만 필요할법한 기능이지만 혹시 몰라서 추가 개발)
-    @PutMapping(value="", produces = JSON_FORMAT)
+    @PutMapping(value = "", produces = JSON_FORMAT)
     public ResponseEntity updateFaq(
             @RequestBody
-            FaqVO faqVO
+                    FaqVO faqVO
     ) throws Exception {
 
         faqService.modifyFaq(faqVO);
@@ -92,10 +92,10 @@ public class FaqController extends BaseConfigController {
 
     // 단일 자주하는질문만 상태만 수정하는 api
     // (admin에서만 필요할법한 기능이지만 혹시 몰라서 추가 개발)
-    @PutMapping(value="/state", produces = JSON_FORMAT)
+    @PutMapping(value = "/state", produces = JSON_FORMAT)
     public ResponseEntity updateFaqState(
             @RequestBody
-            FaqVO faqVO
+                    FaqVO faqVO
     ) throws Exception {
 
         faqService.modifyFaqState(faqVO);
@@ -105,10 +105,10 @@ public class FaqController extends BaseConfigController {
 
     // 단일 자주하는질문만 삭제하는 api
     // (admin에서만 필요할법한 기능이지만 혹시 몰라서 추가 개발)
-    @DeleteMapping(value="", produces = JSON_FORMAT)
+    @DeleteMapping(value = "", produces = JSON_FORMAT)
     public ResponseEntity deleteFaq(
             @RequestParam
-            Integer faqNo
+                    Integer faqNo
     ) throws Exception {
 
         faqService.removeFaq(faqNo);

@@ -49,11 +49,11 @@ public class RepairViewController extends BaseConfigController {
     @GetMapping(value = "/index", produces = TEXT_HTML_FORMAT)
     public String goIndexPage(
             @RequestParam(required = false)
-            Integer currentPage
+                    Integer currentPage
             , Model model
     ) throws Exception {
 
-        if(StringUtils.isEmpty(currentPage)) {
+        if (StringUtils.isEmpty(currentPage)) {
             currentPage = 1;
         }
 
@@ -76,7 +76,7 @@ public class RepairViewController extends BaseConfigController {
     @GetMapping(value = "/content/list", produces = TEXT_HTML_FORMAT)
     public String getRepairApplyListAtPage(
             @RequestParam
-                Integer currentPage
+                    Integer currentPage
             , Model model
     ) throws Exception {
 

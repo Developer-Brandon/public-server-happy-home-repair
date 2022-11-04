@@ -66,12 +66,12 @@ public class RepairController extends BaseConfigController {
     @GetMapping(value = "/list", produces = JSON_FORMAT)
     public ResponseEntity<List<RepairApplyVO>> getRepairApplyList(
             @RequestParam(required = false, defaultValue = "1")
-            Integer currentPage
+                    Integer currentPage
             , @RequestParam(required = false, defaultValue = "10")
                     Integer pageSize
     ) throws Exception {
 
-        if(StringUtils.isEmpty(currentPage)) {
+        if (StringUtils.isEmpty(currentPage)) {
             currentPage = 1;
         }
 
@@ -93,7 +93,7 @@ public class RepairController extends BaseConfigController {
     @GetMapping(value = "", produces = JSON_FORMAT)
     public ResponseEntity<RepairApplyVO> getRepairApply(
             @RequestParam
-            Integer repairApplyNo
+                    Integer repairApplyNo
     ) throws Exception {
 
         RepairApplyVO repairApplyVO = repairService.getRepairApply(repairApplyNo);
@@ -106,8 +106,8 @@ public class RepairController extends BaseConfigController {
     @PostMapping(value = "", produces = JSON_FORMAT)
     public ResponseEntity<Integer> insertRepairApply(
             @RequestBody
-            InsertRepairApplyDTO insertRepairApplyDTO
-    ) throws Exception{
+                    InsertRepairApplyDTO insertRepairApplyDTO
+    ) throws Exception {
 
         Integer insertedRepairApplyNo = repairService.registerRepairApply(insertRepairApplyDTO);
 
@@ -121,7 +121,7 @@ public class RepairController extends BaseConfigController {
     public ResponseEntity updateRepairApply(
             @RequestBody
                     UpdateRepairApplyDTO updateRepairApplyDTO
-    ) throws Exception{
+    ) throws Exception {
 
         repairService.modifyRepairApply(updateRepairApplyDTO);
 
@@ -133,8 +133,8 @@ public class RepairController extends BaseConfigController {
     @DeleteMapping(value = "", produces = JSON_FORMAT)
     public ResponseEntity deleteRepairApply(
             @RequestBody
-            Integer repairApplyNo
-    ) throws Exception{
+                    Integer repairApplyNo
+    ) throws Exception {
 
         repairService.removeRepairApply(repairApplyNo);
 

@@ -1,6 +1,9 @@
 package com.dev.webApp.mapper.fiveDucks;
 
-import com.dev.webApp.domain.fiveDuck.dto.*;
+import com.dev.webApp.domain.fiveDuck.dto.InsertComicBookInfoDTO;
+import com.dev.webApp.domain.fiveDuck.dto.SelectComicBookPaginationDTO;
+import com.dev.webApp.domain.fiveDuck.dto.UpdateComicBookInfoDTO;
+import com.dev.webApp.domain.fiveDuck.dto.UpdateComicBookStateDTO;
 import com.dev.webApp.domain.fiveDuck.vo.ComicBookVO;
 
 import java.util.List;

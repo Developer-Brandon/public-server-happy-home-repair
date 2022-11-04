@@ -10,8 +10,12 @@ import java.util.List;
 public interface BlogService {
 
     List<BlogPostingVO> getAllBlogList();
+
     List<RawBlogPostingVO> getRawBlogPostingListByCrawling(Integer crawlingCnt) throws Exception;
+
     PaginationBlogPostingVO getBlogList(SelectBlogPostingPaginationDTO selectBlogPostingPaginationDTO) throws Exception;
+
     void setBlogList() throws Exception;
+
     void setOnlyDifferentBlogList() throws Exception;
 }

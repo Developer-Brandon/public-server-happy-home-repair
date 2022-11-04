@@ -23,9 +23,9 @@ public class NoticeController extends BaseConfigController {
     @GetMapping(value = "/list", produces = JSON_FORMAT)
     public ResponseEntity<List<NoticeVO>> getNoticeList(
             @RequestParam(required = false, defaultValue = "1")
-            Integer currentPage
+                    Integer currentPage
             , @RequestParam(required = false, defaultValue = "10")
-            Integer pageSize
+                    Integer pageSize
     ) throws Exception {
 
         SelectNoticePaginationDTO selectNoticePaginationDTO = SelectNoticePaginationDTO.builder()
@@ -53,7 +53,7 @@ public class NoticeController extends BaseConfigController {
     @GetMapping(value = "", produces = JSON_FORMAT)
     public ResponseEntity<NoticeVO> getNotice(
             @RequestParam
-            Integer noticeNo
+                    Integer noticeNo
     ) throws Exception {
 
         NoticeVO requestNoticeVO = NoticeVO.builder()
@@ -70,7 +70,7 @@ public class NoticeController extends BaseConfigController {
     @PostMapping(value = "", produces = JSON_FORMAT)
     public ResponseEntity<Integer> insertNotice(
             @RequestBody
-            NoticeVO noticeVO
+                    NoticeVO noticeVO
     ) throws Exception {
 
         Integer noticeNo = noticeService.registerNotice(noticeVO);
@@ -83,7 +83,7 @@ public class NoticeController extends BaseConfigController {
     @PutMapping(value = "", produces = JSON_FORMAT)
     public ResponseEntity updateNotice(
             @RequestBody
-            NoticeVO noticeVO
+                    NoticeVO noticeVO
     ) throws Exception {
 
         noticeService.modifyNotice(noticeVO);

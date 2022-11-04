@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class BlogServiceImpl implements BlogService{
+public class BlogServiceImpl implements BlogService {
 
     @Autowired
     private BlogMapper blogMapper;
@@ -42,7 +42,7 @@ public class BlogServiceImpl implements BlogService{
         return (Elements) getConnection().select("li.p_date span");
     }
 
-    public List<RawBlogPostingVO> getRawBlogPostingListByCrawling(Integer crawlingCnt) throws Exception{
+    public List<RawBlogPostingVO> getRawBlogPostingListByCrawling(Integer crawlingCnt) throws Exception {
 
         // 1. 메인에서 타이틀과 이미지 경로를 불러옵니다.
         ArrayList<RawBlogPostingVO> blogInfoMapListForImage = new ArrayList<RawBlogPostingVO>();
@@ -77,15 +77,15 @@ public class BlogServiceImpl implements BlogService{
 
         getMainPostDateSpanElements()
                 .forEach(
-                    Element -> {
+                        Element -> {
 
-                        RawBlogPostingVO blogInfoMap = new RawBlogPostingVO();
+                            RawBlogPostingVO blogInfoMap = new RawBlogPostingVO();
 
-                        blogInfoMap.setPostingRegDt(Element.text());
+                            blogInfoMap.setPostingRegDt(Element.text());
 
-                        //
-                        finalBlogInfoMapListForDateTime.add(blogInfoMap);
-                });
+                            //
+                            finalBlogInfoMapListForDateTime.add(blogInfoMap);
+                        });
 
         blogInfoMapListForDateTime = (ArrayList<RawBlogPostingVO>) finalBlogInfoMapListForDateTime
                 .stream()
@@ -108,13 +108,13 @@ public class BlogServiceImpl implements BlogService{
 
         // 3.DateTime을 순회를 돌며, regDt만을 get하여 blogInfoMapListForImage에 날짜만을 순서대로 쌓습니다
         // (이렇게 되면 기존의 blogInfoMapListForImage에 날짜만 쌓일 것입니다.)
-        for(Integer i = 0; i < blogInfoMapListForDateTime.size(); i++) {
+        for (Integer i = 0; i < blogInfoMapListForDateTime.size(); i++) {
 
             String regDt = blogInfoMapListForDateTime.get(i).getPostingRegDt();
 
             // N시간 전 <- 이런식으로 posting 되는 string을 방지하기 위한 로직
             // 만약, 따끈따끈한 포스팅이라면 현재 날짜를 가져와서, 원하는 포멧으로 치환해서 set 해준다.
-            if(regDt.matches(".*[초]+.*") || regDt.matches(".*[분]+.*") || regDt.matches(".*[시간]+.*")) {
+            if (regDt.matches(".*[초]+.*") || regDt.matches(".*[분]+.*") || regDt.matches(".*[시간]+.*")) {
 
                 Date currentTime = new Date(System.currentTimeMillis()); // 현재시간을 가져와 Date형으로 저장한다
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy. MM. dd.");
@@ -170,7 +170,7 @@ public class BlogServiceImpl implements BlogService{
         int totalCnt = blogMapper.getTotalCnt();
 
         // 3. 제대로 삭제되었다면 크롤링을 하여 대량 insert를 진행합니다.
-        if(totalCnt == 0) {
+        if (totalCnt == 0) {
 
             List<RawBlogPostingVO> rawBlogPostingVOList = getRawBlogPostingListByCrawling(15);
 
@@ -178,7 +178,7 @@ public class BlogServiceImpl implements BlogService{
                     .insertBlogPostingDTOList(rawBlogPostingVOList)
                     .build();
 
-            if(blogMapper.insertBlogPostingList(insertBlogPostingListDTO) == 0) {
+            if (blogMapper.insertBlogPostingList(insertBlogPostingListDTO) == 0) {
                 throw new Exception("데이터를 대량으로 insert 하는 과정에서 문제가 발생하였습니다.");
             }
         } else {
@@ -216,19 +216,19 @@ public class BlogServiceImpl implements BlogService{
         RawBlogPostingVO topRawBlogPostingVOByCrawling = rawBlogPostingVOListByCrawling.get(0);
 
         // 1-1. 만약, 가장 상단에 있는 아이템을 하나씩 뺴서 비교한후 다르다면?
-        if(!topRawBlogPostingVO.getTitle().equals(topRawBlogPostingVOByCrawling.getTitle())) {
+        if (!topRawBlogPostingVO.getTitle().equals(topRawBlogPostingVOByCrawling.getTitle())) {
 
             // 2. 다른 리스트가 하나라도 있다면, 기존의 불러온 crawling list를 기준으로 db에서 불러온 list만큼'만' 삭제시켜줍니다.
-                rawBlogPostingVOListByCrawling.removeAll(rawBlogPostingVOListFromDB);
+            rawBlogPostingVOListByCrawling.removeAll(rawBlogPostingVOListFromDB);
 
-                // 4. 다른 리스트만큼만, insert 해줍니다.
-                InsertBlogPostingListDTO insertBlogPostingListDTO = InsertBlogPostingListDTO.builder()
-                        .insertBlogPostingDTOList(rawBlogPostingVOListByCrawling)
-                        .build();
+            // 4. 다른 리스트만큼만, insert 해줍니다.
+            InsertBlogPostingListDTO insertBlogPostingListDTO = InsertBlogPostingListDTO.builder()
+                    .insertBlogPostingDTOList(rawBlogPostingVOListByCrawling)
+                    .build();
 
-                if(blogMapper.insertBlogPostingList(insertBlogPostingListDTO) == 0) {
-                    throw new Exception("데이터를 대량으로 insert 하는 과정에서 문제가 발생하였습니다.");
-                }
+            if (blogMapper.insertBlogPostingList(insertBlogPostingListDTO) == 0) {
+                throw new Exception("데이터를 대량으로 insert 하는 과정에서 문제가 발생하였습니다.");
+            }
 
         } else {
 

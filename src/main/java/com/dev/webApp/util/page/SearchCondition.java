@@ -22,12 +22,13 @@ public class SearchCondition {
     private Integer pageSize = DEFAULT_PAGE_SIZE;
 
     // 검색 옵션
-    private String  option = "";
+    private String option = "";
 
     // 검색 페이지네이션
-    private String  keyword = "";
+    private String keyword = "";
 
-    public SearchCondition(){}
+    public SearchCondition() {
+    }
 
     public SearchCondition(Integer currentPage, Integer pageSize) {
 
@@ -56,6 +57,7 @@ public class SearchCondition {
                 .queryParam("keyword", keyword)
                 .build().toString();
     }
+
     public Integer getPage() {
         return currentPage;
     }
@@ -92,6 +94,6 @@ public class SearchCondition {
     }
 
     public Integer getOffset() {
-        return (currentPage-1) * pageSize;
+        return (currentPage - 1) * pageSize;
     }
 }

@@ -1,6 +1,8 @@
 package com.dev.webApp.mapper.fiveDucks;
 
-import com.dev.webApp.domain.fiveDuck.dto.*;
+import com.dev.webApp.domain.fiveDuck.dto.InsertDramaInfoDTO;
+import com.dev.webApp.domain.fiveDuck.dto.UpdateDramaInfoDTO;
+import com.dev.webApp.domain.fiveDuck.dto.UpdateDramaStateDTO;
 import com.dev.webApp.domain.fiveDuck.vo.DramaVO;
 
 import java.util.List;

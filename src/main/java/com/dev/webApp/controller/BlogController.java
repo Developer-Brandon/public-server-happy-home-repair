@@ -25,17 +25,17 @@ public class BlogController {
     @GetMapping(value = "/list/{type}", produces = JSON_FORMAT)
     public ResponseEntity<String> checkBlogPostingListStatus(
             @PathVariable
-            String type
+                    String type
     ) throws Exception {
 
-        if(type.equals("bulk")) {
+        if (type.equals("bulk")) {
 
             // 1-1. 크롤링한 데이터를 바로 insert하는 메소드
             // (최초 한번만 써야하는 api, 하지만 예외처리 되어있으니 덜 조심해도 될듯)
 
             blogService.setBlogList();
 
-        } else if(type.equals("diff-bulk")){
+        } else if (type.equals("diff-bulk")) {
 
             // 1-2. 크롤링으로 데이터 베이스와 크롤링 데이터들을 비교해서 다르면 크롤링 데이터로 업데이트하는 메소드
             blogService.setOnlyDifferentBlogList();

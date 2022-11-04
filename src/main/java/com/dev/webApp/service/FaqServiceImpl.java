@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional(rollbackFor = Exception.class)
-public class FaqServiceImpl implements FaqService{
+public class FaqServiceImpl implements FaqService {
 
     private static Logger logger = LoggerFactory.getLogger(FaqServiceImpl.class);
 
@@ -50,7 +50,7 @@ public class FaqServiceImpl implements FaqService{
 
         logger.info("selectedFaqVO: {}", selectedFaqVO);
 
-        if(selectedFaqVO == null) {
+        if (selectedFaqVO == null) {
             throw new Exception("게시물을 조회하는 과정에서 문제가 발생하였습니다.");
         }
 
@@ -60,7 +60,7 @@ public class FaqServiceImpl implements FaqService{
     @Override
     public Integer registerFaq(FaqVO FaqVO) throws Exception {
 
-        if(faqMapper.insertFaq(FaqVO) != 1) {
+        if (faqMapper.insertFaq(FaqVO) != 1) {
             throw new Exception("게시물을 삽입하는 과정에서 문제가 발생하였습니다.");
         }
 
@@ -72,7 +72,7 @@ public class FaqServiceImpl implements FaqService{
     @Override
     public void modifyFaq(FaqVO FaqVO) throws Exception {
 
-        if(faqMapper.updateFaq(FaqVO) != 1) {
+        if (faqMapper.updateFaq(FaqVO) != 1) {
             throw new Exception("게시물을 수정하는 과정에서 문제가 발생하였습니다.");
         }
     }
@@ -80,7 +80,7 @@ public class FaqServiceImpl implements FaqService{
     @Override
     public void modifyFaqState(FaqVO FaqVO) throws Exception {
 
-        if(faqMapper.updateFaqState(FaqVO) != 1) {
+        if (faqMapper.updateFaqState(FaqVO) != 1) {
             throw new Exception("게시물의 상태를 수정하는 과정에서 문제가 발생하였습니다.");
         }
     }
@@ -88,7 +88,7 @@ public class FaqServiceImpl implements FaqService{
     @Override
     public void removeFaq(Integer FaqNo) throws Exception {
 
-        if(faqMapper.deleteFaq(FaqNo) != 1) {
+        if (faqMapper.deleteFaq(FaqNo) != 1) {
             throw new Exception("게시물을 삭제하는 과정에서 문제가 발생하였습니다.");
         }
     }
