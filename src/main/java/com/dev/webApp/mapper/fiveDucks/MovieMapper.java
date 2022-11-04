@@ -1,7 +1,6 @@
 package com.dev.webApp.mapper.fiveDucks;
 
 import com.dev.webApp.domain.fiveDuck.dto.*;
-import com.dev.webApp.domain.fiveDuck.vo.AnimeVO;
 import com.dev.webApp.domain.fiveDuck.vo.MovieVO;
 
 import java.util.List;
