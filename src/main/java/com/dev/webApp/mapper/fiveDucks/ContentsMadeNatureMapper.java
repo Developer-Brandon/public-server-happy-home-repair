@@ -1,9 +1,6 @@
 package com.dev.webApp.mapper.fiveDucks;
 
-import com.dev.webApp.domain.fiveDuck.dto.InsertContentsInfoDTO;
-import com.dev.webApp.domain.fiveDuck.dto.SelectContentsPaginationDTO;
-import com.dev.webApp.domain.fiveDuck.dto.UpdateContentsInfoDTO;
-import com.dev.webApp.domain.fiveDuck.dto.UpdateContentsStateDTO;
+import com.dev.webApp.domain.fiveDuck.dto.request.*;
 import com.dev.webApp.domain.fiveDuck.vo.ContentsVO;
 
 import java.util.List;
@@ -16,13 +13,15 @@ public interface ContentsMadeNatureMapper {
 
     List<ContentsVO> selectAllContentsList();
 
-    List<ContentsVO> selectContentsList(SelectContentsPaginationDTO selectContentsPaginationDTO);
+    List<ContentsVO> selectContentsList(SelectContentsPaginationRequestDTO selectContentsPaginationRequestDTO);
 
-    Integer insertContentsInfo(InsertContentsInfoDTO insertContentsInfoDTO);
+    ContentsVO selectContents(SelectContentsInfoRequestDTO selectContentsInfoRequestDTO);
 
-    int updateContentsInfo(UpdateContentsInfoDTO updateContentsInfoDTO);
+    Integer insertContentsInfo(InsertContentsInfoRequestDTO insertContentsInfoRequestDTO);
 
-    int updateContentsState(UpdateContentsStateDTO updateContentsStateDTO);
+    int updateContentsInfo(UpdateContentsInfoRequestDTO updateContentsInfoRequestDTO);
+
+    int updateContentsState(UpdateContentsStateRequestDTO updateContentsStateRequestDTO);
 
     int deleteContentsInfo(Integer contentsNo);
 }

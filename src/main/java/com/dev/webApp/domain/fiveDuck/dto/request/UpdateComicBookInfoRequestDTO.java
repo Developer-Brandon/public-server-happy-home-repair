@@ -1,4 +1,4 @@
-package com.dev.webApp.domain.fiveDuck.dto;
+package com.dev.webApp.domain.fiveDuck.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import java.util.Date;
 @Data
 @Builder
 @AllArgsConstructor
-public class UpdateComicBookInfoDTO {
+public class UpdateComicBookInfoRequestDTO {
     Integer bookNo;
     Integer madeNatureNo;
     String title;

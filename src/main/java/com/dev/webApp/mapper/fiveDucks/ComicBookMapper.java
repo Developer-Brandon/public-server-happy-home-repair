@@ -1,9 +1,10 @@
 package com.dev.webApp.mapper.fiveDucks;
 
-import com.dev.webApp.domain.fiveDuck.dto.InsertComicBookInfoDTO;
-import com.dev.webApp.domain.fiveDuck.dto.SelectComicBookPaginationDTO;
-import com.dev.webApp.domain.fiveDuck.dto.UpdateComicBookInfoDTO;
-import com.dev.webApp.domain.fiveDuck.dto.UpdateComicBookStateDTO;
+import com.dev.webApp.domain.fiveDuck.dto.request.InsertComicBookInfoRequestDTO;
+import com.dev.webApp.domain.fiveDuck.dto.request.SelectComicBookInfoRequestDTO;
+import com.dev.webApp.domain.fiveDuck.dto.request.SelectComicBookPaginationRequestDTO;
+import com.dev.webApp.domain.fiveDuck.dto.request.UpdateComicBookInfoRequestDTO;
+import com.dev.webApp.domain.fiveDuck.dto.request.UpdateComicBookStateRequestDTO;
 import com.dev.webApp.domain.fiveDuck.vo.ComicBookVO;
 
 import java.util.List;
@@ -16,13 +17,15 @@ public interface ComicBookMapper {
 
     List<ComicBookVO> selectAllComicBookList();
 
-    List<ComicBookVO> selectComicBookList(SelectComicBookPaginationDTO selectComicBookPaginationDTO);
+    List<ComicBookVO> selectComicBookList(SelectComicBookPaginationRequestDTO selectComicBookPaginationRequestDTO);
 
-    Integer insertComicBookInfo(InsertComicBookInfoDTO insertComicBookInfoDTO);
+    ComicBookVO selectComicBookInfo(SelectComicBookInfoRequestDTO selectComicBookInfoRequestDTO);
 
-    int updateComicBookInfo(UpdateComicBookInfoDTO updateComicBookInfoDTO);
+    Integer insertComicBookInfo(InsertComicBookInfoRequestDTO insertComicBookInfoRequestDTO);
 
-    int updateComicBookState(UpdateComicBookStateDTO updateComicBookStateDTO);
+    int updateComicBookInfo(UpdateComicBookInfoRequestDTO updateComicBookInfoRequestDTO);
+
+    int updateComicBookState(UpdateComicBookStateRequestDTO updateComicBookStateRequestDTO);
 
     int deleteComicBookInfo(Integer bookNo);
 }

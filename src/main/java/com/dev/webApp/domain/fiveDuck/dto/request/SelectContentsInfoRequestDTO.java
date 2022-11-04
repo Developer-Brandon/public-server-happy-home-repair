@@ -1,4 +1,4 @@
-package com.dev.webApp.domain.fiveDuck.dto;
+package com.dev.webApp.domain.fiveDuck.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,8 +7,6 @@ import lombok.Data;
 @Data
 @Builder
 @AllArgsConstructor
-public class UpdateContentsInfoDTO {
+public class SelectContentsInfoRequestDTO {
     Integer contentsNo;
-    String englishName;
-    String koreanName;
 }

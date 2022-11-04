@@ -24,5 +24,5 @@ public interface BookService {
 
     void modifyBookInfo(UpdateBookInfoRequestDTO updateBookInfoRequestDTO);
 
-    void removeBookInfo(RemoveBookInfoRequestDTO removeBookRequestDTO);
+    void removeBookInfo(Integer bookNo);
 }

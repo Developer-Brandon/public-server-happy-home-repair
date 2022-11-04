@@ -1,4 +1,4 @@
-package com.dev.webApp.domain.fiveDuck.dto;
+package com.dev.webApp.domain.fiveDuck.dto.request;
 
 import com.dev.webApp.util.ContentsMadeNatureUseYnEnum;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 @Builder
 @AllArgsConstructor
-public class UpdateContentsStateDTO {
+public class UpdateContentsStateRequestDTO {
     Integer contentsNo;
     ContentsMadeNatureUseYnEnum contentsMadeNatureUseYnEnum;
 }
