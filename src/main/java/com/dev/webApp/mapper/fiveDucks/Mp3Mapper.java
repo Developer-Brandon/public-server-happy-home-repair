@@ -1,4 +1,4 @@
-package com.dev.webApp.mapper;
+package com.dev.webApp.mapper.fiveDucks;
 
 import com.dev.webApp.domain.fiveDuck.dto.InsertMp3InfoDTO;
 import com.dev.webApp.domain.fiveDuck.dto.UpdateMp3InfoDTO;

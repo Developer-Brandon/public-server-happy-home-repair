@@ -1,4 +1,4 @@
-package com.dev.webApp.mapper;
+package com.dev.webApp.mapper.fiveDucks;
 
 import com.dev.webApp.domain.fiveDuck.dto.InsertContentsInfoDTO;
 import com.dev.webApp.domain.fiveDuck.dto.SelectContentsPaginationDTO;
