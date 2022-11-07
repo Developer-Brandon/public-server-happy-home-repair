@@ -1,4 +1,4 @@
-package com.dev.webApp.domain.fiveDuck.dto;
+package com.dev.webApp.domain.fiveDuck.dto.request;
 
 import com.dev.webApp.util.DramaUseYnEnum;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 @Builder
 @AllArgsConstructor
-public class UpdateDramaStateDTO {
+public class UpdateDramaStateRequestDTO {
     Integer dramaNo;
     DramaUseYnEnum dramaUseYnEnum;
 }
