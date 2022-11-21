@@ -2,27 +2,27 @@ package com.dev.webApp.service.fiveDucks;
 
 
 import com.dev.webApp.domain.fiveDuck.dto.request.*;
-import com.dev.webApp.domain.fiveDuck.vo.Mp3VO;
+import com.dev.webApp.domain.fiveDuck.vo.YoutubeVO;
 
 import java.util.List;
 
 public interface YoutubeService {
 
-    Integer selectMp3TotalCnt();
+    Integer selectYoutubeTotalCnt();
 
-    void removeAllMp3InfoList();
+    void removeAllYoutubeInfoList();
 
-    List<Mp3VO> selectMp3List(SelectMp3PaginationRequestDTO selectMp3PaginationRequestDTO);
+    List<YoutubeVO> selectYoutubeList(SelectYoutubePaginationRequestDTO selectYoutubePaginationRequestDTO);
 
-    List<Mp3VO> selectAllMp3InfoList();
+    List<YoutubeVO> selectAllYoutubeInfoList();
 
-    Mp3VO selectMp3Info(SelectMp3InfoRequestDTO selectMp3InfoRequestDTO);
+    YoutubeVO selectYoutubeInfo(SelectYoutubeInfoRequestDTO selectYoutubeInfoRequestDTO);
 
-    void registerMp3Info(InsertMp3InfoRequestDTO insertMp3InfoRequestDTO);
+    void registerYoutubeInfo(InsertYoutubeInfoRequestDTO insertYoutubeInfoRequestDTO);
 
-    void modifyMp3Info(UpdateMp3InfoRequestDTO updateMp3InfoRequestDTO);
+    void modifyYoutubeInfo(UpdateYoutubeInfoRequestDTO updateYoutubeInfoRequestDTO);
 
-    void modifyMp3State(UpdateMp3StateRequestDTO updateMp3StateRequestDTO);
+    void modifyYoutubeState(UpdateYoutubeStateRequestDTO updateYoutubeStateRequestDTO);
 
-    void removeMp3Info(Integer Mp3No);
+    void removeYoutubeInfo(Integer YoutubeNo);
 }

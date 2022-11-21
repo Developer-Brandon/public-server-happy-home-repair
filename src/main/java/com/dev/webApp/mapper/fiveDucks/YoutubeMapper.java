@@ -1,8 +1,8 @@
 package com.dev.webApp.mapper.fiveDucks;
 
-import com.dev.webApp.domain.fiveDuck.dto.InsertYoutubeInfoDTO;
-import com.dev.webApp.domain.fiveDuck.dto.UpdateYoutubeInfoDTO;
-import com.dev.webApp.domain.fiveDuck.dto.UpdateYoutubeStateDTO;
+import com.dev.webApp.domain.fiveDuck.dto.request.InsertYoutubeInfoRequestDTO;
+import com.dev.webApp.domain.fiveDuck.dto.request.UpdateYoutubeInfoRequestDTO;
+import com.dev.webApp.domain.fiveDuck.dto.request.UpdateYoutubeStateRequestDTO;
 import com.dev.webApp.domain.fiveDuck.vo.YoutubeVO;
 
 import java.util.List;
@@ -17,11 +17,11 @@ public interface YoutubeMapper {
 
     List<YoutubeVO> selectYoutubeList();
 
-    Integer insertYoutubeInfo(InsertYoutubeInfoDTO insertYoutubeInfoDTO);
+    Integer insertYoutubeInfo(InsertYoutubeInfoRequestDTO insertYoutubeInfoRequestDTO);
 
-    int updateYoutubeInfo(UpdateYoutubeInfoDTO updateYoutubeInfoDTO);
+    int updateYoutubeInfo(UpdateYoutubeInfoRequestDTO updateYoutubeInfoRequestDTO);
 
-    int updateYoutubeState(UpdateYoutubeStateDTO updateYoutubeStateDTO);
+    int updateYoutubeState(UpdateYoutubeStateRequestDTO updateYoutubeStateRequestDTO);
 
     int deleteYoutubeInfo(Integer bookNo);
 }
