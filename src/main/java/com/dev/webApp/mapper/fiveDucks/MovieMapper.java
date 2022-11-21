@@ -1,9 +1,6 @@
 package com.dev.webApp.mapper.fiveDucks;
 
-import com.dev.webApp.domain.fiveDuck.dto.InsertMovieInfoDTO;
-import com.dev.webApp.domain.fiveDuck.dto.SelectMoviePaginationDTO;
-import com.dev.webApp.domain.fiveDuck.dto.UpdateMovieInfoDTO;
-import com.dev.webApp.domain.fiveDuck.dto.UpdateMovieStateDTO;
+import com.dev.webApp.domain.fiveDuck.dto.request.*;
 import com.dev.webApp.domain.fiveDuck.vo.MovieVO;
 
 import java.util.List;
@@ -16,13 +13,15 @@ public interface MovieMapper {
 
     List<MovieVO> selectAllMovieList();
 
-    List<MovieVO> selectMovieList(SelectMoviePaginationDTO selectMoviePaginationDTO);
+    List<MovieVO> selectMovieList(SelectMoviePaginationRequestDTO selectMoviePaginationRequestDTO);
 
-    Integer insertMovieInfo(InsertMovieInfoDTO insertMovieInfoDTO);
+    MovieVO selectMovieInfo(SelectMovieInfoRequestDTO selectMovieInfoRequestDTO);
 
-    int updateMovieInfo(UpdateMovieInfoDTO updateMovieInfoDTO);
+    Integer insertMovieInfo(InsertMovieInfoRequestDTO insertMovieInfoDTO);
 
-    int updateMovieState(UpdateMovieStateDTO updateMovieStateDTO);
+    int updateMovieInfo(UpdateMovieInfoRequestDTO updateMovieInfoRequestDTO);
+
+    int updateMovieState(UpdateMovieStateRequestDTO updateMovieStateRequestDTO);
 
     int deleteMovieInfo(Integer movieNo);
 }
