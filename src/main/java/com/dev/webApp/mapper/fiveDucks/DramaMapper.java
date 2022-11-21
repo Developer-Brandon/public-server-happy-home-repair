@@ -1,6 +1,7 @@
 package com.dev.webApp.mapper.fiveDucks;
 
 import com.dev.webApp.domain.fiveDuck.dto.request.InsertDramaInfoRequestDTO;
+import com.dev.webApp.domain.fiveDuck.dto.request.SelectDramaInfoRequestDTO;
 import com.dev.webApp.domain.fiveDuck.dto.request.UpdateDramaInfoRequestDTO;
 import com.dev.webApp.domain.fiveDuck.dto.request.UpdateDramaStateRequestDTO;
 import com.dev.webApp.domain.fiveDuck.vo.DramaVO;
@@ -16,6 +17,8 @@ public interface DramaMapper {
     List<DramaVO> selectAllDramaList();
 
     List<DramaVO> selectDramaList();
+
+    DramaVO selectDramaInfo(SelectDramaInfoRequestDTO selectDramaInfoRequestDTO);
 
     Integer insertDramaInfo(InsertDramaInfoRequestDTO insertDramaInfoRequestDTO);
 

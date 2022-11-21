@@ -1,4 +1,4 @@
-package com.dev.webApp.domain.fiveDuck.dto;
+package com.dev.webApp.domain.fiveDuck.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +9,8 @@ import java.util.Date;
 @Data
 @Builder
 @AllArgsConstructor
-public class UpdateMp3InfoDTO {
-    Integer mp3No;
+public class InsertMp3InfoRequestDTO {
+    Integer insertedMp3No;
     String title;
     String singer;
     Date songRegDt;

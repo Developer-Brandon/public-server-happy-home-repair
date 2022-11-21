@@ -59,7 +59,7 @@
             parameterType="com.dev.webApp.domain.fiveDuck.dto.request.SelectMovieInfoRequestDTO"
             resultType="com.dev.webApp.domain.fiveDuck.vo.MovieVO">
         <![CDATA[
-        /* 전체 책 리스트 조회 쿼리(pagination) */
+        /* 단일 책 리스트 조회 쿼리 */
         ]]>
         select r_movie_no as movieNo
              , m_n_no as madeNatureNo

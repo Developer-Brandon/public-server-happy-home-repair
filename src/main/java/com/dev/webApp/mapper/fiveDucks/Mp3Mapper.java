@@ -1,8 +1,8 @@
 package com.dev.webApp.mapper.fiveDucks;
 
-import com.dev.webApp.domain.fiveDuck.dto.InsertMp3InfoDTO;
-import com.dev.webApp.domain.fiveDuck.dto.UpdateMp3InfoDTO;
-import com.dev.webApp.domain.fiveDuck.dto.UpdateMp3StateDTO;
+import com.dev.webApp.domain.fiveDuck.dto.request.InsertMp3InfoRequestDTO;
+import com.dev.webApp.domain.fiveDuck.dto.request.UpdateMp3InfoRequestDTO;
+import com.dev.webApp.domain.fiveDuck.dto.request.UpdateMp3StateRequestDTO;
 import com.dev.webApp.domain.fiveDuck.vo.Mp3VO;
 
 import java.util.List;
@@ -17,11 +17,11 @@ public interface Mp3Mapper {
 
     List<Mp3VO> selectMp3List();
 
-    Integer insertMp3Info(InsertMp3InfoDTO insertMp3InfoDTO);
+    Integer insertMp3Info(InsertMp3InfoRequestDTO insertMp3InfoRequestDTO);
 
-    int updateMp3Info(UpdateMp3InfoDTO updateMp3InfoDTO);
+    int updateMp3Info(UpdateMp3InfoRequestDTO updateMp3InfoRequestDTO);
 
-    int updateMp3State(UpdateMp3StateDTO updateMp3StateDTO);
+    int updateMp3State(UpdateMp3StateRequestDTO updateMp3StateRequestDTO);
 
-    int deleteMp3Info(Integer bookNo);
+    int deleteMp3Info(Integer mp3No);
 }
