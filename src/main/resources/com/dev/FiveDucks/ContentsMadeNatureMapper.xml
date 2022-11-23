@@ -50,7 +50,7 @@
     </select>
 
     <select id="selectContents"
-            parameterType="com.dev.webApp.domain.fiveDuck.dto.request.SelectContentsPaginationRequestDTO"
+            parameterType="com.dev.webApp.domain.fiveDuck.dto.request.SelectContentsInfoRequestDTO"
             resultType="com.dev.webApp.domain.fiveDuck.vo.ContentsVO">
         <![CDATA[
         /* 단일 컨텐츠 조회 쿼리 */
