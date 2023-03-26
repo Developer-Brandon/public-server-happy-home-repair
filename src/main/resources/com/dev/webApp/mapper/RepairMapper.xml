@@ -16,7 +16,7 @@
             , explanation as explanation
             , date_format(reg_dt, '%Y-%m-%d') as regDt
             , date_format(mod_dt, '%Y-%m-%d') as modDt
-        from web_app_test.tb_repair_type
+        from happy_home_repair.tb_repair_type
         order by regDt desc
         limit #{itemCnt}
     </select>
@@ -32,7 +32,7 @@
              , explanation as explanation
              , date_format(reg_dt, '%Y-%m-%d') as regDt
              , date_format(mod_dt, '%Y-%m-%d') as modDt
-        from web_app_test.tb_repair_type
+        from happy_home_repair.tb_repair_type
         where r_type_no = #{repairTypeNo}
         ]]>
     </select>
@@ -49,7 +49,7 @@
             , explanation as explanation
             , date_format(reg_dt, '%Y-%m-%d') as regDt
             , date_format(mod_dt, '%Y-%m-%d') as modDt
-        from web_app_test.tb_repair_location
+        from happy_home_repair.tb_repair_location
         order by regDt desc
         <if test="itemCnt != 0">
             limit #{itemCnt}
@@ -67,7 +67,7 @@
              , explanation as explanation
              , date_format(reg_dt, '%Y-%m-%d') as regDt
              , date_format(mod_dt, '%Y-%m-%d') as modDt
-        from web_app_test.tb_repair_location
+        from happy_home_repair.tb_repair_location
         where r_location_no = #{repairLocationNo}
         ]]>
     </select>
@@ -83,7 +83,7 @@
             , explanation as explanation
             , date_format(reg_dt, '%Y-%m-%d') as regDt
             , date_format(mod_dt, '%Y-%m-%d') as modDt
-        from web_app_test.tb_repair_state
+        from happy_home_repair.tb_repair_state
         order by regDt desc
         <if test="itemCnt != 0">
             limit #{itemCnt}
@@ -100,7 +100,7 @@
              , explanation as explanation
              , date_format(reg_dt, '%Y-%m-%d') as regDt
              , date_format(mod_dt, '%Y-%m-%d') as modDt
-        from web_app_test.tb_repair_state
+        from happy_home_repair.tb_repair_state
         where r_state_no = #{repairStateNo}
         ]]>
     </select>
@@ -110,7 +110,7 @@
         parameterType="com.dev.webApp.domain.dto.InsertRepairApplyDTO">
     <![CDATA[
     /* 특정 견적문의 삽입 쿼리 */
-    insert into web_app_test.tb_repair_apply(
+    insert into happy_home_repair.tb_repair_apply(
         r_type_no, r_location_no, r_state_no, user_type, phone_number, agree_or_not, explanation
     ) value(
         #{repairTypeNo}, #{repairLocationNo}, #{repairStateNo}, #{userTypeEnum}, #{phoneNumber}, #{agreeOrNotEnum}, #{explanation}
@@ -122,7 +122,7 @@
             resultType="Integer">
         /*  */
         select max(r_apply_no)
-        from web_app_test.tb_repair_apply
+        from happy_home_repair.tb_repair_apply
     </selectKey>
     </insert>
 
@@ -141,12 +141,12 @@
          , tb_r_apply.explanation as explanation
          , date_format(tb_r_apply.reg_dt, '%Y-%m-%d') as regDt
          , date_format(tb_r_apply.mod_dt, '%Y-%m-%d') as modDt
-    from web_app_test.tb_repair_apply as tb_r_apply
-             inner join web_app_test.tb_repair_type as tb_r_type
+    from happy_home_repair.tb_repair_apply as tb_r_apply
+             inner join happy_home_repair.tb_repair_type as tb_r_type
                         on tb_r_apply.r_type_no = tb_r_type.r_type_no
-             inner join web_app_test.tb_repair_state as tb_r_state
+             inner join happy_home_repair.tb_repair_state as tb_r_state
                         on tb_r_apply.r_state_no = tb_r_state.r_state_no
-             inner join web_app_test.tb_repair_location as tb_r_location
+             inner join happy_home_repair.tb_repair_location as tb_r_location
                         on tb_r_apply.r_location_no = tb_r_location.r_location_no
     where tb_r_apply.r_apply_no = #{repairApplyNo}
     ]]>
@@ -168,12 +168,12 @@
             , tb_r_apply.explanation as explanation
             , date_format(tb_r_apply.reg_dt, '%Y-%m-%d') as regDt
             , date_format(tb_r_apply.mod_dt, '%Y-%m-%d') as modDt
-        from web_app_test.tb_repair_apply as tb_r_apply
-            inner join web_app_test.tb_repair_type as tb_r_type
+        from happy_home_repair.tb_repair_apply as tb_r_apply
+            inner join happy_home_repair.tb_repair_type as tb_r_type
                 on tb_r_apply.r_type_no = tb_r_type.r_type_no
-            inner join web_app_test.tb_repair_state as tb_r_state
+            inner join happy_home_repair.tb_repair_state as tb_r_state
                 on tb_r_apply.r_state_no = tb_r_state.r_state_no
-            inner join web_app_test.tb_repair_location as tb_r_location
+            inner join happy_home_repair.tb_repair_location as tb_r_location
                 on tb_r_apply.r_location_no = tb_r_location.r_location_no
             order by regDt desc, repairApplyNo desc
         limit #{offset}, #{pageSize}
@@ -183,7 +183,7 @@
         parameterType="com.dev.webApp.domain.dto.UpdateRepairApplyDTO">
     <![CDATA[
     /* 단일 견적 문의 수정 쿼리 */
-    update web_app_test.tb_repair_apply
+    update happy_home_repair.tb_repair_apply
         set r_type_no = #{repairTypeNo}
           , r_location_no = #{repairLocationNo}
           , r_state_no = #{repairStateNo}
@@ -199,7 +199,7 @@
         parameterType="Integer">
     <![CDATA[
     /* 단일 견적문의 삭제 쿼리 */
-    delete from web_app_test.tb_repair_apply
+    delete from happy_home_repair.tb_repair_apply
     where r_apply_no = #{repairApplyNo}
     ]]>
     </delete>
@@ -210,12 +210,12 @@
         /* 전체 견적문의의 개수를 조회하는 쿼리 */
         ]]>
         select count(*)
-        from web_app_test.tb_repair_apply as tb_r_apply
-             inner join web_app_test.tb_repair_type as tb_r_type
+        from happy_home_repair.tb_repair_apply as tb_r_apply
+             inner join happy_home_repair.tb_repair_type as tb_r_type
                         on tb_r_apply.r_type_no = tb_r_type.r_type_no
-             inner join web_app_test.tb_repair_state as tb_r_state
+             inner join happy_home_repair.tb_repair_state as tb_r_state
                         on tb_r_apply.r_state_no = tb_r_state.r_state_no
-             inner join web_app_test.tb_repair_location as tb_r_location
+             inner join happy_home_repair.tb_repair_location as tb_r_location
                         on tb_r_apply.r_location_no = tb_r_location.r_location_no
     </select>
 </mapper>
