@@ -10,6 +10,10 @@
 
 > grant all privileges on *.* to 'testUser'@'localhost';
 
-### 3. 아래와 같은 사진이 나오면 빌드에 성공한 것입니다.
+### 3. 그 후 스키마를 생성해주세요.
+
+> create schema if not exists happy_home_repair;
+
+### 4. 아래와 같은 사진이 나오면 빌드에 성공한 것입니다.
 
 > <img src="https://dk-projects-images.s3.ap-northeast-2.amazonaws.com/%EC%9D%B4%EB%AF%B8%EC%A7%80+387.png"  width="500" height="250">
