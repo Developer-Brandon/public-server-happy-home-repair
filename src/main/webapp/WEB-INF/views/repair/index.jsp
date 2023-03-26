@@ -26,10 +26,10 @@
                     </div>
                     <div class="panel-body">
                         <c:forEach items="${repairTypeList}" var="repairType">
-                        <ul>
-                            <li><c:out value="${repairType.repairTypeNo}"/> / <c:out value="${repairType.title}"/> / <c:out value="${repairType.explanation}"/></li>
-                        </ul>
-                    </c:forEach>
+                            <ul>
+                                <li><c:out value="${repairType.repairTypeNo}"/> / <c:out value="${repairType.title}"/> / <c:out value="${repairType.explanation}"/></li>
+                            </ul>
+                        </c:forEach>
                     </div>
                 </div>
             </div>
