@@ -12,4 +12,4 @@
 
 ### 3. 아래와 같은 사진이 나오면 빌드에 성공한 것입니다.
 
-> <img src="https://dk-projects-images.s3.ap-northeast-2.amazonaws.com/%EC%9D%B4%EB%AF%B8%EC%A7%80+387.png"  width="300" height="250">
+> <img src="https://dk-projects-images.s3.ap-northeast-2.amazonaws.com/%EC%9D%B4%EB%AF%B8%EC%A7%80+387.png"  width="500" height="250">
